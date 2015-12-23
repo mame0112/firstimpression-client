@@ -1,0 +1,197 @@
+package com.mame.impression;
+
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import com.mame.impression.service.MainPageService;
+import com.mame.impression.ui.MainPageAdapter;
+import com.mame.impression.ui.MainPageContent;
+import com.mame.impression.util.LogUtil;
+import com.mame.impression.constant.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MainPageActivity extends AppCompatActivity implements MainPageAdapter.MainPageAdapterListener {
+
+    private static final String TAG = Constants.TAG + MainPageActivity.class.getSimpleName();
+
+    private MainPageService mService;
+
+    //True if this Activity and MainPageService is connected.
+    private boolean mIsBound = false;
+
+    private RecyclerView mRecyclerView;
+
+    private MainPageAdapter mAdapter;
+
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        LogUtil.d(TAG, "onCreate");
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main_page);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action.", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
+        //TODO
+        MainPageContent content = new MainPageContent(1L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "123", "name1", "Desc1", "Choice A1", "Choice B1");
+        mContents.add(content);
+
+        MainPageContent content2 = new MainPageContent(2L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+        mContents.add(content2);
+
+        MainPageContent content3 = new MainPageContent(3L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+        mContents.add(content3);
+
+        MainPageContent content4 = new MainPageContent(4L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+        mContents.add(content4);
+
+        MainPageContent content5 = new MainPageContent(5L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+        mContents.add(content5);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new MainPageAdapter(getApplicationContext(), mContents);
+        mAdapter.setMainPageAdapterListener(this);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+
+        //Bind to MainPageService
+        startService(new Intent(MainPageActivity.this, MainPageService.class));
+
+        doBindService();
+    }
+
+    @Override
+    protected  void onPause(){
+        super.onPause();;
+
+        //Unbind from MainPageService
+        startService(new Intent(MainPageActivity.this, MainPageService.class));
+
+        doUnbindService();
+    }
+
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+
+            // To be called when connection with service is established.
+            LogUtil.d(TAG, "onServiceConnected");
+
+            //Keep service instance to operate it from Activity.
+            mService = ((MainPageService.MainPageServiceBinder)service).getService();
+
+            //Get initial question data.
+            mService.requestAllMessageData(Constants.INITIAL_REQUEST_NUM);
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            //Disconnection from service.
+            mService = null;
+            LogUtil.d(TAG, "onServiceDisconnected");
+        }
+    };
+
+    void doBindService() {
+        bindService(new Intent(MainPageActivity.this,
+                MainPageService.class), mConnection, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
+
+    void doUnbindService() {
+        if (mIsBound) {
+            unbindService(mConnection);
+            mIsBound = false;
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main_page, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onItemSelected(long id, int select) {
+        LogUtil.d(TAG, "id: " + id + " select: " + select);
+
+        if(mAdapter != null){
+            mAdapter.notifyDataSetChanged();
+//            mAdapter.notifyItemRemoved(2);
+            if(mAdapter.getItemCount() == 0){
+                //TODO Show "No item" or more item.
+            }
+        }
+
+        if(mService != null){
+            mService.respondToQuestion(id, select);
+        }
+
+    }
+
+}

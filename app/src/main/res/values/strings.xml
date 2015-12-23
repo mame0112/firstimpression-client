@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">First Impression</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Main page -->
+    <string name="main_card_title_divider"> / </string>
+
+    <!-- Welcome page -->
+    <string name="welcome_signin_button">Sign in</string>
+    <string name="welcome_signup_button">Sign up</string>
+
+    <!-- Sign in fragment -->
+    <string name="signin_title">Sign in</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_in_hint_username">User name</string>
+    <string name="sign_in_hint_password">Password</string>
+    <string name="sign_in_forget_password">Forget password?</string>
+
+    <!-- Sign up fragment -->
+    <string name="signup_title">Sign up</string>
+
+    <!-- Error message fragment -->
+    <string name="error_message_title">Error message</string>
+</resources>
