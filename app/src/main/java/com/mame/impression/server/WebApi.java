@@ -2,6 +2,13 @@ package com.mame.impression.server;
 
 import android.util.Log;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
 
@@ -17,6 +24,7 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -27,125 +35,144 @@ import java.util.Map;
 /**
  * Created by kosukeEndo on 2015/12/15.
  */
-public class WebApi {
+public class WebApi extends AbstractWebApi{
 
-    public void get(String api) throws IOException {
-        LogUtil.d("WebApi", "connect");
-        HttpURLConnection con = null;
-        URL url = new URL(Constants.HTTP_URL + api);
+    private static final String TAG = Constants.TAG + WebApi.class.getSimpleName();
 
-        con = (HttpURLConnection)url.openConnection();
-        con.setRequestMethod("GET");
-        con.setInstanceFollowRedirects(false);
-        con.setRequestProperty("Accept-Language", "jp");
-        con.connect();
+    @Override
+    public void get(String api, final JSONObject input) {
+        LogUtil.d(TAG, "get");
 
-        Map headers = con.getHeaderFields();
-        Iterator headerIt = headers.keySet().iterator();
-        String header = null;
-        while(headerIt.hasNext()){
-            String headerKey = (String)headerIt.next();
-            header += headerKey + "：" + headers.get(headerKey) + "\r\n";
-        }
-
-        LogUtil.d("WebApi", "header: " + header);
-
-        InputStream in = con.getInputStream();
-        byte bodyByte[] = new byte[1024];
-        in.read(bodyByte);
-        in.close();
-
-        LogUtil.d("WebApi", "body: " + new String(bodyByte));
-
-    }
-
-    public void post(String api) throws IOException, JSONException {
-        LogUtil.d("WebApi", "post");
-        JSONObject requestJSON = new JSONObject();
-        requestJSON.put("id", 1);
-//        String requestJSON = "JSON文字列";
-
-        HttpURLConnection conn = null;
-        try {
-            conn = (HttpURLConnection) new URL(Constants.HTTP_URL + api).openConnection();
-            conn.setRequestMethod("POST");
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
-            conn.setFixedLengthStreamingMode(requestJSON.length());
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            Log.i("OSA030","doPost start.:" + conn.toString());
-
-            conn.connect();
-
-            DataOutputStream os = new DataOutputStream(conn.getOutputStream());
-            os.write(requestJSON.toString().getBytes("UTF-8"));
-            os.flush();
-            os.close();
-
-            if( conn.getResponseCode() == HttpURLConnection.HTTP_OK ){
-                StringBuffer responseJSON = new StringBuffer();
-                BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String inputLine;
-                while ((inputLine = reader.readLine()) != null) {
-                    responseJSON.append(inputLine);
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, Constants.HTTP_URL+api, null,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // display response
+                        LogUtil.d(TAG, "result: " + response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
+                    }
                 }
-                Log.i("OSA030", "doPost success");
-            }
-        }catch(IOException e){
-            Log.e("OSA030","error orz:" + e.getMessage(), e);
-        }finally {
-            if( conn != null ){
-                conn.disconnect();
-            }
-        }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put(JsonConstants.PARAM, input.toString());
 
-//        HttpURLConnection con = null;
-//        URL url = new URL(Constants.HTTP_URL + api);
-//
-//        con = (HttpURLConnection)url.openConnection();
-//        con.setRequestMethod("POST");
-//        con.setDoOutput(true);
-//        con.setInstanceFollowRedirects(false);
-//        con.setRequestProperty("Accept-Language", "jp");
-//        con.connect();
-//
-//        Map headers = con.getHeaderFields();
-//        Iterator headerIt = headers.keySet().iterator();
-//        String header = null;
-//        while(headerIt.hasNext()){
-//            String headerKey = (String)headerIt.next();
-//            header += headerKey + "：" + headers.get(headerKey) + "\r\n";
-//        }
-//
-//        LogUtil.d("WebApi", "header: " + header);
-//
-//        InputStream in = con.getInputStream();
-//        byte bodyByte[] = new byte[1024];
-//        in.read(bodyByte);
-//        in.close();
-//
-//        LogUtil.d("WebApi", "body: " + new String(bodyByte));
+                return params;
+            }
+        };
+
+        mQueue.add(getRequest);
+
     }
 
-    public void put(String api) throws IOException {
-        URL url = new URL(Constants.HTTP_URL + api);
-        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setDoOutput(true);
-        httpCon.setRequestMethod("PUT");
-        OutputStreamWriter out = new OutputStreamWriter(
-                httpCon.getOutputStream());
-        out.write("Resource content");
-        out.close();
-        httpCon.getInputStream();
+    @Override
+    public void post(String api, final JSONObject input) {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, Constants.HTTP_URL+api,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        LogUtil.d(TAG, "result: " + response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+//                        LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String>();
+                params.put(JsonConstants.PARAM, input.toString());
+
+                return params;
+            }
+        };
+        mQueue.add(postRequest);
     }
 
-    public void delete(String api) throws IOException {
-        URL url = new URL(Constants.HTTP_URL + api);
-        HttpURLConnection httpCon = (HttpURLConnection) url.openConnection();
-        httpCon.setDoOutput(true);
-        httpCon.setRequestProperty(
-                "Content-Type", "application/x-www-form-urlencoded" );
-        httpCon.setRequestMethod("DELETE");
-        httpCon.connect();
+    @Override
+    public void put(String api, final JSONObject input) {
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, Constants.HTTP_URL+api,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        LogUtil.d(TAG, "result: " + response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
+                    }
+                }
+        ) {
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String> ();
+                params.put("name", "Alif");
+                params.put("domain", "http://itsalif.info");
+
+                return params;
+            }
+
+        };
+
+        mQueue.add(putRequest);
+    }
+
+    @Override
+    public void delete(String api, final JSONObject input) {
+        StringRequest dr = new StringRequest(Request.Method.DELETE, Constants.HTTP_URL+api,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        LogUtil.d(TAG, "result: " + response);
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
+                    }
+                }
+        ){
+
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String>  params = new HashMap<String, String> ();
+                params.put("name", "Alif");
+                params.put("domain", "http://itsalif.info");
+
+                return params;
+            }
+
+        };
+        mQueue.add(dr);
     }
 }

@@ -73,7 +73,8 @@ public class MainPageService extends Service implements ResultListener {
     public void requestAllMessageData(int num) {
         LogUtil.d(TAG, "requestAllMessageData");
 
-        mService.requestAllQuestionData(this, num);
+        //TODO
+        mService.requestAllQuestionData(this, 0, 19);
     }
 
     public void respondToQuestion(long id, int select){

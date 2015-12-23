@@ -64,17 +64,21 @@ public class ImpressionService extends Service {
 
     }
 
-    public void requestAllQuestionData(ResultListener listener, int num) {
+    public void requestAllQuestionData(ResultListener listener, int start, int end) {
         LogUtil.d(TAG, "requestAllQuestionData");
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
         }
 
-        if (num <= 0) {
-            throw new IllegalArgumentException("num must be more than 1");
+        if (start <= 0) {
+            throw new IllegalArgumentException("start must be more than 1");
         }
 
-        JSONObject param = RequestParameterFactory.createForRequestAllMessageData(num);
+        if (end <= 0) {
+            throw new IllegalArgumentException("end must be more than 1");
+        }
+
+        JSONObject param = RequestParameterFactory.createForRequestAllMessageData(start, end);
         List<Accessor> accessors = AccessorTypeDecider.createAccessor(RequestAction.QUESTION);
 
         RequestInfoBuilder builder = new RequestInfoBuilder();

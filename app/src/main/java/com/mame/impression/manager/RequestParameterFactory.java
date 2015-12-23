@@ -13,11 +13,12 @@ public class RequestParameterFactory {
 
     private static final String TAG = Constants.TAG + RequestParameterFactory.class.getSimpleName();
 
-    public static JSONObject createForRequestAllMessageData(int num){
+    public static JSONObject createForRequestAllMessageData(int start, int end){
 
         try {
             JSONObject object = new JSONObject();
-            object.put(JsonParam.REQUEST_QUESTION_NUM, num);
+            object.put(JsonParam.REQUEST_QUESTION_START_POS, start);
+            object.put(JsonParam.REQUEST_QUESTION_END_POS, end);
             return object;
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());

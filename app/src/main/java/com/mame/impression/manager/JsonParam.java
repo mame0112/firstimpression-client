@@ -5,5 +5,7 @@ package com.mame.impression.manager;
  */
 public class JsonParam {
 
-    static final String REQUEST_QUESTION_NUM = "num";
+    static final String REQUEST_QUESTION_START_POS = "start";
+
+    static final String REQUEST_QUESTION_END_POS = "end";
 }
