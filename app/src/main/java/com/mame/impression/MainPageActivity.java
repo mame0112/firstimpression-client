@@ -4,30 +4,23 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.View;
 
+import com.mame.impression.constant.Constants;
 import com.mame.impression.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.ui.MainPageContent;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.constant.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +41,25 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+
+            // To be called when connection with service is established.
+            LogUtil.d(TAG, "onServiceConnected");
+
+            //Keep service instance to operate it from Activity.
+            mService = ((MainPageService.MainPageServiceBinder) service).getService();
+
+            //Get initial question data.
+//            mService.requestAllMessageData(Constants.INITIAL_REQUEST_NUM);
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            //Disconnection from service.
+            mService = null;
+            LogUtil.d(TAG, "onServiceDisconnected");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +113,7 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         //Bind to MainPageService
@@ -111,34 +123,15 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
     }
 
     @Override
-    protected  void onPause(){
-        super.onPause();;
+    protected void onPause() {
+        super.onPause();
+        ;
 
         //Unbind from MainPageService
         startService(new Intent(MainPageActivity.this, MainPageService.class));
 
         doUnbindService();
     }
-
-    private ServiceConnection mConnection = new ServiceConnection() {
-        public void onServiceConnected(ComponentName className, IBinder service) {
-
-            // To be called when connection with service is established.
-            LogUtil.d(TAG, "onServiceConnected");
-
-            //Keep service instance to operate it from Activity.
-            mService = ((MainPageService.MainPageServiceBinder)service).getService();
-
-            //Get initial question data.
-            mService.requestAllMessageData(Constants.INITIAL_REQUEST_NUM);
-        }
-
-        public void onServiceDisconnected(ComponentName className) {
-            //Disconnection from service.
-            mService = null;
-            LogUtil.d(TAG, "onServiceDisconnected");
-        }
-    };
 
     void doBindService() {
         bindService(new Intent(MainPageActivity.this,
@@ -179,15 +172,15 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
     public void onItemSelected(long id, int select) {
         LogUtil.d(TAG, "id: " + id + " select: " + select);
 
-        if(mAdapter != null){
+        if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
 //            mAdapter.notifyItemRemoved(2);
-            if(mAdapter.getItemCount() == 0){
+            if (mAdapter.getItemCount() == 0) {
                 //TODO Show "No item" or more item.
             }
         }
 
-        if(mService != null){
+        if (mService != null) {
             mService.respondToQuestion(id, select);
         }
 

@@ -15,13 +15,13 @@ public class AccessorTypeDecider {
 
     private static final String TAG = Constants.TAG + AccessorTypeDecider.class.getSimpleName();
 
-    public static List<Accessor> createAccessor(RequestAction param){
+    public static List<Accessor> createAccessor(RequestAction param) {
         LogUtil.d(TAG, "createAccessor");
 
         List<Accessor> accessors = new ArrayList<Accessor>();
 
-        switch (param){
-            case QUESTION:
+        switch (param) {
+            case GET_QUESTION_LIST:
                 accessors.add(new ServerAccessor());
                 return accessors;
         }

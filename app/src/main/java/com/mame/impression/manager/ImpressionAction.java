@@ -18,9 +18,9 @@ public class ImpressionAction implements Runnable, Accessor.AccessorListener {
     /**
      * Constructor
      */
-    ImpressionAction(RequestInfo info){
+    ImpressionAction(RequestInfo info) {
         LogUtil.d(TAG, "ImpressionAction constructor");
-        if(info == null){
+        if (info == null) {
             throw new IllegalArgumentException("RequestInfo is null");
         }
 
@@ -34,8 +34,8 @@ public class ImpressionAction implements Runnable, Accessor.AccessorListener {
         List<Accessor> accessors = mInfo.getAccessors();
 
         //TODO Need to decide how we get return information from server and local side.
-        if(accessors != null && !accessors.isEmpty()){
-            for(Accessor accessor : accessors){
+        if (accessors != null && !accessors.isEmpty()) {
+            for (Accessor accessor : accessors) {
                 accessor.setAccessorListener(this);
                 accessor.request(mInfo.getRequestAction(), mInfo.getParameter());
             }

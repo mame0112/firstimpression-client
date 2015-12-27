@@ -9,8 +9,8 @@ public abstract class AbstractInputValidator {
 
     public abstract boolean isLessThanMaxLength(String input, int maxLength);
 
-    public boolean isValidText(String input, int min, int max){
-        if(isLessThanMaxLength(input, min) && isMoreThanMinLength(input, max)){
+    public boolean isValidText(String input, int min, int max) {
+        if (isLessThanMaxLength(input, min) && isMoreThanMinLength(input, max)) {
 
         }
         return false;

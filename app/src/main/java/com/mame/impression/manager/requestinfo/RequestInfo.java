@@ -22,39 +22,39 @@ public class RequestInfo {
 
     private JSONObject mParam;
 
-    RequestInfo(){
+    RequestInfo() {
 
     }
 
-    void setResultListener(ResultListener listener){
-        mListener = listener;
-    }
-
-    void setAccessors(List<Accessor> accessors){
-        mAccessors = accessors;
-    }
-
-    void setRequestAction(RequestAction action){
-        mAction = action;
-    }
-
-    void setRequestParam(JSONObject param){
+    void setRequestParam(JSONObject param) {
         mParam = param;
     }
 
-    public ResultListener getResultListener(){
+    public ResultListener getResultListener() {
         return mListener;
     }
 
-    public List<Accessor> getAccessors(){
+    void setResultListener(ResultListener listener) {
+        mListener = listener;
+    }
+
+    public List<Accessor> getAccessors() {
         return mAccessors;
     }
 
-    public RequestAction getRequestAction(){
+    void setAccessors(List<Accessor> accessors) {
+        mAccessors = accessors;
+    }
+
+    public RequestAction getRequestAction() {
         return mAction;
     }
 
-    public JSONObject getParameter(){
+    void setRequestAction(RequestAction action) {
+        mAction = action;
+    }
+
+    public JSONObject getParameter() {
         return mParam;
     }
 

@@ -4,11 +4,13 @@ package com.mame.impression.constant;
  * Created by kosukeEndo on 2015/11/27.
  */
 public class Constants {
-    public final static String TAG ="FirstImpression/";
+    public final static String TAG = "FirstImpression/";
 
     public final static boolean IS_DEBUG = true;
 
     public final static int INITIAL_REQUEST_NUM = 20;
+
+    public final static boolean IS_HTTPS = false;
 
     public final static String HTTP = "http://";
 

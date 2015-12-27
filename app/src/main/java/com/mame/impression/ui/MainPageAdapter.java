@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,12 +32,12 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     private Context mContext;
 
-    public MainPageAdapter(Context context, List<MainPageContent> data){
+    public MainPageAdapter(Context context, List<MainPageContent> data) {
         mData = data;
         mContext = context;
     }
 
-    public void setMainPageAdapterListener(MainPageAdapterListener listener){
+    public void setMainPageAdapterListener(MainPageAdapterListener listener) {
         mListener = listener;
     }
 
@@ -68,17 +67,19 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
         return mData.size();
     }
 
-    private void setAnimation(View viewToAnimate, int position)
-    {
+    private void setAnimation(View viewToAnimate, int position) {
         // If the bound view wasn't previously displayed on screen, it's animated
-        if (position > lastPosition)
-        {
+        if (position > lastPosition) {
             Animation animation = AnimationUtils.loadAnimation(mContext, android.R.anim.slide_in_left);
             viewToAnimate.startAnimation(animation);
             lastPosition = position;
         }
     }
 
+
+    public interface MainPageAdapterListener {
+        public void onItemSelected(long id, int select);
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -92,13 +93,13 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
         public ViewHolder(View v) {
             super(v);
-            mThumbnail = (ImageView)v.findViewById(R.id.main_card_thumbnail);
+            mThumbnail = (ImageView) v.findViewById(R.id.main_card_thumbnail);
 
-            mPostDateView = (TextView)v.findViewById(R.id.main_card_postdate);
-            mUserName = (TextView)v.findViewById(R.id.main_card_username);
-            mDescription = (TextView)v.findViewById(R.id.main_card_description);
+            mPostDateView = (TextView) v.findViewById(R.id.main_card_postdate);
+            mUserName = (TextView) v.findViewById(R.id.main_card_username);
+            mDescription = (TextView) v.findViewById(R.id.main_card_description);
 
-            mChoiseAButton = (Button)v.findViewById(R.id.main_card_choise_a);
+            mChoiseAButton = (Button) v.findViewById(R.id.main_card_choise_a);
             mChoiseAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -108,7 +109,7 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
                 }
             });
 
-            mChoiseBButton = (Button)v.findViewById(R.id.main_card_choise_b);
+            mChoiseBButton = (Button) v.findViewById(R.id.main_card_choise_b);
             mChoiseBButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -118,9 +119,5 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
                 }
             });
         }
-    }
-
-    public interface MainPageAdapterListener{
-        public void onItemSelected(long id, int select);
     }
 }

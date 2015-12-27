@@ -25,7 +25,7 @@ public class ServerAccessor extends Accessor {
     public void request(RequestAction action, JSONObject param) {
         LogUtil.d(TAG, "request");
 
-        if(mListener == null){
+        if (mListener == null) {
             throw new IllegalArgumentException("AccessorListenr is null");
         }
 

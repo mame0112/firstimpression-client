@@ -27,23 +27,39 @@ public class WelcomePageFragment extends Fragment {
     private Activity mActivity;
 
     private WelcomePageFragmentListener mCallback;
+    private View.OnClickListener mClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.signin_button:
+                    LogUtil.d(TAG, "signin button pressed");
+                    mCallback.onStateChangeToSignIn();
+                    break;
+                case R.id.signup_button:
+                    LogUtil.d(TAG, "signup button pressed");
+                    mCallback.onStateChangeToSignUp();
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.welcome_fragment, container, false);
+        View view = inflater.inflate(R.layout.welcome_fragment, container, false);
 
-        mSignInButton = (Button)view.findViewById(R.id.signin_button);
+        mSignInButton = (Button) view.findViewById(R.id.signin_button);
         mSignInButton.setOnClickListener(mClickListener);
 
-        mSignUpButton = (Button)view.findViewById(R.id.signup_button);
+        mSignUpButton = (Button) view.findViewById(R.id.signup_button);
         mSignUpButton.setOnClickListener(mClickListener);
 
         return view;
@@ -60,24 +76,6 @@ public class WelcomePageFragment extends Fragment {
                     + " must implement OnHeadlineSelectedListener");
         }
     }
-
-    private View.OnClickListener mClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            switch(v.getId()) {
-                case R.id.signin_button:
-                    LogUtil.d(TAG, "signin button pressed");
-                    mCallback.onStateChangeToSignIn();
-                    break;
-                case R.id.signup_button:
-                    LogUtil.d(TAG, "signup button pressed");
-                    mCallback.onStateChangeToSignUp();
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
 
     public interface WelcomePageFragmentListener {
         void onStateChangeToSignIn();

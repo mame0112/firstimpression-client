@@ -1,12 +1,7 @@
 package com.mame.impression;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ImpressionService;
@@ -34,14 +29,15 @@ public class SprashActivity extends Activity {
     }
 
     @Override
-    protected void onStart(){
-        super.onStart();;
+    protected void onStart() {
+        super.onStart();
+        ;
 
-        mService = ImpressionService.getService(this.getClass());
+        mService = ImpressionService.getService(getApplicationContext(), this.getClass());
     }
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
         super.onResume();
 
         String userName = PreferenceUtil.getUserNmae(getApplicationContext());
@@ -58,15 +54,17 @@ public class SprashActivity extends Activity {
     }
 
     @Override
-    protected void onPause(){
-        super.onPause();;
+    protected void onPause() {
+        super.onPause();
+        ;
     }
 
     @Override
-    protected void onStop(){
-        super.onStop();;
+    protected void onStop() {
+        super.onStop();
+        ;
 
-        if(mService != null){
+        if (mService != null) {
             mService.finalize(this.getClass());
         }
     }

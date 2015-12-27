@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,46 +38,11 @@ public class SignInPageFragment extends Fragment {
 
     private String mPassword;
 
-    private ImpressionService mService = ImpressionService.getService(SignInPageFragment.class);
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        LogUtil.d(TAG, "onCreate");
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view =  inflater.inflate(R.layout.signin_fragment, container, false);
-        mUserNameView = (EditText)view.findViewById(R.id.signin_username);
-        mUserNameView.addTextChangedListener(mUserNmaeWatcher);
-
-        mPasswordView = (EditText)view.findViewById(R.id.signin_password);
-        mPasswordView.addTextChangedListener(mPasswordWatcher);
-
-        mSignInButton = (Button)view.findViewById(R.id.signin_button);
-        mSignInButton.setOnClickListener(mClickListener);
-
-        mForgetView = (TextView)view.findViewById(R.id.signin_forget_password);
-        mForgetView.setOnClickListener(mClickListener);
-
-        return view;
-    }
-
-    @Override
-    public void onDestroyView(){
-        super.onDestroyView();
-
-        mService.finalize(this.getClass());
-    }
-
+    private ImpressionService mService;
     private View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.signin_button:
                     //TODO Need to disable sign in button here
                     LogUtil.d(TAG, "sign in button pressed");
@@ -91,7 +55,7 @@ public class SignInPageFragment extends Fragment {
                         }
 
                         @Override
-                        public void onFailed(ImpressionError reason) {
+                        public void onFailed(ImpressionError reason, String message) {
 
                         }
                     }, mUserName, mPassword);
@@ -106,7 +70,6 @@ public class SignInPageFragment extends Fragment {
 
         }
     };
-
     private TextWatcher mUserNmaeWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -123,7 +86,6 @@ public class SignInPageFragment extends Fragment {
 
         }
     };
-
     private TextWatcher mPasswordWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -140,5 +102,41 @@ public class SignInPageFragment extends Fragment {
 
         }
     };
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LogUtil.d(TAG, "onCreate");
+
+        mService = ImpressionService.getService(getContext(), SignInPageFragment.class);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.signin_fragment, container, false);
+        mUserNameView = (EditText) view.findViewById(R.id.signin_username);
+        mUserNameView.addTextChangedListener(mUserNmaeWatcher);
+
+        mPasswordView = (EditText) view.findViewById(R.id.signin_password);
+        mPasswordView.addTextChangedListener(mPasswordWatcher);
+
+        mSignInButton = (Button) view.findViewById(R.id.signin_button);
+        mSignInButton.setOnClickListener(mClickListener);
+
+        mForgetView = (TextView) view.findViewById(R.id.signin_forget_password);
+        mForgetView.setOnClickListener(mClickListener);
+
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        mService.finalize(this.getClass());
+    }
 
 }

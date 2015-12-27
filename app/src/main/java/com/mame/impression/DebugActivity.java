@@ -1,7 +1,6 @@
 package com.mame.impression;
 
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,13 +14,11 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.server.JsonConstants;
-import com.mame.impression.server.WebApi;
 import com.mame.impression.util.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,37 +31,11 @@ public class DebugActivity extends Activity {
     private static final String TAG = Constants.TAG + DebugActivity.class.getSimpleName();
 
     private RequestQueue mQueue;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-
-        LogUtil.d(TAG, "onCreate");
-
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.debug_activity);
-
-        Button userGetButton = (Button)findViewById(R.id.debug_user_get);
-        userGetButton.setOnClickListener(mClicklistener);
-
-        Button userPostButton = (Button)findViewById(R.id.debug_user_post);
-        userPostButton.setOnClickListener(mClicklistener);
-
-        Button userPutButton = (Button)findViewById(R.id.debug_user_put);
-        userPutButton.setOnClickListener(mClicklistener);
-
-        Button userDeleteButton = (Button)findViewById(R.id.debug_user_delete);
-        userDeleteButton.setOnClickListener(mClicklistener);
-
-        mQueue = Volley.newRequestQueue(this);
-
-    }
-
     private View.OnClickListener mClicklistener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
-            switch(v.getId()){
+            switch (v.getId()) {
                 case R.id.debug_user_get:
                     LogUtil.d(TAG, "Get");
                     try {
@@ -120,19 +91,41 @@ public class DebugActivity extends Activity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        LogUtil.d(TAG, "onCreate");
+
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.debug_activity);
+
+        Button userGetButton = (Button) findViewById(R.id.debug_user_get);
+        userGetButton.setOnClickListener(mClicklistener);
+
+        Button userPostButton = (Button) findViewById(R.id.debug_user_post);
+        userPostButton.setOnClickListener(mClicklistener);
+
+        Button userPutButton = (Button) findViewById(R.id.debug_user_put);
+        userPutButton.setOnClickListener(mClicklistener);
+
+        Button userDeleteButton = (Button) findViewById(R.id.debug_user_delete);
+        userDeleteButton.setOnClickListener(mClicklistener);
+
+        mQueue = Volley.newRequestQueue(this);
+
+    }
+
     private void get(String api, final JSONObject input) {
 
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, Constants.HTTP_URL+api, null,
-                new Response.Listener<JSONObject>()
-                {
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, Constants.HTTP_URL + api, null,
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         // display response
                         LogUtil.d(TAG, "result: " + response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
@@ -140,9 +133,8 @@ public class DebugActivity extends Activity {
                 }
         ) {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put(JsonConstants.PARAM, input.toString());
 
                 return params;
@@ -153,17 +145,15 @@ public class DebugActivity extends Activity {
     }
 
     private void post(String api, final JSONObject input) {
-        StringRequest postRequest = new StringRequest(Request.Method.POST, Constants.HTTP_URL+api,
-                new Response.Listener<String>()
-                {
+        StringRequest postRequest = new StringRequest(Request.Method.POST, Constants.HTTP_URL + api,
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
                         LogUtil.d(TAG, "result: " + response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
@@ -172,9 +162,8 @@ public class DebugActivity extends Activity {
                 }
         ) {
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put(JsonConstants.PARAM, input.toString());
 
                 return params;
@@ -184,17 +173,15 @@ public class DebugActivity extends Activity {
     }
 
     private void put(String api, final JSONObject input) {
-        StringRequest putRequest = new StringRequest(Request.Method.PUT, Constants.HTTP_URL+api,
-                new Response.Listener<String>()
-                {
+        StringRequest putRequest = new StringRequest(Request.Method.PUT, Constants.HTTP_URL + api,
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
                         LogUtil.d(TAG, "result: " + response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // error
@@ -204,9 +191,8 @@ public class DebugActivity extends Activity {
         ) {
 
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String> ();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("name", "Alif");
                 params.put("domain", "http://itsalif.info");
 
@@ -219,28 +205,25 @@ public class DebugActivity extends Activity {
     }
 
     private void delete(String api, final JSONObject input) {
-        StringRequest dr = new StringRequest(Request.Method.DELETE, Constants.HTTP_URL+api,
-                new Response.Listener<String>()
-                {
+        StringRequest dr = new StringRequest(Request.Method.DELETE, Constants.HTTP_URL + api,
+                new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         // response
                         LogUtil.d(TAG, "result: " + response);
                     }
                 },
-                new Response.ErrorListener()
-                {
+                new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
                     }
                 }
-        ){
+        ) {
 
             @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String> ();
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
                 params.put("name", "Alif");
                 params.put("domain", "http://itsalif.info");
 

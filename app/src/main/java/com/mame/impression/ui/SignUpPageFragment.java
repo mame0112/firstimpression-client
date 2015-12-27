@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
@@ -29,7 +28,7 @@ public class SignUpPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view =  inflater.inflate(R.layout.signup_fragment, container, false);
+        View view = inflater.inflate(R.layout.signup_fragment, container, false);
 
         return view;
     }

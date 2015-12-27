@@ -26,12 +26,12 @@ public class QuestionDataBuilder {
      */
     private List<QuestionItem> mItems = new ArrayList<>();
 
-    public QuestionDataBuilder getInstance(){
+    public QuestionDataBuilder getInstance() {
         return new QuestionDataBuilder();
     }
 
-    public QuestionDataBuilder setDescription(String description){
-        if(description == null){
+    public QuestionDataBuilder setDescription(String description) {
+        if (description == null) {
             throw new IllegalArgumentException("Description is null");
         }
 
@@ -40,8 +40,8 @@ public class QuestionDataBuilder {
         return this;
     }
 
-    public QuestionDataBuilder setPostDate(long date){
-        if(date <= 0){
+    public QuestionDataBuilder setPostDate(long date) {
+        if (date <= 0) {
             throw new IllegalArgumentException("Illegal post date");
         }
 
@@ -51,8 +51,8 @@ public class QuestionDataBuilder {
 
     }
 
-    public QuestionDataBuilder setPostUserData(String userName){
-        if(userName == null){
+    public QuestionDataBuilder setPostUserData(String userName) {
+        if (userName == null) {
             throw new IllegalArgumentException("User name is null");
         }
         mPostUserName = userName;
@@ -61,12 +61,12 @@ public class QuestionDataBuilder {
 
     }
 
-    public QuestionDataBuilder setOptons(List<QuestionItem> items){
-        if(items == null){
+    public QuestionDataBuilder setOptons(List<QuestionItem> items) {
+        if (items == null) {
             throw new IllegalArgumentException("Question option is null");
         }
 
-        if(items.size() <= 1){
+        if (items.size() <= 1) {
             throw new IllegalArgumentException("Question option must be more than 2");
         }
 
@@ -79,7 +79,6 @@ public class QuestionDataBuilder {
     public QuestionData createData() {
         return new QuestionData(mDescription, mPostDate, mPostUserName, mItems);
     }
-
 
 
 }

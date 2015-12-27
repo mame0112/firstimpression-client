@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by kosukeEndo on 2015/11/29.
  */
-public class QuestionData implements ImpressionData{
+public class QuestionData implements ImpressionData {
 
     private static final String TAG = Constants.TAG + QuestionData.class.getSimpleName();
 
@@ -27,15 +27,12 @@ public class QuestionData implements ImpressionData{
     private List<QuestionItem> mItems = new ArrayList<>();
 
     //Package private
-    QuestionData(String description, long postDate, String postUserName, List<QuestionItem> items){
+    QuestionData(String description, long postDate, String postUserName, List<QuestionItem> items) {
         mDescription = description;
         mPostDate = postDate;
         mPostUserName = postUserName;
         mItems = items;
     }
-
-
-
 
 
 }

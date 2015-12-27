@@ -22,7 +22,7 @@ public class MainPageContent {
 
     private String mChoiceB;
 
-    public MainPageContent(long id, Bitmap thumbnail, String postDate, String userName, String desc, String choiceA, String choiceB){
+    public MainPageContent(long id, Bitmap thumbnail, String postDate, String userName, String desc, String choiceA, String choiceB) {
         mId = id;
         mThumbnail = thumbnail;
         mPostDate = postDate;
@@ -32,31 +32,31 @@ public class MainPageContent {
         mChoiceB = choiceB;
     }
 
-    public long getId(){
+    public long getId() {
         return mId;
     }
 
-    public Bitmap getThumbnail(){
+    public Bitmap getThumbnail() {
         return mThumbnail;
     }
 
-    public String getPostDate(){
+    public String getPostDate() {
         return mPostDate;
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return mUserName;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return mDescription;
     }
 
-    public String getChoiceA(){
+    public String getChoiceA() {
         return mChoiceA;
     }
 
-    public String getChoiceB(){
+    public String getChoiceB() {
         return mChoiceB;
     }
 

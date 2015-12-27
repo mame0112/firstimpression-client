@@ -1,7 +1,6 @@
 package com.mame.impression.manager;
 
 import com.mame.impression.constant.RequestAction;
-import com.mame.impression.data.ResultInfo;
 
 import org.json.JSONObject;
 
@@ -14,7 +13,7 @@ public abstract class Accessor {
 
     public abstract void request(RequestAction action, JSONObject param);
 
-    protected interface AccessorListener{
+    protected interface AccessorListener {
         public void onNotify();
     }
 

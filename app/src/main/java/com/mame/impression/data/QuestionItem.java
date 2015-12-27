@@ -6,5 +6,4 @@ package com.mame.impression.data;
 public interface QuestionItem {
 
 
-
 }

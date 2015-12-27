@@ -1,20 +1,22 @@
 package com.mame.impression.manager;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.mame.impression.action.lists.QuestionListAction;
+import com.mame.impression.action.user.SignInAction;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.constant.RequestAction;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
+import com.mame.impression.server.WebApiRunner;
 import com.mame.impression.util.LogUtil;
 
-import org.json.JSONObject;
+import org.json.JSONException;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -26,7 +28,7 @@ public class ImpressionService extends Service {
 
     private static Set<Class> mClients = new HashSet<>();
 
-    private ImpressionActionRunner mTaskRunner = new ImpressionActionRunner();
+    private static WebApiRunner mTaskRunner;
 
     private static ImpressionService sService = new ImpressionService() {
 
@@ -42,22 +44,30 @@ public class ImpressionService extends Service {
      *
      * @return
      */
-    public static ImpressionService getService(Class clazz) {
+    public static ImpressionService getService(Context context, Class clazz) {
         LogUtil.d(TAG, "getService");
 
         if (clazz == null) {
             throw new IllegalArgumentException("Class name must not be null");
         }
-            // Remember client name
-            LogUtil.d(TAG, "client size: " + mClients.size());
-            mClients.add(clazz);
+
+
+        if (context == null) {
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        mTaskRunner = new WebApiRunner(context);
+
+        // Remember client name
+        LogUtil.d(TAG, "client size: " + mClients.size());
+        mClients.add(clazz);
 
         return sService;
     }
 
-    public void finalize(Class clazz){
+    public void finalize(Class clazz) {
         LogUtil.d(TAG, "finalize size: " + mClients.size());
-        if(clazz != null){
+        if (clazz != null) {
             mClients.remove(clazz);
             LogUtil.d(TAG, "remove size: " + mClients.size());
         }
@@ -70,22 +80,27 @@ public class ImpressionService extends Service {
             throw new IllegalArgumentException("Listener is null");
         }
 
-        if (start <= 0) {
-            throw new IllegalArgumentException("start must be more than 1");
+        if (start < 0) {
+            throw new IllegalArgumentException("start must be more than 0");
         }
 
         if (end <= 0) {
             throw new IllegalArgumentException("end must be more than 1");
         }
 
-        JSONObject param = RequestParameterFactory.createForRequestAllMessageData(start, end);
-        List<Accessor> accessors = AccessorTypeDecider.createAccessor(RequestAction.QUESTION);
+        //TODO
+        QuestionListAction questinListAction = new QuestionListAction();
+        questinListAction.setAction(0, 10);
 
         RequestInfoBuilder builder = new RequestInfoBuilder();
-        RequestInfo info = builder.setResultListener(listener).setAccessors(accessors).setRequestAction(RequestAction.QUESTION).setRequestParam(param).getResult();
-
-        //TODO
-        mTaskRunner.add(info);
+        try {
+            RequestInfo info = builder.setResultListener(listener).setAccessors(questinListAction.getAccessors()).setRequestAction(questinListAction.getAction()).setRequestParam(questinListAction.getParemeter()).getResult();
+            //TODO
+            mTaskRunner.add(listener, info);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            //TODO Need to do error handing
+        }
 
     }
 
@@ -94,19 +109,29 @@ public class ImpressionService extends Service {
             throw new IllegalArgumentException("Listener is null");
         }
 
-        //TODO
+        SignInAction action = new SignInAction();
+        action.setAction(userName, password);
+
+        RequestInfoBuilder builder = new RequestInfoBuilder();
+        try {
+            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
+            mTaskRunner.add(listener, info);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            //TODO Need to do error handing
+        }
     }
 
-    public void respondToQuestion(ResultListener listener, long questionId, int select){
+    public void respondToQuestion(ResultListener listener, long questionId, int select) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
         }
 
-        if(questionId < 0){
+        if (questionId < 0) {
             throw new IllegalArgumentException("questionId must be greater than 0");
         }
 
-        if(select < 0){
+        if (select < 0) {
             throw new IllegalArgumentException("select must be greater than 0");
         }
 

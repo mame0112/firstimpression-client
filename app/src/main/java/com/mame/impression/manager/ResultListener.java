@@ -18,5 +18,5 @@ public interface ResultListener {
      * Method to be called when requested operation is failed due to some reason.
      * Error reason should be available from argument of this method.
      */
-    public void onFailed(ImpressionError reason);
+    public void onFailed(ImpressionError reason, String message);
 }

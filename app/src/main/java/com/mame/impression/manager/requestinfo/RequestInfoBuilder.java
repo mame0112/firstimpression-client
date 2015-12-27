@@ -6,7 +6,6 @@ import com.mame.impression.manager.ResultListener;
 
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,27 +15,27 @@ public class RequestInfoBuilder {
 
     RequestInfo mInfo = new RequestInfo();
 
-    public RequestInfoBuilder setResultListener(ResultListener listener){
+    public RequestInfoBuilder setResultListener(ResultListener listener) {
         mInfo.setResultListener(listener);
         return this;
     }
 
-    public RequestInfoBuilder setAccessors(List<Accessor> accessors){
+    public RequestInfoBuilder setAccessors(List<Accessor> accessors) {
         mInfo.setAccessors(accessors);
         return this;
     }
 
-    public RequestInfoBuilder setRequestAction(RequestAction action){
+    public RequestInfoBuilder setRequestAction(RequestAction action) {
         mInfo.setRequestAction(action);
         return this;
     }
 
-    public RequestInfoBuilder setRequestParam(JSONObject param){
+    public RequestInfoBuilder setRequestParam(JSONObject param) {
         mInfo.setRequestParam(param);
         return this;
     }
 
-    public RequestInfo getResult(){
+    public RequestInfo getResult() {
         return mInfo;
     }
 

@@ -2,9 +2,6 @@ package com.mame.impression;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.widget.Button;
 
 import com.mame.impression.ui.ErrorMessageFragment;
 import com.mame.impression.ui.SignInPageFragment;
@@ -35,7 +32,7 @@ public class WelcomePageActivity extends ImpressionBaseActivity implements Welco
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_layout);
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.welcome_frame, mWelcomeFragment)
                     .commit();
@@ -55,13 +52,15 @@ public class WelcomePageActivity extends ImpressionBaseActivity implements Welco
     }
 
     @Override
-    protected void onPause(){
-        super.onPause();;
+    protected void onPause() {
+        super.onPause();
+        ;
     }
 
     @Override
-    protected void onStop(){
-        super.onStop();;
+    protected void onStop() {
+        super.onStop();
+        ;
     }
 
     @Override

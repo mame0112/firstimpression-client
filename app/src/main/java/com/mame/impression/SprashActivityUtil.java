@@ -8,13 +8,13 @@ import android.content.Intent;
  */
 public class SprashActivityUtil {
 
-    void startWelcomeActivity(Context context){
+    void startWelcomeActivity(Context context) {
         Intent intent = new Intent(context, WelcomePageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }
 
-    void startMainActivity(Context context){
+    void startMainActivity(Context context) {
         Intent intent = new Intent(context, MainPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

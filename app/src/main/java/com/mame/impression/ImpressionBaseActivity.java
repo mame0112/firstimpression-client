@@ -1,7 +1,6 @@
 package com.mame.impression;
 
 
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 /**
@@ -14,18 +13,17 @@ public abstract class ImpressionBaseActivity extends FragmentActivity {
     protected abstract void escapePage();
 
     @Override
-    protected void onStart(){
-        super.onStart();;
+    protected void onStart() {
+        super.onStart();
+        ;
         enterPage();
     }
 
     @Override
-    protected void onStop(){
+    protected void onStop() {
         super.onStop();
         escapePage();
     }
-
-
 
 
 }
