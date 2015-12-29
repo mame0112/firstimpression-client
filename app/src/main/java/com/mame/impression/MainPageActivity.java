@@ -161,8 +161,18 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        switch (id){
+            case R.id.action_settings:
             return true;
+            case R.id.debug_answer_page:
+                Intent intent = new Intent(getApplicationContext(), AnswerPageActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                return true;
+            case R.id.debug_prompt_dialog:
+                return true;
+            default:
+                break;
         }
 
         return super.onOptionsItemSelected(item);

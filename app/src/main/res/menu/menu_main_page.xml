@@ -3,4 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainPageActivity">
     <item android:id="@+id/action_settings" android:title="@string/action_settings"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/debug_answer_page" android:title="Answer page"
+        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/debug_prompt_dialog" android:title="Profile prompt dialog"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

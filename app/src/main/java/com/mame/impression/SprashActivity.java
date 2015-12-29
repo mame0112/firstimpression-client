@@ -31,8 +31,6 @@ public class SprashActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        ;
-
         mService = ImpressionService.getService(getApplicationContext(), this.getClass());
     }
 
