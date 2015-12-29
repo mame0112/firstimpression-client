@@ -21,10 +21,6 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-//import org.apache.http.client.HttpClient;
-
-//import org.apache.http.client.HttpClient;
-
 /**
  * Created by kosukeEndo on 2015/12/15.
  */
@@ -42,47 +38,8 @@ public class HttpWebApi implements WebApi {
     public void get(final ResultListener listener, String api, final JSONObject input) {
         LogUtil.d(TAG, "get: " + input.toString());
 
-//        JSONObject in = new JSONObject();
-//        try {
-//            in.put("id", 1);
-//            LogUtil.d(TAG, "input: " + in.toString());
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-//
-//        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, Constants.HTTP_URL + api, null,
-//                new Response.Listener<JSONObject>() {
-//                    @Override
-//                    public void onResponse(JSONObject response) {
-//                        // display response
-//                        LogUtil.d(TAG, "result: " + response);
-//
-//                        //Change JSONObject to ImpressionData
-////                        listener.onCompleted();
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
-//                        listener.onFailed(ImpressionError.GENERAL_ERROR, error.getMessage());
-//                    }
-//                }
-//        )
-//        {
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                Map<String, String> params = new HashMap<String, String>();
-//                params.put("id", "1");
-//                return params;
-//            }
-//        };
-
-        HashMap<String,String> map = new HashMap<String,String>();
-        map.put("id", "1");
-        map.put("param", "test");
-
-        CustomRequest jsObjRequest = new CustomRequest(Request.Method.GET, Constants.HTTP_URL + api, map,
-            new Response.Listener<JSONObject>() {
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, Constants.HTTP_URL + api, input,
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         // display response
@@ -99,20 +56,51 @@ public class HttpWebApi implements WebApi {
                         listener.onFailed(ImpressionError.GENERAL_ERROR, error.getMessage());
                     }
                 }
-
-        ){
-
-                @Override
-                protected Map<String, String> getParams() {
-                    HashMap<String,String> map = new HashMap<String,String>();
-                    map.put("id", "1");
-                    map.put("param", "test");
-                    return map;
-                }
-
+        )
+        {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("id", "1");
+                return params;
+            }
         };
 
-        mQueue.add(jsObjRequest);
+//        HashMap<String,String> map = new HashMap<String,String>();
+//        map.put("id", "1");
+//        map.put("param", "test");
+//
+//        CustomRequest jsObjRequest = new CustomRequest(Request.Method.GET, Constants.HTTP_URL + api, map,
+//            new Response.Listener<JSONObject>() {
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        // display response
+//                        LogUtil.d(TAG, "result: " + response);
+//
+//                        //Change JSONObject to ImpressionData
+////                        listener.onCompleted();
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        LogUtil.d(TAG, "onErrorResponse: " + error.getMessage());
+//                        listener.onFailed(ImpressionError.GENERAL_ERROR, error.getMessage());
+//                    }
+//                }
+//
+//        ){
+//
+//                @Override
+//                protected Map<String, String> getParams() {
+//                    HashMap<String,String> map = new HashMap<String,String>();
+//                    map.put("id", "1");
+//                    map.put("param", "test");
+//                    return map;
+//                }
+//
+//        };
+
+        mQueue.add(getRequest);
 
     };
 

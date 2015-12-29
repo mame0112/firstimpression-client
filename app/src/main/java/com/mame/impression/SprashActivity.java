@@ -50,13 +50,12 @@ public class SprashActivity extends Activity {
 //        }
 
         mUtil.startMainActivity(getApplicationContext());
-
+        finish();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        ;
     }
 
     @Override
