@@ -4,4 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="subscreen_horizontal_margin">32dp</dimen>
+    <dimen name="default_card_horizontal_margin">10dp</dimen>
+    <dimen name="default_card_vertical_margin">4dp</dimen>
 </resources>
