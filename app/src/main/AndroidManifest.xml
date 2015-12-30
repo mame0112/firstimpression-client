@@ -48,7 +48,14 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
 
-        <service android:name=".service.MainPageService"></service>
+        <activity
+            android:name=".PromptDialogActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+
+        <service android:name=".ui.service.MainPageService"></service>
+        <service android:name=".ui.service.AnswerPageService"></service>
         <service android:name="com.mame.impression.manager.ImpressionService"></service>
     </application>
 

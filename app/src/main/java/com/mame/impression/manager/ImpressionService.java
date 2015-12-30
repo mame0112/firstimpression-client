@@ -139,6 +139,13 @@ public class ImpressionService extends Service {
 
     }
 
+    public void requestQuestionsCreatedByUser(ResultListener listener, long userId){
+        LogUtil.d(TAG, "requestQuestionsCreatedByUser");
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {

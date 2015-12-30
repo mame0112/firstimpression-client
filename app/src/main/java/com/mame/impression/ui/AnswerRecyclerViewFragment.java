@@ -61,7 +61,7 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new AnswerPageOverviewAdapter(getActivity(), mData);
+        mAdapter = new AnswerPageOverviewAdapter(mData);
         mAdapter.setAdapterClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 

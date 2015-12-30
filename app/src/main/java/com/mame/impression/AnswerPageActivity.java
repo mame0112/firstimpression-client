@@ -1,12 +1,18 @@
 package com.mame.impression;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 
 import com.android.volley.toolbox.StringRequest;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
+import com.mame.impression.ui.service.AnswerPageService;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -20,6 +26,9 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     private Fragment mDetailFragment = new AnswerDetailFragment();
 
+    private AnswerPageService mService;
+
+    private boolean mIsBound = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,26 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     }
 
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+
+            // To be called when connection with service is established.
+            LogUtil.d(TAG, "onServiceConnected");
+
+            //Keep service instance to operate it from Activity.
+            mService = ((AnswerPageService.AnswerPageServiceBinder) service).getService();
+
+            //Get initial question data.
+            mService.requestQuestionsCreatedByUser();
+        }
+
+        public void onServiceDisconnected(ComponentName className) {
+            //Disconnection from service.
+            mService = null;
+            LogUtil.d(TAG, "onServiceDisconnected");
+        }
+    };
+
     @Override
     protected void enterPage() {
 
@@ -48,6 +77,37 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     @Override
     protected void escapePage() {
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        startService(new Intent(this, AnswerPageService.class));
+
+        doBindService();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        doUnbindService();
+
+        stopService(new Intent(this, AnswerPageService.class));
+    }
+
+    void doBindService() {
+        bindService(new Intent(this,
+                AnswerPageService.class), mConnection, Context.BIND_AUTO_CREATE);
+        mIsBound = true;
+    }
+
+    void doUnbindService() {
+        if (mIsBound) {
+            unbindService(mConnection);
+            mIsBound = false;
+        }
     }
 
     private void switchToDetailView(){

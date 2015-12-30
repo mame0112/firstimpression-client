@@ -23,4 +23,6 @@ public class Constants {
     public final static String HTTPS_URL = HTTPS + BASE_URL;
 
     public final static String USER = "/user";
+
+    public final static long NO_USER = -1;
 }

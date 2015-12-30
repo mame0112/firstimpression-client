@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.mame.impression.constant.Constants;
-import com.mame.impression.service.MainPageService;
+import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.ui.MainPageContent;
 import com.mame.impression.util.LogUtil;
@@ -41,7 +41,10 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
+
     private ServiceConnection mConnection = new ServiceConnection() {
+
+        @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
 
             // To be called when connection with service is established.
@@ -54,6 +57,7 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
 //            mService.requestAllMessageData(Constants.INITIAL_REQUEST_NUM);
         }
 
+        @Override
         public void onServiceDisconnected(ComponentName className) {
             //Disconnection from service.
             mService = null;
@@ -125,12 +129,12 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
     @Override
     protected void onPause() {
         super.onPause();
-        ;
 
         //Unbind from MainPageService
-        startService(new Intent(MainPageActivity.this, MainPageService.class));
-
         doUnbindService();
+
+        stopService(new Intent(MainPageActivity.this, MainPageService.class));
+//        startService(new Intent(MainPageActivity.this, MainPageService.class));
     }
 
     void doBindService() {

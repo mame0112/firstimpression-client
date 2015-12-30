@@ -22,14 +22,11 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
 
     private static final String TAG = Constants.TAG + AnswerPageOverviewAdapter.class.getSimpleName();
 
-    private Context mContext;
-
     private List<AnswerPageData> mData;
 
     private AnswerPageAdapterListener mListener;
 
-    public AnswerPageOverviewAdapter(Context context, List<AnswerPageData> data){
-        mContext = context;
+    public AnswerPageOverviewAdapter(List<AnswerPageData> data){
         mData = data;
     }
 

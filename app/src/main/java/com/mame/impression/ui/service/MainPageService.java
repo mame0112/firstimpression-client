@@ -1,4 +1,4 @@
-package com.mame.impression.service;
+package com.mame.impression.ui.service;
 
 import android.app.Service;
 import android.content.Intent;
