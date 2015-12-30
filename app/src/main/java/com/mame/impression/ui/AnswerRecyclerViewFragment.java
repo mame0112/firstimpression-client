@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by kosukeEndo on 2015/12/29.
  */
-public class AnswerRecyclerViewFragment extends Fragment {
+public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOverviewAdapter.AnswerPageAdapterListener {
 
     private static final String TAG = Constants.TAG + AnswerRecyclerViewFragment.class.getSimpleName();
 
@@ -37,6 +37,8 @@ public class AnswerRecyclerViewFragment extends Fragment {
     private AnswerPageOverviewAdapter mAdapter;
 
     private List<AnswerPageData> mData = new ArrayList<AnswerPageData>();
+
+    private AnswerRecyclerViewListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,7 @@ public class AnswerRecyclerViewFragment extends Fragment {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         mAdapter = new AnswerPageOverviewAdapter(getActivity(), mData);
+        mAdapter.setAdapterClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
         return view;
@@ -113,4 +116,20 @@ public class AnswerRecyclerViewFragment extends Fragment {
 
     }
 
+    public void setAnswerRecyclerViewListener(AnswerRecyclerViewListener listener){
+        mListener = listener;
+    }
+
+    @Override
+    public void onViewClicked(View v) {
+        int position = mRecyclerView.getChildAdapterPosition(v);
+        LogUtil.d(TAG, "onViewClicked: " + position);
+        if(mListener != null){
+            mListener.onItemClicked(position);
+        }
+    }
+
+    public interface AnswerRecyclerViewListener{
+        void onItemClicked(int position);
+    }
 }

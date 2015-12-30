@@ -18,13 +18,15 @@ import java.util.List;
 /**
  * Created by kosukeEndo on 2015/12/29.
  */
-public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageOverviewAdapter.ViewHolder> {
+public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageOverviewAdapter.ViewHolder> implements View.OnClickListener{
 
     private static final String TAG = Constants.TAG + AnswerPageOverviewAdapter.class.getSimpleName();
 
     private Context mContext;
 
     private List<AnswerPageData> mData;
+
+    private AnswerPageAdapterListener mListener;
 
     public AnswerPageOverviewAdapter(Context context, List<AnswerPageData> data){
         mContext = context;
@@ -36,6 +38,7 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
         LogUtil.d(TAG, "onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.answer_card_item, parent, false);
+        v.setOnClickListener(this);
 
         ViewHolder vh = new ViewHolder(v);
         return vh;
@@ -61,6 +64,17 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
         return mData.size();
     }
 
+    void setAdapterClickListener(AnswerPageAdapterListener listener){
+        mListener = listener;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(mListener != null){
+            mListener.onViewClicked(v);
+        }
+    }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mDescriptionView;
@@ -77,5 +91,9 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
             mNumOfAdditionView = (TextView)v.findViewById(R.id.answer_card_num_of_addition);
 
         }
+    }
+
+    public interface AnswerPageAdapterListener{
+        public void onViewClicked(View v);
     }
 }

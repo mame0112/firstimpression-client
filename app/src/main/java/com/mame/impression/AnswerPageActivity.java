@@ -5,17 +5,20 @@ import android.support.v4.app.Fragment;
 
 import com.android.volley.toolbox.StringRequest;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
 import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/29.
  */
-public class AnswerPageActivity extends ImpressionBaseActivity {
+public class AnswerPageActivity extends ImpressionBaseActivity implements AnswerRecyclerViewFragment.AnswerRecyclerViewListener {
 
     private static final String TAG = Constants.TAG + AnswerPageActivity.class.getSimpleName();
 
-    private Fragment mAnswerOverviewFragment = new AnswerRecyclerViewFragment();
+    private AnswerRecyclerViewFragment mAnswerOverviewFragment = new AnswerRecyclerViewFragment();
+
+    private Fragment mDetailFragment = new AnswerDetailFragment();
 
 
     @Override
@@ -33,6 +36,8 @@ public class AnswerPageActivity extends ImpressionBaseActivity {
                     .commit();
         }
 
+        mAnswerOverviewFragment.setAnswerRecyclerViewListener(this);
+
     }
 
     @Override
@@ -43,5 +48,16 @@ public class AnswerPageActivity extends ImpressionBaseActivity {
     @Override
     protected void escapePage() {
 
+    }
+
+    private void switchToDetailView(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.answer_page_frame, mDetailFragment).commit();
+    }
+
+    @Override
+    public void onItemClicked(int position) {
+        LogUtil.d(TAG, "onItemClicked: " + position);
+        switchToDetailView();
     }
 }

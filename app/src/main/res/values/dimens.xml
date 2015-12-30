@@ -5,5 +5,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="subscreen_horizontal_margin">32dp</dimen>
     <dimen name="default_card_horizontal_margin">10dp</dimen>
-    <dimen name="default_card_vertical_margin">4dp</dimen>
+    <dimen name="default_card_vertical_margin">5dp</dimen>
+
+    <!-- Card view -->
+    <dimen name="default_card_view_radius">4dp</dimen>
 </resources>
