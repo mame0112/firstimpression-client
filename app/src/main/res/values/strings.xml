@@ -2,6 +2,10 @@
     <string name="app_name">First Impression</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Common -->
+    <string name="impression_ok">OK</string>
+    <string name="impression_cancel">Cancel</string>
+
     <!-- Main page -->
     <string name="main_card_title_divider"> / </string>
 
@@ -32,6 +36,18 @@
     <string name="answer_detail_generation_from50_60">From 50 to 60</string>
     <string name="answer_detail_generation_from60_70">From 60 to 70</string>
     <string name="answer_detail_generation_over70">Over 70</string>
+
+    <!-- Notification dialog -->
+    <string name="notification_dialog_title">You need to sign in before answer question</string>
+
+    <!-- Profile dialog -->
+    <string name="profile_dialog_age_text">Age</string>
+    <string name="profile_dialog_gender_text">Age</string>
+    <string name="profile_dialog_answer">Answer</string>
+    <string name="profile_dialog_signup_merit_text">If you sign up, you can ask question</string>
+    <string name="profile_dialog_signup_button">Sign up</string>
+    <string name="profile_dialog_signin_note">If you already have account</string>
+    <string name="profile_dialog_signin_button">Sign in</string>
 
     <!-- Error message fragment -->
     <string name="error_message_title">Error message</string>

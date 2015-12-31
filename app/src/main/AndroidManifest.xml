@@ -51,7 +51,7 @@
         <activity
             android:name=".PromptDialogActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.PromptDialog">
         </activity>
 
         <service android:name=".ui.service.MainPageService"></service>

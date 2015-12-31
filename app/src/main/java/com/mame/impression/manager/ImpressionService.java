@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import com.mame.impression.action.lists.QuestionListAction;
 import com.mame.impression.action.user.SignInAction;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.AnswerPageData;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
 import com.mame.impression.server.WebApiRunner;
@@ -124,7 +125,7 @@ public class ImpressionService extends Service {
 
     public void respondToQuestion(ResultListener listener, long questionId, int select) {
         if (listener == null) {
-            throw new IllegalArgumentException("Listener is null");
+            throw new IllegalArgumentException("Listener cannot be null");
         }
 
         if (questionId < 0) {
@@ -144,6 +145,25 @@ public class ImpressionService extends Service {
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");
         }
+    }
+
+    public void updateUserData(ResultListener listener, AnswerPageData.Gender gender, AnswerPageData.Age age) {
+        LogUtil.d(TAG, "updateUserData");
+
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if(gender == null){
+            throw new IllegalArgumentException("Gender cannot be null");
+        }
+
+        if(age == null){
+            throw new IllegalArgumentException("Age cannot be null");
+        }
+
+        //TODO
+
     }
 
     @Nullable

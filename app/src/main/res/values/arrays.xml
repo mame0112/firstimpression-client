@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="impression_gender">
+        <item>Please select</item>
+        <item>Male</item>
+        <item>Female</item>
+        <item>Unknown</item>
+    </string-array>
+    <string-array name="impression_age">
+        <item>Please select</item>
+        <item>Under 10</item>
+        <item>From 10 - 19</item>
+        <item>From 20 - 29</item>
+        <item>From 30 - 39</item>
+        <item>From 40 - 49</item>
+        <item>From 50 - 59</item>
+        <item>From 60 - 69</item>
+        <item>Over 70</item>
+    </string-array>
+</resources>

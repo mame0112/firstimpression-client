@@ -54,14 +54,14 @@ public class AnswerPageService extends ImpressionBaseService {
             }
         };
 
-        //TODO
+
         long userId = PreferenceUtil.getUserId(getApplicationContext());
-        if(userId == Constants.NO_USER){
+        if(userId != Constants.NO_USER){
+            mService.requestQuestionsCreatedByUser(listener, userId);
+        } else {
             showPromptDialog(PromptMode.NOTICE);
         }
 
-
-        mService.requestQuestionsCreatedByUser(listener, userId);
     }
 
     @Override
