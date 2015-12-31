@@ -42,7 +42,7 @@
 
     <!-- Profile dialog -->
     <string name="profile_dialog_age_text">Age</string>
-    <string name="profile_dialog_gender_text">Age</string>
+    <string name="profile_dialog_gender_text">Gender</string>
     <string name="profile_dialog_answer">Answer</string>
     <string name="profile_dialog_signup_merit_text">If you sign up, you can ask question</string>
     <string name="profile_dialog_signup_button">Sign up</string>

@@ -56,6 +56,7 @@
 
         <service android:name=".ui.service.MainPageService"></service>
         <service android:name=".ui.service.AnswerPageService"></service>
+        <service android:name=".server.WebApiService"></service>
         <service android:name="com.mame.impression.manager.ImpressionService"></service>
     </application>
 

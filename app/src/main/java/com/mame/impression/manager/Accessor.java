@@ -1,6 +1,8 @@
 package com.mame.impression.manager;
 
-import com.mame.impression.constant.RequestAction;
+import android.content.Context;
+
+import com.mame.impression.manager.requestinfo.RequestInfo;
 
 import org.json.JSONObject;
 
@@ -11,7 +13,7 @@ public abstract class Accessor {
 
     public abstract void setAccessorListener(AccessorListener listener);
 
-    public abstract void request(RequestAction action, JSONObject param);
+    public abstract void request(ResultListener listener, Context context, RequestInfo info);
 
     protected interface AccessorListener {
         public void onNotify();

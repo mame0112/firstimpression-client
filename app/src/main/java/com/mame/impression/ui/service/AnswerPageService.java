@@ -30,7 +30,7 @@ public class AnswerPageService extends ImpressionBaseService {
     @Override
     public IBinder onBind(Intent intent) {
 
-        mService = ImpressionService.getService(getApplicationContext(), this.getClass());
+        mService = ImpressionService.getService(this.getClass());
 
         //TODO Request questions here.
         return mBinder;

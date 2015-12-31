@@ -12,7 +12,6 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.data.AnswerPageData;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
-import com.mame.impression.server.WebApiRunner;
 import com.mame.impression.util.LogUtil;
 
 import org.json.JSONException;
@@ -29,7 +28,7 @@ public class ImpressionService extends Service {
 
     private static Set<Class> mClients = new HashSet<>();
 
-    private static WebApiRunner mTaskRunner;
+    private static ImpressionTaskRunner mTaskRunner;
 
     private static ImpressionService sService = new ImpressionService() {
 
@@ -45,19 +44,14 @@ public class ImpressionService extends Service {
      *
      * @return
      */
-    public static ImpressionService getService(Context context, Class clazz) {
+    public static ImpressionService getService(Class clazz) {
         LogUtil.d(TAG, "getService");
 
         if (clazz == null) {
             throw new IllegalArgumentException("Class name must not be null");
         }
 
-
-        if (context == null) {
-            throw new IllegalArgumentException("Context cannot be null");
-        }
-
-        mTaskRunner = new WebApiRunner(context);
+        mTaskRunner = ImpressionTaskRunner.getInstance();
 
         // Remember client name
         LogUtil.d(TAG, "client size: " + mClients.size());
@@ -75,7 +69,7 @@ public class ImpressionService extends Service {
 
     }
 
-    public void requestAllQuestionData(ResultListener listener, int start, int end) {
+    public void requestAllQuestionData(ResultListener listener, Context context, int start, int end) {
         LogUtil.d(TAG, "requestAllQuestionData");
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
@@ -97,7 +91,7 @@ public class ImpressionService extends Service {
         try {
             RequestInfo info = builder.setResultListener(listener).setAccessors(questinListAction.getAccessors()).setRequestAction(questinListAction.getAction()).setRequestParam(questinListAction.getParemeter()).getResult();
             //TODO
-            mTaskRunner.add(listener, info);
+            mTaskRunner.run(listener, context, info);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             //TODO Need to do error handing
@@ -105,7 +99,7 @@ public class ImpressionService extends Service {
 
     }
 
-    public void requestSignIn(ResultListener listener, String userName, String password) {
+    public void requestSignIn(ResultListener listener, Context context, String userName, String password) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
         }
@@ -116,7 +110,7 @@ public class ImpressionService extends Service {
         RequestInfoBuilder builder = new RequestInfoBuilder();
         try {
             RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
-            mTaskRunner.add(listener, info);
+            mTaskRunner.run(listener, context, info);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             //TODO Need to do error handing

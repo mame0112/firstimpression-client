@@ -1,6 +1,11 @@
 package com.mame.impression.server;
 
+import android.app.Service;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Binder;
+import android.os.IBinder;
+import android.support.annotation.Nullable;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ResultListener;
@@ -8,25 +13,36 @@ import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 
 /**
+ * In this method, HTTP and HTTPS connection is switched.
  * Created by kosukeEndo on 2015/12/05.
  */
-public class WebApiRunner {
+public class WebApiService extends Service{
 
-    private static final String TAG = Constants.TAG + WebApiRunner.class.getSimpleName();
+    private static final String TAG = Constants.TAG + WebApiService.class.getSimpleName();
 
     private WebApi mWebApi;
 
-    /**
-     * Constructor for WebApiRunner. In this method, HTTP and HTTPS connection is switched.
-     */
-    public WebApiRunner(Context context) {
+    private IBinder mBinder = new WebApiServiceBinder();
+
+    @Override
+    public void onCreate(){
+        super.onCreate();
+
+        LogUtil.d(TAG, "onCreate:" + this);
+
         if (mWebApi == null) {
-            mWebApi = WebApiClientFactory.getWebApi(context);
+            mWebApi = WebApiClientFactory.getWebApi(getApplicationContext());
         }
     }
 
-    public void add(ResultListener listener, RequestInfo info) {
-        LogUtil.d(TAG, "add");
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
+    public void run(ResultListener listener, RequestInfo info) {
+        LogUtil.d(TAG, "run: " + this);
 
         ApiType apiType = ApiType.getResttype(info.getRequestAction());
         String apiName = ApiType.getApiName(info.getRequestAction());
@@ -48,7 +64,17 @@ public class WebApiRunner {
                 break;
         }
 
-
     }
 
+    public class WebApiServiceBinder extends Binder {
+        WebApiService getService() {
+            return WebApiService.this;
+        }
+    }
+
+    @Nullable
+    @Override
+    public IBinder onBind(Intent intent) {
+        return mBinder;
+    }
 }

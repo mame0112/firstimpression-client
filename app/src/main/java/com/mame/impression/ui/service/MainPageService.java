@@ -48,9 +48,9 @@ public class MainPageService extends Service implements ResultListener {
     @Override
     public IBinder onBind(Intent intent) {
         LogUtil.d(TAG, "onBind");
-        mService = ImpressionService.getService(getApplicationContext(), this.getClass());
+        mService = ImpressionService.getService(this.getClass());
         //TODO
-        mService.requestAllQuestionData(this, 0, 19);
+        mService.requestAllQuestionData(this, getApplicationContext(), 0, 19);
 
         return mBinder;
     }

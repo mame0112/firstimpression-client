@@ -58,7 +58,7 @@ public class SignInPageFragment extends Fragment {
                         public void onFailed(ImpressionError reason, String message) {
 
                         }
-                    }, mUserName, mPassword);
+                    }, getActivity(), mUserName, mPassword);
                     break;
                 case R.id.signin_forget_password:
                     LogUtil.d(TAG, "Forget password? text pressed");
@@ -109,7 +109,7 @@ public class SignInPageFragment extends Fragment {
 
         LogUtil.d(TAG, "onCreate");
 
-        mService = ImpressionService.getService(getContext(), SignInPageFragment.class);
+        mService = ImpressionService.getService(SignInPageFragment.class);
     }
 
     @Override

@@ -31,12 +31,18 @@ public class HttpWebApi implements WebApi {
     protected RequestQueue mQueue;
 
     public HttpWebApi(Context context) {
-        mQueue = Volley.newRequestQueue(context);
+
+        //ONly one mQueue should be created.
+        if(mQueue == null){
+            mQueue = Volley.newRequestQueue(context);
+        }
     }
 
     @Override
     public void get(final ResultListener listener, String api, final JSONObject input) {
         LogUtil.d(TAG, "get: " + input.toString());
+
+        final JSONObject result;
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, Constants.HTTP_URL + api, input,
                 new Response.Listener<JSONObject>() {
@@ -44,9 +50,13 @@ public class HttpWebApi implements WebApi {
                     public void onResponse(JSONObject response) {
                         // display response
                         LogUtil.d(TAG, "result: " + response);
+//                        return response;
 
-                        //Change JSONObject to ImpressionData
-//                        listener.onCompleted();
+                        //TODO
+//                        listener.onCompleted(null);
+
+
+
                     }
                 },
                 new Response.ErrorListener() {

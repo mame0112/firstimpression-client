@@ -1,8 +1,12 @@
 package com.mame.impression.local;
 
+import android.content.Context;
+
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.manager.Accessor;
+import com.mame.impression.manager.ResultListener;
+import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 
 import org.json.JSONObject;
@@ -20,7 +24,7 @@ public class LocalAccessor extends Accessor {
     }
 
     @Override
-    public void request(RequestAction action, JSONObject param) {
+    public void request(ResultListener listener, Context context, RequestInfo info) {
         LogUtil.d(TAG, "request");
     }
 }

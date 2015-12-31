@@ -46,7 +46,7 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
 
         LogUtil.d(TAG, "onCreate");
 
-        mService = ImpressionService.getService(getActivity(), SignInPageFragment.class);
+        mService = ImpressionService.getService(SignInPageFragment.class);
 
         createDummyData();
     }

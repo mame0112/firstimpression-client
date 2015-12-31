@@ -54,7 +54,7 @@ public class ProfileDialogFragment extends DialogFragment {
         super.onCreate(savedInstanceState);
         mNum = getArguments().getInt("num");
 
-        mService = ImpressionService.getService(getActivity(), this.getClass());
+        mService = ImpressionService.getService(this.getClass());
     }
 
     @Override
