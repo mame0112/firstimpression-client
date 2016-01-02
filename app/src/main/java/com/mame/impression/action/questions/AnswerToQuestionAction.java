@@ -1,5 +1,6 @@
-package com.mame.impression.action.user;
+package com.mame.impression.action.questions;
 
+import com.android.volley.toolbox.StringRequest;
 import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
@@ -11,44 +12,42 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
- * Created by kosukeEndo on 2015/12/27.
+ * Created by kosukeEndo on 2016/01/01.
  */
-public class SignUpAction implements Action {
+public class AnswerToQuestionAction implements Action {
 
-    private static final String TAG = Constants.TAG + SignUpAction.class.getSimpleName();
+    private final static String TAG = Constants.TAG + AnswerToQuestionAction.class.getSimpleName();
 
-    private String mUserName;
-
-    private String mPassword;
+    private long mQuestionId = Constants.NO_QUESTION;
 
     @Override
     public RequestAction getAction() {
-        return RequestAction.SIGN_UP;
+        return RequestAction.REPLY_TO_QUESTION;
     }
 
     @Override
     public List<Accessor> getAccessors() {
-
         List<Accessor> accessors = new ArrayList<Accessor>();
         accessors.add(new ServerAccessor());
 
         return accessors;
+
     }
 
-    public void setAction(String userName, String password) {
-        mUserName = userName;
-        mPassword = password;
+    public void setAction(long questionId) {
+        mQuestionId = questionId;
     }
 
     @Override
-    public JSONObject getParemeter() throws JSONException {
-
+    public JSONObject getParemeter() throws IllegalArgumentException, IllegalFormatException, JSONException {
         JSONObject param = new JSONObject();
-        param.put(JsonParam.USER_USERNAME, mUserName);
-        param.put(JsonParam.USER_PASSWORD, mPassword);
+
+        // TODO
+//        param.put(JsonParam., mQuestionId);
 
         return param;
     }

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.action.lists.QuestionListAction;
 import com.mame.impression.action.user.SignInAction;
+import com.mame.impression.action.user.SignUpAction;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.AnswerPageData;
 import com.mame.impression.manager.requestinfo.RequestInfo;
@@ -105,6 +106,24 @@ public class ImpressionService extends Service {
         }
 
         SignInAction action = new SignInAction();
+        action.setAction(userName, password);
+
+        RequestInfoBuilder builder = new RequestInfoBuilder();
+        try {
+            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
+            mTaskRunner.run(listener, context, info);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            //TODO Need to do error handing
+        }
+    }
+
+    public void requestSignUp(ResultListener listener, Context context, String userName, String password) {
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener is null");
+        }
+
+        SignUpAction action = new SignUpAction();
         action.setAction(userName, password);
 
         RequestInfoBuilder builder = new RequestInfoBuilder();

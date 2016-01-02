@@ -25,4 +25,6 @@ public class Constants {
     public final static String USER = "/user";
 
     public final static long NO_USER = -1;
+
+    public final static long NO_QUESTION = -1;
 }
