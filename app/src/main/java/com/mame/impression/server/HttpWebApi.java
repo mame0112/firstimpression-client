@@ -183,12 +183,80 @@ public class HttpWebApi implements WebApi {
     }
 
     @Override
-    public void put(ResultListener listener, String api, JSONObject input) {
+    public void put(ResultListener listener, final String api, JSONObject input) {
+        LogUtil.d(TAG, "put");
+        URL url = null;
+        try {
+            url = new URL(Constants.HTTP_URL + api);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestMethod("PUT");
+
+            OutputStream os = conn.getOutputStream();
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+
+            Map<String, Object> values = new HashMap<String, Object>();
+            values.put("username","test name");
+            values.put("password","test password");
+            writer.write(getQuery(values));
+
+            writer.flush();
+            writer.close();
+            os.close();
+
+
+//            OutputStreamWriter out = new OutputStreamWriter(
+//                    conn.getOutputStream());
+//            out.write("Resource content");
+//            out.close();
+            int responseCode=conn.getResponseCode();
+            LogUtil.d(TAG, "responseCode: " + responseCode);
+
+            String response = null;
+
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+                String line;
+                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line=br.readLine()) != null) {
+                    response+=line;
+                }
+            }
+            else {
+                response="";
+
+            }
+
+            LogUtil.d(TAG, "response: " + response);
+            LogUtil.d(TAG, "response: " + response);
+        } catch (MalformedURLException e) {
+            LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+        } catch (ProtocolException e) {
+            LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+        } catch (IOException e) {
+            LogUtil.d(TAG, "IOException: " + e.getMessage());
+        }
 
     }
 
     @Override
     public void delete(ResultListener listener, String api, JSONObject input) {
+        URL url = null;
+        try {
+            url = new URL(Constants.HTTP_URL + api);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setDoOutput(true);
+            conn.setRequestProperty(
+                    "Content-Type", "application/x-www-form-urlencoded");
+            conn.setRequestMethod("DELETE");
+            conn.connect();
+        } catch (MalformedURLException e) {
+            LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+        } catch (ProtocolException e) {
+            LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+        } catch (IOException e) {
+            LogUtil.d(TAG, "IOException: " + e.getMessage());
+        }
 
     }
 
