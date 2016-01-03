@@ -12,6 +12,9 @@ import com.mame.impression.manager.ResultListener;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * In this method, HTTP and HTTPS connection is switched.
  * Created by kosukeEndo on 2015/12/05.
@@ -20,9 +23,11 @@ public class WebApiService extends Service{
 
     private static final String TAG = Constants.TAG + WebApiService.class.getSimpleName();
 
-    private WebApi mWebApi;
+//    private WebApi mWebApi;
 
     private IBinder mBinder = new WebApiServiceBinder();
+
+    private ExecutorService mExec;
 
     @Override
     public void onCreate(){
@@ -30,8 +35,12 @@ public class WebApiService extends Service{
 
         LogUtil.d(TAG, "onCreate:" + this);
 
-        if (mWebApi == null) {
-            mWebApi = WebApiClientFactory.getWebApi(getApplicationContext());
+//        if (mWebApi == null) {
+//            mWebApi = WebApiClientFactory.getWebApi(getApplicationContext());
+//        }
+
+        if(mExec == null){
+            mExec = Executors.newFixedThreadPool(3);
         }
     }
 
@@ -49,16 +58,18 @@ public class WebApiService extends Service{
 
         switch (apiType) {
             case GET:
-                mWebApi.get(listener, apiName, info.getParameter());
+                mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
+//                mWebApi.get(listener, apiName, info.getParameter());
                 break;
             case POST:
-                mWebApi.post(listener, apiName, info.getParameter());
+                mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
+//                mWebApi.post(listener, apiName, info.getParameter());
                 break;
             case PUT:
-                mWebApi.put(listener, apiName, info.getParameter());
+//                mWebApi.put(listener, apiName, info.getParameter());
                 break;
             case DELETE:
-                mWebApi.delete(listener, apiName, info.getParameter());
+//                mWebApi.delete(listener, apiName, info.getParameter());
                 break;
             default:
                 break;

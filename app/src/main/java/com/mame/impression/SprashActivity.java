@@ -59,7 +59,6 @@ public class SprashActivity extends Activity {
     @Override
     protected void onStop() {
         super.onStop();
-        ;
 
         if (mService != null) {
             mService.finalize(this.getClass());

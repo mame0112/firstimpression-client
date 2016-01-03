@@ -1,5 +1,7 @@
 package com.mame.impression.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -60,16 +62,24 @@ public class SignInPageFragment extends Fragment {
                         }
                     }, getActivity(), mUserName, mPassword);
                     break;
+
                 case R.id.signin_forget_password:
                     LogUtil.d(TAG, "Forget password? text pressed");
-                    //TODO Go to web page.
+                    openContactPage();
                     break;
+
                 default:
                     break;
             }
 
         }
     };
+
+    private void openContactPage(){
+        Uri uri = Uri.parse(Constants.CONTACT_URL);
+        Intent i = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(i);
+    }
 
     private TextWatcher mUserNmaeWatcher = new TextWatcher() {
         @Override
@@ -84,7 +94,8 @@ public class SignInPageFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            mUserName = s.toString();
+            changeButtonState();
         }
     };
     private TextWatcher mPasswordWatcher = new TextWatcher() {
@@ -100,9 +111,19 @@ public class SignInPageFragment extends Fragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            mPassword = s.toString();
+            changeButtonState();
         }
     };
+
+    private void changeButtonState(){
+        if(TextValidator.isValidUsername(mUserName) && TextValidator.isValidPassword(mPassword)){
+            mSignInButton.setEnabled(true);
+        } else {
+            mSignInButton.setEnabled(false);
+        }
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -111,6 +132,7 @@ public class SignInPageFragment extends Fragment {
         LogUtil.d(TAG, "onCreate");
 
         mService = ImpressionService.getService(SignInPageFragment.class);
+
     }
 
     @Override
@@ -126,6 +148,7 @@ public class SignInPageFragment extends Fragment {
 
         mSignInButton = (Button) view.findViewById(R.id.signin_button);
         mSignInButton.setOnClickListener(mClickListener);
+        mSignInButton.setEnabled(false);
 
         mForgetView = (TextView) view.findViewById(R.id.signin_forget_password);
         mForgetView.setOnClickListener(mClickListener);

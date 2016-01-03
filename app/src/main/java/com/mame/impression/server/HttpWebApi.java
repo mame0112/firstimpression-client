@@ -2,6 +2,7 @@ package com.mame.impression.server;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.net.Uri;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -17,6 +18,7 @@ import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -24,6 +26,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -37,8 +40,11 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import java.net.URLEncoder;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -62,7 +68,7 @@ public class HttpWebApi implements WebApi {
                 URL url = null;
                 HttpURLConnection urlConnection = null;
                 try {
-                    url = new URL(Constants.HTTP_URL + api+"?id=2");
+                    url = new URL(Constants.API_URL + api+"?id=2");
                     urlConnection = (HttpURLConnection) url.openConnection();
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader r = new BufferedReader(new InputStreamReader(in));
@@ -96,7 +102,7 @@ public class HttpWebApi implements WebApi {
             URL url = null;
             HttpURLConnection conn = null;
             try {
-                url = new URL(Constants.HTTP_URL + api);
+                url = new URL(Constants.API_URL + api);
                 conn = (HttpURLConnection) url.openConnection();
     //            urlConnection.setChunkedStreamingMode(0);
                 conn.setReadTimeout(10000);
@@ -104,6 +110,7 @@ public class HttpWebApi implements WebApi {
                 conn.setRequestMethod("POST");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
+                conn.setRequestProperty("Content-Type", "application/json");
 
     //            OutputStream out = new BufferedOutputStream(urlConnection.getOutputStream());
     //            writeStream(out);
@@ -118,17 +125,30 @@ public class HttpWebApi implements WebApi {
     //            values.put("username","test name");
     //            values.put("password","test password");
 
-                Map<String, Object> values = new HashMap<String, Object>();
-                values.put("username","test name");
-                values.put("password","test password");
+//                Map<String, Object> values = new HashMap<String, Object>();
+//                values.put("username","test name");
+//                values.put("password","test password");
 
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(getQuery(values));
-                writer.flush();
-                writer.close();
-                os.close();
+                JSONObject jsonParam = new JSONObject();
+                try {
+                    jsonParam.put("id", 1);
+                    jsonParam.put("param", new JSONObject());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+                DataOutputStream printout = new DataOutputStream(conn.getOutputStream ());
+                printout.writeUTF(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
+                printout.flush ();
+                printout.close ();
+
+//                OutputStream os = conn.getOutputStream();
+//                BufferedWriter writer = new BufferedWriter(
+//                        new OutputStreamWriter(os, "UTF-8"));
+//                writer.write(getQuery(values));
+//                writer.flush();
+//                writer.close();
+//                os.close();
                 int responseCode=conn.getResponseCode();
                 LogUtil.d(TAG, "responseCode: " + responseCode);
 
@@ -162,6 +182,29 @@ public class HttpWebApi implements WebApi {
 
     }
 
+    private String buildPostParameters(Object content) {
+        String output = null;
+        if ((content instanceof String) ||
+                (content instanceof JSONObject) ||
+                (content instanceof JSONArray)) {
+            output = content.toString();
+        } else if (content instanceof Map) {
+            Uri.Builder builder = new Uri.Builder();
+            HashMap hashMap = (HashMap) content;
+            if (hashMap != null) {
+                Iterator entries = hashMap.entrySet().iterator();
+                while (entries.hasNext()) {
+                    Map.Entry entry = (Map.Entry) entries.next();
+                    builder.appendQueryParameter(entry.getKey().toString(), entry.getValue().toString());
+                    entries.remove(); // avoids a ConcurrentModificationException
+                }
+                output = builder.build().getEncodedQuery();
+            }
+        }
+
+        return output;
+    }
+
     private String getQuery(Map params) throws UnsupportedEncodingException
     {
         StringBuilder result = new StringBuilder();
@@ -187,7 +230,7 @@ public class HttpWebApi implements WebApi {
         LogUtil.d(TAG, "put");
         URL url = null;
         try {
-            url = new URL(Constants.HTTP_URL + api);
+            url = new URL(Constants.API_URL + api);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -243,7 +286,7 @@ public class HttpWebApi implements WebApi {
     public void delete(ResultListener listener, String api, JSONObject input) {
         URL url = null;
         try {
-            url = new URL(Constants.HTTP_URL + api);
+            url = new URL(Constants.API_URL + api);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestProperty(

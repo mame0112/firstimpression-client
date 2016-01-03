@@ -7,6 +7,8 @@
     <dimen name="default_card_horizontal_margin">10dp</dimen>
     <dimen name="default_card_vertical_margin">5dp</dimen>
 
+    <dimen name="activity_button_button_margin">30dp</dimen>
+
     <!-- Card view -->
     <dimen name="default_card_view_radius">4dp</dimen>
 </resources>
