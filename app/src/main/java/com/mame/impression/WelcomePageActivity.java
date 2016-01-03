@@ -77,7 +77,7 @@ public class WelcomePageActivity extends ImpressionBaseActivity implements Welco
 
     @Override
     public void onStateChangeToSignIn() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment)
+        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
                 .commit();
 
     }
@@ -85,7 +85,7 @@ public class WelcomePageActivity extends ImpressionBaseActivity implements Welco
     @Override
     public void onStateChangeToSignUp() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment)
+                .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
                 .commit();
     }
 

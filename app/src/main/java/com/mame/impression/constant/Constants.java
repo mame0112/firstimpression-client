@@ -29,6 +29,10 @@ public class Constants {
     //TODO
     public final static String CONTACT_URL = HTTP_URL + "";
 
+    public final static String TOS_URL = HTTP_URL + "";
+
+    public final static String PRIVACY_URL = HTTP_URL + "";
+
     public final static String USER = "/user";
 
     public final static long NO_USER = -1;

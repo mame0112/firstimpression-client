@@ -9,6 +9,9 @@
 
     <dimen name="activity_button_button_margin">30dp</dimen>
 
+    <!-- Welcome view-->
+    <dimen name="welcome_divider_margin">10dp</dimen>
+
     <!-- Card view -->
     <dimen name="default_card_view_radius">4dp</dimen>
 </resources>

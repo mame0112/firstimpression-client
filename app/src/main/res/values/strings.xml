@@ -5,6 +5,7 @@
     <!-- Common -->
     <string name="impression_ok">OK</string>
     <string name="impression_cancel">Cancel</string>
+    <string name="impression_divider">/</string>
 
     <!-- Main page -->
     <string name="main_card_title_divider"> / </string>
@@ -23,6 +24,9 @@
 
     <!-- Sign up fragment -->
     <string name="signup_title">Sign up</string>
+    <string name="sign_up_service_notice">By signing up, you agree to:</string>
+    <string name="sign_up_tos">Terms of service</string>
+    <string name="sign_up_privacy_policy">Privacy policy</string>
 
     <!-- Answer fragment -->
     <string name="answer_detail_choice_a">A</string>

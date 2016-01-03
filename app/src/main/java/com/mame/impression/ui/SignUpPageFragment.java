@@ -1,5 +1,7 @@
 package com.mame.impression.ui;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
@@ -17,6 +20,8 @@ import com.mame.impression.data.ImpressionData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
@@ -30,6 +35,10 @@ public class SignUpPageFragment extends Fragment {
     private EditText mUserNameView;
 
     private EditText mPasswordView;
+
+    private TextView mToSView;
+
+    private TextView mPricacyView;
 
     private String mUserName;
 
@@ -67,6 +76,12 @@ public class SignUpPageFragment extends Fragment {
 
         mSignUpButton = (Button) view.findViewById(R.id.signup_button);
         mSignUpButton.setOnClickListener(mClickListener);
+
+        mToSView = (TextView)view.findViewById(R.id.signup_tos);
+        mToSView.setOnClickListener(mClickListener);
+
+        mPricacyView = (TextView)view.findViewById(R.id.signup_privacy_policy);
+        mPricacyView.setOnClickListener(mClickListener);
 
         return view;
     }
@@ -125,11 +140,32 @@ public class SignUpPageFragment extends Fragment {
                         }
                     }, getActivity(), mUserName, mPassword);
                     break;
+                case R.id.signup_tos:
+                    LogUtil.d(TAG, "TOS");
+                    openTosPage();
+                    break;
+                case R.id.signup_privacy_policy:
+                    LogUtil.d(TAG, "Privacy policy");
+                    openPrivacyPolicyPage();
+                    break;
+
                 default:
                     break;
             }
 
         }
     };
+
+    private void openTosPage(){
+        Uri uri = Uri.parse(Constants.TOS_URL);
+        Intent i = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(i);
+    }
+
+    private void openPrivacyPolicyPage(){
+        Uri uri = Uri.parse(Constants.PRIVACY_URL);
+        Intent i = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(i);
+    }
 
 }

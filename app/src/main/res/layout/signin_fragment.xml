@@ -20,6 +20,8 @@
         android:id="@+id/signin_forget_password"
         android:layout_width="match_parent"
         android:text="@string/sign_in_forget_password"
+        android:gravity="right"
+        android:textColor="@color/impressionAccent"
         android:layout_height="wrap_content" />
     <Button android:id="@+id/signin_button"
         android:layout_width="match_parent"
