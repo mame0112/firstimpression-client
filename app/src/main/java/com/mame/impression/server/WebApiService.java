@@ -62,13 +62,16 @@ public class WebApiService extends Service{
 //                mWebApi.get(listener, apiName, info.getParameter());
                 break;
             case POST:
+//                mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
                 mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
 //                mWebApi.post(listener, apiName, info.getParameter());
                 break;
             case PUT:
+                mExec.execute(new WebApiTask.RestPut(listener, apiName, info.getParameter()));
 //                mWebApi.put(listener, apiName, info.getParameter());
                 break;
             case DELETE:
+//                mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
 //                mWebApi.delete(listener, apiName, info.getParameter());
                 break;
             default:
