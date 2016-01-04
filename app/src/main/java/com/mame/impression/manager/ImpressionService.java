@@ -136,6 +136,17 @@ public class ImpressionService extends Service {
         }
     }
 
+    //TODO
+    public void requestToCreateNewQuestion(ResultListener listener, Context context, long userId, String description, String choiceA, String choiceB) {
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener is null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context is null");
+        }
+    }
+
     public void respondToQuestion(ResultListener listener, long questionId, int select) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");

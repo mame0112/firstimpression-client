@@ -116,9 +116,10 @@ public class CreateQuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LogUtil.d(TAG, "create button pressed");
+
             }
         });
-        
+
         return view;
     }
 
@@ -141,8 +142,6 @@ public class CreateQuestionFragment extends Fragment {
             mCreateButton.setEnabled(false);
         }
     }
-
-
 
     @Override
     public void onDestroyView() {
