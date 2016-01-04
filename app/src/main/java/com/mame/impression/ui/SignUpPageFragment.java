@@ -45,22 +45,18 @@ public class SignUpPageFragment extends Fragment {
 
     private String mPassword;
 
-    private ImpressionService mService;
+    private SignUpFragmentListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         LogUtil.d(TAG, "onCreate");
-
-        mService = ImpressionService.getService(SignUpPageFragment.class);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
-        mService.finalize(this.getClass());
     }
 
     @Override
@@ -125,21 +121,7 @@ public class SignUpPageFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signup_button:
-                    //TODO Need to disable sign in button here
-                    LogUtil.d(TAG, "sign up button pressed");
-
-                    mService.requestSignUp(new ResultListener() {
-
-                        @Override
-                        public void onCompleted(JSONObject response) {
-                            LogUtil.d(TAG, "onCompleted");
-                        }
-
-                        @Override
-                        public void onFailed(ImpressionError reason, String message) {
-                            LogUtil.d(TAG, "onFailed");
-                        }
-                    }, getActivity(), mUserName, mPassword);
+                    mListener.onSignUpButtonPressed(mUserName, mPassword);
                     break;
                 case R.id.signup_tos:
                     LogUtil.d(TAG, "TOS");
@@ -167,6 +149,14 @@ public class SignUpPageFragment extends Fragment {
         Uri uri = Uri.parse(Constants.PRIVACY_URL);
         Intent i = new Intent(Intent.ACTION_VIEW,uri);
         startActivity(i);
+    }
+
+    public void setSignUpFragmentListener(SignUpFragmentListener listener){
+        mListener = listener;
+    }
+
+    public interface SignUpFragmentListener{
+        void onSignUpButtonPressed(String userName, String password);
     }
 
 }

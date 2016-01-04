@@ -9,7 +9,7 @@ import android.content.Intent;
 public class SprashActivityUtil {
 
     void startWelcomeActivity(Context context) {
-        Intent intent = new Intent(context, WelcomePageActivity.class);
+        Intent intent = new Intent(context, SignUpInPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

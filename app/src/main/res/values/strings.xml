@@ -28,6 +28,7 @@
 
     <!-- Sign up fragment -->
     <string name="signup_title">Sign up</string>
+    <string name="sign_up_button">Sign up</string>
     <string name="sign_up_service_notice">By signing up, you agree to:</string>
     <string name="sign_up_tos">Terms of service</string>
     <string name="sign_up_privacy_policy">Privacy policy</string>

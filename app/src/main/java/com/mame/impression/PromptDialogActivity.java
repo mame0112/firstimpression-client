@@ -4,13 +4,8 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.NotificationDialogFragment;
@@ -110,7 +105,7 @@ public class PromptDialogActivity extends Activity implements NotificationDialog
     }
 
     private void startWelcomeActivity() {
-        Intent intent = new Intent(this, WelcomePageActivity.class);
+        Intent intent = new Intent(this, SignUpInPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constants.INTENT_QUESTION_DESCEIPTION, mDescription);
         intent.putExtra(Constants.INTENT_QUESTION_CHOICE_A, mChoiceA);

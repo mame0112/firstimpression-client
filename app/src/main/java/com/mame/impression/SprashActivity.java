@@ -39,7 +39,7 @@ public class SprashActivity extends ImpressionBaseActivity {
 
     @Override
     protected void enterPage() {
-        
+
     }
 
     @Override

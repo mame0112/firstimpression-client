@@ -169,12 +169,17 @@ public class WebApiTask {
                 br.close();
                 conn.disconnect();
 
+                JSONObject resultJson = new JSONObject(jsonString.toString());
+                mListener.onCompleted(resultJson);
+
             } catch (MalformedURLException e) {
                 LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
             } catch (ProtocolException e) {
                 LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
             } catch (IOException e) {
                 LogUtil.d(TAG, "IOException: " + e.getMessage());
+            } catch (JSONException e) {
+                e.printStackTrace();
             } finally {
                 if(conn != null){
                     conn.disconnect();
