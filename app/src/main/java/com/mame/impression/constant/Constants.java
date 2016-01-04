@@ -54,4 +54,15 @@ public class Constants {
 
     public final static int DESCRIPTION_CHOICE_MAX_LENGTH = 32;
 
+    /**
+     * Intent
+     */
+    public final static String INTENT_PROMOPT_MODE = "intent_prompt_mode";
+
+    public final static String INTENT_QUESTION_DESCEIPTION = "intent_question_description";
+
+    public final static String INTENT_QUESTION_CHOICE_A = "intent_question_choice_a";
+
+    public final static String INTENT_QUESTION_CHOICE_B = "intent_question_choice_b";
+
 }

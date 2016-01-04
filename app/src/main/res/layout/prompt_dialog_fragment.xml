@@ -21,7 +21,7 @@
         <Button
             android:id="@+id/prompt_dialog_accept"
             android:layout_weight="1"
-            android:text="@string/impression_ok"
+            android:text="@string/notification_dialog_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>

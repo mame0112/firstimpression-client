@@ -13,6 +13,9 @@ import com.mame.impression.R;
  * Created by kosukeEndo on 2015/12/31.
  */
 public class NotificationDialogFragment extends DialogFragment {
+
+    private NotificationDialogFragmentListener mListener;
+
     int mNum;
 
     public static NotificationDialogFragment newInstance(int num) {
@@ -51,13 +54,29 @@ public class NotificationDialogFragment extends DialogFragment {
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.prompt_dialog_accept:
+                    if(mListener != null){
+                        mListener.onOkButtonPressed();
+                    }
                     break;
                 case R.id.prompt_dialog_cancel:
+                    if(mListener != null) {
+                        mListener.onCancelButtonPressed();
+                    }
                     break;
                 default:
                     break;
             }
         }
     };
+
+    public void setNotificationDialogFragmentListener(NotificationDialogFragmentListener listener){
+        mListener = listener;
+    }
+
+    public interface NotificationDialogFragmentListener{
+        void onOkButtonPressed();
+
+        void onCancelButtonPressed();
+    }
 
 }

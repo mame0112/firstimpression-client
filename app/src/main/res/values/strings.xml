@@ -50,7 +50,8 @@
 
 
     <!-- Notification dialog -->
-    <string name="notification_dialog_title">You need to sign in before answer question</string>
+    <string name="notification_dialog_title">You need to sign up before answer question</string>
+    <string name="notification_dialog_sign_up">Sign up</string>
 
     <!-- Profile dialog -->
     <string name="profile_dialog_age_text">Age</string>

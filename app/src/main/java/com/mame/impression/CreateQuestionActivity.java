@@ -12,6 +12,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
@@ -114,7 +115,7 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onCreateButtonPressed(String description, String choiceA, String choiceB) {
         Log.d(TAG, "onCreateButtonPressed");
         if (mIsBound) {
-            mService.requestToCreateNewQuestion(2, description, choiceA, choiceB);
+            mService.requestToCreateNewQuestion(description, choiceA, choiceB);
         }
     }
 }

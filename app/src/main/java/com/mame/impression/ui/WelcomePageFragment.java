@@ -26,6 +26,8 @@ public class WelcomePageFragment extends Fragment {
 
     private Activity mActivity;
 
+
+
     private WelcomePageFragmentListener mCallback;
     private View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override

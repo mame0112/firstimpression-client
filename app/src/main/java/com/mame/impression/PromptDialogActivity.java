@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,16 +15,23 @@ import android.widget.Button;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.NotificationDialogFragment;
 import com.mame.impression.ui.ProfileDialogFragment;
+import com.mame.impression.ui.service.ImpressionBaseService;
 import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/30.
  */
-public class PromptDialogActivity extends Activity {
+public class PromptDialogActivity extends Activity implements NotificationDialogFragment.NotificationDialogFragmentListener {
 
     private final static String TAG = Constants.TAG + PromptDialogActivity.class.getSimpleName();
 
     private int mStackLevel=0;
+
+    private String mDescription;
+
+    private String mChoiceA;
+
+    private String mChoiceB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +40,28 @@ public class PromptDialogActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-//        showNotificationDialog();
-        showProfileDialog();
+        Intent intent = getIntent();
+        if(intent != null){
+            ImpressionBaseService.PromptMode launchMode = (ImpressionBaseService.PromptMode)intent.getSerializableExtra(Constants.INTENT_PROMOPT_MODE);
+
+            mDescription = (String)intent.getStringExtra(Constants.INTENT_QUESTION_DESCEIPTION);
+            mChoiceA = (String)intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_A);
+            mChoiceB = (String)intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_B);
+
+            switch(launchMode){
+                case NOTICE:
+                    showNotificationDialog();
+                    break;
+                case PROFILE:
+                    showProfileDialog();
+                    break;
+                default:
+                    break;
+            }
+
+        } else {
+            //TODO Need to have error handling here.
+        }
 
     }
 
@@ -46,8 +75,9 @@ public class PromptDialogActivity extends Activity {
         }
         ft.addToBackStack(null);
 
-        DialogFragment newFragment = NotificationDialogFragment.newInstance(mStackLevel);
+        NotificationDialogFragment newFragment = NotificationDialogFragment.newInstance(mStackLevel);
         newFragment.show(ft, "dialog");
+        newFragment.setNotificationDialogFragmentListener(this);
 
     }
 
@@ -64,5 +94,27 @@ public class PromptDialogActivity extends Activity {
         DialogFragment newFragment = ProfileDialogFragment.newInstance(mStackLevel);
         newFragment.show(ft, "dialog");
 
+    }
+
+    @Override
+    public void onOkButtonPressed() {
+        LogUtil.d(TAG, "onOkButtonPressed");
+        startWelcomeActivity();
+        finish();
+    }
+
+    @Override
+    public void onCancelButtonPressed() {
+        LogUtil.d(TAG, "onCancelButtonPressed");
+        finish();
+    }
+
+    private void startWelcomeActivity() {
+        Intent intent = new Intent(this, WelcomePageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constants.INTENT_QUESTION_DESCEIPTION, mDescription);
+        intent.putExtra(Constants.INTENT_QUESTION_CHOICE_A, mChoiceA);
+        intent.putExtra(Constants.INTENT_QUESTION_CHOICE_B, mChoiceB);
+        startActivity(intent);
     }
 }

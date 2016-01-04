@@ -1,8 +1,10 @@
 package com.mame.impression;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.ErrorMessageFragment;
 import com.mame.impression.ui.SignInPageFragment;
 import com.mame.impression.ui.SignUpPageFragment;
@@ -24,6 +26,11 @@ public class WelcomePageActivity extends ImpressionBaseActivity implements Welco
 
     private Fragment mErrorMessageFragment = new ErrorMessageFragment();
 
+    // These are used when the user comes into this activity from Prompt dialog (Originall from Create new question)
+    private String mDescription;
+    private String mChoiceA;
+    private String mChoiceB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -37,7 +44,13 @@ public class WelcomePageActivity extends ImpressionBaseActivity implements Welco
                     .add(R.id.welcome_frame, mWelcomeFragment)
                     .commit();
         }
-
+        Intent intent = getIntent();
+        if(intent != null){
+            //TODO Need to go back to Create new question page if these values are not null
+            mDescription = intent.getStringExtra(Constants.INTENT_QUESTION_DESCEIPTION);
+            mChoiceA = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_A);
+            mChoiceB = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_B);
+        }
 
     }
 

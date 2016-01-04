@@ -11,6 +11,7 @@ import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 import org.json.JSONObject;
 
@@ -34,18 +35,23 @@ public class CreateNewQuestionService extends ImpressionBaseService {
         return mBinder;
     }
 
-    public void requestToCreateNewQuestion(long userId, String description, String choiceA, String choiceB){
-        mService.requestToCreateNewQuestion(new ResultListener() {
-            @Override
-            public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "onCompleted");
-            }
+    public void requestToCreateNewQuestion(String description, String choiceA, String choiceB){
+        long userId = PreferenceUtil.getUserId(getApplicationContext());
+        if(userId == Constants.NO_USER){
+            showPromptDialog(PromptMode.NOTICE, description, choiceA, choiceB);
+        } else {
+            mService.requestToCreateNewQuestion(new ResultListener() {
+                @Override
+                public void onCompleted(JSONObject response) {
+                    LogUtil.d(TAG, "onCompleted");
+                }
 
-            @Override
-            public void onFailed(ImpressionError reason, String message) {
-                LogUtil.d(TAG, "onFailed");
-            }
-        }, getApplicationContext(), userId, description, choiceA, choiceB);
+                @Override
+                public void onFailed(ImpressionError reason, String message) {
+                    LogUtil.d(TAG, "onFailed");
+                }
+            }, getApplicationContext(), userId, description, choiceA, choiceB);
+        }
     }
 
     @Override
