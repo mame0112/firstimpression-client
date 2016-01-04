@@ -47,7 +47,7 @@ public class SignUpAction implements Action {
     public JSONObject getParemeter() throws JSONException {
 
         JSONObject param = new JSONObject();
-        param.put(JsonParam.USER_USERNAME, mUserName);
+        param.put(JsonParam.USER_NAME, mUserName);
         param.put(JsonParam.USER_PASSWORD, mPassword);
 
         return param;

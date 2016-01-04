@@ -45,4 +45,13 @@ public class Constants {
     public final static int USERNAME_MAX_LENGTH = 16;
 
     public final static int USERNAMET_MIN_LENGTH = 4;
+
+    public final static int DESCRIPTION_MIN_LENGTH = 4;
+
+    public final static int DESCRIPTION_MAX_LENGTH = 64;
+
+    public final static int DESCRIPTION_CHOICE_MIN_LENGTH = 2;
+
+    public final static int DESCRIPTION_CHOICE_MAX_LENGTH = 32;
+
 }

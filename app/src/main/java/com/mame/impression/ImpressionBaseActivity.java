@@ -15,7 +15,6 @@ public abstract class ImpressionBaseActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ;
         enterPage();
     }
 

@@ -49,8 +49,8 @@ public class QuestionListAction implements Action {
     public JSONObject getParemeter() throws JSONException {
         LogUtil.d(TAG, "getParameter");
         JSONObject param = new JSONObject();
-        param.put(JsonParam.REQUEST_QUESTION_START_POS, mStart);
-        param.put(JsonParam.REQUEST_QUESTION_END_POS, mEnd);
+        param.put(JsonParam.QUESTION_START_POS, mStart);
+        param.put(JsonParam.QUESTION_END_POS, mEnd);
 
         return param;
     }

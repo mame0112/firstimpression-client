@@ -42,6 +42,13 @@
     <string name="answer_detail_generation_from60_70">From 60 to 70</string>
     <string name="answer_detail_generation_over70">Over 70</string>
 
+    <!-- Create question fragment -->
+    <string name="str_create_question_description">Description</string>
+    <string name="str_create_question_choice_a">Choice A</string>
+    <string name="str_create_question_choice_b">Choice B</string>
+    <string name="str_create_question_create_button">Create question</string>
+
+
     <!-- Notification dialog -->
     <string name="notification_dialog_title">You need to sign in before answer question</string>
 
