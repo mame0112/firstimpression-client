@@ -22,7 +22,7 @@ public class CreateQuestionFragment extends Fragment {
 
     private final static String TAG = Constants.TAG + CreateQuestionFragment.class.getSimpleName();
 
-    private ImpressionService mService;
+    private CreateQuestionFragmentListener mCreateQuestionListener;
 
     private EditText mDescriptionView;
 
@@ -44,8 +44,6 @@ public class CreateQuestionFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         LogUtil.d(TAG, "onCreate");
-
-        mService = ImpressionService.getService(CreateQuestionFragment.class);
     }
 
     @Override
@@ -116,6 +114,10 @@ public class CreateQuestionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 LogUtil.d(TAG, "create button pressed");
+                if(mCreateQuestionListener == null){
+                    throw new IllegalStateException("Need to call setCreateQuestionFragmentListener first");
+                }
+                mCreateQuestionListener.onCreateButtonPressed(mDescription, mChoiceAString, mChoiceBString);
 
             }
         });
@@ -146,7 +148,13 @@ public class CreateQuestionFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
 
-        mService.finalize(this.getClass());
+    public void setCreateQuestionFragmentListener(CreateQuestionFragmentListener listener){
+        mCreateQuestionListener = listener;
+    }
+
+    public interface CreateQuestionFragmentListener{
+        void onCreateButtonPressed(String description, String choiceA, String choiceB);
     }
 }

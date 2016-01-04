@@ -7,8 +7,12 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.ImpressionService;
+import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
+
+import org.json.JSONObject;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
@@ -28,6 +32,20 @@ public class CreateNewQuestionService extends ImpressionBaseService {
         mService = ImpressionService.getService(this.getClass());
 
         return mBinder;
+    }
+
+    public void requestToCreateNewQuestion(long userId, String description, String choiceA, String choiceB){
+        mService.requestToCreateNewQuestion(new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        }, getApplicationContext(), userId, description, choiceA, choiceB);
     }
 
     @Override

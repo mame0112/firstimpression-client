@@ -6,17 +6,17 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.util.Log;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
-import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
  */
-public class CreateQuestionActivity extends ImpressionBaseActivity{
+public class CreateQuestionActivity extends ImpressionBaseActivity implements CreateQuestionFragment.CreateQuestionFragmentListener {
 
     private final static String TAG = Constants.TAG + CreateQuestionActivity.class.getSimpleName();
 
@@ -39,24 +39,25 @@ public class CreateQuestionActivity extends ImpressionBaseActivity{
                     .add(R.id.create_question_frame, mFragment)
                     .commit();
         }
+        mFragment.setCreateQuestionFragmentListener(this);
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
 
-        startService(new Intent(CreateQuestionActivity.this, MainPageService.class));
+//        startService(new Intent(CreateQuestionActivity.this, CreateNewQuestionService.class));
 
         doBindService();
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    protected void onStop() {
+        super.onStop();
 
         doUnbindService();
 
-        stopService(new Intent(CreateQuestionActivity.this, MainPageService.class));
+//        stopService(new Intent(CreateQuestionActivity.this, CreateNewQuestionService.class));
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -70,6 +71,8 @@ public class CreateQuestionActivity extends ImpressionBaseActivity{
             //Keep service instance to operate it from Activity.
             mService = ((CreateNewQuestionService.CreateNewQuestionServiceBinder) service).getService();
 
+            mIsBound = true;
+
         }
 
         @Override
@@ -77,16 +80,20 @@ public class CreateQuestionActivity extends ImpressionBaseActivity{
             //Disconnection from service.
             mService = null;
             LogUtil.d(TAG, "onServiceDisconnected");
+
+            mIsBound = false;
         }
     };
 
     void doBindService() {
+        LogUtil.d(TAG, "doBindService");
         bindService(new Intent(CreateQuestionActivity.this,
-                MainPageService.class), mConnection, Context.BIND_AUTO_CREATE);
+                CreateNewQuestionService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
     }
 
     void doUnbindService() {
+        LogUtil.d(TAG, "doUnbindService");
         if (mIsBound) {
             unbindService(mConnection);
             mIsBound = false;
@@ -101,5 +108,13 @@ public class CreateQuestionActivity extends ImpressionBaseActivity{
     @Override
     protected void escapePage() {
 
+    }
+
+    @Override
+    public void onCreateButtonPressed(String description, String choiceA, String choiceB) {
+        Log.d(TAG, "onCreateButtonPressed");
+        if (mIsBound) {
+            mService.requestToCreateNewQuestion(2, description, choiceA, choiceB);
+        }
     }
 }

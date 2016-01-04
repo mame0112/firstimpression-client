@@ -7,6 +7,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.mame.impression.action.lists.QuestionListAction;
+import com.mame.impression.action.questions.CreateNewQuestionAction;
 import com.mame.impression.action.user.SignInAction;
 import com.mame.impression.action.user.SignUpAction;
 import com.mame.impression.constant.Constants;
@@ -136,7 +137,6 @@ public class ImpressionService extends Service {
         }
     }
 
-    //TODO
     public void requestToCreateNewQuestion(ResultListener listener, Context context, long userId, String description, String choiceA, String choiceB) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
@@ -145,6 +145,20 @@ public class ImpressionService extends Service {
         if(context == null){
             throw new IllegalArgumentException("Context is null");
         }
+
+        CreateNewQuestionAction action = new CreateNewQuestionAction();
+        action.setAction(userId, description, choiceA, choiceB);
+
+        RequestInfoBuilder builder = new RequestInfoBuilder();
+
+        try {
+            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
+            mTaskRunner.run(listener, context, info);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            //TODO Need to do error handing
+        }
+
     }
 
     public void respondToQuestion(ResultListener listener, long questionId, int select) {
