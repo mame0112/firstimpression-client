@@ -46,8 +46,8 @@ public class SprashActivity extends Activity {
 //        } else {
 //            mUtil.startWelcomeActivity(getApplicationContext());
 //        }
-        mUtil.startWelcomeActivity(getApplicationContext());
-//        mUtil.startMainActivity(getApplicationContext());
+//        mUtil.startWelcomeActivity(getApplicationContext());
+        mUtil.startMainActivity(getApplicationContext());
         finish();
     }
 

@@ -3,6 +3,8 @@ package com.mame.impression.manager;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.ImpressionData;
 
+import org.json.JSONObject;
+
 /**
  * Created by kosukeEndo on 2015/11/29.
  */
@@ -12,7 +14,7 @@ public interface ResultListener {
      * Method to be called when requested operation is successfully finished.
      * And if no response argument is needed, result shall be null.
      */
-    public void onCompleted(ImpressionData result);
+    public void onCompleted(JSONObject response);
 
     /**
      * Method to be called when requested operation is failed due to some reason.

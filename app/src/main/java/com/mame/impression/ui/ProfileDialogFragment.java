@@ -21,6 +21,8 @@ import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 
+import org.json.JSONObject;
+
 /**
  * Created by kosukeEndo on 2015/12/31.
  */
@@ -152,7 +154,7 @@ public class ProfileDialogFragment extends DialogFragment {
 
     private ResultListener mListener = new ResultListener() {
         @Override
-        public void onCompleted(ImpressionData result) {
+        public void onCompleted(JSONObject response) {
             LogUtil.d(TAG, "onCompleted");
         }
 

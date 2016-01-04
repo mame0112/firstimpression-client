@@ -52,11 +52,6 @@ public class QuestionListAction implements Action {
         param.put(JsonParam.REQUEST_QUESTION_START_POS, mStart);
         param.put(JsonParam.REQUEST_QUESTION_END_POS, mEnd);
 
-        JSONObject param2 = new JSONObject();
-        param2.put("param", param);
-
-        LogUtil.d(TAG, "getParameter output: " + param2.toString());
-
-        return param2;
+        return param;
     }
 }

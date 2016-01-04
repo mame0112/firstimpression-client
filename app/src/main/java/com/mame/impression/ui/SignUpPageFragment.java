@@ -21,6 +21,7 @@ import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 /**
@@ -130,7 +131,7 @@ public class SignUpPageFragment extends Fragment {
                     mService.requestSignUp(new ResultListener() {
 
                         @Override
-                        public void onCompleted(ImpressionData result) {
+                        public void onCompleted(JSONObject response) {
                             LogUtil.d(TAG, "onCompleted");
                         }
 

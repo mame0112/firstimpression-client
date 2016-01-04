@@ -21,6 +21,8 @@ import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 
+import org.json.JSONObject;
+
 /**
  * Created by kosukeEndo on 2015/12/10.
  */
@@ -52,7 +54,7 @@ public class SignInPageFragment extends Fragment {
                     mService.requestSignIn(new ResultListener() {
 
                         @Override
-                        public void onCompleted(ImpressionData result) {
+                        public void onCompleted(JSONObject response) {
 
                         }
 

@@ -14,6 +14,8 @@ import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
+import org.json.JSONObject;
+
 /**
  * Created by kosukeEndo on 2015/12/30.
  */
@@ -44,7 +46,7 @@ public class AnswerPageService extends ImpressionBaseService {
 
         ResultListener listener = new ResultListener() {
             @Override
-            public void onCompleted(ImpressionData result) {
+            public void onCompleted(JSONObject response) {
 
             }
 

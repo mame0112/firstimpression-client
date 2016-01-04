@@ -19,9 +19,9 @@ public enum ApiType {
                 return ApiType.GET;
 
             case CREATE_QUESTION:
+            case SIGN_UP:
                 return ApiType.POST;
 
-            case SIGN_UP:
             case REPLY_TO_QUESTION:
             case UPDATE_MY_INFORMATION:
             case SIGN_OUT:
