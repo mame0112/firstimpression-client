@@ -44,9 +44,9 @@ public class PromptDialogActivity extends Activity implements NotificationDialog
         if(intent != null){
             ImpressionBaseService.PromptMode launchMode = (ImpressionBaseService.PromptMode)intent.getSerializableExtra(Constants.INTENT_PROMOPT_MODE);
 
-            mDescription = (String)intent.getStringExtra(Constants.INTENT_QUESTION_DESCEIPTION);
-            mChoiceA = (String)intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_A);
-            mChoiceB = (String)intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_B);
+            mDescription = intent.getStringExtra(Constants.INTENT_QUESTION_DESCEIPTION);
+            mChoiceA = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_A);
+            mChoiceB = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_B);
 
             switch(launchMode){
                 case NOTICE:

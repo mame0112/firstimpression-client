@@ -7,6 +7,10 @@
     <string name="impression_cancel">Cancel</string>
     <string name="impression_divider">/</string>
 
+    <!-- Sprash page -->
+    <string name="sprash_check_question_button">Check questions without sign in</string>
+    <string name="sprash_sign_upin_button">Sign up / in</string>
+
     <!-- Main page -->
     <string name="main_card_title_divider"> / </string>
 
