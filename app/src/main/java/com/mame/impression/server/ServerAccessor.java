@@ -34,13 +34,15 @@ public class ServerAccessor extends Accessor {
 
     private RequestInfo mInfo;
 
+    private String mIdentifier;
+
     @Override
     public void setAccessorListener(AccessorListener listener) {
         mListener = listener;
     }
 
     @Override
-    public void request(ResultListener listener, Context context, RequestInfo info) {
+    public void request(ResultListener listener, Context context, RequestInfo info, String identifier) {
         LogUtil.d(TAG, "request");
 
         if (mListener == null) {
@@ -48,6 +50,9 @@ public class ServerAccessor extends Accessor {
         }
 
         mContext = context;
+
+        //TODO Need to call mListener.onNotify();
+        mIdentifier = identifier;
 
         //If this is the first time to launch service
         if(mService == null){

@@ -24,6 +24,8 @@ public class AnswerToQuestionAction implements Action {
 
     private long mQuestionId = Constants.NO_QUESTION;
 
+    private int mSelectedItem = 0;
+
     @Override
     public RequestAction getAction() {
         return RequestAction.REPLY_TO_QUESTION;
@@ -38,16 +40,19 @@ public class AnswerToQuestionAction implements Action {
 
     }
 
-    public void setAction(long questionId) {
+    public void setAction(long questionId, int selectedItem) {
         mQuestionId = questionId;
+        mSelectedItem = selectedItem;
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, IllegalFormatException, JSONException {
+    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
 
-        // TODO
-//        param.put(JsonParam., mQuestionId);
+        param.put(JsonParam.QUESTION_ID, mQuestionId);
+
+        //In client side, we just remember "Which item is seleced". Translation to"a: x, b:y" format should be done by server side.
+        param.put(JsonParam.QUESTION_SELECTED_CHOICE, mSelectedItem);
 
         return param;
     }

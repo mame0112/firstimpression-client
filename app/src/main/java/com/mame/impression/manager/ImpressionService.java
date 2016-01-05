@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.mame.impression.action.Action;
 import com.mame.impression.action.lists.QuestionListAction;
+import com.mame.impression.action.questions.AnswerToQuestionAction;
 import com.mame.impression.action.questions.CreateNewQuestionAction;
 import com.mame.impression.action.user.SignInAction;
 import com.mame.impression.action.user.SignUpAction;
+import com.mame.impression.action.user.UpdateUserDataAction;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.AnswerPageData;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
@@ -89,15 +93,7 @@ public class ImpressionService extends Service {
         QuestionListAction questinListAction = new QuestionListAction();
         questinListAction.setAction(0, 10);
 
-        RequestInfoBuilder builder = new RequestInfoBuilder();
-        try {
-            RequestInfo info = builder.setResultListener(listener).setAccessors(questinListAction.getAccessors()).setRequestAction(questinListAction.getAction()).setRequestParam(questinListAction.getParemeter()).getResult();
-            //TODO
-            mTaskRunner.run(listener, context, info);
-        } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            //TODO Need to do error handing
-        }
+        executeAction(listener, context, questinListAction);
 
     }
 
@@ -109,14 +105,7 @@ public class ImpressionService extends Service {
         SignInAction action = new SignInAction();
         action.setAction(userName, password);
 
-        RequestInfoBuilder builder = new RequestInfoBuilder();
-        try {
-            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
-            mTaskRunner.run(listener, context, info);
-        } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            //TODO Need to do error handing
-        }
+        executeAction(listener, context, action);
     }
 
     public void requestSignUp(ResultListener listener, Context context, String userName, String password) {
@@ -127,14 +116,8 @@ public class ImpressionService extends Service {
         SignUpAction action = new SignUpAction();
         action.setAction(userName, password);
 
-        RequestInfoBuilder builder = new RequestInfoBuilder();
-        try {
-            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
-            mTaskRunner.run(listener, context, info);
-        } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            //TODO Need to do error handing
-        }
+        executeAction(listener, context, action);
+
     }
 
     public void requestToCreateNewQuestion(ResultListener listener, Context context, long userId, String description, String choiceA, String choiceB) {
@@ -149,21 +132,17 @@ public class ImpressionService extends Service {
         CreateNewQuestionAction action = new CreateNewQuestionAction();
         action.setAction(userId, description, choiceA, choiceB);
 
-        RequestInfoBuilder builder = new RequestInfoBuilder();
-
-        try {
-            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
-            mTaskRunner.run(listener, context, info);
-        } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            //TODO Need to do error handing
-        }
+        executeAction(listener, context, action);
 
     }
 
-    public void respondToQuestion(ResultListener listener, long questionId, int select) {
+    public void respondToQuestion(ResultListener listener, Context context, long questionId, int select) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
         }
 
         if (questionId < 0) {
@@ -174,8 +153,32 @@ public class ImpressionService extends Service {
             throw new IllegalArgumentException("select must be greater than 0");
         }
 
-        //TODO
+        AnswerToQuestionAction action = new AnswerToQuestionAction();
+        action.setAction(questionId, select);
 
+        executeAction(listener, context, action);
+
+    }
+
+    /**
+     * Execute action.
+     * @param listener
+     * @param context
+     * @param action
+     * @return true if successfully action is executed. Otherwise, false.
+     */
+    private boolean executeAction(ResultListener listener, Context context, Action action){
+        RequestInfoBuilder builder = new RequestInfoBuilder();
+
+        try {
+            RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
+            mTaskRunner.run(listener, context, info);
+            return true;
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+        }
+        return false;
     }
 
     public void requestQuestionsCreatedByUser(ResultListener listener, long userId){
@@ -185,7 +188,7 @@ public class ImpressionService extends Service {
         }
     }
 
-    public void updateUserData(ResultListener listener, AnswerPageData.Gender gender, AnswerPageData.Age age) {
+    public void updateUserData(ResultListener listener, Context context, AnswerPageData.Gender gender, AnswerPageData.Age age) {
         LogUtil.d(TAG, "updateUserData");
 
         if (listener == null) {
@@ -200,7 +203,10 @@ public class ImpressionService extends Service {
             throw new IllegalArgumentException("Age cannot be null");
         }
 
-        //TODO
+        UpdateUserDataAction action = new UpdateUserDataAction();
+        action.setAction(gender, age);
+
+        executeAction(listener, context, action);
 
     }
 

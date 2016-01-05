@@ -93,7 +93,7 @@ public class MainPageService extends Service implements ResultListener {
     public void respondToQuestion(long id, int select) {
         LogUtil.d(TAG, "respondToQuestion");
 
-        mService.respondToQuestion(this, id, select);
+        mService.respondToQuestion(this, getApplicationContext(), id, select);
     }
 
     //Binder to connect service

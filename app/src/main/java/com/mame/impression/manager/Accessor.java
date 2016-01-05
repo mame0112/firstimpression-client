@@ -13,10 +13,10 @@ public abstract class Accessor {
 
     public abstract void setAccessorListener(AccessorListener listener);
 
-    public abstract void request(ResultListener listener, Context context, RequestInfo info);
+    public abstract void request(ResultListener listener, Context context, RequestInfo info, String identifier);
 
-    protected interface AccessorListener {
-        public void onNotify();
+    public interface AccessorListener {
+        void onNotify(String identifier);
     }
 
 }

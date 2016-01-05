@@ -138,7 +138,7 @@ public class ProfileDialogFragment extends DialogFragment {
             switch(v.getId()){
                 case R.id.profile_answer_button:
                     LogUtil.d(TAG, "Answer button pressed");
-                    mService.updateUserData(mListener, getGenderValue(mGenderItem), getAgeValue(mAgeItem));
+                    mService.updateUserData(mListener, getActivity(), getGenderValue(mGenderItem), getAgeValue(mAgeItem));
                     break;
                 case R.id.profile_signin_text_button:
                     LogUtil.d(TAG, "Signin text pressed");
