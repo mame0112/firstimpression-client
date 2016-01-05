@@ -42,7 +42,8 @@ public class SignInPageFragment extends Fragment {
 
     private String mPassword;
 
-    private ImpressionService mService;
+    private SignInPageFragmentListener mListener;
+
     private View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -50,19 +51,7 @@ public class SignInPageFragment extends Fragment {
                 case R.id.signin_button:
                     //TODO Need to disable sign in button here
                     LogUtil.d(TAG, "sign in button pressed");
-
-                    mService.requestSignIn(new ResultListener() {
-
-                        @Override
-                        public void onCompleted(JSONObject response) {
-
-                        }
-
-                        @Override
-                        public void onFailed(ImpressionError reason, String message) {
-
-                        }
-                    }, getActivity(), mUserName, mPassword);
+                    mListener.onSignInButtonPressed(mUserName, mPassword);
                     break;
 
                 case R.id.signin_forget_password:
@@ -133,8 +122,6 @@ public class SignInPageFragment extends Fragment {
 
         LogUtil.d(TAG, "onCreate");
 
-        mService = ImpressionService.getService(SignInPageFragment.class);
-
     }
 
     @Override
@@ -161,8 +148,14 @@ public class SignInPageFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
 
-        mService.finalize(this.getClass());
+    public void setSignInPageFragmentListener(SignInPageFragmentListener listener){
+        mListener = listener;
+    }
+
+    public interface SignInPageFragmentListener{
+        void onSignInButtonPressed(String userName, String password);
     }
 
 }

@@ -1,5 +1,6 @@
 package com.mame.impression;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,12 +8,15 @@ import android.support.v4.app.Fragment;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.UserData;
+import com.mame.impression.data.UserDataBuilder;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.ui.ErrorMessageFragment;
 import com.mame.impression.ui.SignInPageFragment;
 import com.mame.impression.ui.SignUpPageFragment;
 import com.mame.impression.ui.WelcomePageFragment;
+import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
@@ -22,7 +26,8 @@ import org.json.JSONObject;
 /**
  * Created by kosukeEndo on 2015/12/06.
  */
-public class SignUpInPageActivity extends ImpressionBaseActivity implements WelcomePageFragment.WelcomePageFragmentListener, SignUpPageFragment.SignUpFragmentListener {
+public class SignUpInPageActivity extends ImpressionBaseActivity
+        implements WelcomePageFragment.WelcomePageFragmentListener, SignUpPageFragment.SignUpFragmentListener, SignInPageFragment.SignInPageFragmentListener {
 
     private final static String TAG = SignUpInPageActivity.class.getSimpleName();
 
@@ -65,6 +70,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity implements Welc
         mService = ImpressionService.getService(SignUpPageFragment.class);
 
         mSignUpFragment.setSignUpFragmentListener(this);
+        mSignInFragment.setSignInPageFragmentListener(this);
 
     }
 
@@ -93,8 +99,6 @@ public class SignUpInPageActivity extends ImpressionBaseActivity implements Welc
         super.onDestroy();
         mService.finalize(this.getClass());
     }
-
-
 
     @Override
     protected void enterPage() {
@@ -132,7 +136,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity implements Welc
 
             @Override
             public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "onCompleted");
+                LogUtil.d(TAG, "SignUp Completed");
                 parseAndStoreUserData(response, userName, password);
             }
 
@@ -149,10 +153,50 @@ public class SignUpInPageActivity extends ImpressionBaseActivity implements Welc
         try {
             JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
             long userId = (long) paramObject.get(JsonParam.USER_ID);
+
+            //Store userdata
             PreferenceUtil.setUserId(getApplicationContext(), userId);
             PreferenceUtil.setUserName(getApplicationContext(), userName);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void onSignInButtonPressed(String userName, String password) {
+        LogUtil.d(TAG, "onSignInButtonPressed");
+        mService.requestSignIn(new ResultListener() {
+
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "SignIn Completed");
+
+                JSONParser parser = new JSONParser();
+                UserData data = parser.createUserData(response);
+
+                // Store user data
+                PreferenceUtil.setUserId(getApplicationContext(), data.getUserId());
+                PreferenceUtil.setUserName(getApplicationContext(), data.getUserName());
+
+                //Go to main page
+                startMainPage();
+
+                //Close this activity
+                finish();
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+
+            }
+        }, getApplicationContext(), userName, password);
+
+    }
+
+    private void startMainPage(){
+        Intent intent = new Intent(this, MainPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 }

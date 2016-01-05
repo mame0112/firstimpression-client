@@ -30,4 +30,12 @@ public class TrackingUtil {
 
     /** Custome variable7 (TBD) */
     private static final int CUSTOM_VAR_INDEX_7 = 7;
+
+    public static final String EVENT_CATEGORY_SPLASH = "Splash view";
+
+    public static final String EVENT_CATEGORY_SIGN_UPIN = "Sign up/in view";
+
+    public static final String EVENT_CATEGORY_MAIN = "Main view";
+
+    public static final String EVENT_CATEGORY_CREATE_QUESTION = "Create question view";
 }

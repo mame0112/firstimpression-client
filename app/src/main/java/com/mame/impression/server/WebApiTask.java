@@ -90,42 +90,7 @@ public class WebApiTask {
                     urlConnection.disconnect();
                 }
             }
-
         }
-
-
-//        @Override
-//        public void run() {
-//            LogUtil.d(TAG, "Get run");
-//            new Thread(new Runnable() {
-//                @Override
-//                public void run() {
-//                    URL url = null;
-//                    HttpURLConnection urlConnection = null;
-//                    try {
-//                        url = new URL(Constants.API_URL + mApi+"?id=2");
-//                        urlConnection = (HttpURLConnection) url.openConnection();
-//                        InputStream in = new BufferedInputStream(urlConnection.getInputStream());
-//                        BufferedReader r = new BufferedReader(new InputStreamReader(in));
-//                        StringBuilder total = new StringBuilder();
-//                        String line;
-//                        while ((line = r.readLine()) != null) {
-//                            total.append(line);
-//                        }
-//                        LogUtil.d(TAG, "string: " + line);
-//                    } catch (MalformedURLException e) {
-//                        e.printStackTrace();
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    } finally {
-//                        if(urlConnection != null){
-//                            urlConnection.disconnect();
-//                        }
-//                    }
-//
-//                }
-//            }).start();
-//        }
     }
 
     public static class RestPost implements Runnable {

@@ -26,7 +26,7 @@ public class SignInAction implements Action {
 
     @Override
     public RequestAction getAction() {
-        return RequestAction.SIGN_UP;
+        return RequestAction.SIGN_IN;
     }
 
     @Override
