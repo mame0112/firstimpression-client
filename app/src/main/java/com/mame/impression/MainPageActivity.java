@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
@@ -19,13 +20,13 @@ import android.view.View;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
-import com.mame.impression.ui.MainPageContent;
+import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainPageActivity extends AppCompatActivity implements MainPageAdapter.MainPageAdapterListener {
+public class MainPageActivity extends AppCompatActivity implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener {
 
     private static final String TAG = Constants.TAG + MainPageActivity.class.getSimpleName();
 
@@ -52,6 +53,7 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
 
             //Keep service instance to operate it from Activity.
             mService = ((MainPageService.MainPageServiceBinder) service).getService();
+            mService.setMainPageServiceListener(MainPageActivity.this);
 
             //Get initial question data.
 //            mService.requestAllMessageData(Constants.INITIAL_REQUEST_NUM);
@@ -191,5 +193,42 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
         Intent intent = new Intent(getApplicationContext(), CreateQuestionActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onOpenQuestionDataReady(final List<MainPageContent> data) {
+        LogUtil.d(TAG, "onOpenQuestionDataReady");
+
+        if(data != null){
+
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LogUtil.d(TAG, "size: " + data.size());
+                    mAdapter.updateData(data);
+                    mAdapter.notifyDataSetChanged();
+                }
+            });
+
+
+        }
+    }
+
+    private void createDummyContent(){
+
+//        MainPageContent content = new MainPageContent(1L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "123", "name1", "Desc1", "Choice A1", "Choice B1");
+//        mContents.add(content);
+//
+//        MainPageContent content2 = new MainPageContent(2L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+//        mContents.add(content2);
+//
+//        MainPageContent content3 = new MainPageContent(3L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+//        mContents.add(content3);
+//
+//        MainPageContent content4 = new MainPageContent(4L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+//        mContents.add(content4);
+//
+//        MainPageContent content5 = new MainPageContent(5L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
+//        mContents.add(content5);
     }
 }

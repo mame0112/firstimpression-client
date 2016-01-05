@@ -1,6 +1,5 @@
 package com.mame.impression.ui.service;
 
-import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
@@ -9,10 +8,9 @@ import android.os.IBinder;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.ImpressionData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
-import com.mame.impression.ui.MainPageContent;
+import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
 
@@ -34,24 +32,11 @@ public class MainPageService extends Service implements ResultListener {
 
     private ImpressionService mService;
 
+    private MainPageServiceListener mListener;
+
     private int mFirstItem = 0;
 
     private int mLastItem = 19;
-
-    @Override
-    public void onCompleted(JSONObject response) {
-        LogUtil.d(TAG, "onComplited");
-        if(response != null){
-            LogUtil.d(TAG, "response: " + response.toString());
-
-            createMainPageContentListFromResponse(response);
-        }
-    }
-
-    @Override
-    public void onFailed(ImpressionError reason, String message) {
-        LogUtil.d(TAG, "onFailed: " + reason);
-    }
 
     @Override
     public void onCreate() {
@@ -104,6 +89,24 @@ public class MainPageService extends Service implements ResultListener {
         }
     }
 
+    @Override
+    public void onCompleted(JSONObject response) {
+        LogUtil.d(TAG, "onComplited");
+        if(response != null){
+            LogUtil.d(TAG, "response: " + response.toString());
+
+            List<MainPageContent> data = createMainPageContentListFromResponse(response);
+            if(mListener != null){
+                mListener.onOpenQuestionDataReady(data);
+            }
+        }
+    }
+
+    @Override
+    public void onFailed(ImpressionError reason, String message) {
+        LogUtil.d(TAG, "onFailed: " + reason);
+    }
+
     private List<MainPageContent> createMainPageContentListFromResponse(JSONObject response){
         LogUtil.d(TAG, "createMainPageContentListFromResponse");
 
@@ -125,5 +128,14 @@ public class MainPageService extends Service implements ResultListener {
         }
 
         return result;
+    }
+
+
+    public void setMainPageServiceListener(MainPageServiceListener listener){
+        mListener = listener;
+    }
+
+    public interface MainPageServiceListener{
+        void onOpenQuestionDataReady(List<MainPageContent> data);
     }
 }

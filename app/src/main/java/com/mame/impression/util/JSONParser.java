@@ -2,9 +2,10 @@ package com.mame.impression.util;
 
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.MainPageContentBuilder;
 import com.mame.impression.data.UserData;
 import com.mame.impression.data.UserDataBuilder;
-import com.mame.impression.ui.MainPageContent;
+import com.mame.impression.data.MainPageContent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,29 +23,85 @@ public class JSONParser {
 
     public MainPageContent createMainPageContent(JSONObject object){
 
+        // Mandatory items
+        long createUserId = Constants.NO_USER;
+        long questionId = Constants.NO_QUESTION;
+        String description = null;
+        String choiceA = null;
+        String choiceB = null;
         try {
-            long createUserId = object.getLong(JsonParam.QUESTION_CREATED_USER_ID);
-            int choiceAResponse= object.getInt(JsonParam.QUESTION_CHOICE_A_RESPONSE);
-            long questionId = object.getLong(JsonParam.QUESTION_ID);
-            String description = object.getString(JsonParam.QUESTION_DESCRIPTION);
-            String additionalQuestion = object.getString(JsonParam.QUESTION_ADDITIONAL_QUESTION);
-            List<String> additionalComment = (List<String>)object.get(JsonParam.QUESTION_ADDITIONAL_COMMENT);
-
-            //TODO
-            return new MainPageContent(questionId, null, String.valueOf(questionId), null, description, null, null);
+            createUserId = object.getLong(JsonParam.QUESTION_CREATED_USER_ID);
+            questionId = object.getLong(JsonParam.QUESTION_ID);
+            description = object.getString(JsonParam.QUESTION_DESCRIPTION);
+            choiceA = object.getString(JsonParam.QUESTION_CHOICE_A);
+            choiceB = object.getString(JsonParam.QUESTION_CHOICE_B);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
-//        public final static String QUESTION_CATEGORY = "category";
-//        public final static String QUESTION_CHOICE = "choice";
-//        public final static String QUESTION_CHOICE_A = "choice_a";
-//        public final static String QUESTION_CHOICE_B = "choice_b";
-//        public final static String QUESTION_CREATED_USER_NAME = "created_user_name";
-//        public final static String QUESTION_THUMBNAIL = "thumbnail";
-//        public final static String QUESTION_CHOICE_B_RESPONSE = "choice_b_response";
+        //Optional items
+        String additionalQuestion = null;
+        try {
+            additionalQuestion = object.getString(JsonParam.QUESTION_ADDITIONAL_QUESTION);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
 
-        return null;
+        List<String> additionalComments = new ArrayList<String>();
+        try {
+//            additionalComment = (List<String>)object.get(JsonParam.QUESTION_ADDITIONAL_COMMENT);
+            JSONArray array = (JSONArray)object.get(JsonParam.QUESTION_ADDITIONAL_COMMENT);
+            if (array != null) {
+                for (int i=0;i<array.length();i++){
+                    additionalComments.add(array.get(i).toString());
+                }
+            }
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        int choiceAResponse = 0;
+        try {
+            choiceAResponse = object.getInt(JsonParam.QUESTION_CHOICE_A_RESPONSE);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        int choiceBResponse = 0;
+        try {
+            choiceAResponse = object.getInt(JsonParam.QUESTION_CHOICE_B_RESPONSE);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        String thumbUrl = null;
+        try {
+            choiceAResponse = object.getInt(JsonParam.QUESTION_THUMBNAIL);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        String category = null;
+        try {
+            category = object.getString(JsonParam.QUESTION_CATEGORY);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        String createdUserName = null;
+        try {
+            createdUserName = object.getString(JsonParam.QUESTION_CREATED_USER_NAME);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        return new MainPageContentBuilder().setCreatedUserId(createUserId).setQuestionId(questionId).setDescription(description).setChoiceA(choiceA).setChoiceB(choiceB)
+.setAdditionalQuestion(additionalQuestion).setAdditionalComments(additionalComments).setChoiceAResponse(choiceAResponse).setChoiceBResponse(choiceBResponse)
+                .setThumbnail(thumbUrl).setCategory(category).setCreatedUserName(createdUserName).getResult();
+
+        //TODO
+//        public final static String QUESTION_CREATED_USER_NAME = "created_user_name";
+
     }
 
     public UserData createUserData(JSONObject object){

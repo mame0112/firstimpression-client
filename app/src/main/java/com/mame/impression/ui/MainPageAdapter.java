@@ -13,8 +13,10 @@ import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.LogUtil;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -37,6 +39,11 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
         mContext = context;
     }
 
+    public void updateData(List<MainPageContent> data){
+        LogUtil.d(TAG, "updateData");
+        mData = Collections.unmodifiableList(data);
+    }
+
     public void setMainPageAdapterListener(MainPageAdapterListener listener) {
         mListener = listener;
     }
@@ -54,12 +61,26 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(MainPageAdapter.ViewHolder holder, int position) {
-        holder.mThumbnail.setImageBitmap(mData.get(position).getThumbnail());
-        holder.mPostDateView.setText(mData.get(position).getPostDate());
-        holder.mUserName.setText(mData.get(position).getUserName());
-        holder.mDescription.setText(mData.get(position).getDescription());
-        holder.mChoiseAButton.setText(mData.get(position).getChoiceA());
-        holder.mChoiseBButton.setText(mData.get(position).getChoiceB());
+        LogUtil.d(TAG, "position" + position);
+
+        MainPageContent data = mData.get(position);
+
+        if(data != null){
+            //TODO
+//            holder.mThumbnail.setImageBitmap(data.getThumbnail());
+            //TODO
+            holder.mPostDateView.setText(String.valueOf(data.getPostDate()));
+            holder.mUserName.setText(data.getUserName());
+            holder.mDescription.setText(data.getDescription());
+            holder.mChoiseAButton.setText(data.getChoiceA());
+            holder.mChoiseBButton.setText(data.getChoiceB());
+        }
+//        holder.mThumbnail.setImageBitmap(mData.get(position).getThumbnail());
+//        holder.mPostDateView.setText(mData.get(position).getPostDate());
+//        holder.mUserName.setText(mData.get(position).getUserName());
+//        holder.mDescription.setText(mData.get(position).getDescription());
+//        holder.mChoiseAButton.setText(mData.get(position).getChoiceA());
+//        holder.mChoiseBButton.setText(mData.get(position).getChoiceB());
     }
 
     @Override
@@ -103,8 +124,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             mChoiseAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long id = mData.get(getAdapterPosition()).getId();
-                    mData.remove(getAdapterPosition()).getId();
+                    long id = mData.get(getAdapterPosition()).getQuestionId();
+                    mData.remove(getAdapterPosition()).getQuestionId();
                     mListener.onItemSelected(id, 0);
                 }
             });
@@ -113,8 +134,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             mChoiseBButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long id = mData.get(getAdapterPosition()).getId();
-                    mData.remove(getAdapterPosition()).getId();
+                    long id = mData.get(getAdapterPosition()).getQuestionId();
+                    mData.remove(getAdapterPosition()).getQuestionId();
                     mListener.onItemSelected(id, 1);
                 }
             });

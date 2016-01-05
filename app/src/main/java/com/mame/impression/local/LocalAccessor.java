@@ -24,7 +24,7 @@ public class LocalAccessor extends Accessor {
     }
 
     @Override
-    public void request(ResultListener listener, Context context, RequestInfo info) {
+    public void request(ResultListener listener, Context context, RequestInfo info, String identifier) {
         LogUtil.d(TAG, "request");
     }
 }
