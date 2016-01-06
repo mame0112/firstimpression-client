@@ -16,6 +16,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.LogUtil;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -41,7 +42,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     public void updateData(List<MainPageContent> data){
         LogUtil.d(TAG, "updateData");
-        mData = Collections.unmodifiableList(data);
+//        mData = Collections.unmodifiableList(data);
+        mData = new ArrayList(data);
     }
 
     public void setMainPageAdapterListener(MainPageAdapterListener listener) {

@@ -24,7 +24,7 @@ import java.util.List;
 /**
  * Created by kosukeEndo on 2015/11/27.
  */
-public class MainPageService extends Service implements ResultListener {
+public class MainPageService extends Service{
 
     private static final String TAG = Constants.TAG + MainPageService.class.getSimpleName();
 
@@ -55,7 +55,25 @@ public class MainPageService extends Service implements ResultListener {
         LogUtil.d(TAG, "onBind");
         mService = ImpressionService.getService(this.getClass());
         //TODO
-        mService.requestAllQuestionData(this, getApplicationContext(), mFirstItem, mLastItem);
+        mService.requestAllQuestionData(new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "requestAllQuestionData onComplete");
+                if (response != null) {
+                    LogUtil.d(TAG, "response: " + response.toString());
+
+                    List<MainPageContent> data = createMainPageContentListFromResponse(response);
+                    if (mListener != null) {
+                        mListener.onOpenQuestionDataReady(data);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "requestAllQuestionData onFailed");
+            }
+        }, getApplicationContext(), mFirstItem, mLastItem);
 
         return mBinder;
     }
@@ -78,7 +96,18 @@ public class MainPageService extends Service implements ResultListener {
     public void respondToQuestion(long id, int select) {
         LogUtil.d(TAG, "respondToQuestion");
 
-        mService.respondToQuestion(this, getApplicationContext(), id, select);
+        mService.respondToQuestion(new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "respondToQuestion onComplited");
+                //TODO Need to store user point
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "respondToQuestion onFailed: " + reason);
+            }
+        }, getApplicationContext(), id, select);
     }
 
     //Binder to connect service
@@ -87,24 +116,6 @@ public class MainPageService extends Service implements ResultListener {
         public MainPageService getService() {
             return MainPageService.this;
         }
-    }
-
-    @Override
-    public void onCompleted(JSONObject response) {
-        LogUtil.d(TAG, "onComplited");
-        if(response != null){
-            LogUtil.d(TAG, "response: " + response.toString());
-
-            List<MainPageContent> data = createMainPageContentListFromResponse(response);
-            if(mListener != null){
-                mListener.onOpenQuestionDataReady(data);
-            }
-        }
-    }
-
-    @Override
-    public void onFailed(ImpressionError reason, String message) {
-        LogUtil.d(TAG, "onFailed: " + reason);
     }
 
     private List<MainPageContent> createMainPageContentListFromResponse(JSONObject response){

@@ -22,10 +22,10 @@ public class RestApi {
     /**
      * URL pattern for detail of question operation
      */
-    public static final String KEY_QUESTION_DETAIL = KEY_QUESTION + "/details";
+//    public static final String KEY_QUESTION_DETAIL = KEY_QUESTION + "/details";
 
     /**
      * URL pattern for answer
      */
-    public static final String KEY_ANSWER = KEY_QUESTION + "/answers";
+    public static final String KEY_ANSWER = "/answers";
 }

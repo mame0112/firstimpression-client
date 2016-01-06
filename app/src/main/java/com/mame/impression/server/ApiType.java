@@ -39,11 +39,11 @@ public enum ApiType {
             case GET_QUESTION_LIST:
                 return RestApi.KEY_LIST;
             case CREATE_QUESTION:
-            case REPLY_TO_QUESTION:
             case TARGET_QUESTION:
-//                return RestApi.KEY_QUESTION;
-                return RestApi.KEY_QUESTION_DETAIL;
-
+                return RestApi.KEY_QUESTION;
+//                return RestApi.KEY_QUESTION_DETAIL;
+            case REPLY_TO_QUESTION:
+                return RestApi.KEY_ANSWER;
         }
 
         return RestApi.KEY_USER;

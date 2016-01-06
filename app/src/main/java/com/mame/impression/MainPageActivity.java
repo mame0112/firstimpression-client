@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +27,7 @@ import com.mame.impression.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class MainPageActivity extends AppCompatActivity implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener {
 
@@ -90,6 +93,7 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
         });
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
+
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
@@ -214,21 +218,4 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
         }
     }
 
-    private void createDummyContent(){
-
-//        MainPageContent content = new MainPageContent(1L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "123", "name1", "Desc1", "Choice A1", "Choice B1");
-//        mContents.add(content);
-//
-//        MainPageContent content2 = new MainPageContent(2L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
-//        mContents.add(content2);
-//
-//        MainPageContent content3 = new MainPageContent(3L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
-//        mContents.add(content3);
-//
-//        MainPageContent content4 = new MainPageContent(4L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
-//        mContents.add(content4);
-//
-//        MainPageContent content5 = new MainPageContent(5L, Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_4444), "456", "name2", "Desc2", "Choice A2", "Choice B2");
-//        mContents.add(content5);
-    }
 }
