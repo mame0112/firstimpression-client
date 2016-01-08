@@ -121,6 +121,7 @@ public class ImpressionService extends Service {
     }
 
     public void requestToCreateNewQuestion(ResultListener listener, Context context, long userId, String description, String choiceA, String choiceB) {
+        LogUtil.d(TAG, "requestToCreateNewQuestion");
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
         }

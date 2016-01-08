@@ -22,7 +22,7 @@ public class PreferenceUtil {
         pref.edit().putString(KEY_USER_NAME, userName).commit();
     }
 
-    public static String getUserNmae(Context c) {
+    public static String getUserName(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
         return pref.getString(KEY_USER_NAME, null);
@@ -31,7 +31,7 @@ public class PreferenceUtil {
     public static void setUserId(Context c, long userId) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        pref.edit().putLong(KEY_USER_NAME, userId).commit();
+        pref.edit().putLong(KEY_USER_ID, userId).commit();
     }
 
     public static long getUserId(Context c) {

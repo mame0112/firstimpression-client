@@ -36,7 +36,11 @@ public class CreateNewQuestionService extends ImpressionBaseService {
     }
 
     public void requestToCreateNewQuestion(String description, String choiceA, String choiceB){
+        LogUtil.d(TAG, "requestToCreateNewQuestion");
+
         long userId = PreferenceUtil.getUserId(getApplicationContext());
+        String userName = PreferenceUtil.getUserName(getApplicationContext());
+        LogUtil.d(TAG, "userId: " + userId + "/" + userName);
         if(userId == Constants.NO_USER){
             showPromptDialog(PromptMode.NOTICE, description, choiceA, choiceB);
         } else {
