@@ -28,4 +28,9 @@ public class RestApi {
      * URL pattern for answer
      */
     public static final String KEY_ANSWER = "/answers";
+
+    /**
+     * URL pattern for ask question result
+     */
+    public static final String KEY_RESULT = "/results";
 }

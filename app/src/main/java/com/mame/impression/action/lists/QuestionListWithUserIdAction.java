@@ -12,7 +12,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
@@ -25,7 +24,7 @@ public class QuestionListWithUserIdAction  implements Action {
 
     @Override
     public RequestAction getAction() {
-        return RequestAction.GET_QUESTION_LIST_WITH_ID;
+        return RequestAction.GET_QUESTION_RESULT_LIST;
     }
 
     @Override

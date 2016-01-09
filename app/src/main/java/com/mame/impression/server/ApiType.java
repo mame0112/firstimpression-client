@@ -12,7 +12,8 @@ public enum ApiType {
     public static ApiType getResttype(RequestAction action) {
         switch (action) {
             case GET_QUESTION_LIST:
-            case GET_QUESTION_LIST_WITH_ID:
+            case GET_QUESTION_RESULT_LIST:
+            case GET_QUESTION_RESULT:
             case TARGET_QUESTION:
             case DETAIL:
             case MY_INFORMATION:
@@ -38,7 +39,6 @@ public enum ApiType {
             case SIGN_OUT:
                 return RestApi.KEY_USER;
             case GET_QUESTION_LIST:
-            case GET_QUESTION_LIST_WITH_ID:
                 return RestApi.KEY_LIST;
             case CREATE_QUESTION:
             case TARGET_QUESTION:
@@ -46,6 +46,9 @@ public enum ApiType {
 //                return RestApi.KEY_QUESTION_DETAIL;
             case REPLY_TO_QUESTION:
                 return RestApi.KEY_ANSWER;
+            case GET_QUESTION_RESULT_LIST:
+            case GET_QUESTION_RESULT:
+                return RestApi.KEY_RESULT;
         }
 
         return RestApi.KEY_USER;

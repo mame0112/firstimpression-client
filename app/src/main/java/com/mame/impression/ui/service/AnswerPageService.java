@@ -56,7 +56,6 @@ public class AnswerPageService extends ImpressionBaseService {
             }
         };
 
-
         long userId = PreferenceUtil.getUserId(getApplicationContext());
         if(userId != Constants.NO_USER){
             //TODO

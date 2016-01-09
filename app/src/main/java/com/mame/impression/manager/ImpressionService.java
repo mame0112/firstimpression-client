@@ -93,6 +93,10 @@ public class ImpressionService extends Service {
             throw new IllegalArgumentException("Listener cannot be null");
         }
 
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
         if(userId == Constants.NO_USER){
             throw new IllegalArgumentException("user id cannot be NO_USER");
         }
