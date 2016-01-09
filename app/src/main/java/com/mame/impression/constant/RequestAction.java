@@ -15,6 +15,7 @@ public enum RequestAction {
      * Question list action
      */
     GET_QUESTION_LIST,        // Request latest questions
+    GET_QUESTION_LIST_WITH_ID,        // Request latest questions for id
 
     /**
      * Question action

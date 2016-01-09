@@ -34,10 +34,6 @@ public class MainPageService extends Service{
 
     private MainPageServiceListener mListener;
 
-    private int mFirstItem = 0;
-
-    private int mLastItem = 19;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -55,10 +51,10 @@ public class MainPageService extends Service{
         LogUtil.d(TAG, "onBind");
         mService = ImpressionService.getService(this.getClass());
         //TODO
-        mService.requestAllQuestionData(new ResultListener() {
+        mService.requestQuestions(new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "requestAllQuestionData onComplete");
+                LogUtil.d(TAG, "onCompleted");
                 if (response != null) {
                     LogUtil.d(TAG, "response: " + response.toString());
 
@@ -71,9 +67,9 @@ public class MainPageService extends Service{
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
-                LogUtil.d(TAG, "requestAllQuestionData onFailed");
+                LogUtil.d(TAG, "onFail");
             }
-        }, getApplicationContext(), mFirstItem, mLastItem);
+        }, getApplicationContext());
 
         return mBinder;
     }

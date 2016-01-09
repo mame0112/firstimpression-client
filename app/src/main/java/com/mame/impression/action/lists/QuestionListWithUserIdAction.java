@@ -12,18 +12,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.IllegalFormatException;
 import java.util.List;
 
 /**
- * Created by kosukeEndo on 2015/12/27.
+ * Created by kosukeEndo on 2016/01/09.
  */
-public class QuestionListAction implements Action {
-    private static final String TAG = Constants.TAG + QuestionListAction.class.getSimpleName();
+public class QuestionListWithUserIdAction  implements Action {
+    private static final String TAG = Constants.TAG + QuestionListWithUserIdAction.class.getSimpleName();
+
+    private long mUserId = Constants.NO_USER;
 
     @Override
     public RequestAction getAction() {
-        LogUtil.d(TAG, "getAction");
-        return RequestAction.GET_QUESTION_LIST;
+        return RequestAction.GET_QUESTION_LIST_WITH_ID;
     }
 
     @Override
@@ -35,10 +37,15 @@ public class QuestionListAction implements Action {
         return accessors;
     }
 
+    public void setAction(long userId) {
+        LogUtil.d(TAG, "setAction");
+        mUserId = userId;
+    }
+
     @Override
-    public JSONObject getParemeter() throws JSONException {
-        LogUtil.d(TAG, "getParameter");
+    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
+        param.put(JsonParam.QUESTION_CREATED_USER_ID, mUserId);
 
         return param;
     }

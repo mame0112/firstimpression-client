@@ -42,12 +42,12 @@ public class AnswerPageService extends ImpressionBaseService {
      * Request questions created by this user
      */
     public void requestQuestionsCreatedByUser(){
-        LogUtil.d(TAG, "requestQuestionsCreatedByUser");
+        LogUtil.d(TAG, "requestQuestionsCreatedByUsear");
 
         ResultListener listener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
-
+                LogUtil.d(TAG, "onCompleted");
             }
 
             @Override
@@ -59,7 +59,8 @@ public class AnswerPageService extends ImpressionBaseService {
 
         long userId = PreferenceUtil.getUserId(getApplicationContext());
         if(userId != Constants.NO_USER){
-            mService.requestQuestionsCreatedByUser(listener, userId);
+            //TODO
+            mService.requestQuestionsCreatedByUser(listener, getApplicationContext(), userId);
         } else {
             showPromptDialog(PromptMode.NOTICE);
         }

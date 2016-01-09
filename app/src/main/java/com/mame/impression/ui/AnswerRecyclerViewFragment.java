@@ -28,8 +28,6 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
 
     private static final String TAG = Constants.TAG + AnswerRecyclerViewFragment.class.getSimpleName();
 
-    private ImpressionService mService;
-
     private RecyclerView.LayoutManager mLayoutManager;
 
     private RecyclerView mRecyclerView;
@@ -45,8 +43,6 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
         super.onCreate(savedInstanceState);
 
         LogUtil.d(TAG, "onCreate");
-
-        mService = ImpressionService.getService(SignInPageFragment.class);
 
         createDummyData();
     }
@@ -71,8 +67,6 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
-        mService.finalize(this.getClass());
     }
 
     private void createDummyData(){

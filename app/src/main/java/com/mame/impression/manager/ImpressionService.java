@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.action.Action;
 import com.mame.impression.action.lists.QuestionListAction;
+import com.mame.impression.action.lists.QuestionListWithUserIdAction;
 import com.mame.impression.action.questions.AnswerToQuestionAction;
 import com.mame.impression.action.questions.CreateNewQuestionAction;
 import com.mame.impression.action.user.SignInAction;
@@ -75,27 +76,34 @@ public class ImpressionService extends Service {
 
     }
 
-    public void requestAllQuestionData(ResultListener listener, Context context, int start, int end) {
-        LogUtil.d(TAG, "requestAllQuestionData");
+    public void requestQuestions(ResultListener listener, Context context) {
+        LogUtil.d(TAG, "requestQuestions");
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
         }
-
-        if (start < 0) {
-            throw new IllegalArgumentException("start must be more than 0");
-        }
-
-        if (end <= 0) {
-            throw new IllegalArgumentException("end must be more than 1");
-        }
-
-        //TODO
         QuestionListAction questinListAction = new QuestionListAction();
-        questinListAction.setAction(0, 10);
-
         executeAction(listener, context, questinListAction);
 
     }
+
+    public void requestQuestionsCreatedByUser(ResultListener listener, Context context, long userId){
+        LogUtil.d(TAG, "requestQuestionsCreatedByUser");
+
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if(userId == Constants.NO_USER){
+            throw new IllegalArgumentException("user id cannot be NO_USER");
+        }
+
+        QuestionListWithUserIdAction action = new QuestionListWithUserIdAction();
+        action.setAction(userId);
+
+        executeAction(listener, context, action);
+
+    }
+
 
     public void requestSignIn(ResultListener listener, Context context, String userName, String password) {
         if (listener == null) {
@@ -180,13 +188,6 @@ public class ImpressionService extends Service {
             listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
         }
         return false;
-    }
-
-    public void requestQuestionsCreatedByUser(ResultListener listener, long userId){
-        LogUtil.d(TAG, "requestQuestionsCreatedByUser");
-        if (listener == null) {
-            throw new IllegalArgumentException("Listener cannot be null");
-        }
     }
 
     public void updateUserData(ResultListener listener, Context context, AnswerPageData.Gender gender, AnswerPageData.Age age) {
