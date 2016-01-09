@@ -1,6 +1,7 @@
 package com.mame.impression.ui;
 
 import android.content.Context;
+import android.preference.Preference;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,9 +37,12 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     private Context mContext;
 
+    private long mMyUserId = Constants.NO_USER;
+
     public MainPageAdapter(Context context, List<MainPageContent> data) {
         mData = data;
         mContext = context;
+        mMyUserId = PreferenceUtil.getUserId(context);
     }
 
     public void updateData(List<MainPageContent> data){
@@ -52,7 +57,6 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     @Override
     public MainPageAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LogUtil.d(TAG, "onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.main_card_item, parent, false);
 
@@ -76,6 +80,13 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             holder.mDescription.setText(data.getDescription());
             holder.mChoiseAButton.setText(data.getChoiceA());
             holder.mChoiseBButton.setText(data.getChoiceB());
+
+            //If this question was created by this user, disable button to avoid the user respond this question
+            if(data.getCreatedUserId() == mMyUserId){
+                holder.mChoiseAButton.setEnabled(false);
+                holder.mChoiseBButton.setEnabled(false);
+            }
+
         }
 //        holder.mThumbnail.setImageBitmap(mData.get(position).getThumbnail());
 //        holder.mPostDateView.setText(mData.get(position).getPostDate());
