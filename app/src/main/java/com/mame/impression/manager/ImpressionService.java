@@ -120,7 +120,7 @@ public class ImpressionService extends Service {
 
     }
 
-    public void requestToCreateNewQuestion(ResultListener listener, Context context, long userId, String description, String choiceA, String choiceB) {
+    public void requestToCreateNewQuestion(ResultListener listener, Context context, long createUserId, String createUserName, String description, String choiceA, String choiceB) {
         LogUtil.d(TAG, "requestToCreateNewQuestion");
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
@@ -131,7 +131,7 @@ public class ImpressionService extends Service {
         }
 
         CreateNewQuestionAction action = new CreateNewQuestionAction();
-        action.setAction(userId, description, choiceA, choiceB);
+        action.setAction(createUserId, createUserName, description, choiceA, choiceB);
 
         executeAction(listener, context, action);
 

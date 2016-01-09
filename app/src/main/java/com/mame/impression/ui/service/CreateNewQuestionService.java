@@ -26,6 +26,8 @@ public class CreateNewQuestionService extends ImpressionBaseService {
 
     private ImpressionService mService;
 
+    private CreateNewQuestionServiceListener mListener;
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -36,25 +38,30 @@ public class CreateNewQuestionService extends ImpressionBaseService {
     }
 
     public void requestToCreateNewQuestion(String description, String choiceA, String choiceB){
-        LogUtil.d(TAG, "requestToCreateNewQuestion");
 
-        long userId = PreferenceUtil.getUserId(getApplicationContext());
-        String userName = PreferenceUtil.getUserName(getApplicationContext());
-        LogUtil.d(TAG, "userId: " + userId + "/" + userName);
-        if(userId == Constants.NO_USER){
+        long createUserId = PreferenceUtil.getUserId(getApplicationContext());
+        String createUserName = PreferenceUtil.getUserName(getApplicationContext());
+        if(createUserId == Constants.NO_USER || createUserName == null){
             showPromptDialog(PromptMode.NOTICE, description, choiceA, choiceB);
         } else {
             mService.requestToCreateNewQuestion(new ResultListener() {
                 @Override
                 public void onCompleted(JSONObject response) {
                     LogUtil.d(TAG, "onCompleted");
+                    //TODO Need to consider if we should store created question ID to Local DB.
+                    if(mListener != null){
+                        mListener.onNewQuestionCreationSuccess();
+                    }
                 }
 
                 @Override
                 public void onFailed(ImpressionError reason, String message) {
                     LogUtil.d(TAG, "onFailed");
+                    if(mListener != null){
+                        mListener.onNewQuestionCreationFail(reason);
+                    }
                 }
-            }, getApplicationContext(), userId, description, choiceA, choiceB);
+            }, getApplicationContext(), createUserId, createUserName, description, choiceA, choiceB);
         }
     }
 
@@ -71,5 +78,15 @@ public class CreateNewQuestionService extends ImpressionBaseService {
         public CreateNewQuestionService getService(){
             return CreateNewQuestionService.this;
         }
+    }
+
+    public void setCreateNewQuestionServiceListener(CreateNewQuestionServiceListener listener){
+        mListener = listener;
+    }
+
+    public interface CreateNewQuestionServiceListener {
+        void onNewQuestionCreationSuccess();
+
+        void onNewQuestionCreationFail(ImpressionError reason);
     }
 }

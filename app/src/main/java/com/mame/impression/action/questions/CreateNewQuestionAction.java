@@ -23,6 +23,8 @@ public class CreateNewQuestionAction  implements Action {
 
     private long mCreatedUserId = Constants.NO_USER;
 
+    private String mCreatedUserName;
+
     private String mDescription;
 
     private String mChoiceA;
@@ -44,8 +46,9 @@ public class CreateNewQuestionAction  implements Action {
 
     }
 
-    public void setAction(long userId, String description, String choiceA, String choiceB) {
-        mCreatedUserId = userId;
+    public void setAction(long createUserId, String createUserName, String description, String choiceA, String choiceB) {
+        mCreatedUserId = createUserId;
+        mCreatedUserName = createUserName;
         mDescription = description;
         mChoiceA = choiceA;
         mChoiceB = choiceB;
@@ -56,6 +59,7 @@ public class CreateNewQuestionAction  implements Action {
         JSONObject param = new JSONObject();
 
         param.put(JsonParam.QUESTION_CREATED_USER_ID, mCreatedUserId);
+        param.put(JsonParam.QUESTION_CREATED_USER_NAME, mCreatedUserName);
         param.put(JsonParam.QUESTION_DESCRIPTION, mDescription);
         param.put(JsonParam.QUESTION_CHOICE_A, mChoiceA);
         param.put(JsonParam.QUESTION_CHOICE_B, mChoiceB);

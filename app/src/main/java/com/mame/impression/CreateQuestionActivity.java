@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
 import com.mame.impression.util.LogUtil;
@@ -17,7 +18,7 @@ import com.mame.impression.util.PreferenceUtil;
 /**
  * Created by kosukeEndo on 2016/01/04.
  */
-public class CreateQuestionActivity extends ImpressionBaseActivity implements CreateQuestionFragment.CreateQuestionFragmentListener {
+public class CreateQuestionActivity extends ImpressionBaseActivity implements CreateQuestionFragment.CreateQuestionFragmentListener, CreateNewQuestionService.CreateNewQuestionServiceListener {
 
     private final static String TAG = Constants.TAG + CreateQuestionActivity.class.getSimpleName();
 
@@ -71,6 +72,7 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
 
             //Keep service instance to operate it from Activity.
             mService = ((CreateNewQuestionService.CreateNewQuestionServiceBinder) service).getService();
+            mService.setCreateNewQuestionServiceListener(CreateQuestionActivity.this);
 
             mIsBound = true;
 
@@ -117,5 +119,17 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
         if (mIsBound) {
             mService.requestToCreateNewQuestion(description, choiceA, choiceB);
         }
+    }
+
+    @Override
+    public void onNewQuestionCreationSuccess() {
+        LogUtil.d(TAG, "onNewQuestionCreationSuccess");
+        finish();
+    }
+
+    @Override
+    public void onNewQuestionCreationFail(ImpressionError reason) {
+        LogUtil.d(TAG, "onNewQuestionCreationFail");
+        // TODO
     }
 }
