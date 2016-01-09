@@ -29,12 +29,14 @@ public class JSONParser {
         String description = null;
         String choiceA = null;
         String choiceB = null;
+        long createdDate = 0;
         try {
             createUserId = object.getLong(JsonParam.QUESTION_CREATED_USER_ID);
             questionId = object.getLong(JsonParam.QUESTION_ID);
             description = object.getString(JsonParam.QUESTION_DESCRIPTION);
             choiceA = object.getString(JsonParam.QUESTION_CHOICE_A);
             choiceB = object.getString(JsonParam.QUESTION_CHOICE_B);
+            createdDate = object.getLong(JsonParam.QUESTION_POST_DATE);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
@@ -95,12 +97,9 @@ public class JSONParser {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
-        return new MainPageContentBuilder().setCreatedUserId(createUserId).setQuestionId(questionId).setDescription(description).setChoiceA(choiceA).setChoiceB(choiceB)
+        return new MainPageContentBuilder().setCreatedUserId(createUserId).setQuestionId(questionId).setDescription(description).setChoiceA(choiceA).setChoiceB(choiceB).setPostDate(createdDate)
 .setAdditionalQuestion(additionalQuestion).setAdditionalComments(additionalComments).setChoiceAResponse(choiceAResponse).setChoiceBResponse(choiceBResponse)
                 .setThumbnail(thumbUrl).setCategory(category).setCreatedUserName(createdUserName).getResult();
-
-        //TODO
-//        public final static String QUESTION_CREATED_USER_NAME = "created_user_name";
 
     }
 

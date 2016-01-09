@@ -51,6 +51,8 @@ public class JsonParam {
 
     public final static String QUESTION_CHOICE_B = "choice_b";
 
+    public final static String QUESTION_POST_DATE = "post_date";
+
     public final static String QUESTION_CREATED_USER_NAME = "created_user_name";
 
     public final static String QUESTION_CREATED_USER_ID = "created_user_id";

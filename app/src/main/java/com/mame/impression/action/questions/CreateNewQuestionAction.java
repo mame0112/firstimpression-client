@@ -55,7 +55,7 @@ public class CreateNewQuestionAction  implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, IllegalFormatException, JSONException {
+    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
 
         param.put(JsonParam.QUESTION_CREATED_USER_ID, mCreatedUserId);
