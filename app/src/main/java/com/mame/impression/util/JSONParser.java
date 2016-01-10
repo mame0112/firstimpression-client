@@ -211,88 +211,104 @@ public class JSONParser {
         return null;
     }
 
-    public QuestionResultDetailData createQuestionResultDetailData(JSONObject object){
+    public QuestionResultDetailData createQuestionResultDetailData(JSONObject input){
         LogUtil.d(TAG, "createQuestionResultDetailData");
 
-        if(object != null) {
-            //Mandatory fields
-            long questionId = Constants.NO_QUESTION;
-            long createdUserId = Constants.NO_USER;
-            String description = null;
-            String choiceA = null;
-            String choiceB = null;
-            QuestionResultDetailItem itemA = null;
-            QuestionResultDetailItem itemB = null;
 
-            try {
-                questionId = object.getLong(JsonParam.QUESTION_ID);
-                createdUserId = object.getLong(JsonParam.QUESTION_CREATED_USER_ID);
-                description = object.getString(JsonParam.QUESTION_DESCRIPTION);
-                choiceA = object.getString(JsonParam.QUESTION_CHOICE_A);
-                choiceB = object.getString(JsonParam.QUESTION_CHOICE_B);
-
-                JSONObject itemAObj = object.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_A);
-                JSONObject itemBObj = object.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_B);
-                itemA = createQuestionResultDetailItemA(itemAObj);
-                itemB = createQuestionResultDetailItemA(itemBObj);
-            } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
-                //TODO Need to do error handling
-            }
-
-            //Optional fields
-
-            String additionalQuestion = null;
-            try {
-                additionalQuestion = object.getString(JsonParam.QUESTION_ADDITIONAL_QUESTION);
-            } catch (Exception e1) {
-                LogUtil.d(TAG, "Exception: " + e1.getMessage());
-            }
-
-            List<String> additionalComments = new ArrayList<String>();
-            try {
-                additionalComments = (List) object.get(JsonParam.QUESTION_ADDITIONAL_COMMENT);
-            } catch (Exception e1) {
-                LogUtil.d(TAG, "Exception: " + e1.getMessage());
-            }
-
-            String thumbnail = null;
-            try {
-                thumbnail = object.getString(JsonParam.QUESTION_THUMBNAIL);
-            } catch (Exception e1) {
-                LogUtil.d(TAG, "Exception: " + e1.getMessage());
-            }
-
-            String category = null;
-            try {
-                category = object.getString(JsonParam.QUESTION_CATEGORY);
-            } catch (Exception e1) {
-                LogUtil.d(TAG, "Exception: " + e1.getMessage());
-            }
-
-            long postDate = 0L;
-            try {
-                postDate = object.getLong(JsonParam.QUESTION_POST_DATE);
-            } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            }
-
-            String createdUserName = null;
-            try {
-                createdUserName = object.getString(JsonParam.QUESTION_CREATED_USER_NAME);
-            } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            }
-
-            return new QuestionResultDetailDataBuilder().setQuestionId(questionId).setDescription(description)
-                    .setChoiceA(choiceA).setChoiceB(choiceB).setThumbnail(thumbnail).setPostDate(postDate)
-                    .setCreatedUserId(createdUserId).setCreatedUserName(createdUserName).setCategory(category)
-                    .setAdditionalQuestion(additionalQuestion).setAdditionalComments(additionalComments)
-                    .setChoiceAItem(itemA).setChoiceBItem(itemB).getResult();
-
+        if(input == null){
+            //TDOO need error handling
+            return null;
         }
 
-        return null;
+        JSONObject param = null;
+        try {
+            param = input.getJSONObject(JsonParam.PARAM);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        if(param == null){
+            //TODO Need error handling
+            return null;
+        }
+
+        //Mandatory fields
+        long questionId = Constants.NO_QUESTION;
+        long createdUserId = Constants.NO_USER;
+        String description = null;
+        String choiceA = null;
+        String choiceB = null;
+        QuestionResultDetailItem itemA = null;
+        QuestionResultDetailItem itemB = null;
+
+        try {
+            questionId = param.getLong(JsonParam.QUESTION_ID);
+            createdUserId = param.getLong(JsonParam.QUESTION_CREATED_USER_ID);
+            description = param.getString(JsonParam.QUESTION_DESCRIPTION);
+            LogUtil.d(TAG, "description: " + description);
+            choiceA = param.getString(JsonParam.QUESTION_CHOICE_A);
+            choiceB = param.getString(JsonParam.QUESTION_CHOICE_B);
+
+            JSONObject itemAObj = param.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_A);
+            JSONObject itemBObj = param.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_B);
+            itemA = createQuestionResultDetailItemA(itemAObj);
+            itemB = createQuestionResultDetailItemA(itemBObj);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            //TODO Need error handling
+            return null;
+        }
+
+        //Optional fields
+
+        String additionalQuestion = null;
+        try {
+            additionalQuestion = param.getString(JsonParam.QUESTION_ADDITIONAL_QUESTION);
+        } catch (Exception e1) {
+            LogUtil.d(TAG, "Exception: " + e1.getMessage());
+        }
+
+        List<String> additionalComments = new ArrayList<String>();
+        try {
+            additionalComments = (List) param.get(JsonParam.QUESTION_ADDITIONAL_COMMENT);
+        } catch (Exception e1) {
+            LogUtil.d(TAG, "Exception: " + e1.getMessage());
+        }
+
+        String thumbnail = null;
+        try {
+            thumbnail = param.getString(JsonParam.QUESTION_THUMBNAIL);
+        } catch (Exception e1) {
+            LogUtil.d(TAG, "Exception: " + e1.getMessage());
+        }
+
+        String category = null;
+        try {
+            category = param.getString(JsonParam.QUESTION_CATEGORY);
+        } catch (Exception e1) {
+            LogUtil.d(TAG, "Exception: " + e1.getMessage());
+        }
+
+        long postDate = 0L;
+        try {
+            postDate = param.getLong(JsonParam.QUESTION_POST_DATE);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        String createdUserName = null;
+        try {
+            createdUserName = param.getString(JsonParam.QUESTION_CREATED_USER_NAME);
+        } catch (JSONException e) {
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+        }
+
+        return new QuestionResultDetailDataBuilder().setQuestionId(questionId).setDescription(description)
+                .setChoiceA(choiceA).setChoiceB(choiceB).setThumbnail(thumbnail).setPostDate(postDate)
+                .setCreatedUserId(createdUserId).setCreatedUserName(createdUserName).setCategory(category)
+                .setAdditionalQuestion(additionalQuestion).setAdditionalComments(additionalComments)
+                .setChoiceAItem(itemA).setChoiceBItem(itemB).getResult();
+
     }
 
     private QuestionResultDetailItem createQuestionResultDetailItemA(JSONObject object) {

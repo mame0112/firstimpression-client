@@ -144,12 +144,19 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                     mAnswerOverviewFragment.updateData(resultLists);
                 }
             });
-
         }
     }
 
     @Override
-    public void onAnswerDetailReady(QuestionResultDetailData detail) {
+    public void onAnswerDetailReady(final QuestionResultDetailData detail) {
         LogUtil.d(TAG, "onAnswerDetailReady");
+        if(detail != null){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mDetailFragment.updateDetailData(detail);
+                }
+            });
+        }
     }
 }

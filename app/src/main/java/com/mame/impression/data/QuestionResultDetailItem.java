@@ -94,7 +94,7 @@ public class QuestionResultDetailItem {
         return mFrom20_30;
     }
 
-    public int getFrom39_40(){
+    public int getFrom30_40(){
         return mFrom30_40;
     }
 

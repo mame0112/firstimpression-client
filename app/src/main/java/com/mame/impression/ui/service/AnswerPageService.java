@@ -84,7 +84,12 @@ public class AnswerPageService extends ImpressionBaseService {
                 if(mListener != null && response != null){
                     JSONParser parser = new JSONParser();
                     QuestionResultDetailData data = parser.createQuestionResultDetailData(response);
-                    mListener.onAnswerDetailReady(data);
+                    if(data != null){
+                        mListener.onAnswerDetailReady(data);
+                    } else {
+                        // TODO Need error handling
+                    }
+
                 }
             }
 

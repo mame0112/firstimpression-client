@@ -1,11 +1,16 @@
 package com.mame.impression.data;
 
+import com.mame.impression.constant.Constants;
+import com.mame.impression.util.LogUtil;
+
 import java.util.List;
 
 /**
  * Created by kosukeEndo on 2016/01/10.
  */
 public class QuestionResultDetailDataBuilder {
+
+    private final static String TAG = Constants.TAG + QuestionResultDetailDataBuilder.class.getSimpleName();
 
     private QuestionResultDetailData mContent = new QuestionResultDetailData();
 
@@ -15,6 +20,7 @@ public class QuestionResultDetailDataBuilder {
     }
 
     public QuestionResultDetailDataBuilder setDescription(String description) {
+        LogUtil.d(TAG, "description; " + description);
         mContent.setDescription(description);
         return this;
     }
