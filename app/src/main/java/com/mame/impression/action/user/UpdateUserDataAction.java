@@ -4,7 +4,7 @@ import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
-import com.mame.impression.data.AnswerPageData;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.server.ServerAccessor;
 
@@ -22,9 +22,9 @@ public class UpdateUserDataAction  implements Action {
 
     private final static String TAG = Constants.TAG + UpdateUserDataAction.class.getSimpleName();
 
-    private AnswerPageData.Gender mGender;
+    private QuestionResultListData.Gender mGender;
 
-    private AnswerPageData.Age mAge;
+    private QuestionResultListData.Age mAge;
 
     @Override
     public RequestAction getAction() {
@@ -39,7 +39,7 @@ public class UpdateUserDataAction  implements Action {
         return accessors;
     }
 
-    public void setAction(AnswerPageData.Gender gender, AnswerPageData.Age age) {
+    public void setAction(QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
         mGender = gender;
         mAge = age;
     }

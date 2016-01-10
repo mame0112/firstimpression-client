@@ -8,23 +8,25 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 
-import com.android.volley.toolbox.StringRequest;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
 import com.mame.impression.ui.service.AnswerPageService;
 import com.mame.impression.util.LogUtil;
 
+import java.util.List;
+
 /**
  * Created by kosukeEndo on 2015/12/29.
  */
-public class AnswerPageActivity extends ImpressionBaseActivity implements AnswerRecyclerViewFragment.AnswerRecyclerViewListener {
+public class AnswerPageActivity extends ImpressionBaseActivity implements AnswerRecyclerViewFragment.AnswerRecyclerViewListener, AnswerPageService.AnswerPageServiceListener {
 
     private static final String TAG = Constants.TAG + AnswerPageActivity.class.getSimpleName();
 
     private AnswerRecyclerViewFragment mAnswerOverviewFragment = new AnswerRecyclerViewFragment();
 
-    private Fragment mDetailFragment = new AnswerDetailFragment();
+    private AnswerDetailFragment mDetailFragment = new AnswerDetailFragment();
 
     private AnswerPageService mService;
 
@@ -57,6 +59,8 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
             //Keep service instance to operate it from Activity.
             mService = ((AnswerPageService.AnswerPageServiceBinder) service).getService();
+
+            mService.setAnswerPageServiceListener(AnswerPageActivity.this);
 
             //Get initial question data.
             mService.requestQuestionsCreatedByUser();
@@ -119,5 +123,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     public void onItemClicked(int position) {
         LogUtil.d(TAG, "onItemClicked: " + position);
         switchToDetailView();
+    }
+
+    @Override
+    public void onAnswerResultListReady(List<QuestionResultListData> resultLists) {
+        LogUtil.d(TAG, "onAnswerResultListReady");
     }
 }

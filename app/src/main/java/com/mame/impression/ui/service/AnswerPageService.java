@@ -1,6 +1,5 @@
 package com.mame.impression.ui.service;
 
-import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -8,25 +7,29 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.ImpressionData;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
+import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
 import org.json.JSONObject;
 
+import java.util.List;
+
 /**
  * Created by kosukeEndo on 2015/12/30.
  */
 public class AnswerPageService extends ImpressionBaseService {
-//public class AnswerPageService extends Service {
 
     private static final String TAG = Constants.TAG + AnswerPageService.class.getSimpleName();
 
     private ImpressionService mService;
 
     private IBinder mBinder = new AnswerPageServiceBinder();
+
+    private AnswerPageServiceListener mListener;
 
     @Nullable
     @Override
@@ -48,6 +51,11 @@ public class AnswerPageService extends ImpressionBaseService {
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "onCompleted");
+                if(mListener != null){
+                    JSONParser parser = new JSONParser();
+                    List<QuestionResultListData> lists = parser.createQuestionResultListDataFromJsonObject(response);
+                    mListener.onAnswerResultListReady(lists);
+                }
             }
 
             @Override
@@ -79,6 +87,24 @@ public class AnswerPageService extends ImpressionBaseService {
         public AnswerPageService getService(){
             return AnswerPageService.this;
         }
+    }
+
+    private List<QuestionResultListData> createResultListFromJsonObject(JSONObject object){
+        LogUtil.d(TAG, "createResultListFromJsonObject");
+
+        if(object != null){
+            //TODO
+        }
+
+        return null;
+    }
+
+    public void setAnswerPageServiceListener(AnswerPageServiceListener listener){
+        mListener = listener;
+    }
+
+    public interface AnswerPageServiceListener{
+        void onAnswerResultListReady(List<QuestionResultListData> resultLists);
     }
 
 }

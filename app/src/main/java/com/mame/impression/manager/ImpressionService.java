@@ -16,7 +16,7 @@ import com.mame.impression.action.user.SignUpAction;
 import com.mame.impression.action.user.UpdateUserDataAction;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.AnswerPageData;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
 import com.mame.impression.util.LogUtil;
@@ -194,7 +194,7 @@ public class ImpressionService extends Service {
         return false;
     }
 
-    public void updateUserData(ResultListener listener, Context context, AnswerPageData.Gender gender, AnswerPageData.Age age) {
+    public void updateUserData(ResultListener listener, Context context, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
         LogUtil.d(TAG, "updateUserData");
 
         if (listener == null) {

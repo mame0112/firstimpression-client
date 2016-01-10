@@ -2,7 +2,6 @@ package com.mame.impression.ui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +14,7 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.AnswerPageData;
-import com.mame.impression.data.ImpressionData;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
@@ -172,41 +170,41 @@ public class ProfileDialogFragment extends DialogFragment {
         }
     }
 
-    public AnswerPageData.Gender getGenderValue(int position) {
+    public QuestionResultListData.Gender getGenderValue(int position) {
         switch(position){
             case 0: // Not selected
                 return null;
             case 1: // Male
-                return AnswerPageData.Gender.MALE;
+                return QuestionResultListData.Gender.MALE;
             case 2: // Female
-                return AnswerPageData.Gender.FEMALE;
+                return QuestionResultListData.Gender.FEMALE;
             case 3: // Unknown
-                return AnswerPageData.Gender.UNKNOWN;
+                return QuestionResultListData.Gender.UNKNOWN;
             default:
                 return null;
         }
     }
 
-    public AnswerPageData.Age getAgeValue(int position) {
+    public QuestionResultListData.Age getAgeValue(int position) {
         switch (position) {
             case 0: // Not selected
                 return null;
             case 1: // Under 10
-                return AnswerPageData.Age.UNDER10;
+                return QuestionResultListData.Age.UNDER10;
             case 2: // 10 - 20
-                return AnswerPageData.Age.FROM10_20;
+                return QuestionResultListData.Age.FROM10_20;
             case 3: // 20 - 30
-                return AnswerPageData.Age.FROM20_30;
+                return QuestionResultListData.Age.FROM20_30;
             case 4: // 30 - 40
-                return AnswerPageData.Age.FROM30_40;
+                return QuestionResultListData.Age.FROM30_40;
             case 5: // 40 - 50
-                return AnswerPageData.Age.FROM40_50;
+                return QuestionResultListData.Age.FROM40_50;
             case 6: // 50 - 60
-                return AnswerPageData.Age.FROM50_60;
+                return QuestionResultListData.Age.FROM50_60;
             case 7: // 60 - 70
-                return AnswerPageData.Age.FROM60_70;
+                return QuestionResultListData.Age.FROM60_70;
             case 8: // Over 70
-                return AnswerPageData.Age.OVER70;
+                return QuestionResultListData.Age.OVER70;
             default:
                 return null;
         }

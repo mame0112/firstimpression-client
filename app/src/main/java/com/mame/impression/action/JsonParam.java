@@ -68,4 +68,13 @@ public class JsonParam {
     public final static String QUESTION_ADDITIONAL_COMMENT = "additional_comment";
 
     public final static String QUESTION_SELECTED_CHOICE = "choice";
+
+    public final static String QUESTION_NUM_OF_QUESTION = "num_of_answer";
+
+    public final static String QUESTION_LAST_COMMENT_DATE = "last_comment_date";
+
+    public final static String QUESTION_ADDITIONAL_COMMENT_NUM = "additional_comment_num";
+
+
+
 }

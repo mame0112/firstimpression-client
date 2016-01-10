@@ -3,6 +3,8 @@ package com.mame.impression.util;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContentBuilder;
+import com.mame.impression.data.QuestionResultListData;
+import com.mame.impression.data.QuestionResultListDataBuilder;
 import com.mame.impression.data.UserData;
 import com.mame.impression.data.UserDataBuilder;
 import com.mame.impression.data.MainPageContent;
@@ -135,11 +137,96 @@ public class JSONParser {
 
     }
 
+    public List<QuestionResultListData> createQuestionResultListDataFromJsonObject(JSONObject object){
+
+        LogUtil.d(TAG, "createQuestionResultListDataFromJsonObject");
+
+        if(object != null){
+
+            List<QuestionResultListData> results = new ArrayList<QuestionResultListData>();
+
+            JSONArray array = extractParamArray(object);
+            for(int i=0; i<array.length();i++){
+                try {
+                    JSONObject obj = (JSONObject)array.get(i);
+                    QuestionResultListData data = createQuestionResultListData(obj);
+                    results.add(data);
+                } catch (JSONException e) {
+                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private QuestionResultListData createQuestionResultListData(JSONObject object){
+
+        LogUtil.d(TAG, "createQuestionResultListData");
+
+        if(object != null){
+
+            long questionId = Constants.NO_QUESTION;
+            try {
+                questionId = object.getLong(JsonParam.QUESTION_ID);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            String description = null;
+            try {
+                description = object.getString(JsonParam.QUESTION_DESCRIPTION);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int numOfQuestion = 0;
+            try {
+                numOfQuestion = object.getInt(JsonParam.QUESTION_NUM_OF_QUESTION);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            long lastCommentDate = 0L;
+            try {
+                lastCommentDate = object.getLong(JsonParam.QUESTION_LAST_COMMENT_DATE);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int additionalCommentNum = 0;
+            try {
+                additionalCommentNum = object.getInt(JsonParam.QUESTION_ADDITIONAL_COMMENT_NUM);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+             return new QuestionResultListDataBuilder().setQuestionId(questionId).setDescription(description).setLastCommentDate(lastCommentDate).setNumfOfAnswer(numOfQuestion).setNumOfAdditionalComment(additionalCommentNum).getResult();
+
+        }
+
+        return null;
+    }
+
+
     private JSONObject extractParamObject(JSONObject input){
 
         if(input != null){
             try {
                 return (JSONObject)input.get(JsonParam.PARAM);
+            } catch (JSONException e) {
+                LogUtil.w(TAG, "JSONException: " + e.getMessage());
+            }
+        }
+
+        return null;
+    }
+
+    private JSONArray extractParamArray(JSONObject input){
+
+        if(input != null){
+            try {
+                return (JSONArray)input.get(JsonParam.PARAM);
             } catch (JSONException e) {
                 LogUtil.w(TAG, "JSONException: " + e.getMessage());
             }

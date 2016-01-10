@@ -3,19 +3,16 @@ package com.mame.impression.ui;
 import android.support.v4.app.Fragment;
 
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.data.AnswerDataBuilder;
-import com.mame.impression.data.AnswerPageData;
-import com.mame.impression.manager.ImpressionService;
+import com.mame.impression.data.QuestionResultListDataBuilder;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.util.LogUtil;
 
 import java.util.ArrayList;
@@ -34,7 +31,7 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
 
     private AnswerPageOverviewAdapter mAdapter;
 
-    private List<AnswerPageData> mData = new ArrayList<AnswerPageData>();
+    private List<QuestionResultListData> mData = new ArrayList<QuestionResultListData>();
 
     private AnswerRecyclerViewListener mListener;
 
@@ -44,7 +41,6 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
 
         LogUtil.d(TAG, "onCreate");
 
-        createDummyData();
     }
 
     @Override
@@ -67,47 +63,6 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-    }
-
-    private void createDummyData(){
-
-        AnswerDataBuilder builder1A = new AnswerDataBuilder();
-        AnswerPageData.AnswerData data1A = builder1A.setMale(2).setFemale(3).setUnder10(1).setFrom10_20(4).setFrom20_30(1).setFrom30_40(0).setFrom40_50(5).setFrom50_60(2).setFrom60_70(1).setOver70(1).getResult();
-        AnswerDataBuilder builder1B = new AnswerDataBuilder();
-        AnswerPageData.AnswerData data1B = builder1B.setMale(2).setFemale(3).setUnder10(1).setFrom10_20(4).setFrom20_30(1).setFrom30_40(0).setFrom40_50(5).setFrom50_60(2).setFrom60_70(1).setOver70(1).getResult();
-        List<String> addComments1 = new ArrayList<String>();
-        addComments1.add("Comment 1");
-        addComments1.add("Comment 2");
-        addComments1.add("Comment 3");
-
-        AnswerPageData content1 = new AnswerPageData("description1",data1A, data1B, "additionalQuestion2", addComments1);
-
-        AnswerDataBuilder builder2A = new AnswerDataBuilder();
-        AnswerPageData.AnswerData data2A = builder2A.setMale(1).setFemale(0).setUnder10(1).setFrom10_20(2).setFrom20_30(2).setFrom30_40(0).setFrom40_50(2).setFrom50_60(2).setFrom60_70(1).setOver70(1).getResult();
-        AnswerDataBuilder builder2B = new AnswerDataBuilder();
-        AnswerPageData.AnswerData data2B = builder2B.setMale(2).setFemale(3).setUnder10(2).setFrom10_20(5).setFrom20_30(10).setFrom30_40(6).setFrom40_50(5).setFrom50_60(1).setFrom60_70(1).setOver70(1).getResult();
-        List<String> addComments2 = new ArrayList<String>();
-        addComments1.add("Comment 4");
-        addComments1.add("Comment 5");
-
-        AnswerPageData content2 = new AnswerPageData("description2",data2A, data2B, "additionalQuestion3", addComments2);
-
-        AnswerDataBuilder builder3A = new AnswerDataBuilder();
-        AnswerPageData.AnswerData data3A = builder3A.setMale(1).setFemale(0).setUnder10(1).setFrom10_20(2).setFrom20_30(2).setFrom30_40(0).setFrom40_50(2).setFrom50_60(2).setFrom60_70(1).setOver70(1).getResult();
-        AnswerDataBuilder builder3B = new AnswerDataBuilder();
-        AnswerPageData.AnswerData data3B = builder3B.setMale(2).setFemale(3).setUnder10(2).setFrom10_20(5).setFrom20_30(10).setFrom30_40(6).setFrom40_50(5).setFrom50_60(1).setFrom60_70(1).setOver70(1).getResult();
-        List<String> addComments3 = new ArrayList<String>();
-        addComments1.add("Comment 6");
-        addComments1.add("Comment 7");
-        addComments1.add("Comment 8");
-        addComments1.add("Comment 9");
-
-        AnswerPageData content3 = new AnswerPageData("description3",data3A, data3B, "additionalQuestion4", addComments3);
-
-        mData.add(content1);
-        mData.add(content2);
-        mData.add(content3);
-
     }
 
     public void setAnswerRecyclerViewListener(AnswerRecyclerViewListener listener){
