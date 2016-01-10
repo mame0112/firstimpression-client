@@ -214,7 +214,6 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
                 }
             });
 
-
         }
     }
 

@@ -141,10 +141,9 @@ public class JSONParser {
 
         LogUtil.d(TAG, "createQuestionResultListDataFromJsonObject");
 
+        List<QuestionResultListData> results = new ArrayList<QuestionResultListData>();
+
         if(object != null){
-
-            List<QuestionResultListData> results = new ArrayList<QuestionResultListData>();
-
             JSONArray array = extractParamArray(object);
             for(int i=0; i<array.length();i++){
                 try {
@@ -157,7 +156,7 @@ public class JSONParser {
             }
         }
 
-        return null;
+        return results;
     }
 
     private QuestionResultListData createQuestionResultListData(JSONObject object){

@@ -53,7 +53,7 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new AnswerPageOverviewAdapter(mData);
+        mAdapter = new AnswerPageOverviewAdapter(mData, getActivity());
         mAdapter.setAdapterClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -63,6 +63,12 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+    }
+
+    public void updateData(List<QuestionResultListData> data){
+        LogUtil.d(TAG, "updateData");
+        mAdapter.updateData(data);
+        mAdapter.notifyDataSetChanged();
     }
 
     public void setAnswerRecyclerViewListener(AnswerRecyclerViewListener listener){

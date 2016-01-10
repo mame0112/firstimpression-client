@@ -1,5 +1,6 @@
 package com.mame.impression.ui;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,7 +11,9 @@ import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TimeUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,8 +27,15 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
 
     private AnswerPageAdapterListener mListener;
 
-    public AnswerPageOverviewAdapter(List<QuestionResultListData> data){
+    private Context mContext;
+
+    public AnswerPageOverviewAdapter(List<QuestionResultListData> data, Context context){
         mData = data;
+        mContext = context;
+    }
+
+    public void updateData(List<QuestionResultListData> data){
+        mData = new ArrayList<QuestionResultListData>(data);
     }
 
     @Override
@@ -43,7 +53,10 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
     public void onBindViewHolder(AnswerPageOverviewAdapter.ViewHolder holder, int position) {
         holder.mDescriptionView.setText(mData.get(position).getDescription());
         holder.mNumOfAnswerView.setText(String.valueOf(mData.get(position).getNumfOfAnswer()));
-        holder.mLastDateView.setText("Test text");
+
+        long lastUpdateDate = mData.get(position).getLastCommentDate();
+        holder.mLastDateView.setText(TimeUtil.getDateForDisplay(lastUpdateDate, mContext));
+
         int addComment = mData.get(position).getNumOfAdditionalComment();
         if(addComment != 0){
             holder.mNumOfAdditionView.setVisibility(View.VISIBLE);

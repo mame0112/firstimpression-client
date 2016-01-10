@@ -32,6 +32,9 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     private boolean mIsBound = false;
 
+    /* Field name to send result list data */
+    public final static String PARAM_RESULT_LIST_DATA ="result_list_data";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -126,7 +129,17 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     }
 
     @Override
-    public void onAnswerResultListReady(List<QuestionResultListData> resultLists) {
+    public void onAnswerResultListReady(final List<QuestionResultListData> resultLists) {
         LogUtil.d(TAG, "onAnswerResultListReady");
+        if(resultLists != null){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    LogUtil.d(TAG, "size: " + resultLists.size());
+                    mAnswerOverviewFragment.updateData(resultLists);
+                }
+            });
+
+        }
     }
 }
