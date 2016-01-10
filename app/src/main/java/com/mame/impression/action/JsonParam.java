@@ -75,6 +75,32 @@ public class JsonParam {
 
     public final static String QUESTION_ADDITIONAL_COMMENT_NUM = "additional_comment_num";
 
+    public final static String QUESTION_GENDER_MALE = "male";
 
+    public final static String QUESTION_GENDER_FEMALE = "female";
+
+    public final static String QUESTION_GENDER_UNKNOWN = "gender_unknonw";
+
+    public final static String QUESTION_AGE_UNDER10 = "under10";
+
+    public final static String QUESTION_AGE_FROM10_20 = "from10_20";
+
+    public final static String QUESTION_AGE_FROM20_30_A = "from20_30";
+
+    public final static String QUESTION_AGE_FROM30_40 = "from30_40";
+
+    public final static String QUESTION_AGE_FROM40_50 = "from40_50";
+
+    public final static String QUESTION_AGE_FROM50_60 = "from50_60";
+
+    public final static String QUESTION_AGE_FROM60_70 = "from60_70";
+
+    public final static String QUESTION_AGE_OVER70 = "over70";
+
+    /* Field name for choice A data */
+    public final static String QUESTION_CHOICE_ITEM_A = "item_a";
+
+    /* Field name for choice B data */
+    public final static String QUESTION_CHOICE_ITEM_B = "item_b";
 
 }

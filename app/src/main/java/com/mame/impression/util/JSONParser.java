@@ -3,6 +3,10 @@ package com.mame.impression.util;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContentBuilder;
+import com.mame.impression.data.QuestionResultDetailData;
+import com.mame.impression.data.QuestionResultDetailDataBuilder;
+import com.mame.impression.data.QuestionResultDetailItem;
+import com.mame.impression.data.QuestionResultDetailItemBuilder;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.data.QuestionResultListDataBuilder;
 import com.mame.impression.data.UserData;
@@ -207,6 +211,180 @@ public class JSONParser {
         return null;
     }
 
+    public QuestionResultDetailData createQuestionResultDetailData(JSONObject object){
+        LogUtil.d(TAG, "createQuestionResultDetailData");
+
+        if(object != null) {
+            //Mandatory fields
+            long questionId = Constants.NO_QUESTION;
+            long createdUserId = Constants.NO_USER;
+            String description = null;
+            String choiceA = null;
+            String choiceB = null;
+            QuestionResultDetailItem itemA = null;
+            QuestionResultDetailItem itemB = null;
+
+            try {
+                questionId = object.getLong(JsonParam.QUESTION_ID);
+                createdUserId = object.getLong(JsonParam.QUESTION_CREATED_USER_ID);
+                description = object.getString(JsonParam.QUESTION_DESCRIPTION);
+                choiceA = object.getString(JsonParam.QUESTION_CHOICE_A);
+                choiceB = object.getString(JsonParam.QUESTION_CHOICE_B);
+
+                JSONObject itemAObj = object.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_A);
+                JSONObject itemBObj = object.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_B);
+                itemA = createQuestionResultDetailItemA(itemAObj);
+                itemB = createQuestionResultDetailItemA(itemBObj);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                //TODO Need to do error handling
+            }
+
+            //Optional fields
+
+            String additionalQuestion = null;
+            try {
+                additionalQuestion = object.getString(JsonParam.QUESTION_ADDITIONAL_QUESTION);
+            } catch (Exception e1) {
+                LogUtil.d(TAG, "Exception: " + e1.getMessage());
+            }
+
+            List<String> additionalComments = new ArrayList<String>();
+            try {
+                additionalComments = (List) object.get(JsonParam.QUESTION_ADDITIONAL_COMMENT);
+            } catch (Exception e1) {
+                LogUtil.d(TAG, "Exception: " + e1.getMessage());
+            }
+
+            String thumbnail = null;
+            try {
+                thumbnail = object.getString(JsonParam.QUESTION_THUMBNAIL);
+            } catch (Exception e1) {
+                LogUtil.d(TAG, "Exception: " + e1.getMessage());
+            }
+
+            String category = null;
+            try {
+                category = object.getString(JsonParam.QUESTION_CATEGORY);
+            } catch (Exception e1) {
+                LogUtil.d(TAG, "Exception: " + e1.getMessage());
+            }
+
+            long postDate = 0L;
+            try {
+                postDate = object.getLong(JsonParam.QUESTION_POST_DATE);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            String createdUserName = null;
+            try {
+                createdUserName = object.getString(JsonParam.QUESTION_CREATED_USER_NAME);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            return new QuestionResultDetailDataBuilder().setQuestionId(questionId).setDescription(description)
+                    .setChoiceA(choiceA).setChoiceB(choiceB).setThumbnail(thumbnail).setPostDate(postDate)
+                    .setCreatedUserId(createdUserId).setCreatedUserName(createdUserName).setCategory(category)
+                    .setAdditionalQuestion(additionalQuestion).setAdditionalComments(additionalComments)
+                    .setChoiceAItem(itemA).setChoiceBItem(itemB).getResult();
+
+        }
+
+        return null;
+    }
+
+    private QuestionResultDetailItem createQuestionResultDetailItemA(JSONObject object) {
+        LogUtil.d(TAG, "createQuestionResultDetailItem");
+
+        if (object != null) {
+
+            int male = 0;
+            try {
+                male = object.getInt(JsonParam.QUESTION_GENDER_MALE);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int female = 0;
+            try {
+                female = object.getInt(JsonParam.QUESTION_GENDER_FEMALE);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int genderUnknown = 0;
+            try {
+                genderUnknown = object.getInt(JsonParam.QUESTION_GENDER_UNKNOWN);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int under10 = 0;
+            try {
+                under10 = object.getInt(JsonParam.QUESTION_AGE_UNDER10);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int from10_20 = 0;
+            try {
+                from10_20 = object.getInt(JsonParam.QUESTION_AGE_FROM10_20);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int from20_30 = 0;
+            try {
+                from20_30 = object.getInt(JsonParam.QUESTION_AGE_FROM20_30_A);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int from30_40 = 0;
+            try {
+                from30_40 = object.getInt(JsonParam.QUESTION_AGE_FROM30_40);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int from40_50 = 0;
+            try {
+                from40_50 = object.getInt(JsonParam.QUESTION_AGE_FROM40_50);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int from50_60 = 0;
+            try {
+                from50_60 = object.getInt(JsonParam.QUESTION_AGE_FROM50_60);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int from60_70 = 0;
+            try {
+                from60_70 = object.getInt(JsonParam.QUESTION_AGE_FROM60_70);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int over70 = 0;
+            try {
+                over70 = object.getInt(JsonParam.QUESTION_AGE_OVER70);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            return new QuestionResultDetailItemBuilder().setMale(male).setFemale(female)
+                    .setGenderUnknown(genderUnknown).setUnder10(under10).setFrom10_20(from10_20)
+                    .setFrom20_30(from20_30).setFrom30_40(from30_40).setFrom40_50(from40_50)
+                    .setFrom50_60(from50_60).setFrom60_70(from60_70).setOver70(over70).getResult();
+        }
+
+        return null;
+    }
 
     private JSONObject extractParamObject(JSONObject input){
 

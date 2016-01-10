@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.QuestionResultDetailData;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
@@ -79,9 +80,11 @@ public class AnswerPageService extends ImpressionBaseService {
         ResultListener listener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "onCompleted");
-                if(mListener != null){
-                    //TODO Need to implement
+                LogUtil.d(TAG, "onCompleted: " + response.toString());
+                if(mListener != null && response != null){
+                    JSONParser parser = new JSONParser();
+                    QuestionResultDetailData data = parser.createQuestionResultDetailData(response);
+                    mListener.onAnswerDetailReady(data);
                 }
             }
 
@@ -115,15 +118,6 @@ public class AnswerPageService extends ImpressionBaseService {
         }
     }
 
-    private List<QuestionResultListData> createResultListFromJsonObject(JSONObject object){
-        LogUtil.d(TAG, "createResultListFromJsonObject");
-
-        if(object != null){
-            //TODO
-        }
-
-        return null;
-    }
 
     public void setAnswerPageServiceListener(AnswerPageServiceListener listener){
         mListener = listener;
@@ -131,6 +125,8 @@ public class AnswerPageService extends ImpressionBaseService {
 
     public interface AnswerPageServiceListener{
         void onAnswerResultListReady(List<QuestionResultListData> resultLists);
+
+        void onAnswerDetailReady(QuestionResultDetailData detail);
     }
 
 }

@@ -9,6 +9,7 @@ import android.os.IBinder;
 import android.support.v4.app.Fragment;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.QuestionResultDetailData;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
@@ -145,5 +146,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
             });
 
         }
+    }
+
+    @Override
+    public void onAnswerDetailReady(QuestionResultDetailData detail) {
+        LogUtil.d(TAG, "onAnswerDetailReady");
     }
 }

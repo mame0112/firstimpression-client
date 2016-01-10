@@ -1,117 +1,145 @@
 package com.mame.impression.data;
 
+import com.mame.impression.constant.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by kosukeEndo on 2016/01/10.
  */
 public class QuestionResultDetailData {
 
-    private int mMale;
+    private long mCreateUserId = Constants.NO_USER;
 
-    private int mFemale;
+    private long mQuestionId = Constants.NO_QUESTION;
 
-    private int mGenderUnknown;
+    private String mDescription = null;
 
-    private int mUnder10;
+    private String mChoiceA = null;
 
-    private int mFrom10_20;
+    private String mChoiceB = null;
 
-    private int mFrom20_30;
+    private String mAdditionalQuestion = null;
 
-    private int mFrom30_40;
+    private List<String> mAdditionalComment = null;
 
-    private int mFrom40_50;
+    // TODO need to consider if we should store bitmap here.
+    private String mThumbnail;
 
-    private int mFrom50_60;
+    private String mCategory = null;
 
-    private int mFrom60_70;
+    private String mCreatedUserName = null;
 
-    private int mOver70;
+    private long mPostDate = 0;
 
-    void setMale(int male){
-        mMale = male;
+    private QuestionResultDetailItem mChoiceAItem;
+
+    private QuestionResultDetailItem mChoiceBItem;
+
+
+    void setQuestionId(long questionId) {
+        mQuestionId = questionId;
     }
 
-    void setFemale(int female){
-        mFemale = female;
+    void setDescription(String description) {
+        mDescription = description;
     }
 
-    void setGenderUnknown(int unknown){
-        mGenderUnknown = unknown;
+    void setChoiceA(String choiceA) {
+        mChoiceA = choiceA;
     }
 
-    void setUnder10(int under10){
-        mUnder10 = under10;
+    void setChoiceB(String choiceB) {
+        mChoiceB = choiceB;
     }
 
-    void setFrom10_20(int from10_20){
-        mFrom10_20 = from10_20;
+    void setThumbnail(String thumbUrl) {
+        mThumbnail = thumbUrl;
     }
 
-    void setFrom20_30(int from20_30){
-        mFrom20_30 = from20_30;
+    void setPostDate(long postDate) {
+        mPostDate = postDate;
     }
 
-    void setFrom30_40(int from30_40){
-        mFrom30_40 = from30_40;
+    void setCreatedUserId(long createduserId) {
+        mCreateUserId = createduserId;
     }
 
-    void setFrom40_50(int from40_50){
-        mFrom40_50 = from40_50;
+    void setCreatedUserName(String createdUserName) {
+        mCreatedUserName = createdUserName;
     }
 
-    void setFrom50_60(int from50_60){
-        mFrom50_60 = from50_60;
+    void setCategory(String category) {
+        mCategory = category;
     }
 
-    void setFrom60_70(int from60_70){
-        mFrom60_70 = from60_70;
+    void setAdditionalQuestion(String additionalQuestion) {
+        mAdditionalQuestion = additionalQuestion;
     }
 
-    void setOver70(int over70){
-        mOver70 = over70;
+    void setAdditionalComment(List<String> comments) {
+        mAdditionalComment = comments;
     }
 
-    public int getMale(){
-        return mMale;
+    void setChoiceAItem(QuestionResultDetailItem item){
+        mChoiceAItem = item;
     }
 
-    public int getFemale(){
-        return mFemale;
+    void setChoiceBItem(QuestionResultDetailItem item){
+        mChoiceBItem = item;
     }
 
-    public int getGenderUnknown(){
-        return mGenderUnknown;
+    public long getQuestionId() {
+        return mQuestionId;
     }
 
-    public int getUnder10(){
-        return mUnder10;
+    public String getThumbnail() {
+        return mThumbnail;
     }
 
-    public int getFrom10_20(){
-        return mFrom10_20;
+    public long getPostDate() {
+        return mPostDate;
     }
 
-    public int getFrom20_30(){
-        return mFrom20_30;
+    public String getUserName() {
+        return mCreatedUserName;
     }
 
-    public int getFrom39_40(){
-        return mFrom30_40;
+    public String getDescription() {
+        return mDescription;
     }
 
-    public int getFrom40_50(){
-        return mFrom40_50;
+    public String getChoiceA() {
+        return mChoiceA;
     }
 
-    public int getFrom50_60(){
-        return mFrom50_60;
+    public String getChoiceB() {
+        return mChoiceB;
     }
 
-    public int getFrom60_70(){
-        return mFrom60_70;
+    public String getAdditionalQuestion() {
+        return mAdditionalQuestion;
     }
 
-    public int getOver70(){
-        return mOver70;
+    public List<String> getAdditionalComments() {
+        return mAdditionalComment;
     }
+
+    public long getCreatedUserId() {
+        return mCreateUserId;
+    }
+
+    public String getCategory() {
+        return mCategory;
+    }
+
+    public QuestionResultDetailItem getChoiceAItem() {
+        return mChoiceAItem;
+    }
+
+    public QuestionResultDetailItem getChoiceBItem() {
+        return mChoiceBItem;
+    }
+
 }

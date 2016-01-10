@@ -67,6 +67,7 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
 
     public void updateData(List<QuestionResultListData> data){
         LogUtil.d(TAG, "updateData");
+        mData = data;
         mAdapter.updateData(data);
         mAdapter.notifyDataSetChanged();
     }

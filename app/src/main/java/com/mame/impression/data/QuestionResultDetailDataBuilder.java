@@ -1,64 +1,81 @@
 package com.mame.impression.data;
 
+import java.util.List;
+
 /**
  * Created by kosukeEndo on 2016/01/10.
  */
 public class QuestionResultDetailDataBuilder {
 
-    private QuestionResultDetailData mData = new QuestionResultDetailData();
+    private QuestionResultDetailData mContent = new QuestionResultDetailData();
 
-    public QuestionResultDetailDataBuilder setMale(int male){
-        mData.setMale(male);
+    public QuestionResultDetailDataBuilder setQuestionId(long questionId) {
+        mContent.setQuestionId(questionId);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFemale(int female ){
-        mData.setFemale(female);
+    public QuestionResultDetailDataBuilder setDescription(String description) {
+        mContent.setDescription(description);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setGenderUnknown(int unknown){
-        mData.setGenderUnknown(unknown);
+    public QuestionResultDetailDataBuilder setChoiceA(String choiceA) {
+        mContent.setChoiceA(choiceA);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setUnder10(int under10 ){
-        mData.setUnder10(under10);
+    public QuestionResultDetailDataBuilder setChoiceB(String choiceB) {
+        mContent.setChoiceB(choiceB);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFrom10_20(int from10_20 ){
-        mData.setFrom10_20(from10_20);
+    public QuestionResultDetailDataBuilder setThumbnail(String thumbUrl) {
+        mContent.setThumbnail(thumbUrl);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFrom20_30(int from20_30 ){
-        mData.setFrom20_30(from20_30);
+    public QuestionResultDetailDataBuilder setPostDate(long postDate) {
+        mContent.setPostDate(postDate);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFrom30_40(int from30_40 ){
-        mData.setFrom30_40(from30_40);
+    public QuestionResultDetailDataBuilder setCreatedUserId(long createduserId) {
+        mContent.setCreatedUserId(createduserId);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFrom40_50(int from40_50 ){
-        mData.setFrom40_50(from40_50);
+    public QuestionResultDetailDataBuilder setCreatedUserName(String createdUserName) {
+        mContent.setCreatedUserName(createdUserName);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFrom50_60(int from50_60 ){
-        mData.setFrom50_60(from50_60);
+    public QuestionResultDetailDataBuilder setCategory(String category) {
+        mContent.setCategory(category);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setFrom60_70(int from60_70 ){
-        mData.setFrom60_70(from60_70);
+    public QuestionResultDetailDataBuilder setAdditionalQuestion(
+            String additionalQuestion) {
+        mContent.setAdditionalQuestion(additionalQuestion);
         return this;
     }
 
-    public QuestionResultDetailDataBuilder setOver70(int over70 ){
-        mData.setOver70(over70);
+    public QuestionResultDetailDataBuilder setAdditionalComments(List<String> comments) {
+        mContent.setAdditionalComment(comments);
         return this;
+    }
+
+    public QuestionResultDetailDataBuilder setChoiceAItem(QuestionResultDetailItem item){
+        mContent.setChoiceAItem(item);
+        return this;
+    }
+
+    public QuestionResultDetailDataBuilder setChoiceBItem(QuestionResultDetailItem item){
+        mContent.setChoiceBItem(item);
+        return this;
+    }
+
+    public QuestionResultDetailData getResult() {
+        return mContent;
     }
 }
