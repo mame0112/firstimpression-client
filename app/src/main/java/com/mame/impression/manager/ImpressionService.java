@@ -8,9 +8,10 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.action.Action;
 import com.mame.impression.action.lists.QuestionListAction;
-import com.mame.impression.action.lists.QuestionListWithUserIdAction;
+import com.mame.impression.action.result.QuestionListWithUserIdAction;
 import com.mame.impression.action.questions.AnswerToQuestionAction;
 import com.mame.impression.action.questions.CreateNewQuestionAction;
+import com.mame.impression.action.result.QuestionResultDetailAction;
 import com.mame.impression.action.user.SignInAction;
 import com.mame.impression.action.user.SignUpAction;
 import com.mame.impression.action.user.UpdateUserDataAction;
@@ -106,6 +107,28 @@ public class ImpressionService extends Service {
 
         executeAction(listener, context, action);
 
+    }
+
+    public void requestQuestionResultDetail(ResultListener listener, Context context, long userId, long questionId){
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        if(userId == Constants.NO_USER){
+            throw new IllegalArgumentException("user id cannot be NO_USER");
+        }
+        if(questionId == Constants.NO_QUESTION){
+            throw new IllegalArgumentException("question id cannot be NO_QUESTION");
+        }
+
+        QuestionResultDetailAction action = new QuestionResultDetailAction();
+        action.setAction(userId, questionId);
+
+        executeAction(listener, context, action);
     }
 
 

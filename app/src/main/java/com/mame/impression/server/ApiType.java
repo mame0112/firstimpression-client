@@ -13,7 +13,7 @@ public enum ApiType {
         switch (action) {
             case GET_QUESTION_LIST:
             case GET_QUESTION_RESULT_LIST:
-            case GET_QUESTION_RESULT:
+            case GET_QUESTION_RESULT_DETAIL:
             case TARGET_QUESTION:
             case DETAIL:
             case MY_INFORMATION:
@@ -47,7 +47,7 @@ public enum ApiType {
             case REPLY_TO_QUESTION:
                 return RestApi.KEY_ANSWER;
             case GET_QUESTION_RESULT_LIST:
-            case GET_QUESTION_RESULT:
+            case GET_QUESTION_RESULT_DETAIL:
                 return RestApi.KEY_RESULT;
         }
 

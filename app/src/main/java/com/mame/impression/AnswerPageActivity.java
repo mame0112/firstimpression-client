@@ -117,15 +117,19 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         }
     }
 
-    private void switchToDetailView(){
+    private void switchToDetailView(long targetQuestionId){
+
+        //Load detail info for target question
+        mService.requestQuestionsResultDetail(targetQuestionId);
+
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.answer_page_frame, mDetailFragment).commit();
     }
 
     @Override
-    public void onItemClicked(int position) {
-        LogUtil.d(TAG, "onItemClicked: " + position);
-        switchToDetailView();
+    public void onItemClicked(long targetQuestionId) {
+        LogUtil.d(TAG, "onItemClicked: " + targetQuestionId);
+        switchToDetailView(targetQuestionId);
     }
 
     @Override

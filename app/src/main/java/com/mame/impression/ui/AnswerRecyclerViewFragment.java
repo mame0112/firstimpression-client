@@ -79,12 +79,18 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
     public void onViewClicked(View v) {
         int position = mRecyclerView.getChildAdapterPosition(v);
         LogUtil.d(TAG, "onViewClicked: " + position);
-        if(mListener != null){
-            mListener.onItemClicked(position);
+
+        try {
+            if(mListener != null){
+                mListener.onItemClicked(mData.get(position).getQuestionId());
+            }
+        } catch (IndexOutOfBoundsException e){
+            LogUtil.d(TAG, "IndexOutOfBoundsException: " + e.getMessage());
         }
+
     }
 
     public interface AnswerRecyclerViewListener{
-        void onItemClicked(int position);
+        void onItemClicked(long targetQuestionId);
     }
 }

@@ -66,8 +66,34 @@ public class AnswerPageService extends ImpressionBaseService {
 
         long userId = PreferenceUtil.getUserId(getApplicationContext());
         if(userId != Constants.NO_USER){
-            //TODO
             mService.requestQuestionsCreatedByUser(listener, getApplicationContext(), userId);
+        } else {
+            showPromptDialog(PromptMode.NOTICE);
+        }
+    }
+
+    /* Request question detail information for target question */
+    public void requestQuestionsResultDetail(long questionId){
+        LogUtil.d(TAG, "requestQuestionsResultDetail: " + questionId);
+
+        ResultListener listener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted");
+                if(mListener != null){
+                    //TODO Need to implement
+                }
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        };
+
+        long userId = PreferenceUtil.getUserId(getApplicationContext());
+        if(userId != Constants.NO_USER){
+            mService.requestQuestionResultDetail(listener, getApplicationContext(), userId, questionId);
         } else {
             showPromptDialog(PromptMode.NOTICE);
         }

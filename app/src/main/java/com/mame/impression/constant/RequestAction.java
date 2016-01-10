@@ -20,7 +20,7 @@ public enum RequestAction {
      * Result for ask questions.
      */
     GET_QUESTION_RESULT_LIST,        // Request question result list for  given userId
-    GET_QUESTION_RESULT,       // Request question result for give userId and given question Id
+    GET_QUESTION_RESULT_DETAIL,       // Request question result for give userId and given question Id
 
     /**
      * Question action
