@@ -5,6 +5,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 
 import com.mame.impression.constant.Constants;
@@ -16,7 +17,7 @@ import com.mame.impression.util.LogUtil;
 /**
  * Created by kosukeEndo on 2015/12/30.
  */
-public class PromptDialogActivity extends Activity implements NotificationDialogFragment.NotificationDialogFragmentListener {
+public class PromptDialogActivity extends ImpressionBaseActivity implements NotificationDialogFragment.NotificationDialogFragmentListener {
 
     private final static String TAG = Constants.TAG + PromptDialogActivity.class.getSimpleName();
 
@@ -111,5 +112,20 @@ public class PromptDialogActivity extends Activity implements NotificationDialog
         intent.putExtra(Constants.INTENT_QUESTION_CHOICE_A, mChoiceA);
         intent.putExtra(Constants.INTENT_QUESTION_CHOICE_B, mChoiceB);
         startActivity(intent);
+    }
+
+    @Override
+    protected void enterPage() {
+
+    }
+
+    @Override
+    protected void escapePage() {
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
     }
 }

@@ -67,8 +67,6 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(MainPageAdapter.ViewHolder holder, int position) {
-        LogUtil.d(TAG, "position" + position);
-
         MainPageContent data = mData.get(position);
 
         if(data != null){

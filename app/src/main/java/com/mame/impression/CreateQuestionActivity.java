@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
@@ -131,5 +132,10 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onNewQuestionCreationFail(ImpressionError reason) {
         LogUtil.d(TAG, "onNewQuestionCreationFail");
         // TODO
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
     }
 }

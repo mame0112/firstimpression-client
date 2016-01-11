@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -29,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class MainPageActivity extends AppCompatActivity implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener {
+public class MainPageActivity extends ImpressionBaseActivity implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener {
 
     private static final String TAG = Constants.TAG + MainPageActivity.class.getSimpleName();
 
@@ -79,7 +80,7 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
         setContentView(R.layout.activity_main_page);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.main_create_question_fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -208,7 +209,6 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    LogUtil.d(TAG, "size: " + data.size());
                     mAdapter.updateData(data);
                     mAdapter.notifyDataSetChanged();
                 }
@@ -217,4 +217,20 @@ public class MainPageActivity extends AppCompatActivity implements MainPageAdapt
         }
     }
 
+    @Override
+    protected void enterPage() {
+
+    }
+
+    @Override
+    protected void escapePage() {
+
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        LogUtil.d(TAG, "onConfigurationChanged");
+
+        super.onConfigurationChanged(newConfig);
+    }
 }

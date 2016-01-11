@@ -1,5 +1,6 @@
 package com.mame.impression;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -99,5 +100,10 @@ public class SprashActivity extends ImpressionBaseActivity {
             }
         }
     };
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
+    }
 
 }

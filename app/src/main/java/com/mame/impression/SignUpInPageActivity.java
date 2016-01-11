@@ -2,6 +2,7 @@ package com.mame.impression;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
@@ -197,6 +198,11 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         Intent intent = new Intent(this, MainPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig){
+        super.onConfigurationChanged(newConfig);
     }
 
 }
