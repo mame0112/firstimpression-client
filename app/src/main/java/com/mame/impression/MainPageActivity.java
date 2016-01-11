@@ -63,6 +63,18 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
 
     private CharSequence mDrawerTitle;
 
+    private static int[] DRAWER_ITEMS;
+
+    static {
+        // Define drawer items and its layout
+        DRAWER_ITEMS = new int[] {
+            R.string.drawer_item_setting,
+                    R.string.drawer_item_about,
+                    R.string.drawer_item_privacy,
+                    R.string.drawer_item_terms
+        };
+    }
+
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -75,8 +87,6 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
             mService = ((MainPageService.MainPageServiceBinder) service).getService();
             mService.setMainPageServiceListener(MainPageActivity.this);
 
-            //Get initial question data.
-//            mService.requestAllMessageData(Constants.INITIAL_REQUEST_NUM);
         }
 
         @Override
@@ -126,21 +136,11 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
 
         mRecyclerView.setAdapter(mAdapter);
 
-        String[] values = new String[] { "Android List View",
-                "Adapter implementation",
-                "Simple List View In Android",
-                "Create List View Android",
-                "Android Example",
-                "List View Source Code",
-                "List View Array Adapter",
-                "Android Example List View"
-        };
-
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, values));
+                android.R.layout.simple_list_item_1, createDrawerItemStrings()));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
@@ -318,6 +318,16 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
         super.onPostCreate(savedInstanceState);
         // Sync the toggle state after onRestoreInstanceState has occurred.
         mDrawerToggle.syncState();
+    }
+
+    private String[] createDrawerItemStrings(){
+        String[] output = new String[DRAWER_ITEMS.length];
+
+        for(int i=0; i<DRAWER_ITEMS.length; i++){
+            output[i] = (String)getText(DRAWER_ITEMS[i]);
+        }
+
+        return output;
     }
 
 }

@@ -7,6 +7,12 @@
     <string name="impression_cancel">Cancel</string>
     <string name="impression_divider">/</string>
 
+    <!-- Drawer -->
+    <string name="drawer_item_setting">Settings</string>
+    <string name="drawer_item_about">About</string>
+    <string name="drawer_item_privacy">Privacy policy</string>
+    <string name="drawer_item_terms">Terms of service</string>
+
     <!-- Time -->
     <string name="str_generic_time_before">" before"</string>
     <string name="str_generic_time_sec">" sec"</string>
