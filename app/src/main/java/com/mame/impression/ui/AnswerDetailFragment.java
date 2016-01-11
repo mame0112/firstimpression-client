@@ -23,6 +23,10 @@ public class AnswerDetailFragment extends Fragment {
 
     private TextView mDescriptionView;
 
+    private TextView mChoiceAView;
+
+    private TextView mChoiceBView;
+
     private TextView mMaleAView;
 
     private TextView mFemaleAView;
@@ -97,6 +101,8 @@ public class AnswerDetailFragment extends Fragment {
 
     private void createCommonViews(View view){
         mDescriptionView = (TextView)view.findViewById(R.id.answer_detail_description);
+        mChoiceAView = (TextView)view.findViewById(R.id.answer_detail_choice_a);
+        mChoiceBView = (TextView)view.findViewById(R.id.answer_detail_choice_b);
     }
 
     private void createGenderAViews(View view){
@@ -137,7 +143,12 @@ public class AnswerDetailFragment extends Fragment {
         LogUtil.d(TAG, "updateViews");
 
         mDescriptionView.setText(mData.getDescription());
+        mChoiceAView.setText(mData.getChoiceA());
+        mChoiceBView.setText(mData.getChoiceB());
+
         mDescriptionView.invalidate();
+        mChoiceAView.invalidate();
+        mChoiceBView.invalidate();
 
         mMaleAView.setText(String.valueOf(mData.getChoiceAItem().getMale()));
         mFemaleAView.setText(String.valueOf(mData.getChoiceAItem().getFemale()));
