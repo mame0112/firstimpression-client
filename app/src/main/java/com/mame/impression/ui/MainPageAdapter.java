@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContent;
+import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
@@ -135,9 +136,11 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             mChoiseAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long id = mData.get(getAdapterPosition()).getQuestionId();
-                    mData.remove(getAdapterPosition()).getQuestionId();
-                    mListener.onItemSelected(id, 0);
+                    if(ButtonUtil.isClickable()){
+                        long id = mData.get(getAdapterPosition()).getQuestionId();
+                        mData.remove(getAdapterPosition()).getQuestionId();
+                        mListener.onItemSelected(id, 0);
+                    }
                 }
             });
 
@@ -145,9 +148,11 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             mChoiseBButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    long id = mData.get(getAdapterPosition()).getQuestionId();
-                    mData.remove(getAdapterPosition()).getQuestionId();
-                    mListener.onItemSelected(id, 1);
+                    if(ButtonUtil.isClickable()){
+                        long id = mData.get(getAdapterPosition()).getQuestionId();
+                        mData.remove(getAdapterPosition()).getQuestionId();
+                        mListener.onItemSelected(id, 1);
+                    }
                 }
             });
         }

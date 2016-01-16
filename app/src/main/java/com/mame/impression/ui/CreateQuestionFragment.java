@@ -13,6 +13,7 @@ import android.widget.EditText;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ImpressionService;
+import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -113,11 +114,13 @@ public class CreateQuestionFragment extends Fragment {
         mCreateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LogUtil.d(TAG, "create button pressed");
                 if(mCreateQuestionListener == null){
                     throw new IllegalStateException("Need to call setCreateQuestionFragmentListener first");
                 }
-                mCreateQuestionListener.onCreateButtonPressed(mDescription, mChoiceAString, mChoiceBString);
+
+                if(ButtonUtil.isClickable()){
+                    mCreateQuestionListener.onCreateButtonPressed(mDescription, mChoiceAString, mChoiceBString);
+                }
 
             }
         });

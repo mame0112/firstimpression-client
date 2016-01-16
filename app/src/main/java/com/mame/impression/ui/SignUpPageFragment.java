@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
+import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -188,9 +189,14 @@ public class SignUpPageFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signup_button:
-                    QuestionResultListData.Gender gender = getGenderValue();
-                    QuestionResultListData.Age age = getAgeValue();
-                    mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
+                    LogUtil.d(TAG, "signup button pressed");
+                    if(ButtonUtil.isClickable()){
+                        LogUtil.d(TAG, "Click");
+                        QuestionResultListData.Gender gender = getGenderValue();
+                        QuestionResultListData.Age age = getAgeValue();
+
+                        mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
+                    }
                     break;
                 case R.id.signup_tos:
                     LogUtil.d(TAG, "TOS");
