@@ -129,7 +129,7 @@ public class MainPageService extends Service{
                     result.add(parser.createMainPageContent(contentObj));
                 }
             } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
         }

@@ -1,5 +1,7 @@
 package com.mame.impression.action.result;
 
+import android.util.SparseArray;
+
 import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
@@ -30,12 +32,12 @@ public class QuestionResultDetailAction   implements Action {
     }
 
     @Override
-    public List<Accessor> getAccessors() {
-        LogUtil.d(TAG, "getAccessors");
-        List<Accessor> accessors = new ArrayList<Accessor>();
-        accessors.add(new ServerAccessor());
+    public SparseArray<Accessor> getAccessors() {
+        SparseArray<Accessor> accessors = new SparseArray<Accessor>();
+        accessors.put(0, new ServerAccessor());
 
         return accessors;
+
     }
 
     public void setAction(long userId, long questionId) {

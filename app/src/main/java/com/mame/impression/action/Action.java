@@ -1,5 +1,7 @@
 package com.mame.impression.action;
 
+import android.util.SparseArray;
+
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.manager.Accessor;
 
@@ -20,16 +22,17 @@ public interface Action {
 
     /**
      * Get accessor as List format.
+     * Key id (int) is order for accessors.
      *
      * @return
      */
-    public List<Accessor> getAccessors();
+    public SparseArray<Accessor> getAccessors();
 
     /**
      * Get parameter as JSONObject format. Throw IllegalFormatException if given format is not expected.
      *
      * @return
      */
-    public JSONObject getParemeter() throws IllegalArgumentException, IllegalFormatException, JSONException;
+    public JSONObject getParemeter() throws IllegalArgumentException, JSONException;
 
 }

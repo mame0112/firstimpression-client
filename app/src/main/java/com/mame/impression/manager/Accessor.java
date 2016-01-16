@@ -13,10 +13,12 @@ public abstract class Accessor {
 
     public abstract void setAccessorListener(AccessorListener listener);
 
-    public abstract void request(ResultListener listener, Context context, RequestInfo info, String identifier);
+    public abstract void request(Context context, RequestInfo info, String identifier);
 
     public interface AccessorListener {
-        void onNotify(String identifier);
+        void onCompleted(JSONObject object);
+
+        void onFailed(String errorMessage);
     }
 
 }

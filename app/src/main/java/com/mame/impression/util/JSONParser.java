@@ -52,7 +52,7 @@ public class JSONParser {
         try {
             additionalQuestion = object.getString(JsonParam.QUESTION_ADDITIONAL_QUESTION);
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         List<String> additionalComments = new ArrayList<String>();
@@ -65,42 +65,42 @@ public class JSONParser {
                 }
             }
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         int choiceAResponse = 0;
         try {
             choiceAResponse = object.getInt(JsonParam.QUESTION_CHOICE_A_RESPONSE);
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         int choiceBResponse = 0;
         try {
             choiceAResponse = object.getInt(JsonParam.QUESTION_CHOICE_B_RESPONSE);
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         String thumbUrl = null;
         try {
             choiceAResponse = object.getInt(JsonParam.QUESTION_THUMBNAIL);
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         String category = null;
         try {
             category = object.getString(JsonParam.QUESTION_CATEGORY);
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         String createdUserName = null;
         try {
             createdUserName = object.getString(JsonParam.QUESTION_CREATED_USER_NAME);
         } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
 
         return new MainPageContentBuilder().setCreatedUserId(createUserId).setQuestionId(questionId).setDescription(description).setChoiceA(choiceA).setChoiceB(choiceB).setPostDate(createdDate)
@@ -155,7 +155,7 @@ public class JSONParser {
                     QuestionResultListData data = createQuestionResultListData(obj);
                     results.add(data);
                 } catch (JSONException e) {
-                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
                 }
             }
         }
@@ -173,35 +173,35 @@ public class JSONParser {
             try {
                 questionId = object.getLong(JsonParam.QUESTION_ID);
             } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
             String description = null;
             try {
                 description = object.getString(JsonParam.QUESTION_DESCRIPTION);
             } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
             int numOfQuestion = 0;
             try {
                 numOfQuestion = object.getInt(JsonParam.QUESTION_NUM_OF_QUESTION);
             } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
             long lastCommentDate = 0L;
             try {
                 lastCommentDate = object.getLong(JsonParam.QUESTION_LAST_COMMENT_DATE);
             } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
             int additionalCommentNum = 0;
             try {
                 additionalCommentNum = object.getInt(JsonParam.QUESTION_ADDITIONAL_COMMENT_NUM);
             } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
              return new QuestionResultListDataBuilder().setQuestionId(questionId).setDescription(description).setLastCommentDate(lastCommentDate).setNumfOfAnswer(numOfQuestion).setNumOfAdditionalComment(additionalCommentNum).getResult();

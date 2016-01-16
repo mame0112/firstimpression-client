@@ -204,7 +204,7 @@ public class ImpressionService extends Service {
      * @return true if successfully action is executed. Otherwise, false.
      */
     private boolean executeAction(ResultListener listener, Context context, Action action){
-        RequestInfoBuilder builder = new RequestInfoBuilder();
+        RequestInfoBuilder builder = new RequestInfoBuilder(null);
 
         try {
             RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();

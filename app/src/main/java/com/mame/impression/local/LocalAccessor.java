@@ -32,7 +32,7 @@ public class LocalAccessor extends Accessor {
     }
 
     @Override
-    public void request(ResultListener listener, Context context, RequestInfo info, String identifier) {
+    public void request(Context context, RequestInfo info, String identifier) {
         LogUtil.d(TAG, "request");
 
         RequestAction action = info.getRequestAction();
@@ -40,21 +40,23 @@ public class LocalAccessor extends Accessor {
 
         switch(action){
             case CREATE_QUESTION:
-                storeQuestionId(listener, context, param);
+                storeQuestionId(context, param);
                 break;
         }
 
     }
 
-    private void storeQuestionId(ResultListener resultListener, Context context, JSONObject param){
+    private void storeQuestionId(Context context, JSONObject param){
         LogUtil.d(TAG, "storeQuestionId");
 
         try {
-            long questionId = param.getLong(JsonParam.QUESTION_ID);
+            long questionId = param.getLong(JsonParam.ID);
             mDataHandler.storeQuestionId(context, questionId);
+            //TODO
+            mListener.onCompleted(new JSONObject());
         } catch (JSONException e){
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            resultListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+            mListener.onFailed(e.getMessage());
         }
 
     }

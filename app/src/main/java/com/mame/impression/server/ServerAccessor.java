@@ -24,7 +24,7 @@ public class ServerAccessor extends Accessor {
 
     private AccessorListener mListener;
 
-    private ResultListener mResultListener;
+//    private ResultListener mResultListener;
 
     private WebApiService mService;
 
@@ -42,7 +42,7 @@ public class ServerAccessor extends Accessor {
     }
 
     @Override
-    public void request(ResultListener listener, Context context, RequestInfo info, String identifier) {
+    public void request(Context context, RequestInfo info, String identifier) {
         LogUtil.d(TAG, "request");
 
         if (mListener == null) {
@@ -58,9 +58,9 @@ public class ServerAccessor extends Accessor {
         if(mService == null){
             doBindService(context);
             mInfo = info;
-            mResultListener = listener;
+//            mListener = listener;
         } else {
-            mService.run(listener, info);
+            mService.run(mListener, info);
         }
     }
 
@@ -89,7 +89,7 @@ public class ServerAccessor extends Accessor {
 
             mService = ((WebApiService.WebApiServiceBinder) service).getService();
 
-            mService.run(mResultListener, mInfo);
+            mService.run(mListener, mInfo);
 
         }
 

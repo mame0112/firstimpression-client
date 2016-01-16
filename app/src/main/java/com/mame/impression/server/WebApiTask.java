@@ -3,6 +3,7 @@ package com.mame.impression.server;
 import android.content.Context;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 import com.squareup.okhttp.MediaType;
@@ -44,13 +45,13 @@ public class WebApiTask {
 
     public static class RestGet implements Runnable{
 
-        private ResultListener mListener;
+        private Accessor.AccessorListener mListener;
 
         private String mApi;
 
         private JSONObject mInput;
 
-        public RestGet(ResultListener listener, String api, final JSONObject input){
+        public RestGet(Accessor.AccessorListener listener, String api, final JSONObject input){
             mListener = listener;
             mApi = api;
             mInput = input;
@@ -95,13 +96,13 @@ public class WebApiTask {
 
     public static class RestPost implements Runnable {
 
-        private ResultListener mListener;
+        private Accessor.AccessorListener mListener;
 
         private String mApi;
 
         private JSONObject mInput;
 
-        public RestPost(ResultListener listener, String api, final JSONObject input) {
+        public RestPost(Accessor.AccessorListener listener, String api, final JSONObject input) {
             mListener = listener;
             mApi = api;
             mInput = input;
@@ -155,13 +156,13 @@ public class WebApiTask {
     }
 
     public static class RestPut implements Runnable {
-        private ResultListener mListener;
+        private Accessor.AccessorListener mListener;
 
         private String mApi;
 
         private JSONObject mInput;
 
-        public RestPut(ResultListener listener, String api, final JSONObject input) {
+        public RestPut(Accessor.AccessorListener listener, String api, final JSONObject input) {
             mListener = listener;
             mApi = api;
             mInput = input;

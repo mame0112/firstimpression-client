@@ -1,5 +1,7 @@
 package com.mame.impression.action.questions;
 
+import android.util.SparseArray;
+
 import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
@@ -38,10 +40,10 @@ public class CreateNewQuestionAction  implements Action {
     }
 
     @Override
-    public List<Accessor> getAccessors() {
-        List<Accessor> accessors = new ArrayList<Accessor>();
-        accessors.add(new ServerAccessor());
-        accessors.add(new LocalAccessor());
+    public SparseArray<Accessor> getAccessors() {
+        SparseArray<Accessor> accessors = new SparseArray<Accessor>();
+        accessors.put(0, new ServerAccessor());
+        accessors.put(1, new LocalAccessor());
 
         return accessors;
 

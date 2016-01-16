@@ -1,5 +1,7 @@
 package com.mame.impression.action.questions;
 
+import android.util.SparseArray;
+
 import com.android.volley.toolbox.StringRequest;
 import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
@@ -32,9 +34,9 @@ public class AnswerToQuestionAction implements Action {
     }
 
     @Override
-    public List<Accessor> getAccessors() {
-        List<Accessor> accessors = new ArrayList<Accessor>();
-        accessors.add(new ServerAccessor());
+    public SparseArray<Accessor> getAccessors() {
+        SparseArray<Accessor> accessors = new SparseArray<Accessor>();
+        accessors.put(0, new ServerAccessor());
 
         return accessors;
 

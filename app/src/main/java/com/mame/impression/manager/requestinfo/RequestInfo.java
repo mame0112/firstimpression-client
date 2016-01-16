@@ -1,5 +1,7 @@
 package com.mame.impression.manager.requestinfo;
 
+import android.util.SparseArray;
+
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
@@ -16,7 +18,7 @@ public class RequestInfo {
 
     private ResultListener mListener;
 
-    private List<Accessor> mAccessors = new ArrayList<Accessor>();
+    private SparseArray<Accessor> mAccessors = new SparseArray<>();
 
     private RequestAction mAction;
 
@@ -38,11 +40,11 @@ public class RequestInfo {
         mListener = listener;
     }
 
-    public List<Accessor> getAccessors() {
+    public SparseArray<Accessor> getAccessors() {
         return mAccessors;
     }
 
-    void setAccessors(List<Accessor> accessors) {
+    void setAccessors(SparseArray<Accessor> accessors) {
         mAccessors = accessors;
     }
 

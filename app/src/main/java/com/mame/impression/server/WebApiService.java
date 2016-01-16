@@ -8,6 +8,7 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
@@ -50,7 +51,7 @@ public class WebApiService extends Service{
     }
 
 
-    public void run(ResultListener listener, RequestInfo info) {
+    public void run(Accessor.AccessorListener listener, RequestInfo info) {
         LogUtil.d(TAG, "run: " + this);
 
         ApiType apiType = ApiType.getResttype(info.getRequestAction());
@@ -71,6 +72,7 @@ public class WebApiService extends Service{
 //                mWebApi.put(listener, apiName, info.getParameter());
                 break;
             case DELETE:
+                // TODO Need to implement
 //                mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
 //                mWebApi.delete(listener, apiName, info.getParameter());
                 break;

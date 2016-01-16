@@ -1,5 +1,7 @@
 package com.mame.impression.action.lists;
 
+import android.util.SparseArray;
+
 import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
@@ -27,10 +29,10 @@ public class QuestionListAction implements Action {
     }
 
     @Override
-    public List<Accessor> getAccessors() {
+    public SparseArray<Accessor> getAccessors() {
         LogUtil.d(TAG, "getAccessors");
-        List<Accessor> accessors = new ArrayList<Accessor>();
-        accessors.add(new ServerAccessor());
+        SparseArray<Accessor> accessors = new SparseArray<Accessor>();
+        accessors.put(0, new ServerAccessor());
 
         return accessors;
     }
