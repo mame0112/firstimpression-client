@@ -9,7 +9,7 @@ public class TextValidator {
 
     public static boolean isValidUsername(String username){
         if(username != null){
-            if(Constants.USERNAME_MAX_LENGTH >= username.length() && Constants.USERNAMET_MIN_LENGTH <= username.length()){
+            if(Constants.USERNAME_MAX_LENGTH >= username.length() && Constants.USERNAME_MIN_LENGTH <= username.length()){
                 return true;
             }
         }
@@ -19,7 +19,7 @@ public class TextValidator {
 
     public static boolean isValidPassword(String password){
         if(password != null){
-            if(Constants.USERNAME_MAX_LENGTH >= password.length() && Constants.USERNAMET_MIN_LENGTH <= password.length()){
+            if(Constants.USERNAME_MAX_LENGTH >= password.length() && Constants.USERNAME_MIN_LENGTH <= password.length()){
                 return true;
             }
         }

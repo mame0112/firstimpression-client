@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.data.UserData;
 import com.mame.impression.data.UserDataBuilder;
 import com.mame.impression.manager.ImpressionService;
@@ -128,7 +129,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     }
 
     @Override
-    public void onSignUpButtonPressed(final String userName, final String password) {
+    public void onSignUpButtonPressed(final String userName, final String password, final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onSignUpButtonPressed");
         //TODO Need to disable sign in button here
         LogUtil.d(TAG, "sign up button pressed");
@@ -138,9 +139,10 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "SignUp Completed");
-                boolean result = parseAndStoreUserData(response, userName, password);
+                boolean result = parseAndStoreUserData(response, userName, password, gender, age);
 
                 if(result){
+
                     //Go to main page
                     startMainPage();
 
@@ -156,11 +158,11 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
             }
-        }, getApplicationContext(), userName, password);
+        }, getApplicationContext(), userName, password, gender, age);
 
     }
 
-    private boolean parseAndStoreUserData(JSONObject response, String userName, String password){
+    private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
 
         try {
             JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
@@ -169,6 +171,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             //Store userdata
             PreferenceUtil.setUserId(getApplicationContext(), userId);
             PreferenceUtil.setUserName(getApplicationContext(), userName);
+            PreferenceUtil.setUserGender(getApplicationContext(), gender);
+            PreferenceUtil.setUserAge(getApplicationContext(), age);
 
             return true;
 

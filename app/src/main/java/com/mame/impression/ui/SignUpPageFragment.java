@@ -9,20 +9,17 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.ImpressionData;
-import com.mame.impression.manager.ImpressionService;
-import com.mame.impression.manager.ResultListener;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.util.LogUtil;
-
-import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
@@ -39,13 +36,40 @@ public class SignUpPageFragment extends Fragment {
 
     private TextView mToSView;
 
+    private Spinner mAgeSpinner;
+
+    private Spinner mGenderSpinner;
+
     private TextView mPricacyView;
 
     private String mUserName;
 
     private String mPassword;
 
+    private int mGenderSelectedId = R.string.spinner_gender_select_indication;
+
+    private int mAgeSelectedId = R.string.spinner_age_select_indication;
+
     private SignUpFragmentListener mListener;
+
+    private static int AGE_ITEM[] = {
+        R.string.spinner_gender_select_indication,
+        R.string.item_generation_under10,
+        R.string.item_generation_from10_20,
+        R.string.item_generation_from20_30,
+        R.string.item_generation_from30_40,
+        R.string.item_generation_from40_50,
+        R.string.item_generation_from50_60,
+        R.string.item_generation_from60_70,
+        R.string.item_generation_over70
+    };
+
+    private static int GENDER_ITEM[] = {
+            R.string.spinner_age_select_indication,
+            R.string.item_gender_male,
+            R.string.item_gender_female
+    };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,6 +98,47 @@ public class SignUpPageFragment extends Fragment {
         mSignUpButton = (Button) view.findViewById(R.id.signup_button);
         mSignUpButton.setOnClickListener(mClickListener);
 
+        // Age spinner
+        mAgeSpinner = (Spinner)view.findViewById(R.id.signup_age_spinner);
+        ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        for(int i=0; i<AGE_ITEM.length; i++){
+            ageAdapter.add(getResources().getString(AGE_ITEM[i]));
+        }
+        ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mAgeSpinner.setAdapter(ageAdapter);
+        mAgeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mAgeSelectedId = AGE_ITEM[position];
+                changeSignUpButtonState();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        // Gender spinner
+        mGenderSpinner = (Spinner)view.findViewById(R.id.signup_gender_spinner);
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        for(int i=0; i<GENDER_ITEM.length; i++){
+            genderAdapter.add(getResources().getString(GENDER_ITEM[i]));
+        }
+        genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mGenderSpinner.setAdapter(genderAdapter);
+        mGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mGenderSelectedId = GENDER_ITEM[position];
+                changeSignUpButtonState();
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
         mToSView = (TextView)view.findViewById(R.id.signup_tos);
         mToSView.setOnClickListener(mClickListener);
 
@@ -92,6 +157,7 @@ public class SignUpPageFragment extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             mUserName = s.toString();
+            changeSignUpButtonState();
         }
 
         @Override
@@ -108,6 +174,7 @@ public class SignUpPageFragment extends Fragment {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             mPassword = s.toString();
+            changeSignUpButtonState();
         }
 
         @Override
@@ -121,7 +188,9 @@ public class SignUpPageFragment extends Fragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signup_button:
-                    mListener.onSignUpButtonPressed(mUserName, mPassword);
+                    QuestionResultListData.Gender gender = getGenderValue();
+                    QuestionResultListData.Age age = getAgeValue();
+                    mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
                     break;
                 case R.id.signup_tos:
                     LogUtil.d(TAG, "TOS");
@@ -135,9 +204,49 @@ public class SignUpPageFragment extends Fragment {
                 default:
                     break;
             }
-
         }
     };
+
+    private QuestionResultListData.Gender getGenderValue(){
+        switch(mGenderSelectedId){
+            case R.string.spinner_age_select_indication:
+                break;
+            case R.string.item_gender_male:
+                return QuestionResultListData.Gender.MALE;
+            case R.string.item_gender_female:
+                return QuestionResultListData.Gender.FEMALE;
+            default:
+                break;
+        }
+        return QuestionResultListData.Gender.UNKNOWN;
+    }
+
+    private QuestionResultListData.Age getAgeValue(){
+        switch(mAgeSelectedId){
+            case R.string.spinner_gender_select_indication:
+                break;
+            case R.string.item_generation_under10:
+                return QuestionResultListData.Age.UNDER10;
+            case R.string.item_generation_from10_20:
+                return QuestionResultListData.Age.FROM10_20;
+            case R.string.item_generation_from20_30:
+                return QuestionResultListData.Age.FROM20_30;
+            case R.string.item_generation_from30_40:
+                return QuestionResultListData.Age.FROM30_40;
+            case R.string.item_generation_from40_50:
+                return QuestionResultListData.Age.FROM40_50;
+            case R.string.item_generation_from50_60:
+                return QuestionResultListData.Age.FROM50_60;
+            case R.string.item_generation_from60_70:
+                return QuestionResultListData.Age.FROM60_70;
+            case R.string.item_generation_over70:
+                return QuestionResultListData.Age.OVER70;
+            default:
+                break;
+        }
+
+        return QuestionResultListData.Age.FROM10_20;
+    }
 
     private void openTosPage(){
         Uri uri = Uri.parse(Constants.TOS_URL);
@@ -151,12 +260,34 @@ public class SignUpPageFragment extends Fragment {
         startActivity(i);
     }
 
+    private void changeSignUpButtonState(){
+        if(isValidButtonState()){
+            mSignUpButton.setEnabled(true);
+        } else {
+            mSignUpButton.setEnabled(false);
+        }
+    }
+
+    private boolean isValidButtonState(){
+        if(mUserName != null && mUserName.length() >= Constants.USERNAME_MIN_LENGTH && mUserName.length() <= Constants.USERNAME_MAX_LENGTH){
+            if(mPassword != null && mPassword.length() >= Constants.PASSWORD_MIN_LENGTH && mPassword.length() <= Constants.PASSWORD_MAX_LENGTH){
+                if(mAgeSelectedId != R.string.spinner_gender_select_indication){
+                    if(mGenderSelectedId != R.string.spinner_age_select_indication){
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
     public void setSignUpFragmentListener(SignUpFragmentListener listener){
         mListener = listener;
     }
 
     public interface SignUpFragmentListener{
-        void onSignUpButtonPressed(String userName, String password);
+        void onSignUpButtonPressed(String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age);
     }
 
 }

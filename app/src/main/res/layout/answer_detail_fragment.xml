@@ -79,7 +79,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_gender_male"/>
+                        android:text="@string/item_gender_male"/>
                     <TextView
                         android:id="@+id/answer_detail_male_a"
                         android:layout_width="match_parent"
@@ -99,7 +99,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_gender_female"/>
+                        android:text="@string/item_gender_female"/>
                     <TextView
                         android:id="@+id/answer_detail_female_a"
                         android:layout_width="match_parent"
@@ -154,7 +154,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_under10"/>
+                        android:text="@string/item_generation_under10"/>
                     <TextView
                         android:id="@+id/answer_detail_under10_a"
                         android:layout_width="match_parent"
@@ -174,7 +174,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_from10_20"/>
+                        android:text="@string/item_generation_from10_20"/>
                     <TextView
                         android:id="@+id/answer_detail_from10_20_a"
                         android:layout_width="match_parent"
@@ -194,7 +194,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_from20_30"/>
+                        android:text="@string/item_generation_from20_30"/>
                     <TextView
                         android:id="@+id/answer_detail_from20_30_a"
                         android:layout_width="match_parent"
@@ -214,7 +214,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_from30_40"/>
+                        android:text="@string/item_generation_from30_40"/>
                     <TextView
                         android:id="@+id/answer_detail_from30_40_a"
                         android:layout_width="match_parent"
@@ -234,7 +234,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_from40_50"/>
+                        android:text="@string/item_generation_from40_50"/>
                     <TextView
                         android:id="@+id/answer_detail_from40_50_a"
                         android:layout_width="match_parent"
@@ -254,7 +254,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_from50_60"/>
+                        android:text="@string/item_generation_from50_60"/>
                     <TextView
                         android:id="@+id/answer_detail_from50_60_a"
                         android:layout_width="match_parent"
@@ -274,7 +274,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_from60_70"/>
+                        android:text="@string/item_generation_from60_70"/>
                     <TextView
                         android:id="@+id/answer_detail_from60_70_a"
                         android:layout_width="match_parent"
@@ -294,7 +294,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:text="@string/answer_detail_generation_over70"/>
+                        android:text="@string/item_generation_over70"/>
                     <TextView
                         android:id="@+id/answer_detail_over70_a"
                         android:layout_width="match_parent"
