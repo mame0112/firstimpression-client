@@ -5,6 +5,7 @@ import android.util.SparseArray;
 
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
 import com.mame.impression.util.LogUtil;
@@ -139,7 +140,11 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
     }
 
     @Override
-    public void onFailed(String errorMessage) {
+    public void onFailed(ImpressionError reason, String errorMessage) {
+
+        if(mListener != null){
+            mListener.onFailed(reason, errorMessage);
+        }
 
     }
 }

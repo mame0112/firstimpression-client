@@ -23,8 +23,14 @@ public class ImpressionLocalDataHandler {
 
     private static SQLiteDatabase sDatabase;
 
-    public ImpressionLocalDataHandler(){
-        LogUtil.d(TAG, "ImpressionLocalDataHandler");
+    private static ImpressionLocalDataHandler sInstance = new ImpressionLocalDataHandler();
+
+    private ImpressionLocalDataHandler(){
+        // Singletone
+    }
+
+    public static ImpressionLocalDataHandler getInstance(){
+        return sInstance;
     }
 
     private synchronized void setDatabase(Context context) {

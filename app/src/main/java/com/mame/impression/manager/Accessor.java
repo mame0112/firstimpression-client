@@ -2,6 +2,7 @@ package com.mame.impression.manager;
 
 import android.content.Context;
 
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 
 import org.json.JSONObject;
@@ -18,7 +19,7 @@ public abstract class Accessor {
     public interface AccessorListener {
         void onCompleted(JSONObject object);
 
-        void onFailed(String errorMessage);
+        void onFailed(ImpressionError reason, String errorMessage);
     }
 
 }

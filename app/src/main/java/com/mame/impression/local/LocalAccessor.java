@@ -24,7 +24,7 @@ public class LocalAccessor extends Accessor {
 
     private AccessorListener mListener;
 
-    private ImpressionLocalDataHandler mDataHandler = new ImpressionLocalDataHandler();
+    private ImpressionLocalDataHandler mDataHandler;
 
     @Override
     public void setAccessorListener(AccessorListener listener) {
@@ -34,6 +34,8 @@ public class LocalAccessor extends Accessor {
     @Override
     public void request(Context context, RequestInfo info, String identifier) {
         LogUtil.d(TAG, "request");
+
+        mDataHandler = ImpressionLocalDataHandler.getInstance();
 
         RequestAction action = info.getRequestAction();
         JSONObject param = info.getParameter();
@@ -56,7 +58,7 @@ public class LocalAccessor extends Accessor {
             mListener.onCompleted(new JSONObject());
         } catch (JSONException e){
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            mListener.onFailed(e.getMessage());
+            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
         }
 
     }
