@@ -4,6 +4,7 @@ import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
+import com.mame.impression.local.LocalAccessor;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.server.ServerAccessor;
 
@@ -39,8 +40,8 @@ public class CreateNewQuestionAction  implements Action {
     @Override
     public List<Accessor> getAccessors() {
         List<Accessor> accessors = new ArrayList<Accessor>();
-        //TODO
         accessors.add(new ServerAccessor());
+        accessors.add(new LocalAccessor());
 
         return accessors;
 
