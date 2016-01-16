@@ -85,4 +85,8 @@
 
     <!-- Error message fragment -->
     <string name="error_message_title">Error message</string>
+
+    <!-- Notification -->
+    <string name="notification_title">First impression</string>
+    <string name="notification_content">You got new notification</string>
 </resources>

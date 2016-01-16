@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.ui.notification.ImpressionNotificationManager;
 import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.data.MainPageContent;
