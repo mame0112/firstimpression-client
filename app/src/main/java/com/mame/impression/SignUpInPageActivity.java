@@ -138,7 +138,18 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "SignUp Completed");
-                parseAndStoreUserData(response, userName, password);
+                boolean result = parseAndStoreUserData(response, userName, password);
+
+                if(result){
+                    //Go to main page
+                    startMainPage();
+
+                    //Close this activity
+                    finish();
+                } else {
+                    // TODO Error handling
+                }
+
             }
 
             @Override
@@ -149,7 +160,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     }
 
-    private void parseAndStoreUserData(JSONObject response, String userName, String password){
+    private boolean parseAndStoreUserData(JSONObject response, String userName, String password){
 
         try {
             JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
@@ -158,9 +169,14 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             //Store userdata
             PreferenceUtil.setUserId(getApplicationContext(), userId);
             PreferenceUtil.setUserName(getApplicationContext(), userName);
+
+            return true;
+
         } catch (JSONException e) {
-            e.printStackTrace();
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }
+
+        return false;
     }
 
     @Override
@@ -175,15 +191,20 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                 JSONParser parser = new JSONParser();
                 UserData data = parser.createUserData(response);
 
-                // Store user data
-                PreferenceUtil.setUserId(getApplicationContext(), data.getUserId());
-                PreferenceUtil.setUserName(getApplicationContext(), data.getUserName());
+                if(data != null){
+                    // Store user data
+                    PreferenceUtil.setUserId(getApplicationContext(), data.getUserId());
+                    PreferenceUtil.setUserName(getApplicationContext(), data.getUserName());
 
-                //Go to main page
-                startMainPage();
+                    //Go to main page
+                    startMainPage();
 
-                //Close this activity
-                finish();
+                    //Close this activity
+                    finish();
+                } else {
+                    // TODO Error handling
+                }
+
             }
 
             @Override

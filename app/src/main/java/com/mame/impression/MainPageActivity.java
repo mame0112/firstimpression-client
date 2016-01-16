@@ -302,6 +302,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
             mDrawerLayout.closeDrawer(mDrawerList);
 //            mToolbar.setTitle("position: " + position);
             mDrawerTitle = "position: " + position;
+            launchSelectedItemFromDrawer(position);
         }
     }
 
@@ -328,6 +329,10 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
         }
 
         return output;
+    }
+
+    private void launchSelectedItemFromDrawer(int position){
+//        switch()
     }
 
 }
