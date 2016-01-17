@@ -21,6 +21,25 @@ public class TrackingUtil {
 
     private static Tracker mTracker;
 
+    /* Sprash */
+    public static final String EVENT_CATEGORY_SPLASH = "Splash view";
+
+    public static final String EVENT_ACTION_BUTTON = "button";
+
+    public static final String EVENT_LABEL_SIGNUPIN = "Sign up/in";
+
+    public static final String EVENT_LABEL_CHECK_QUESTION = "Check question";
+    
+    public static final String EVENT_CATEGORY_SIGN_UPIN = "Sign up/in view";
+
+    public static final String EVENT_CATEGORY_MAIN = "Main view";
+
+    public static final String EVENT_CATEGORY_CREATE_QUESTION = "Create question view";
+
+
+
+
+
     /** Custom variable 1 (Model's name). */
     private static final int CUSTOM_VAR_INDEX_1 = 1;
 
@@ -41,15 +60,6 @@ public class TrackingUtil {
 
     /** Custome variable7 (TBD) */
     private static final int CUSTOM_VAR_INDEX_7 = 7;
-
-    public static final String EVENT_CATEGORY_SPLASH = "Splash view";
-
-    public static final String EVENT_CATEGORY_SIGN_UPIN = "Sign up/in view";
-
-    public static final String EVENT_CATEGORY_MAIN = "Main view";
-
-    public static final String EVENT_CATEGORY_CREATE_QUESTION = "Create question view";
-
 
     public static void trackPage(Activity activity, String page) {
 

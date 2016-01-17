@@ -9,6 +9,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/09.
@@ -88,10 +89,12 @@ public class SprashActivity extends ImpressionBaseActivity {
             LogUtil.d(TAG, "onClick");
             switch(v.getId()){
                 case R.id.sprash_check_question_button:
+                    TrackingUtil.trackEvent(SprashActivity.this, TrackingUtil.EVENT_CATEGORY_SPLASH, TrackingUtil.EVENT_ACTION_BUTTON, TrackingUtil.EVENT_LABEL_CHECK_QUESTION, 0);
                     mUtil.startMainActivity(getApplicationContext());
                     finish();
                     break;
                 case R.id.sprash_signinup_button:
+                    TrackingUtil.trackEvent(SprashActivity.this, TrackingUtil.EVENT_CATEGORY_SPLASH, TrackingUtil.EVENT_ACTION_BUTTON, TrackingUtil.EVENT_LABEL_SIGNUPIN, 0);
                     mUtil.startWelcomeActivity(getApplicationContext());
                     finish();
                     break;
