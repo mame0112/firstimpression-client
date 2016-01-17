@@ -24,20 +24,64 @@ public class TrackingUtil {
     /* Sprash */
     public static final String EVENT_CATEGORY_SPLASH = "Splash view";
 
-    public static final String EVENT_ACTION_BUTTON = "button";
+    public static final String EVENT_ACTION_SPLASH_BUTTON = "Button select";
 
     public static final String EVENT_LABEL_SIGNUPIN = "Sign up/in";
 
     public static final String EVENT_LABEL_CHECK_QUESTION = "Check question";
-    
-    public static final String EVENT_CATEGORY_SIGN_UPIN = "Sign up/in view";
 
-    public static final String EVENT_CATEGORY_MAIN = "Main view";
+    /* Welcome */
+    public static final String EVENT_CATEGORY_WELCOME = "Welcome view";
 
-    public static final String EVENT_CATEGORY_CREATE_QUESTION = "Create question view";
+    public static final String EVENT_ACTION_WELCOME_BUTTON = "Button select";
 
+    public static final String EVENT_CATEGORY_WELCOME_SIGNIN_BUTTON = "SignIn button";
 
+    public static final String EVENT_CATEGORY_WELCOME_SIGNUP_BUTTON = "SignUp button";
 
+    /* SignIn */
+    public static final String EVENT_CATEGORY_SIGNIN = "Sign in view";
+
+    public static final String EVENT_ACTION_SIGNIN_BUTTON = "Button select";
+
+    public static final String EVENT_CATEGORY_SIGNIN_BUTTON = "SignIn button";
+
+    public static final String EVENT_CATEGORY_SIGNIN_FORGET_PASSWORD = "Forget password";
+
+    /* SignUp */
+    public static final String EVENT_CATEGORY_SIGNUP = "Sign up view";
+
+    public static final String EVENT_ACTION_SIGNUP_BUTTON = "Button select";
+
+    public static final String EVENT_CATEGORY_SIGNUP_BUTTON = "SignIn button";
+
+    public static final String EVENT_CATEGORY_SIGNIN_TOS = "Terms of service";
+
+    public static final String EVENT_CATEGORY_SIGNIN_PRIVACY = "Privacy policy";
+
+    /* Main page */
+    public static final String EVENT_CATEGORY_MAINPAGE = "Main view";
+
+    public static final String EVENT_ACTION_MAINPAGE_BUTTON = "Button select";
+
+    public static final String EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON = "Create button";
+
+    public static final String EVENT_ACTION_MAINPAGE_OPTION = "Option select";
+
+    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_ANSWER = "Option answer";
+
+    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_TOS = "Option TOS";
+
+    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_PRIVACY = "Option Privacy";
+
+    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_PROFILE = "Option Setting";
+
+    /* Answer page */
+    public static final String EVENT_CATEGORY_ANSWER = "Answer view";
+
+    public static final String EVENT_ACTION_ANSWER_BUTTON = "Button select";
+
+    public static final String EVENT_CATEGORY_ANSWER_ADDITIONAL_BUTTON = "Additional Question button";
 
 
     /** Custom variable 1 (Model's name). */

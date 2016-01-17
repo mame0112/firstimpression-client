@@ -118,6 +118,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action.", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                TrackingUtil.trackEvent(MainPageActivity.this, TrackingUtil.EVENT_CATEGORY_MAINPAGE, TrackingUtil.EVENT_ACTION_MAINPAGE_BUTTON, TrackingUtil.EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON, 0);
                 launchCreateQuestionActivity();
 
             }

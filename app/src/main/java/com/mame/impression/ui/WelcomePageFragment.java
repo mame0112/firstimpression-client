@@ -36,10 +36,12 @@ public class WelcomePageFragment extends ImpressionBaseFragment {
             switch (v.getId()) {
                 case R.id.signin_button:
                     LogUtil.d(TAG, "signin button pressed");
+                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_WELCOME, TrackingUtil.EVENT_ACTION_WELCOME_BUTTON, TrackingUtil.EVENT_CATEGORY_WELCOME_SIGNIN_BUTTON, 0);
                     mCallback.onStateChangeToSignIn();
                     break;
                 case R.id.signup_button:
                     LogUtil.d(TAG, "signup button pressed");
+                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_WELCOME, TrackingUtil.EVENT_ACTION_WELCOME_BUTTON, TrackingUtil.EVENT_CATEGORY_WELCOME_SIGNUP_BUTTON, 0);
                     mCallback.onStateChangeToSignUp();
                     break;
                 default:

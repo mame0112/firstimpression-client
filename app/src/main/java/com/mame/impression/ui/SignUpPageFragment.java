@@ -192,19 +192,20 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
                 case R.id.signup_button:
                     LogUtil.d(TAG, "signup button pressed");
                     if(ButtonUtil.isClickable()){
-                        LogUtil.d(TAG, "Click");
+                        TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNUP, TrackingUtil.EVENT_ACTION_SIGNUP_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNUP_BUTTON, 0);
                         QuestionResultListData.Gender gender = getGenderValue();
                         QuestionResultListData.Age age = getAgeValue();
-
                         mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
                     }
                     break;
                 case R.id.signup_tos:
                     LogUtil.d(TAG, "TOS");
+                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNUP, TrackingUtil.EVENT_ACTION_SIGNUP_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_TOS, 0);
                     openTosPage();
                     break;
                 case R.id.signup_privacy_policy:
                     LogUtil.d(TAG, "Privacy policy");
+                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNUP, TrackingUtil.EVENT_ACTION_SIGNUP_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_PRIVACY, 0);
                     openPrivacyPolicyPage();
                     break;
 
