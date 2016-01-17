@@ -15,4 +15,11 @@
     <!-- Card view -->
     <dimen name="default_card_view_radius">4dp</dimen>
     <dimen name="card_chart_vertical_padding">6dp</dimen>
+
+    <!-- Fonts -->
+    <dimen name="fi_font_extra_large">32dp</dimen>
+    <dimen name="fi_font_large">20dp</dimen>
+    <dimen name="fi_font_middle">18dp</dimen>
+    <dimen name="fi_font_small">16dp</dimen>
+    <dimen name="fi_font_extra_small">14dp</dimen>
 </resources>

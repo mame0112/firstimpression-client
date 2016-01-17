@@ -53,7 +53,10 @@ public class SignInPageFragment extends ImpressionBaseFragment {
                     //TODO Need to disable sign in button here
                     LogUtil.d(TAG, "sign in button pressed");
                     TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNIN, TrackingUtil.EVENT_ACTION_SIGNIN_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_BUTTON, 0);
-                    mListener.onSignInButtonPressed(mUserName, mPassword);
+                    if(mListener != null){
+                        mListener.onSignInButtonPressed(mUserName, mPassword);
+                    }
+
                     break;
 
                 case R.id.signin_forget_password:
