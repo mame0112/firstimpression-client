@@ -14,6 +14,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListDataBuilder;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by kosukeEndo on 2015/12/29.
  */
-public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOverviewAdapter.AnswerPageAdapterListener {
+public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implements AnswerPageOverviewAdapter.AnswerPageAdapterListener {
 
     private static final String TAG = Constants.TAG + AnswerRecyclerViewFragment.class.getSimpleName();
 
@@ -88,6 +89,16 @@ public class AnswerRecyclerViewFragment extends Fragment implements AnswerPageOv
         } catch (IndexOutOfBoundsException e){
             LogUtil.d(TAG, "IndexOutOfBoundsException: " + e.getMessage());
         }
+
+    }
+
+    @Override
+    protected void enterPage() {
+        TrackingUtil.trackPage(getActivity(), AnswerRecyclerViewFragment.class.getSimpleName());
+    }
+
+    @Override
+    protected void escapePage() {
 
     }
 

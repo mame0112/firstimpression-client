@@ -81,7 +81,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     @Override
     protected void enterPage() {
-
+        // Rely on fragment for GA tracking
     }
 
     @Override

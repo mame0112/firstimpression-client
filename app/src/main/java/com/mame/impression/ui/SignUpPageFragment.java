@@ -21,11 +21,12 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
  */
-public class SignUpPageFragment extends Fragment {
+public class SignUpPageFragment extends ImpressionBaseFragment {
 
     private static final String TAG = Constants.TAG + SignUpPageFragment.class.getSimpleName();
 
@@ -290,6 +291,16 @@ public class SignUpPageFragment extends Fragment {
 
     public void setSignUpFragmentListener(SignUpFragmentListener listener){
         mListener = listener;
+    }
+
+    @Override
+    protected void enterPage() {
+        TrackingUtil.trackPage(getActivity(), SignUpPageFragment.class.getSimpleName());
+    }
+
+    @Override
+    protected void escapePage() {
+
     }
 
     public interface SignUpFragmentListener{

@@ -20,13 +20,14 @@ import com.mame.impression.data.ImpressionData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 import org.json.JSONObject;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
  */
-public class SignInPageFragment extends Fragment {
+public class SignInPageFragment extends ImpressionBaseFragment {
 
     private static final String TAG = Constants.TAG + SignInPageFragment.class.getSimpleName();
 
@@ -152,6 +153,16 @@ public class SignInPageFragment extends Fragment {
 
     public void setSignInPageFragmentListener(SignInPageFragmentListener listener){
         mListener = listener;
+    }
+
+    @Override
+    protected void enterPage() {
+        TrackingUtil.trackPage(getActivity(), SignInPageFragment.class.getSimpleName());
+    }
+
+    @Override
+    protected void escapePage() {
+
     }
 
     public interface SignInPageFragmentListener{

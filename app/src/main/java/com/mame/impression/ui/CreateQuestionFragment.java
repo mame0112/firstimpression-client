@@ -15,11 +15,12 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
  */
-public class CreateQuestionFragment extends Fragment {
+public class CreateQuestionFragment extends ImpressionBaseFragment {
 
     private final static String TAG = Constants.TAG + CreateQuestionFragment.class.getSimpleName();
 
@@ -155,6 +156,16 @@ public class CreateQuestionFragment extends Fragment {
 
     public void setCreateQuestionFragmentListener(CreateQuestionFragmentListener listener){
         mCreateQuestionListener = listener;
+    }
+
+    @Override
+    protected void enterPage() {
+        TrackingUtil.trackPage(getActivity(), CreateQuestionFragment.class.getSimpleName());
+    }
+
+    @Override
+    protected void escapePage() {
+
     }
 
     public interface CreateQuestionFragmentListener{

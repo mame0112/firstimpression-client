@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.mame.impression.R;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/31.
@@ -47,6 +48,12 @@ public class NotificationDialogFragment extends DialogFragment {
         acceptButton.setOnClickListener(mClickListener);
 
         return v;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        TrackingUtil.trackPage(getActivity(), NotificationDialogFragment.class.getSimpleName());
     }
 
     private View.OnClickListener mClickListener= new View.OnClickListener(){

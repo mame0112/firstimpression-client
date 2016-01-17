@@ -32,6 +32,7 @@ import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -278,7 +279,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
 
     @Override
     protected void enterPage() {
-
+        TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
     }
 
     @Override

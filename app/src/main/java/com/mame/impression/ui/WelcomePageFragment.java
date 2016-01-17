@@ -12,11 +12,12 @@ import android.widget.Button;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
  */
-public class WelcomePageFragment extends Fragment {
+public class WelcomePageFragment extends ImpressionBaseFragment {
 
     private static final String TAG = Constants.TAG + WelcomePageFragment.class.getSimpleName();
 
@@ -77,6 +78,16 @@ public class WelcomePageFragment extends Fragment {
             throw new ClassCastException(context.toString()
                     + " must implement OnHeadlineSelectedListener");
         }
+    }
+
+    @Override
+    protected void enterPage() {
+        TrackingUtil.trackPage(getActivity(), WelcomePageFragment.class.getSimpleName());
+    }
+
+    @Override
+    protected void escapePage() {
+
     }
 
     public interface WelcomePageFragmentListener {

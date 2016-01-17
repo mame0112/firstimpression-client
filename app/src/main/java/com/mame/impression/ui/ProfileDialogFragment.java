@@ -18,6 +18,7 @@ import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 import org.json.JSONObject;
 
@@ -95,6 +96,13 @@ public class ProfileDialogFragment extends DialogFragment {
 
         return v;
     }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        TrackingUtil.trackPage(getActivity(), ProfileDialogFragment.class.getSimpleName());
+    }
+
     @Override
     public void onDestroy(){
         LogUtil.d(TAG, "onDestroy");

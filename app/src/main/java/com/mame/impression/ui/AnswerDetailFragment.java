@@ -11,11 +11,12 @@ import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultDetailData;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/30.
  */
-public class AnswerDetailFragment extends Fragment {
+public class AnswerDetailFragment extends ImpressionBaseFragment {
 
     private static final String TAG = Constants.TAG + AnswerDetailFragment.class.getSimpleName();
 
@@ -195,6 +196,16 @@ public class AnswerDetailFragment extends Fragment {
         mFrom50_60BView.invalidate();
         mFrom60_70BView.invalidate();
         mOver70BView.invalidate();
+
+    }
+
+    @Override
+    protected void enterPage() {
+        TrackingUtil.trackPage(getActivity(), AnswerDetailFragment.class.getSimpleName());
+    }
+
+    @Override
+    protected void escapePage() {
 
     }
 }

@@ -104,8 +104,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage() {
-        // TODO Track page
         LogUtil.d(TAG, "enterPage");
+        // Rely on fragment for GA tracking
     }
 
     @Override
