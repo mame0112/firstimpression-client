@@ -126,7 +126,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         mService.requestQuestionsResultDetail(targetQuestionId);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.answer_page_frame, mDetailFragment).commit();
+                .replace(R.id.answer_page_frame, mDetailFragment).addToBackStack(null).commit();
     }
 
     @Override
