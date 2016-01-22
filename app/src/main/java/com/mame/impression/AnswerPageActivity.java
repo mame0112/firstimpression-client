@@ -7,6 +7,7 @@ import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
@@ -54,6 +55,11 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         }
 
         mAnswerOverviewFragment.setAnswerRecyclerViewListener(this);
+
+        CollapsingToolbarLayout collapsingToolbar =
+                (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
+        collapsingToolbar.setTitle("Some title here");
+
 
     }
 
