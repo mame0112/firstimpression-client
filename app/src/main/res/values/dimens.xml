@@ -10,8 +10,9 @@
     <dimen name="default_card_vertical_margin">5dp</dimen>
 
     <dimen name="default_view_vartical_margin">6dp</dimen>
-
     <dimen name="activity_button_button_margin">30dp</dimen>
+
+    <dimen name="impression_divider_height">1dp</dimen>
 
     <!-- Welcome view-->
     <dimen name="welcome_divider_margin">10dp</dimen>

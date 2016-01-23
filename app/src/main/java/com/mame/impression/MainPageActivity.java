@@ -27,6 +27,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.ui.DividerItemDecoration;
 import com.mame.impression.ui.notification.ImpressionNotificationManager;
 import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
@@ -133,6 +134,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
 
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext()));
 
         mAdapter = new MainPageAdapter(getApplicationContext(), mContents);
         mAdapter.setMainPageAdapterListener(this);
@@ -281,7 +283,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     @Override
     public void onReplyFinished(int updatedPoint) {
         LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
-        //TODO Show something to feedback to user.
+        //TODO Show feedback
     }
 
     @Override
