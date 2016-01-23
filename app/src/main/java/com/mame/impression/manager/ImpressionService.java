@@ -135,6 +135,7 @@ public class ImpressionService extends Service {
     }
 
     public void requestCurrentUserPoint(ResultListener listener, Context context, long userId){
+        LogUtil.d(TAG, "requestCurrentUserPoint");
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");
         }

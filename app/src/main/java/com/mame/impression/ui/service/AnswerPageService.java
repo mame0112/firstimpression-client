@@ -52,7 +52,7 @@ public class AnswerPageService extends ImpressionBaseService {
         ResultListener listener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "onCompleted");
+                LogUtil.d(TAG, "requestQuestionsCreatedByUser onCompleted");
                 if(mListener != null){
                     JSONParser parser = new JSONParser();
                     List<QuestionResultListData> lists = parser.createQuestionResultListDataFromJsonObject(response);
@@ -110,10 +110,11 @@ public class AnswerPageService extends ImpressionBaseService {
     }
 
     public void requestUserPoint(){
+        LogUtil.d(TAG, "requestUserPoint");
         ResultListener listener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "onCompleted: " + response.toString());
+                LogUtil.d(TAG, "requestUserPoint onCompleted: " + response.toString());
                 if(mListener != null && response != null){
 
                     try {

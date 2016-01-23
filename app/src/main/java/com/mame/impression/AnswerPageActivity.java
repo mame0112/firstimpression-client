@@ -87,8 +87,6 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
             //Get initial question data.
             mService.requestQuestionsCreatedByUser();
 
-            //Get current user point
-            mService.requestUserPoint();
         }
 
         public void onServiceDisconnected(ComponentName className) {
@@ -158,6 +156,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     public void onAnswerResultListReady(final List<QuestionResultListData> resultLists) {
         LogUtil.d(TAG, "onAnswerResultListReady");
         if(resultLists != null){
+
+            //Get current user point
+            mService.requestUserPoint();
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -172,6 +174,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     public void onAnswerDetailReady(final QuestionResultDetailData detail) {
         LogUtil.d(TAG, "onAnswerDetailReady");
         if(detail != null){
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
