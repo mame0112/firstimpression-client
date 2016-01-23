@@ -33,4 +33,9 @@ public class RestApi {
      * URL pattern for ask question result
      */
     public static final String KEY_RESULT = "/results";
+
+    /**
+     * URL pattern for user's point
+     */
+    public static final String KEY_POINT = "/points";
 }

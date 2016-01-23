@@ -44,6 +44,12 @@ public class LocalAccessor extends Accessor {
             case CREATE_QUESTION:
                 storeQuestionId(context, param);
                 break;
+            case UPDATE_POINT:
+                updateUserPoint(context, param);
+                break;
+            case GET_POINT:
+                getUserPoint(context, param);
+                break;
         }
 
     }
@@ -60,6 +66,37 @@ public class LocalAccessor extends Accessor {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
         }
+    }
 
+    private void getUserPoint(Context context, JSONObject param){
+        LogUtil.d(TAG, "getUserPoint");
+
+        try {
+            int point = mDataHandler.getUserPoint(context);
+
+            JSONObject result = new JSONObject();
+            result.put(JsonParam.USER_POINT, point);
+
+            mListener.onCompleted(result);
+        } catch (JSONException e){
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+        }
+    }
+
+    private void updateUserPoint(Context context, JSONObject param){
+        LogUtil.d(TAG, "updateUserPoint");
+
+        try {
+            int diff = param.getInt(JsonParam.USER_POINT_DIFF);
+            int newPoint = mDataHandler.updateUserPoint(context, diff);
+
+            JSONObject result = new JSONObject();
+            result.put(JsonParam.USER_POINT, newPoint);
+            mListener.onCompleted(result);
+        } catch (JSONException e){
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+        }
     }
 }

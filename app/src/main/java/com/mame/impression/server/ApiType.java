@@ -18,6 +18,7 @@ public enum ApiType {
             case DETAIL:
             case MY_INFORMATION:
             case SIGN_IN:
+            case GET_POINT:
                 return ApiType.GET;
 
             case CREATE_QUESTION:
@@ -27,6 +28,7 @@ public enum ApiType {
             case REPLY_TO_QUESTION:
             case UPDATE_MY_INFORMATION:
             case SIGN_OUT:
+            case UPDATE_POINT:
                 return ApiType.PUT;
         }
         return ApiType.GET;
@@ -49,6 +51,9 @@ public enum ApiType {
             case GET_QUESTION_RESULT_LIST:
             case GET_QUESTION_RESULT_DETAIL:
                 return RestApi.KEY_RESULT;
+            case GET_POINT:
+            case UPDATE_POINT:
+                return RestApi.KEY_POINT;
         }
 
         return RestApi.KEY_USER;

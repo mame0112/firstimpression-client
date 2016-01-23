@@ -39,6 +39,8 @@ public class Constants {
 
     public final static long NO_QUESTION = -1;
 
+    public final static int NO_POINT = 0;
+
     /**
      * UI part
      */

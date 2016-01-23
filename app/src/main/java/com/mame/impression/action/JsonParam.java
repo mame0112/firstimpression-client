@@ -36,6 +36,10 @@ public class JsonParam {
 
     public final static String USER_CREATED_QUESTION_ID = "created_question_ids";
 
+    public final static String USER_POINT = "point";
+
+    public final static String USER_POINT_DIFF = "point_diff";
+
     /**
      * Parameter fields for QuestionData
      */

@@ -16,11 +16,11 @@ public class DatabaseDef {
     static final int DATABASE_VERSION = 1;
 
     interface QuestionTable {
-        final static String TABLE_NAME = "question";
+        String TABLE_NAME = "question";
 
-        static final String MIME_TYPE = "impression-question";
+        String MIME_TYPE = "impression-question";
 
-        static final String QUESTION_PATH = "question";
+        String QUESTION_PATH = "question";
 //
 //        static final String SINGLE_FRIENDSHIP_PATH = "friendship/#";
 
@@ -33,6 +33,8 @@ public class DatabaseDef {
 
     public interface Constants {
         static final int QUESTION_MATCH = 10;
+
+        static final int POINT_MATCH = 20;
     }
 
 }

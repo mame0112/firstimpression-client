@@ -11,8 +11,10 @@ import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.data.MainPageContent;
+import com.mame.impression.point.PointUpdateType;
 import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -96,7 +98,33 @@ public class MainPageService extends Service{
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "respondToQuestion onComplited");
-                //TODO Need to store user point
+
+                long userId = PreferenceUtil.getUserId(getApplicationContext());
+
+                mService.updateCurrentUserPoint(new ResultListener() {
+                    @Override
+                    public void onCompleted(JSONObject response) {
+                        LogUtil.d(TAG, "onCompleted");
+                        if (response != null && mListener != null) {
+                            try {
+                                int updatedPoint = response.getInt(JsonParam.USER_POINT);
+                                mListener.onReplyFinished(updatedPoint);
+                            } catch (JSONException e) {
+                                LogUtil.w(TAG, "JSONException: " + e.getMessage());
+                                //TODO Error handling
+                            }
+                        } else {
+                            LogUtil.w(TAG, "response or mListner is null");
+                            //TODO Error handling
+                        }
+                    }
+
+                    @Override
+                    public void onFailed(ImpressionError reason, String message) {
+                        LogUtil.d(TAG, "onFailed");
+                    }
+                }, getApplicationContext(), userId, PointUpdateType.RESPOND_TO_QUESTION);
+
             }
 
             @Override
@@ -104,6 +132,7 @@ public class MainPageService extends Service{
                 LogUtil.d(TAG, "respondToQuestion onFailed: " + reason);
             }
         }, getApplicationContext(), id, select);
+
     }
 
     //Binder to connect service
@@ -144,5 +173,7 @@ public class MainPageService extends Service{
 
     public interface MainPageServiceListener{
         void onOpenQuestionDataReady(List<MainPageContent> data);
+
+        void onReplyFinished(int updatedPoint);
     }
 }

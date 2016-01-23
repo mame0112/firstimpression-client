@@ -279,6 +279,12 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     }
 
     @Override
+    public void onReplyFinished(int updatedPoint) {
+        LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
+        //TODO Show something to feedback to user.
+    }
+
+    @Override
     protected void enterPage() {
         TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
     }

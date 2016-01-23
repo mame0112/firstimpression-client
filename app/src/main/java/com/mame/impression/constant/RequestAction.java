@@ -34,6 +34,12 @@ public enum RequestAction {
      */
     DETAIL,         // Request detail information for target message (GET)
 
+    /**
+     * Point action
+     */
+    GET_POINT,
+    UPDATE_POINT,
+
 
     MY_INFORMATION,     // Request my own user information
     UPDATE_MY_INFORMATION,  // Request to update my user inforamtion

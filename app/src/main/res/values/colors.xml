@@ -8,5 +8,6 @@
 
     <color name="impression_light_grey">#EEEEEE</color>
     <color name="impression_white">#FFFFFF</color>
+    <color name="impression_transparent_white">#88FFFFFF</color>
 
 </resources>

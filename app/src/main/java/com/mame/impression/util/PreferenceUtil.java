@@ -21,6 +21,8 @@ public class PreferenceUtil {
 
     private static final String KEY_USER_GENDER = "user_gender";
 
+    private static final String KEY_USER_POINT = "user_point";
+
     public static void setUserName(Context c, String userName) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
@@ -67,6 +69,18 @@ public class PreferenceUtil {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
         return pref.getString(KEY_USER_AGE, null);
+    }
+
+    public static void setUserPoint(Context c, int point) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().putInt(KEY_USER_POINT, point).commit();
+    }
+
+    public static int getUserPoint(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        return pref.getInt(KEY_USER_POINT, Constants.NO_POINT);
     }
 
 }

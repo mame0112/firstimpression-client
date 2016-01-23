@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.action.Action;
 import com.mame.impression.action.lists.QuestionListAction;
+import com.mame.impression.action.point.GetPointAction;
+import com.mame.impression.action.point.UpdatePointAction;
 import com.mame.impression.action.result.QuestionListWithUserIdAction;
 import com.mame.impression.action.questions.AnswerToQuestionAction;
 import com.mame.impression.action.questions.CreateNewQuestionAction;
@@ -20,6 +22,7 @@ import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.manager.requestinfo.RequestInfoBuilder;
+import com.mame.impression.point.PointUpdateType;
 import com.mame.impression.util.LogUtil;
 
 import org.json.JSONException;
@@ -127,6 +130,51 @@ public class ImpressionService extends Service {
 
         QuestionResultDetailAction action = new QuestionResultDetailAction();
         action.setAction(userId, questionId);
+
+        executeAction(listener, context, action);
+    }
+
+    public void requestCurrentUserPoint(ResultListener listener, Context context, long userId){
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        if(userId == Constants.NO_USER){
+            throw new IllegalArgumentException("user id cannot be NO_USER");
+        }
+
+        GetPointAction action = new GetPointAction();
+        action.setAction(userId);
+
+        executeAction(listener, context, action);
+    }
+
+    public void updateCurrentUserPoint(ResultListener listener, Context context, long userId, PointUpdateType type){
+        LogUtil.d(TAG, "updateCurrentUserPoint");
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        if(userId == Constants.NO_USER){
+            throw new IllegalArgumentException("user id cannot be NO_USER");
+        }
+
+        if(type == null){
+            throw new IllegalArgumentException("Point type cannot be null");
+        }
+
+        int pointDiff = PointUpdateType.getPointChangeValue(type);
+
+        UpdatePointAction action = new UpdatePointAction();
+        action.setAction(userId, pointDiff);
 
         executeAction(listener, context, action);
     }

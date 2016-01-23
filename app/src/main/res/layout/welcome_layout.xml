@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView android:text="Welcome" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_gravity="center" />
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/sprash_bg_icn">
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:id="@+id/welcome_error_frame">
@@ -12,4 +15,4 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent" android:id="@+id/welcome_frame">
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

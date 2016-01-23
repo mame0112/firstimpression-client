@@ -18,6 +18,7 @@ import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
 import com.mame.impression.ui.service.AnswerPageService;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 import java.util.List;
 
@@ -56,12 +57,21 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
         mAnswerOverviewFragment.setAnswerRecyclerViewListener(this);
 
+        String titleText = PreferenceUtil.getUserName(getApplicationContext());
+
+        if(titleText != null){
+            setTitle(titleText);
+        } else {
+            //TODO Error handling
+        }
+    }
+
+    private void setTitle(String title){
         CollapsingToolbarLayout collapsingToolbar =
                 (CollapsingToolbarLayout) findViewById(R.id.toolbar_layout);
-        collapsingToolbar.setTitle("Some title here");
-
-
+        collapsingToolbar.setTitle(title);
     }
+
 
     private ServiceConnection mConnection = new ServiceConnection() {
         public void onServiceConnected(ComponentName className, IBinder service) {
@@ -76,6 +86,9 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
             //Get initial question data.
             mService.requestQuestionsCreatedByUser();
+
+            //Get current user point
+            mService.requestUserPoint();
         }
 
         public void onServiceDisconnected(ComponentName className) {
@@ -166,6 +179,11 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                 }
             });
         }
+    }
+
+    @Override
+    public void onUserPointReady(int point) {
+        LogUtil.d(TAG, "onUserPointReady: " + point);
     }
 
     @Override

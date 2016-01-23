@@ -5,6 +5,7 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 
+import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.QuestionResultDetailData;
@@ -15,6 +16,7 @@ import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -38,7 +40,6 @@ public class AnswerPageService extends ImpressionBaseService {
 
         mService = ImpressionService.getService(this.getClass());
 
-        //TODO Request questions here.
         return mBinder;
     }
 
@@ -108,6 +109,38 @@ public class AnswerPageService extends ImpressionBaseService {
 
     }
 
+    public void requestUserPoint(){
+        ResultListener listener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted: " + response.toString());
+                if(mListener != null && response != null){
+
+                    try {
+                        int point = response.getInt(JsonParam.USER_POINT);
+                        mListener.onUserPointReady(point);
+                    } catch (JSONException e) {
+                        LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                        //TODO Error handling
+                    }
+                }
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        };
+
+        long userId = PreferenceUtil.getUserId(getApplicationContext());
+        if(userId != Constants.NO_USER){
+            mService.requestCurrentUserPoint(listener, getApplicationContext(), userId);
+        } else {
+            showPromptDialog(PromptMode.NOTICE);
+        }
+
+    }
+
     @Override
     public boolean onUnbind(Intent intent) {
         LogUtil.d(TAG, "onUnbind");
@@ -132,6 +165,8 @@ public class AnswerPageService extends ImpressionBaseService {
         void onAnswerResultListReady(List<QuestionResultListData> resultLists);
 
         void onAnswerDetailReady(QuestionResultDetailData detail);
+
+        void onUserPointReady(int point);
     }
 
 }

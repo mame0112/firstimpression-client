@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 import com.mame.impression.util.SecurityUtil;
 
 import java.util.ArrayList;
@@ -103,6 +104,38 @@ public class ImpressionLocalDataHandler {
         } catch (SQLException e){
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
         }
+    }
+
+    /**
+     * We might want to manage point on Database. Then, we handle point information in this class.
+     * @param context
+     * @param diff
+     * @return updated point.
+     */
+    public synchronized int updateUserPoint(Context context, int diff){
+        LogUtil.d(TAG, "updateUserPoint: " + diff);
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        int current = PreferenceUtil.getUserPoint(context);
+        int newPoint = current + diff;
+
+        PreferenceUtil.setUserPoint(context, newPoint);
+
+        return newPoint;
+
+    }
+
+    public synchronized int getUserPoint(Context context){
+        LogUtil.d(TAG, "getUserPoint");
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        return PreferenceUtil.getUserPoint(context);
 
     }
 
@@ -111,6 +144,5 @@ public class ImpressionLocalDataHandler {
         values.put(DatabaseDef.QuestionColumns.QUESTION_ID, questionId);
         return values;
     }
-
 
 }

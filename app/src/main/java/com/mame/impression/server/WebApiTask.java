@@ -73,7 +73,6 @@ public class WebApiTask {
                 }
                 LogUtil.d(TAG, "string: " + total);
 
-                //TODO Should not call onComplete here. It should be called on Accessor.
                 if(mListener != null){
                     try {
                         mListener.onCompleted(new JSONObject(total.toString()));
@@ -194,12 +193,17 @@ public class WebApiTask {
                 br.close();
                 conn.disconnect();
 
+                JSONObject resultJson = new JSONObject(jsonString.toString());
+                mListener.onCompleted(resultJson);
+
             } catch (MalformedURLException e) {
                 LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
             } catch (ProtocolException e) {
                 LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
             } catch (IOException e) {
                 LogUtil.d(TAG, "IOException: " + e.getMessage());
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             } finally {
                 if (conn != null) {
                     conn.disconnect();
