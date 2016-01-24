@@ -37,7 +37,7 @@
     <string name="sprash_sign_upin_button">Sign up / in</string>
 
     <!-- Main page -->
-    <string name="main_card_title_divider"> / </string>
+    <string name="main_card_title_divider">-</string>
 
     <!-- Welcome page -->
     <string name="welcome_service_description">First impression is a service that enable you to check your idea quickly.</string>

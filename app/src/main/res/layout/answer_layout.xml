@@ -25,7 +25,6 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <!--<include layout="@layout/content_scrolling" />-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

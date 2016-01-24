@@ -19,7 +19,12 @@
 
     <!-- Card view -->
     <dimen name="default_card_view_radius">4dp</dimen>
-    <dimen name="card_chart_vertical_padding">6dp</dimen>
+    <dimen name="card_chart_vertical_padding">10dp</dimen>
+    <dimen name="card_chart_vertical_margin">6dp</dimen>
+    <dimen name="card_chart_horizontal_margin">10dp</dimen>
+    <dimen name="card_margin_left">4dp</dimen>
+    <dimen name="card_subtext_divider">4dp</dimen>
+
 
     <!-- Fonts -->
     <dimen name="fi_font_extra_large">32dp</dimen>

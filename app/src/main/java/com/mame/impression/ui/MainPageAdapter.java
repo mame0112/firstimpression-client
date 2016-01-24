@@ -18,6 +18,7 @@ import com.mame.impression.data.MainPageContent;
 import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
+import com.mame.impression.util.TimeUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -74,7 +75,7 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             //TODO
 //            holder.mThumbnail.setImageBitmap(data.getThumbnail());
             //TODO
-            holder.mPostDateView.setText(String.valueOf(data.getPostDate()));
+            holder.mPostDateView.setText(TimeUtil.getDateForDisplay(data.getPostDate(), mContext));
             holder.mUserName.setText(data.getUserName());
             holder.mDescription.setText(data.getDescription());
             holder.mChoiseAButton.setText(data.getChoiceA());
