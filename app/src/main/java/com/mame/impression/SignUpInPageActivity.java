@@ -132,7 +132,6 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     public void onSignUpButtonPressed(final String userName, final String password, final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onSignUpButtonPressed");
         //TODO Need to disable sign in button here
-        LogUtil.d(TAG, "sign up button pressed");
 
         mService.requestSignUp(new ResultListener() {
 

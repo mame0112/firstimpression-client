@@ -11,6 +11,8 @@ import com.mame.impression.data.QuestionResultListData;
  */
 public class PreferenceUtil {
 
+    private final static String TAG = Constants.TAG + PreferenceUtil.class.getSimpleName();
+
     private static final String PREF_KEY = "first_impression";
 
     private static final String KEY_USER_NAME = "user_name";
