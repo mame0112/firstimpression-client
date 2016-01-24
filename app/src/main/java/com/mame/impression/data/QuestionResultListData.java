@@ -15,7 +15,9 @@ public class QuestionResultListData {
 
     private String mDescription;
 
-    private int mNumOfAnswer = 0;
+    private int mNumOfChoiceA = 0;
+
+    private int mNumOfChoiceB = 0;
 
     private long mLastCommentDate = 0L;
 
@@ -29,8 +31,12 @@ public class QuestionResultListData {
         mDescription = description;
     }
 
-    void setNumfOfAnswer(int numOfAnswer){
-        mNumOfAnswer = numOfAnswer;
+    void setNumfOfChoiceA(int numOfChoiceA){
+        mNumOfChoiceA = numOfChoiceA;
+    }
+
+    void setNumfOfChoiceB(int numOfChoiceB){
+        mNumOfChoiceB = numOfChoiceB;
     }
 
     void setLastCommentDate(long numOfAdditionalComment){
@@ -49,8 +55,12 @@ public class QuestionResultListData {
         return mDescription;
     }
 
-    public int getNumfOfAnswer(){
-        return mNumOfAnswer;
+    public int getNumfOfChoiceA(){
+        return mNumOfChoiceA;
+    }
+
+    public int getNumfOfChoiceB(){
+        return mNumOfChoiceB;
     }
 
     public long getLastCommentDate(){

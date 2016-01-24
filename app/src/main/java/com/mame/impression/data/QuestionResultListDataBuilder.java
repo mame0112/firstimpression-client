@@ -17,8 +17,13 @@ public class QuestionResultListDataBuilder {
         return this;
     }
 
-    public QuestionResultListDataBuilder setNumfOfAnswer(int numOfAnswer){
-        mData.setNumfOfAnswer(numOfAnswer);
+    public QuestionResultListDataBuilder setNumfOfChoiceA(int numOfChoiceA){
+        mData.setNumfOfChoiceA(numOfChoiceA);
+        return this;
+    }
+
+    public QuestionResultListDataBuilder setNumfOfChoiceB(int numOfChoiceB){
+        mData.setNumfOfChoiceB(numOfChoiceB);
         return this;
     }
 

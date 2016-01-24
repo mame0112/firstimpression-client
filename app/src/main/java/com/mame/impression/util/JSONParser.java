@@ -183,9 +183,16 @@ public class JSONParser {
 //                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
-            int numOfQuestion = 0;
+            int numOfChoiceA = 0;
             try {
-                numOfQuestion = object.getInt(JsonParam.QUESTION_NUM_OF_QUESTION);
+                numOfChoiceA = object.getInt(JsonParam.QUESTION_CHOICE_A_RESPONSE);
+            } catch (JSONException e) {
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
+            int numOfChoiceB = 0;
+            try {
+                numOfChoiceB = object.getInt(JsonParam.QUESTION_CHOICE_B_RESPONSE);
             } catch (JSONException e) {
 //                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
@@ -204,7 +211,9 @@ public class JSONParser {
 //                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
-             return new QuestionResultListDataBuilder().setQuestionId(questionId).setDescription(description).setLastCommentDate(lastCommentDate).setNumfOfAnswer(numOfQuestion).setNumOfAdditionalComment(additionalCommentNum).getResult();
+             return new QuestionResultListDataBuilder().setQuestionId(questionId).setDescription(description)
+                     .setLastCommentDate(lastCommentDate).setNumfOfChoiceA(numOfChoiceA).setNumfOfChoiceB(numOfChoiceB)
+                     .setNumOfAdditionalComment(additionalCommentNum).getResult();
 
         }
 

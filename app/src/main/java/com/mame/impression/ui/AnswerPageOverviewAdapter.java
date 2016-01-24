@@ -54,18 +54,21 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
     @Override
     public void onBindViewHolder(AnswerPageOverviewAdapter.ViewHolder holder, int position) {
         holder.mDescriptionView.setText(mData.get(position).getDescription());
-        holder.mNumOfAnswerView.setText(String.valueOf(mData.get(position).getNumfOfAnswer()));
+
+        holder.mChoiceANumView.setText(String.valueOf(mData.get(position).getNumfOfChoiceA()));
+        holder.mChoiceBNumView.setText(String.valueOf(mData.get(position).getNumfOfChoiceB()));
 
         long lastUpdateDate = mData.get(position).getLastCommentDate();
         holder.mLastDateView.setText(TimeUtil.getDateForDisplay(lastUpdateDate, mContext));
+//        holder.mLastDateView.setText("3333");
 
         int addComment = mData.get(position).getNumOfAdditionalComment();
-        if(addComment != 0){
-            holder.mNumOfAdditionView.setVisibility(View.VISIBLE);
-            holder.mNumOfAdditionView.setText(String.valueOf(addComment));
-        } else {
-            holder.mNumOfAdditionView.setVisibility(View.INVISIBLE);
-        }
+//        if(addComment != 0){
+//            holder.mNumOfAdditionView.setVisibility(View.VISIBLE);
+//            holder.mNumOfAdditionView.setText(String.valueOf(addComment));
+//        } else {
+//            holder.mNumOfAdditionView.setVisibility(View.INVISIBLE);
+//        }
 
     }
 
@@ -88,17 +91,21 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView mDescriptionView;
-        private TextView mNumOfAnswerView;
+//        private TextView mNumOfAnswerView;
+        private TextView mChoiceANumView;
+        private TextView mChoiceBNumView;
         private TextView mLastDateView;
-        private TextView mNumOfAdditionView;
+//        private TextView mNumOfAdditionView;
 
         public ViewHolder(View v) {
             super(v);
 
             mDescriptionView = (TextView)v.findViewById(R.id.answer_card_description);
-            mNumOfAnswerView = (TextView)v.findViewById(R.id.answer_card_num_of_answer);
-            mLastDateView = (TextView)v.findViewById(R.id.answer_card_last_date);
-            mNumOfAdditionView = (TextView)v.findViewById(R.id.answer_card_num_of_addition);
+//            mNumOfAnswerView = (TextView)v.findViewById(R.id.answer_card_num_of_answer);
+            mChoiceANumView = (TextView)v.findViewById(R.id.answer_card_choice_a_num);
+            mChoiceBNumView = (TextView)v.findViewById(R.id.answer_card_choice_b_num);
+            mLastDateView = (TextView)v.findViewById(R.id.answer_card_card_last_date);
+//            mNumOfAdditionView = (TextView)v.findViewById(R.id.answer_card_num_of_addition);
 
         }
     }
