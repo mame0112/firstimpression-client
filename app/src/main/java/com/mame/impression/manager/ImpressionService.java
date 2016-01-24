@@ -221,7 +221,7 @@ public class ImpressionService extends Service {
 
     }
 
-    public void respondToQuestion(ResultListener listener, Context context, long questionId, int select) {
+    public void respondToQuestion(ResultListener listener, Context context, long questionId, int select, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener cannot be null");
         }
@@ -238,8 +238,16 @@ public class ImpressionService extends Service {
             throw new IllegalArgumentException("select must be greater than 0");
         }
 
+        if(gender == null){
+            throw new IllegalArgumentException("Gender cannot be null");
+        }
+
+        if(age == null){
+            throw new IllegalArgumentException("Age cannot be null");
+        }
+
         AnswerToQuestionAction action = new AnswerToQuestionAction();
-        action.setAction(questionId, select);
+        action.setAction(questionId, select, gender, age);
 
         executeAction(listener, context, action);
 

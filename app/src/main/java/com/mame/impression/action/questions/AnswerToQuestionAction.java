@@ -7,6 +7,7 @@ import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.server.ServerAccessor;
 
@@ -28,6 +29,10 @@ public class AnswerToQuestionAction implements Action {
 
     private int mSelectedItem = 0;
 
+    private QuestionResultListData.Gender mGender;
+
+    private QuestionResultListData.Age mAge;
+
     @Override
     public RequestAction getAction() {
         return RequestAction.REPLY_TO_QUESTION;
@@ -42,9 +47,11 @@ public class AnswerToQuestionAction implements Action {
 
     }
 
-    public void setAction(long questionId, int selectedItem) {
+    public void setAction(long questionId, int selectedItem, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
         mQuestionId = questionId;
         mSelectedItem = selectedItem;
+        mGender = gender;
+        mAge = age;
     }
 
     @Override
@@ -52,6 +59,8 @@ public class AnswerToQuestionAction implements Action {
         JSONObject param = new JSONObject();
 
         param.put(JsonParam.QUESTION_ID, mQuestionId);
+        param.put(JsonParam.USER_GENDER, mGender);
+        param.put(JsonParam.USER_AGE, mAge);
 
         //In client side, we just remember "Which item is seleced". Translation to"a: x, b:y" format should be done by server side.
         param.put(JsonParam.QUESTION_SELECTED_CHOICE, mSelectedItem);

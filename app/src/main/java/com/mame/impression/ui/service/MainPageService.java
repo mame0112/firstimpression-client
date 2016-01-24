@@ -8,6 +8,7 @@ import android.os.IBinder;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.data.MainPageContent;
@@ -94,45 +95,62 @@ public class MainPageService extends Service{
     public void respondToQuestion(long id, int select) {
         LogUtil.d(TAG, "respondToQuestion");
 
-        mService.respondToQuestion(new ResultListener() {
+        ResultListener questionListener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
-                LogUtil.d(TAG, "respondToQuestion onComplited");
+                LogUtil.d(TAG, "respondToQuestion onComplited: " + response);
 
-                long userId = PreferenceUtil.getUserId(getApplicationContext());
-
-                mService.updateCurrentUserPoint(new ResultListener() {
-                    @Override
-                    public void onCompleted(JSONObject response) {
-                        LogUtil.d(TAG, "onCompleted");
-                        if (response != null && mListener != null) {
-                            try {
-                                int updatedPoint = response.getInt(JsonParam.USER_POINT);
-                                mListener.onReplyFinished(updatedPoint);
-                            } catch (JSONException e) {
-                                LogUtil.w(TAG, "JSONException: " + e.getMessage());
-                                //TODO Error handling
-                            }
-                        } else {
-                            LogUtil.w(TAG, "response or mListner is null");
-                            //TODO Error handling
-                        }
-                    }
-
-                    @Override
-                    public void onFailed(ImpressionError reason, String message) {
-                        LogUtil.d(TAG, "onFailed");
-                    }
-                }, getApplicationContext(), userId, PointUpdateType.RESPOND_TO_QUESTION);
-
+                pointUpdateAction();
             }
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
-                LogUtil.d(TAG, "respondToQuestion onFailed: " + reason);
+                LogUtil.d(TAG, "respondToQuestion onFailed");
             }
-        }, getApplicationContext(), id, select);
+        };
 
+        QuestionResultListData.Gender gender = PreferenceUtil.getUserGender(getApplicationContext());
+        QuestionResultListData.Age age = PreferenceUtil.getUserAge(getApplicationContext());
+
+        if(gender != null && age != null){
+            mService.respondToQuestion(questionListener, getApplicationContext(), id, select, gender, age);
+        } else {
+            LogUtil.w(TAG, "Gender or Age is null");
+            // TODO Show Profile prompt dialog
+        }
+
+
+
+    }
+
+    private void pointUpdateAction(){
+        ResultListener pointListener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "Point onCompleted");
+                if (response != null && mListener != null) {
+                    try {
+                        int updatedPoint = response.getInt(JsonParam.USER_POINT);
+                        mListener.onReplyFinished(updatedPoint);
+                    } catch (JSONException e) {
+                        LogUtil.w(TAG, "JSONException: " + e.getMessage());
+                        //TODO Error handling
+                    }
+                } else {
+                    LogUtil.w(TAG, "response or mListner is null");
+                    //TODO Error handling
+                }
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        };
+
+        long userId = PreferenceUtil.getUserId(getApplicationContext());
+
+        mService.updateCurrentUserPoint(pointListener, getApplicationContext(), userId, PointUpdateType.RESPOND_TO_QUESTION);
     }
 
     //Binder to connect service

@@ -53,10 +53,14 @@ public class PreferenceUtil {
         pref.edit().putString(KEY_USER_GENDER, gender.name()).commit();
     }
 
-    public static String getUserGender(Context c) {
+    public static QuestionResultListData.Gender getUserGender(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        return pref.getString(KEY_USER_GENDER, null);
+        String gender = pref.getString(KEY_USER_GENDER, null);
+        if(gender != null){
+            return QuestionResultListData.Gender.valueOf(gender);
+        }
+        return null;
     }
 
     public static void setUserAge(Context c, QuestionResultListData.Age age) {
@@ -65,10 +69,16 @@ public class PreferenceUtil {
         pref.edit().putString(KEY_USER_AGE, age.name()).commit();
     }
 
-    public static String getUserAge(Context c) {
+    public static QuestionResultListData.Age getUserAge(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        return pref.getString(KEY_USER_AGE, null);
+        String age = pref.getString(KEY_USER_AGE, null);
+
+        if(age != null){
+            return QuestionResultListData.Age.valueOf(age);
+        }
+
+        return null;
     }
 
     public static void setUserPoint(Context c, int point) {
