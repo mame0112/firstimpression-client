@@ -209,6 +209,67 @@ public class WebApiTask {
                     conn.disconnect();
                 }
             }
+        }
+    }
+
+    public static class RestDelete implements Runnable {
+        private Accessor.AccessorListener mListener;
+
+        private String mApi;
+
+        private JSONObject mInput;
+
+        public RestDelete(Accessor.AccessorListener listener, String api, final JSONObject input) {
+            mListener = listener;
+            mApi = api;
+            mInput = input;
+        }
+
+        @Override
+        public void run() {
+            LogUtil.d(TAG, "RestDelete run");
+            HttpURLConnection conn = null;
+            URL url = null;
+            try {
+
+                url = new URL(Constants.API_URL + mApi+"?param=" + mInput.toString());
+                conn = (HttpURLConnection) url.openConnection();
+
+                conn.setDoOutput(true);
+                conn.setRequestMethod("DELETE");
+                conn.setRequestProperty(
+                        "Content-Type", "application/x-www-form-urlencoded" );
+
+//                OutputStream os = conn.getOutputStream();
+//                os.write(mInput.toString().getBytes("UTF-8"));
+//                os.close();
+
+                String line;
+                StringBuffer jsonString = new StringBuffer();
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                while ((line = br.readLine()) != null) {
+                    jsonString.append(line);
+                }
+                LogUtil.d(TAG, "jsonString: " + jsonString);
+                br.close();
+                conn.disconnect();
+
+                JSONObject resultJson = new JSONObject(jsonString.toString());
+                mListener.onCompleted(resultJson);
+
+            } catch (MalformedURLException e) {
+                LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+            } catch (ProtocolException e) {
+                LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+            } catch (IOException e) {
+                LogUtil.d(TAG, "IOException: " + e.getMessage());
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            } finally {
+                if (conn != null) {
+                    conn.disconnect();
+                }
+            }
 
         }
     }

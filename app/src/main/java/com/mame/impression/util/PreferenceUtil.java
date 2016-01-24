@@ -25,22 +25,22 @@ public class PreferenceUtil {
 
     private static final String KEY_USER_POINT = "user_point";
 
-    public static void setUserName(Context c, String userName) {
-        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
-                Context.MODE_PRIVATE);
-        pref.edit().putString(KEY_USER_NAME, userName).commit();
-    }
-
     public static String getUserName(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
         return pref.getString(KEY_USER_NAME, null);
     }
 
-    public static void setUserId(Context c, long userId) {
+    public static void setUserName(Context c, String userName) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        pref.edit().putLong(KEY_USER_ID, userId).commit();
+        pref.edit().putString(KEY_USER_NAME, userName).commit();
+    }
+
+    public static void removeUserName(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_NAME).commit();
     }
 
     public static long getUserId(Context c) {
@@ -49,10 +49,16 @@ public class PreferenceUtil {
         return pref.getLong(KEY_USER_ID, Constants.NO_USER);
     }
 
-    public static void setUserGender(Context c, QuestionResultListData.Gender gender) {
+    public static void setUserId(Context c, long userId) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        pref.edit().putString(KEY_USER_GENDER, gender.name()).commit();
+        pref.edit().putLong(KEY_USER_ID, userId).commit();
+    }
+
+    public static void removeUserId(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_ID).commit();
     }
 
     public static QuestionResultListData.Gender getUserGender(Context c) {
@@ -65,10 +71,16 @@ public class PreferenceUtil {
         return null;
     }
 
-    public static void setUserAge(Context c, QuestionResultListData.Age age) {
+    public static void setUserGender(Context c, QuestionResultListData.Gender gender) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        pref.edit().putString(KEY_USER_AGE, age.name()).commit();
+        pref.edit().putString(KEY_USER_GENDER, gender.name()).commit();
+    }
+
+    public static void removeUserGender(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_GENDER).commit();
     }
 
     public static QuestionResultListData.Age getUserAge(Context c) {
@@ -83,6 +95,18 @@ public class PreferenceUtil {
         return null;
     }
 
+    public static void setUserAge(Context c, QuestionResultListData.Age age) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().putString(KEY_USER_AGE, age.name()).commit();
+    }
+
+    public static void removeUserAge(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_AGE).commit();
+    }
+
     public static void setUserPoint(Context c, int point) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
@@ -93,6 +117,12 @@ public class PreferenceUtil {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
         return pref.getInt(KEY_USER_POINT, Constants.NO_POINT);
+    }
+
+    public static void removeUserPoint(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_POINT).commit();
     }
 
 }

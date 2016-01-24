@@ -7,4 +7,6 @@
         android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/debug_prompt_dialog" android:title="Profile prompt dialog"
         android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/debug_sign_out" android:title="Sign out"
+        android:orderInCategory="100" app:showAsAction="never" />
 </menu>

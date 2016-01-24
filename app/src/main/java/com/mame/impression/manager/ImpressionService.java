@@ -15,6 +15,7 @@ import com.mame.impression.action.questions.AnswerToQuestionAction;
 import com.mame.impression.action.questions.CreateNewQuestionAction;
 import com.mame.impression.action.result.QuestionResultDetailAction;
 import com.mame.impression.action.user.SignInAction;
+import com.mame.impression.action.user.SignOutAction;
 import com.mame.impression.action.user.SignUpAction;
 import com.mame.impression.action.user.UpdateUserDataAction;
 import com.mame.impression.constant.Constants;
@@ -291,6 +292,32 @@ public class ImpressionService extends Service {
 
         UpdateUserDataAction action = new UpdateUserDataAction();
         action.setAction(gender, age);
+
+        executeAction(listener, context, action);
+
+    }
+
+    public void requestSignOut(ResultListener listener, Context context, long userId, String userName){
+        LogUtil.d(TAG, "requestSignOut");
+
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener cannot be null");
+        }
+
+        if (context == null) {
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        if(userId == Constants.NO_USER){
+            throw new IllegalArgumentException("User id cannot be null");
+        }
+
+        if(userName == null){
+            throw new IllegalArgumentException("userName cannot be null");
+        }
+
+        SignOutAction action = new SignOutAction();
+        action.setAction(userId, userName);
 
         executeAction(listener, context, action);
 

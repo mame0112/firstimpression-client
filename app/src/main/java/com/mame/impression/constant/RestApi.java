@@ -38,4 +38,9 @@ public class RestApi {
      * URL pattern for user's point
      */
     public static final String KEY_POINT = "/points";
+
+    /**
+     * URL pattern for Device for Push
+     */
+    public static final String KEY_DEVICE = "/device";
 }

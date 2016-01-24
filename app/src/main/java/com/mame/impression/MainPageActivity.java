@@ -33,6 +33,7 @@ import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.data.MainPageContent;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 import com.mame.impression.util.TrackingUtil;
 
 import java.util.ArrayList;
@@ -232,6 +233,16 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
                 return true;
             case R.id.debug_prompt_dialog:
                 return true;
+            case R.id.debug_sign_out:
+
+                mService.requsetToSignOut(PreferenceUtil.getUserId(getApplicationContext()),
+                        PreferenceUtil.getUserName(getApplicationContext()));
+
+                PreferenceUtil.removeUserId(getApplicationContext());
+                PreferenceUtil.removeUserName(getApplicationContext());
+                PreferenceUtil.removeUserAge(getApplicationContext());
+                PreferenceUtil.removeUserGender(getApplicationContext());
+                break;
             default:
                 break;
         }
@@ -287,6 +298,13 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     }
 
     @Override
+    public void signOutFinished() {
+        LogUtil.d(TAG, "signOutFinished");
+        startSprashActivity();
+        finish();
+    }
+
+    @Override
     protected void enterPage() {
         TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
     }
@@ -313,7 +331,6 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
             mDrawerLayout.closeDrawer(mDrawerList);
 //            mToolbar.setTitle("position: " + position);
             mDrawerTitle = "position: " + position;
-            launchSelectedItemFromDrawer(position);
         }
     }
 
@@ -342,8 +359,10 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
         return output;
     }
 
-    private void launchSelectedItemFromDrawer(int position){
-//        switch()
+    private void startSprashActivity(){
+        Intent intent = new Intent(getApplicationContext(), SprashActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 }

@@ -27,9 +27,10 @@ public enum ApiType {
 
             case REPLY_TO_QUESTION:
             case UPDATE_MY_INFORMATION:
-            case SIGN_OUT:
             case UPDATE_POINT:
                 return ApiType.PUT;
+            case SIGN_OUT:
+                return ApiType.DELETE;
         }
         return ApiType.GET;
     }

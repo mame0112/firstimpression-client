@@ -139,6 +139,21 @@ public class ImpressionLocalDataHandler {
 
     }
 
+    public synchronized void removeUserData(Context context){
+        LogUtil.d(TAG, "removeUserData");
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        // Reset user point
+        PreferenceUtil.setUserPoint(context, Constants.NO_POINT);
+
+        // Clear database
+        context.deleteDatabase(DatabaseDef.DATABASE_NAME);
+
+    }
+
     protected ContentValues getContentValueForQuestion(long questionId){
         ContentValues values = new ContentValues();
         values.put(DatabaseDef.QuestionColumns.QUESTION_ID, questionId);

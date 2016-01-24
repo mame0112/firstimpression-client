@@ -119,7 +119,27 @@ public class MainPageService extends Service{
             // TODO Show Profile prompt dialog
         }
 
+    }
 
+    public void requsetToSignOut(long userId, String userName){
+        LogUtil.d(TAG, "requsetToSignOut");
+
+        ResultListener listener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted");
+                if(mListener != null){
+                    mListener.signOutFinished();
+                }
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        };
+
+        mService.requestSignOut(listener, getApplicationContext(), userId, userName);
 
     }
 
@@ -193,5 +213,7 @@ public class MainPageService extends Service{
         void onOpenQuestionDataReady(List<MainPageContent> data);
 
         void onReplyFinished(int updatedPoint);
+
+        void signOutFinished();
     }
 }

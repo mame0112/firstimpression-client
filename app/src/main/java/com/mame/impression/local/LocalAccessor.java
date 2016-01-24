@@ -50,6 +50,8 @@ public class LocalAccessor extends Accessor {
             case GET_POINT:
                 getUserPoint(context, param);
                 break;
+            case SIGN_OUT:
+                removeUserData(context);
         }
 
     }
@@ -98,5 +100,15 @@ public class LocalAccessor extends Accessor {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
         }
+    }
+
+    private void removeUserData(Context context){
+        LogUtil.d(TAG, "removeUserData");
+
+        mDataHandler.removeUserData(context);
+
+        JSONObject result = new JSONObject();
+        mListener.onCompleted(result);
+
     }
 }

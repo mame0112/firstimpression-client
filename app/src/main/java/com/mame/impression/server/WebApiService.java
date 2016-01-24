@@ -72,8 +72,7 @@ public class WebApiService extends Service{
 //                mWebApi.put(listener, apiName, info.getParameter());
                 break;
             case DELETE:
-                // TODO Need to implement
-//                mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
+                mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
 //                mWebApi.delete(listener, apiName, info.getParameter());
                 break;
             default:
