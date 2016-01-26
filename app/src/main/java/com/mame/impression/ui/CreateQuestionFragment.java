@@ -1,6 +1,7 @@
 package com.mame.impression.ui;
 
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -25,6 +26,12 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
     private final static String TAG = Constants.TAG + CreateQuestionFragment.class.getSimpleName();
 
     private CreateQuestionFragmentListener mCreateQuestionListener;
+
+    private TextInputLayout mDescriptionWrapper;
+
+    private TextInputLayout mChoiceAEditWrapper;
+
+    private TextInputLayout mChoiceBEditWrapper;
 
     private EditText mDescriptionView;
 
@@ -72,6 +79,9 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
             }
         });
 
+        mDescriptionWrapper = (TextInputLayout)view.findViewById(R.id.create_question_description_wrapper);
+        mDescriptionWrapper.setEnabled(true);
+
         mChoiceAEditView = (EditText)view.findViewById(R.id.create_question_choice_a);
         mChoiceAEditView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,8 +98,12 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
             public void afterTextChanged(Editable s) {
                 mChoiceAString = s.toString();
                 changeCreateButtonState();
+                mDescriptionWrapper.setError("Error!!");
             }
         });
+
+        mChoiceAEditWrapper = (TextInputLayout)view.findViewById(R.id.create_question_choice_a_wrapper);
+        mChoiceAEditWrapper.setEnabled(true);
 
         mChoiceBEditView = (EditText)view.findViewById(R.id.create_question_choice_b);
         mChoiceBEditView.addTextChangedListener(new TextWatcher() {
@@ -109,6 +123,9 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
                 changeCreateButtonState();
             }
         });
+
+        mChoiceBEditWrapper = (TextInputLayout)view.findViewById(R.id.create_question_choice_b_wrapper);
+        mChoiceBEditWrapper.setEnabled(true);
 
         mCreateButton = (Button)view.findViewById(R.id.create_question_create_button);
         mCreateButton.setEnabled(false);
