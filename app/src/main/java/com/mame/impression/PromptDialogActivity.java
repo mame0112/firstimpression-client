@@ -95,17 +95,24 @@ public class PromptDialogActivity extends ImpressionBaseActivity implements Noti
     @Override
     public void onOkButtonPressed() {
         LogUtil.d(TAG, "onOkButtonPressed");
-        startWelcomeActivity();
+        startSignUpInActivity();
         finish();
     }
 
     @Override
     public void onCancelButtonPressed() {
         LogUtil.d(TAG, "onCancelButtonPressed");
+        startWelcomeActivity();
         finish();
     }
 
     private void startWelcomeActivity() {
+        Intent intent = new Intent(this, SprashActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void startSignUpInActivity() {
         Intent intent = new Intent(this, SignUpInPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constants.INTENT_QUESTION_DESCEIPTION, mDescription);

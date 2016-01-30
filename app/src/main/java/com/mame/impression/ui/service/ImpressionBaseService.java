@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import com.mame.impression.PromptDialogActivity;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TimeUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/30.
@@ -20,7 +21,6 @@ public class ImpressionBaseService extends Service {
         PROFILE, NOTICE
     }
 
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -29,6 +29,7 @@ public class ImpressionBaseService extends Service {
 
     protected void showPromptDialog(PromptMode mode){
         LogUtil.d(TAG, "showPromptDialog");
+
         Intent intent = new Intent(getApplicationContext(), PromptDialogActivity.class);
         intent.putExtra(Constants.INTENT_PROMOPT_MODE, mode);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

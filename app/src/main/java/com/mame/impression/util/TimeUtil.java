@@ -82,7 +82,7 @@ public class TimeUtil {
         return sdf.format(postDate);
     }
 
-    private static long getCurrentDate() {
+    public static long getCurrentDate() {
         Date date1 = new Date();
         return date1.getTime();
     }

@@ -110,6 +110,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     protected void onResume() {
         super.onResume();
 
+        // TODO Need to check if user already cancel promot dialog (Not to show promot dialog again)
         startService(new Intent(this, AnswerPageService.class));
 
         doBindService();
