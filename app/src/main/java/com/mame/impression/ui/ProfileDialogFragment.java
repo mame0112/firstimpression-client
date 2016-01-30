@@ -37,7 +37,11 @@ public class ProfileDialogFragment extends DialogFragment {
 
     private Button mAnswerButton;
 
+    private Button mCancelButton;
+
     private ImpressionService mService;
+
+    private ProfileDialogFragmentListener mListener;
 
     public static ProfileDialogFragment newInstance(int num) {
         ProfileDialogFragment f = new ProfileDialogFragment();
@@ -88,11 +92,19 @@ public class ProfileDialogFragment extends DialogFragment {
         mAnswerButton = (Button)v.findViewById(R.id.profile_answer_button);
         mAnswerButton.setOnClickListener(mClickListener);
 
+        mCancelButton = (Button)v.findViewById(R.id.profile_cancel_button);
+        mCancelButton.setOnClickListener(mClickListener);
+
         TextView signInButton = (TextView)v.findViewById(R.id.profile_signin_text_button);
         signInButton.setOnClickListener(mClickListener);
 
         Button signUpButton = (Button)v.findViewById(R.id.profile_signup_button);
         signUpButton.setOnClickListener(mClickListener);
+
+        getDialog().setTitle(R.string.notification_dialog_title);
+
+        getDialog().setCanceledOnTouchOutside(false);
+        setCancelable(false);
 
         return v;
     }
@@ -144,29 +156,44 @@ public class ProfileDialogFragment extends DialogFragment {
             switch(v.getId()){
                 case R.id.profile_answer_button:
                     LogUtil.d(TAG, "Answer button pressed");
-                    mService.updateUserData(mListener, getActivity(), getGenderValue(mGenderItem), getAgeValue(mAgeItem));
+                    ResultListener listener = new ResultListener() {
+                        @Override
+                        public void onCompleted(JSONObject response) {
+                            LogUtil.d(TAG, "onCompleted");
+                        }
+
+                        @Override
+                        public void onFailed(ImpressionError reason, String message) {
+                            LogUtil.d(TAG, "onFailed");
+                        }
+                    };
+
+                    mService.updateUserData(listener, getActivity(), getGenderValue(mGenderItem), getAgeValue(mAgeItem));
+
                     break;
                 case R.id.profile_signin_text_button:
                     LogUtil.d(TAG, "Signin text pressed");
+                    if(mListener != null){
+                        mListener.onProfileSignInButtonPressed();
+                    }
                     break;
                 case R.id.profile_signup_button:
                     LogUtil.d(TAG, "Signup button pressed");
+                    if(mListener != null){
+                        mListener.onProfileSignUpButtonPressed();
+                    }
+                    break;
+                case R.id.profile_cancel_button:
+                    LogUtil.d(TAG, "Cancel button pressed");
+
+                    if(mListener != null){
+                        mListener.onProfileCancelButtonPressed();
+                    }
+
                     break;
                 default:
                     break;
             }
-        }
-    };
-
-    private ResultListener mListener = new ResultListener() {
-        @Override
-        public void onCompleted(JSONObject response) {
-            LogUtil.d(TAG, "onCompleted");
-        }
-
-        @Override
-        public void onFailed(ImpressionError reason, String message) {
-            LogUtil.d(TAG, "onFailed");
         }
     };
 
@@ -216,5 +243,17 @@ public class ProfileDialogFragment extends DialogFragment {
             default:
                 return null;
         }
+    }
+
+    public void setProfileDialogFragmentListener(ProfileDialogFragmentListener listener){
+        mListener = listener;
+    }
+
+    public interface ProfileDialogFragmentListener{
+        void onProfileCancelButtonPressed();
+
+        void onProfileSignUpButtonPressed();
+
+        void onProfileSignInButtonPressed();
     }
 }

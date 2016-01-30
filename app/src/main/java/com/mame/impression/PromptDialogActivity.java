@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.WindowManager;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.NotificationDialogFragment;
@@ -17,7 +19,8 @@ import com.mame.impression.util.LogUtil;
 /**
  * Created by kosukeEndo on 2015/12/30.
  */
-public class PromptDialogActivity extends ImpressionBaseActivity implements NotificationDialogFragment.NotificationDialogFragmentListener {
+public class PromptDialogActivity extends ImpressionBaseActivity
+        implements NotificationDialogFragment.NotificationDialogFragmentListener, ProfileDialogFragment.ProfileDialogFragmentListener {
 
     private final static String TAG = Constants.TAG + PromptDialogActivity.class.getSimpleName();
 
@@ -59,6 +62,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity implements Noti
             //TODO Need to have error handling here.
         }
 
+
+
     }
 
     private void showNotificationDialog() {
@@ -74,7 +79,6 @@ public class PromptDialogActivity extends ImpressionBaseActivity implements Noti
         NotificationDialogFragment newFragment = NotificationDialogFragment.newInstance(mStackLevel);
         newFragment.show(ft, "dialog");
         newFragment.setNotificationDialogFragmentListener(this);
-
     }
 
     private void showProfileDialog() {
@@ -87,7 +91,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity implements Noti
         }
         ft.addToBackStack(null);
 
-        DialogFragment newFragment = ProfileDialogFragment.newInstance(mStackLevel);
+        ProfileDialogFragment newFragment = ProfileDialogFragment.newInstance(mStackLevel);
+        newFragment.setProfileDialogFragmentListener(this);
         newFragment.show(ft, "dialog");
 
     }
@@ -135,4 +140,27 @@ public class PromptDialogActivity extends ImpressionBaseActivity implements Noti
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
     }
+
+    @Override
+    public void onProfileCancelButtonPressed() {
+        LogUtil.d(TAG, "onProfileCancelButtonPressed");
+        finish();
+    }
+
+    @Override
+    public void onProfileSignUpButtonPressed() {
+        Intent intent = new Intent(this, SignUpInPageActivity.class);
+        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNUP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onProfileSignInButtonPressed() {
+        Intent intent = new Intent(this, SignUpInPageActivity.class);
+        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
 }

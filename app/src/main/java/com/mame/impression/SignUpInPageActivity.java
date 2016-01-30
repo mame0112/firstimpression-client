@@ -48,6 +48,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     private String mChoiceA;
     private String mChoiceB;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -67,6 +68,10 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             mDescription = intent.getStringExtra(Constants.INTENT_QUESTION_DESCEIPTION);
             mChoiceA = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_A);
             mChoiceB = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_B);
+
+            // To be used when user presses Sign in or up button on Profile dialog
+            String signUpInMode = intent.getStringExtra(Constants.INTENT_SIGNUPIN_MODE);
+            changeFragmentStatusBasedOnLauncnMode(signUpInMode);
         }
 
         mService = ImpressionService.getService(SignUpPageFragment.class);
@@ -116,17 +121,47 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     @Override
     public void onStateChangeToSignIn() {
+        showSignInFragment();
+    }
+
+    private void showSignInFragment(){
         getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
                 .commit();
+    }
 
+    private void showSignInFragmentWithoutBackStack(){
+        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).commit();
     }
 
     @Override
     public void onStateChangeToSignUp() {
+        showSignUpFragment();
+    }
+
+    private void showSignUpFragment(){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
                 .commit();
     }
+
+    private void showSignUpFragmentWithoutBackStack(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).commit();
+    }
+
+    private void changeFragmentStatusBasedOnLauncnMode(String launchMode){
+        if(launchMode != null){
+            if(Constants.INTENT_MODE_SIGNUP.equals(launchMode)){
+                showSignUpFragmentWithoutBackStack();
+            } else if (Constants.INTENT_MODE_SIGNIN.equals(launchMode)){
+                showSignInFragmentWithoutBackStack();
+            } else {
+                LogUtil.w(TAG, "Unknown mode");
+            }
+
+        }
+    }
+
 
     @Override
     public void onSignUpButtonPressed(final String userName, final String password, final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {

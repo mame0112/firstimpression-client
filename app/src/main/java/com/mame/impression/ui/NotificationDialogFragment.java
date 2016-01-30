@@ -2,6 +2,7 @@ package com.mame.impression.ui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,8 @@ public class NotificationDialogFragment extends DialogFragment {
         acceptButton.setOnClickListener(mClickListener);
 
         getDialog().setTitle(R.string.notification_dialog_title);
-
+        getDialog().setCanceledOnTouchOutside(false);
+        setCancelable(false);
 
         return v;
     }
@@ -82,6 +84,7 @@ public class NotificationDialogFragment extends DialogFragment {
     public void setNotificationDialogFragmentListener(NotificationDialogFragmentListener listener){
         mListener = listener;
     }
+
 
     public interface NotificationDialogFragmentListener{
         void onOkButtonPressed();

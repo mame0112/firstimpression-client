@@ -95,7 +95,7 @@ public class SprashActivity extends ImpressionBaseActivity {
                     break;
                 case R.id.sprash_signinup_button:
                     TrackingUtil.trackEvent(SprashActivity.this, TrackingUtil.EVENT_CATEGORY_SPLASH, TrackingUtil.EVENT_ACTION_SPLASH_BUTTON, TrackingUtil.EVENT_LABEL_SIGNUPIN, 0);
-                    mUtil.startWelcomeActivity(getApplicationContext());
+                    mUtil.startSignUpInActivity(getApplicationContext());
                     finish();
                     break;
                 default:

@@ -71,4 +71,10 @@ public class Constants {
 
     public final static String INTENT_QUESTION_CHOICE_B = "intent_question_choice_b";
 
+    public final static String INTENT_SIGNUPIN_MODE = "intent_signupin_mode";
+
+    public final static String INTENT_MODE_SIGNIN = "intent_mode_signin";
+
+    public final static String INTENT_MODE_SIGNUP = "intent_mode_signup";
+
 }
