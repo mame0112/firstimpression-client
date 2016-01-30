@@ -11,10 +11,16 @@ import android.os.Bundle;
 import android.view.WindowManager;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.QuestionResultListData;
+import com.mame.impression.manager.ImpressionService;
+import com.mame.impression.manager.ResultListener;
 import com.mame.impression.ui.NotificationDialogFragment;
 import com.mame.impression.ui.ProfileDialogFragment;
 import com.mame.impression.ui.service.ImpressionBaseService;
 import com.mame.impression.util.LogUtil;
+
+import org.json.JSONObject;
 
 /**
  * Created by kosukeEndo on 2015/12/30.
@@ -31,6 +37,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     private String mChoiceA;
 
     private String mChoiceB;
+
+    private ImpressionService mService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,8 +70,22 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             //TODO Need to have error handling here.
         }
 
+    }
 
+    @Override
+    public void onStart(){
+        super.onStart();
 
+        mService = ImpressionService.getService(this.getClass());
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+
+        if(mService != null){
+            mService.finalize(this.getClass());
+        }
     }
 
     private void showNotificationDialog() {
@@ -161,6 +183,26 @@ public class PromptDialogActivity extends ImpressionBaseActivity
         intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNIN);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    @Override
+    public void onProfileIsfulfilled(QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+        LogUtil.d(TAG, "onProfileIsfulfilled");
+
+        ResultListener listener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted");
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        };
+
+        mService.updateUserData(listener, this, gender, age);
+
     }
 
 }

@@ -42,7 +42,7 @@ public class CreateNewQuestionService extends ImpressionBaseService {
         long createUserId = PreferenceUtil.getUserId(getApplicationContext());
         String createUserName = PreferenceUtil.getUserName(getApplicationContext());
         if(createUserId == Constants.NO_USER || createUserName == null){
-            showPromptDialog(PromptMode.PROFILE, description, choiceA, choiceB);
+            showPromptDialog(PromptMode.NOTICE, description, choiceA, choiceB);
         } else {
             mService.requestToCreateNewQuestion(new ResultListener() {
                 @Override

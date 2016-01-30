@@ -39,8 +39,6 @@ public class ProfileDialogFragment extends DialogFragment {
 
     private Button mCancelButton;
 
-    private ImpressionService mService;
-
     private ProfileDialogFragmentListener mListener;
 
     public static ProfileDialogFragment newInstance(int num) {
@@ -58,8 +56,6 @@ public class ProfileDialogFragment extends DialogFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mNum = getArguments().getInt("num");
-
-        mService = ImpressionService.getService(this.getClass());
     }
 
     @Override
@@ -119,9 +115,6 @@ public class ProfileDialogFragment extends DialogFragment {
     public void onDestroy(){
         LogUtil.d(TAG, "onDestroy");
         super.onDestroy();
-        if(mService != null){
-            mService.finalize(this.getClass());
-        }
     }
 
     private AdapterView.OnItemSelectedListener mSpinnerListener = new AdapterView.OnItemSelectedListener() {
@@ -156,20 +149,9 @@ public class ProfileDialogFragment extends DialogFragment {
             switch(v.getId()){
                 case R.id.profile_answer_button:
                     LogUtil.d(TAG, "Answer button pressed");
-                    ResultListener listener = new ResultListener() {
-                        @Override
-                        public void onCompleted(JSONObject response) {
-                            LogUtil.d(TAG, "onCompleted");
-                        }
-
-                        @Override
-                        public void onFailed(ImpressionError reason, String message) {
-                            LogUtil.d(TAG, "onFailed");
-                        }
-                    };
-
-                    mService.updateUserData(listener, getActivity(), getGenderValue(mGenderItem), getAgeValue(mAgeItem));
-
+                    if(mListener != null){
+                        mListener.onProfileIsfulfilled(getGenderValue(mGenderItem), getAgeValue(mAgeItem));
+                    }
                     break;
                 case R.id.profile_signin_text_button:
                     LogUtil.d(TAG, "Signin text pressed");
@@ -255,5 +237,7 @@ public class ProfileDialogFragment extends DialogFragment {
         void onProfileSignUpButtonPressed();
 
         void onProfileSignInButtonPressed();
+
+        void onProfileIsfulfilled(QuestionResultListData.Gender gender, QuestionResultListData.Age age);
     }
 }
