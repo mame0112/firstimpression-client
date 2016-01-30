@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:paddingLeft="@dimen/prompt_horizontal_padding"
+    android:paddingRight="@dimen/prompt_horizontal_padding"
+    android:paddingBottom="@dimen/dialog_vertical_padding"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:text="@string/notification_dialog_title"
+        android:text="@string/notification_dialog_desc"
+        android:paddingTop="@dimen/dialog_vertical_padding"
+        android:paddingBottom="@dimen/dialog_vertical_padding"
+        android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+        android:layout_marginRight="@dimen/dialog_horizontal_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <LinearLayout
         android:orientation="horizontal"
+        android:paddingTop="@dimen/dialog_vertical_padding"
+        android:paddingBottom="@dimen/dialog_vertical_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Button
             android:id="@+id/prompt_dialog_cancel"
             android:layout_weight="1"
+            android:paddingLeft="@dimen/dialog_horizontal_padding"
+            android:paddingRight="@dimen/dialog_horizontal_padding"
             android:text="@string/impression_cancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

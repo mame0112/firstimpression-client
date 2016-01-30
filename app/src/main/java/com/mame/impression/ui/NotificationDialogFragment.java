@@ -47,6 +47,9 @@ public class NotificationDialogFragment extends DialogFragment {
         Button acceptButton = (Button)v.findViewById(R.id.prompt_dialog_accept);
         acceptButton.setOnClickListener(mClickListener);
 
+        getDialog().setTitle(R.string.notification_dialog_title);
+
+
         return v;
     }
 

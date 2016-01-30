@@ -4,6 +4,8 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="dialog_horizontal_margin">8dp</dimen>
     <dimen name="dialog_horizontal_padding">8dp</dimen>
+    <dimen name="dialog_vertical_margin">8dp</dimen>
+    <dimen name="dialog_vertical_padding">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="subscreen_horizontal_margin">32dp</dimen>
     <dimen name="default_card_horizontal_margin">10dp</dimen>
@@ -25,6 +27,8 @@
     <dimen name="card_margin_left">4dp</dimen>
     <dimen name="card_subtext_divider">4dp</dimen>
 
+    <!-- Prompt dialog-->
+    <dimen name="prompt_horizontal_padding">14dp</dimen>
 
     <!-- Fonts -->
     <dimen name="fi_font_extra_large">32dp</dimen>

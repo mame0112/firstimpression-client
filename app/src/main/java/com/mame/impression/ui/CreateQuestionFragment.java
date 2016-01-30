@@ -2,7 +2,6 @@ package com.mame.impression.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -13,8 +12,8 @@ import android.widget.EditText;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.ui.view.ButtonUtil;
+import com.mame.impression.util.InputValidator;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.TrackingUtil;
 
@@ -76,6 +75,7 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
             public void afterTextChanged(Editable s) {
                 mDescription = s.toString();
                 changeCreateButtonState();
+                InputValidator.isValidText(mDescription);
             }
         });
 
