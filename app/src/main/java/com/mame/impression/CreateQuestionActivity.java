@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.point.PointUpdateType;
 import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
 import com.mame.impression.util.LogUtil;
@@ -132,6 +133,14 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onNewQuestionCreationFail(ImpressionError reason) {
         LogUtil.d(TAG, "onNewQuestionCreationFail");
         // TODO
+    }
+
+    @Override
+    public void notifyNotEnoughUserPoint(int point) {
+        LogUtil.d(TAG, "notifyCurrentUserPoint: " + point);
+
+        // TODO Show error message
+
     }
 
     @Override
