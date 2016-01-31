@@ -11,6 +11,7 @@
     <color name="impression_dark_grey">#aaaaaa</color>
     <color name="impression_white">#FFFFFF</color>
     <color name="impression_transparent_white">#88FFFFFF</color>
+    <color name="impression_black">#000000</color>
     <color name="impression_transparent_black">#88000000</color>
 
 </resources>

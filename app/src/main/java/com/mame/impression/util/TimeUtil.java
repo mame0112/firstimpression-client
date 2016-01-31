@@ -29,7 +29,6 @@ public class TimeUtil {
     private final static long TIME_DAY = 24 * TIME_HOUR;
 
     public static String getDateForDisplay(long post, Context context) {
-        LogUtil.d(TAG, "getDateForDisplay");
 
         long current = getCurrentDate();
 
@@ -53,7 +52,6 @@ public class TimeUtil {
 
     private static String changeDisplayDateForWithinOneDay(long diff,
                                                            Context context) {
-        LogUtil.d(TAG, "changeDisplayDateForWithinOneDay");
 
         Resources res = context.getResources();
         String PREFIX = res.getString(R.string.str_generic_time_before);
@@ -76,7 +74,6 @@ public class TimeUtil {
 
     private static String changeDisplayDateForNotWithinOneDay(Context context,
                                                               long postDate) {
-        LogUtil.d(TAG, "changeDisplayDateForNotWithinOneDay");
 
         SimpleDateFormat sdf = new SimpleDateFormat("M/dd");
         return sdf.format(postDate);
