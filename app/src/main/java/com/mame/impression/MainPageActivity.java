@@ -19,6 +19,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -141,6 +142,28 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
         mAdapter.setMainPageAdapterListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
+
+        ItemTouchHelper itemDecor = new ItemTouchHelper(
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN,
+                        ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+                    @Override
+                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                        final int fromPos = viewHolder.getAdapterPosition();
+                        final int toPos = target.getAdapterPosition();
+                        mAdapter.notifyItemMoved(fromPos, toPos);
+                        return true;
+                    }
+
+                    @Override
+                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                        final int fromPos = viewHolder.getAdapterPosition();
+//                        mContents.remove(fromPos);
+                        //TODO Remove content from adapter
+                        mAdapter.notifyItemRemoved(fromPos);
+                    }
+                });
+        itemDecor.attachToRecyclerView(mRecyclerView);
+
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
