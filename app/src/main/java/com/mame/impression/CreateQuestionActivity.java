@@ -124,8 +124,8 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     }
 
     @Override
-    public void onNewQuestionCreationSuccess() {
-        LogUtil.d(TAG, "onNewQuestionCreationSuccess");
+    public void onNewQuestionCreationSuccess(int updatedPoint) {
+        LogUtil.d(TAG, "onNewQuestionCreationSuccess: " + updatedPoint);
         finish();
     }
 

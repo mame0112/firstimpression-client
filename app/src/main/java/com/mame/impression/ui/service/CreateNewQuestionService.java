@@ -1,6 +1,7 @@
 package com.mame.impression.ui.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -96,19 +97,57 @@ public class CreateNewQuestionService extends ImpressionBaseService {
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "onCompleted");
                 //TODO Need to consider if we should store created question ID to Local DB.
-                if(mListener != null){
-                    mListener.onNewQuestionCreationSuccess();
+
+                    //Reduce used point
+                    reduceUserPoint();
+
+                }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+                if (mListener != null) {
+                    mListener.onNewQuestionCreationFail(reason);
+                }
+            }
+        }, getApplicationContext(), createUserId, createUserName, description, choiceA, choiceB);
+    }
+
+    private void reduceUserPoint(){
+        LogUtil.d(TAG, "reduceUserPoint");
+
+        long userId = PreferenceUtil.getUserId(getApplicationContext());
+
+        ResultListener listener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted");
+
+                try {
+                    int point = response.getInt(JsonParam.USER_POINT);
+                    LogUtil.d(TAG, "updated point: " + point);
+                    if (mListener != null) {
+                        mListener.onNewQuestionCreationSuccess(point);
+                    }
+                } catch (JSONException e) {
+                    LogUtil.w(TAG, "JSONException: " + e.getMessage());
+
+                    if (mListener != null) {
+                        mListener.onNewQuestionCreationSuccess(Constants.NO_POINT);
+                    }
                 }
             }
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
-                if(mListener != null){
-                    mListener.onNewQuestionCreationFail(reason);
+                if (mListener != null) {
+                    mListener.onNewQuestionCreationSuccess(Constants.NO_POINT);
                 }
             }
-        }, getApplicationContext(), createUserId, createUserName, description, choiceA, choiceB);
+        };
+
+        mService.updateCurrentUserPoint(listener, getApplicationContext(), userId, PointUpdateType.CREATE_NEW_QUESTION);
     }
 
 
@@ -132,7 +171,7 @@ public class CreateNewQuestionService extends ImpressionBaseService {
     }
 
     public interface CreateNewQuestionServiceListener {
-        void onNewQuestionCreationSuccess();
+        void onNewQuestionCreationSuccess(int updatedPoint);
 
         void onNewQuestionCreationFail(ImpressionError reason);
 
