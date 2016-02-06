@@ -1,6 +1,5 @@
 package com.mame.impression.db;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
-import com.mame.impression.util.SecurityUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,19 +55,19 @@ public class ImpressionLocalDataHandler {
         List<Long> ids = new ArrayList<Long>();
 
 
-//        String selection = DatabaseDef.QuestionColumns.FROM_USER_ID + "=?";
+//        String selection = DatabaseDef.CreatedQuestionColumns.FROM_USER_ID + "=?";
 //        String selectionArgs[] = { String.valueOf(userId)};
         String selection = null;
         String selectionArgs[] = null;
-//        String sortOrder = DatabaseDef.QuestionColumns.DATE + " DESC LIMIT "
+//        String sortOrder = DatabaseDef.CreatedQuestionColumns.DATE + " DESC LIMIT "
 //                + LcomConst.ITEM_ON_SCREEN;
         String sortOrder = null;
-        cursor = context.getContentResolver().query(DatabaseDef.QuestionTable.URI, null,
+        cursor = context.getContentResolver().query(DatabaseDef.CreatedQuestionTable.URI, null,
                 selection, selectionArgs, sortOrder);
         while (cursor != null && cursor.moveToNext()) {
             long questionId = cursor
                     .getLong(cursor
-                            .getColumnIndex(DatabaseDef.QuestionColumns.QUESTION_ID));
+                            .getColumnIndex(DatabaseDef.CreatedQuestionColumns.QUESTION_ID));
             LogUtil.d(TAG, "questionId: " + questionId);
             ids.add(questionId);
         }
@@ -77,9 +75,9 @@ public class ImpressionLocalDataHandler {
         return ids;
     }
 
-    public synchronized void storeQuestionId(Context context, long questionId){
+    public synchronized void storeCreatedQuestionId(Context context, long questionId){
 
-        LogUtil.d(TAG, "storeQuestionId");
+        LogUtil.d(TAG, "storeCreatedQuestionId");
 
         if(questionId == Constants.NO_QUESTION){
             throw new IllegalArgumentException("Question id cannot be null");
@@ -95,7 +93,7 @@ public class ImpressionLocalDataHandler {
 
             ContentValues questionValues = getContentValueForQuestion(questionId);
 
-            long id = sDatabase.insert(DatabaseDef.QuestionTable.TABLE_NAME, null, questionValues);
+            long id = sDatabase.insert(DatabaseDef.CreatedQuestionTable.TABLE_NAME, null, questionValues);
             LogUtil.d(TAG, "id: " + id);
             if(id < 0){
                 LogUtil.d(TAG, "Failed to insert data for question");
@@ -104,6 +102,43 @@ public class ImpressionLocalDataHandler {
         } catch (SQLException e){
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
         }
+    }
+
+    public synchronized void storeRespondedQuestionId(Context context, long questionId){
+
+        LogUtil.d(TAG, "storeRespondedQuestionId");
+
+        if(questionId == Constants.NO_QUESTION){
+            throw new IllegalArgumentException("Question id cannot be null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        try {
+            setDatabase(context);
+            sDatabase.beginTransaction();
+
+            ContentValues questionValues = getContentValueForQuestion(questionId);
+
+            long id = sDatabase.insert(DatabaseDef.RespondedQuestionTable.TABLE_NAME, null, questionValues);
+            LogUtil.d(TAG, "id: " + id);
+            if(id < 0){
+                LogUtil.d(TAG, "Failed to insert data for question");
+            }
+
+        } catch (SQLException e){
+            LogUtil.d(TAG, "SQLException: " + e.getMessage());
+        }
+    }
+
+    public synchronized boolean isQuestionAlreadyResponed(Context context, long questionId){
+        LogUtil.d(TAG, "isQuestionAlreadyResponed");
+
+        //TODO Need to implement
+
+        return true;
     }
 
     /**
@@ -156,7 +191,7 @@ public class ImpressionLocalDataHandler {
 
     protected ContentValues getContentValueForQuestion(long questionId){
         ContentValues values = new ContentValues();
-        values.put(DatabaseDef.QuestionColumns.QUESTION_ID, questionId);
+        values.put(DatabaseDef.CreatedQuestionColumns.QUESTION_ID, questionId);
         return values;
     }
 

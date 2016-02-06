@@ -16,10 +16,10 @@ public class ImpressionDatabaseHelper extends SQLiteOpenHelper {
     private final static String TAG = Constants.TAG + ImpressionDatabaseHelper.class.getSimpleName();
 
     static final String QUESTION_DATA_SQL = "CREATE TABLE IF NOT EXISTS "
-            + DatabaseDef.QuestionTable.TABLE_NAME + " ("
-            + DatabaseDef.QuestionColumns._ID
+            + DatabaseDef.CreatedQuestionTable.TABLE_NAME + " ("
+            + DatabaseDef.CreatedQuestionColumns._ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + DatabaseDef.QuestionColumns.QUESTION_ID + " INTEGER DEFAULT 0)";
+            + DatabaseDef.CreatedQuestionColumns.QUESTION_ID + " INTEGER DEFAULT 0)";
 
     public ImpressionDatabaseHelper(Context context) {
         super(context, DatabaseDef.DATABASE_NAME, null, DatabaseDef.DATABASE_VERSION);

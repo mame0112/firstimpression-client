@@ -8,6 +8,7 @@ import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.data.QuestionResultListData;
+import com.mame.impression.local.LocalAccessor;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.server.ServerAccessor;
 
@@ -42,6 +43,7 @@ public class AnswerToQuestionAction implements Action {
     public SparseArray<Accessor> getAccessors() {
         SparseArray<Accessor> accessors = new SparseArray<Accessor>();
         accessors.put(0, new ServerAccessor());
+        accessors.put(1, new LocalAccessor());
 
         return accessors;
 

@@ -8,7 +8,6 @@ import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.db.ImpressionLocalDataHandler;
 import com.mame.impression.manager.Accessor;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 
@@ -42,7 +41,7 @@ public class LocalAccessor extends Accessor {
 
         switch(action){
             case CREATE_QUESTION:
-                storeQuestionId(context, param);
+                storeCreatedQuestionId(context, param);
                 break;
             case UPDATE_POINT:
                 updateUserPoint(context, param);
@@ -52,16 +51,48 @@ public class LocalAccessor extends Accessor {
                 break;
             case SIGN_OUT:
                 removeUserData(context);
+                break;
+            case REPLY_TO_QUESTION:
+                storeRepliedQuestionId(context, param);
+                break;
+            case GET_QUESTION_LIST:
+                extractNotRespondedQuestions(context, param);
+                break;
         }
 
     }
 
-    private void storeQuestionId(Context context, JSONObject param){
-        LogUtil.d(TAG, "storeQuestionId");
+    private void extractNotRespondedQuestions(Context context, JSONObject param){
+        LogUtil.d(TAG,"extractNotRespondedQuestions");
+
+//        try {
+//            long questionId = param.getLong(JsonParam.ID);
+//            mDataHandler.isQuestionAlreadyResponed(context, questionId);
+//        } catch (JSONException e){
+//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+//        }
+    }
+
+    private void storeRepliedQuestionId(Context context, JSONObject param){
+        LogUtil.d(TAG, "storeRepliedQuestionId: " + param.toString());
 
         try {
             long questionId = param.getLong(JsonParam.ID);
-            mDataHandler.storeQuestionId(context, questionId);
+            mDataHandler.storeRespondedQuestionId(context, questionId);
+        } catch (JSONException e){
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+        }
+    }
+
+
+    private void storeCreatedQuestionId(Context context, JSONObject param){
+        LogUtil.d(TAG, "storeCreatedQuestionId");
+
+        try {
+            long questionId = param.getLong(JsonParam.ID);
+            mDataHandler.storeCreatedQuestionId(context, questionId);
             //TODO
             mListener.onCompleted(new JSONObject());
         } catch (JSONException e){

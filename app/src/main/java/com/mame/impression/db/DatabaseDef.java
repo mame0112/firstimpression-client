@@ -15,20 +15,36 @@ public class DatabaseDef {
 
     static final int DATABASE_VERSION = 1;
 
-    interface QuestionTable {
-        String TABLE_NAME = "question";
+    interface CreatedQuestionTable {
+        String TABLE_NAME = "created_question";
 
         String MIME_TYPE = "impression-question";
 
-        String QUESTION_PATH = "question";
+        String QUESTION_PATH = "created_question";
 //
 //        static final String SINGLE_FRIENDSHIP_PATH = "friendship/#";
 
         static final Uri URI = Uri.withAppendedPath(BASE_URI, QUESTION_PATH);
     }
 
-    public interface QuestionColumns extends BaseColumns{
-        static final String QUESTION_ID = "question_id";
+    public interface CreatedQuestionColumns extends BaseColumns{
+        static final String QUESTION_ID = "created_question_id";
+    }
+
+    interface RespondedQuestionTable {
+        String TABLE_NAME = "responded_question";
+
+        String MIME_TYPE = "impression-question";
+
+        String QUESTION_PATH = "responded_question";
+//
+//        static final String SINGLE_FRIENDSHIP_PATH = "friendship/#";
+
+        static final Uri URI = Uri.withAppendedPath(BASE_URI, QUESTION_PATH);
+    }
+
+    public interface RespondedQuestionColumns extends BaseColumns{
+        static final String QUESTION_ID = "responded_question_id";
     }
 
     public interface Constants {
