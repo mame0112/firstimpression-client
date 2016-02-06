@@ -118,6 +118,17 @@ public class JSONParser {
                 long userId = paramObject.getLong(JsonParam.USER_ID);
                 String userName = paramObject.getString(JsonParam.USER_NAME);
                 String password = paramObject.getString(JsonParam.USER_PASSWORD);
+                String genderString = paramObject.getString(JsonParam.USER_GENDER);
+                QuestionResultListData.Gender gender = null;
+                if(genderString != null){
+                    gender = QuestionResultListData.Gender.valueOf(genderString);
+                }
+
+                String ageString = paramObject.getString(JsonParam.USER_AGE);
+                QuestionResultListData.Age age = null;
+                if(ageString != null){
+                    age = QuestionResultListData.Age.valueOf(ageString);
+                }
                 JSONArray jsonArray = (JSONArray)paramObject.get(JsonParam.USER_CREATED_QUESTION_ID);
 
                 List<Long> list = new ArrayList<Long>();
@@ -129,7 +140,7 @@ public class JSONParser {
                 }
 
                 UserDataBuilder builder = new UserDataBuilder();
-                return builder.setUserId(userId).setUserName(userName).setPassword(password).setCreatedQuestionIds(list).getResult();
+                return builder.setUserId(userId).setUserName(userName).setPassword(password).setGender(gender).setAge(age).setCreatedQuestionIds(list).getResult();
 
             } catch (JSONException e) {
                 e.printStackTrace();

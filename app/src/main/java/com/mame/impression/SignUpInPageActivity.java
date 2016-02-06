@@ -233,6 +233,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                     // Store user data
                     PreferenceUtil.setUserId(getApplicationContext(), data.getUserId());
                     PreferenceUtil.setUserName(getApplicationContext(), data.getUserName());
+                    PreferenceUtil.setUserGender(getApplicationContext(), data.getGender());
+                    PreferenceUtil.setUserAge(getApplicationContext(), data.getAge());
 
                     //Go to main page
                     startMainPage();

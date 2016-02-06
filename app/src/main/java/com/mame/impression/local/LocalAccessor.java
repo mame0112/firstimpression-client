@@ -75,10 +75,10 @@ public class LocalAccessor extends Accessor {
     }
 
     private void storeRepliedQuestionId(Context context, JSONObject param){
-        LogUtil.d(TAG, "storeRepliedQuestionId: " + param.toString());
+        LogUtil.d(TAG, "storeRepliedQuestionId");
 
         try {
-            long questionId = param.getLong(JsonParam.ID);
+            long questionId = param.getLong(JsonParam.QUESTION_ID);
             mDataHandler.storeRespondedQuestionId(context, questionId);
         } catch (JSONException e){
             LogUtil.d(TAG, "JSONException: " + e.getMessage());

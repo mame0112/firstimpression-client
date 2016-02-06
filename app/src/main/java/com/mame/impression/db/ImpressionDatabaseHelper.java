@@ -15,11 +15,17 @@ public class ImpressionDatabaseHelper extends SQLiteOpenHelper {
 
     private final static String TAG = Constants.TAG + ImpressionDatabaseHelper.class.getSimpleName();
 
-    static final String QUESTION_DATA_SQL = "CREATE TABLE IF NOT EXISTS "
+    static final String CREATED_QUESTION_DATA_SQL = "CREATE TABLE IF NOT EXISTS "
             + DatabaseDef.CreatedQuestionTable.TABLE_NAME + " ("
             + DatabaseDef.CreatedQuestionColumns._ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT,"
             + DatabaseDef.CreatedQuestionColumns.QUESTION_ID + " INTEGER DEFAULT 0)";
+
+    static final String RESPONDED_QUESTION_DATA_SQL = "CREATE TABLE IF NOT EXISTS "
+            + DatabaseDef.RespondedQuestionTable.TABLE_NAME + " ("
+            + DatabaseDef.RespondedQuestionColumns._ID
+            + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+            + DatabaseDef.RespondedQuestionColumns.QUESTION_ID + " INTEGER DEFAULT 0)";
 
     public ImpressionDatabaseHelper(Context context) {
         super(context, DatabaseDef.DATABASE_NAME, null, DatabaseDef.DATABASE_VERSION);
@@ -32,7 +38,8 @@ public class ImpressionDatabaseHelper extends SQLiteOpenHelper {
         LogUtil.d(TAG, "onCreate");
 
         try {
-            db.execSQL(QUESTION_DATA_SQL);
+            db.execSQL(CREATED_QUESTION_DATA_SQL);
+            db.execSQL(RESPONDED_QUESTION_DATA_SQL);
         } catch (SQLException e) {
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
         }

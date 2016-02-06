@@ -28,6 +28,16 @@ public class UserDataBuilder {
         return this;
     }
 
+    public UserDataBuilder setGender(QuestionResultListData.Gender gender){
+        mData.setGender(gender);
+        return this;
+    }
+
+    public UserDataBuilder setAge(QuestionResultListData.Age age){
+        mData.setAge(age);
+        return this;
+    }
+
     public UserDataBuilder setCreatedQuestionIds(List<Long> createQuestionIds){
         mData.setCreatedQuestionIds(createQuestionIds);
         return this;

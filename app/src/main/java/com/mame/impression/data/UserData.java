@@ -15,6 +15,10 @@ public class UserData {
 
     private String mPassword;
 
+    private QuestionResultListData.Gender mGender;
+
+    private QuestionResultListData.Age mAge;
+
     private List<Long> mCreatedQuestionIds;
 
     /* Package private */ UserData(){
@@ -33,6 +37,14 @@ public class UserData {
         mPassword = password;
     }
 
+    void setGender(QuestionResultListData.Gender gender){
+        mGender = gender;
+    }
+
+    void setAge(QuestionResultListData.Age age){
+        mAge = age;
+    }
+
     void setCreatedQuestionIds(List<Long> createdQuestionIds){
         mCreatedQuestionIds = createdQuestionIds;
     }
@@ -48,6 +60,15 @@ public class UserData {
     public String getPassword(){
         return mPassword;
     }
+
+    public QuestionResultListData.Gender getGender(){
+        return mGender;
+    }
+
+    public QuestionResultListData.Age getAge(){
+        return mAge;
+    }
+
 
     public List<Long> getCreatedQuestionIds(){
         return mCreatedQuestionIds;

@@ -91,7 +91,7 @@ public class ImpressionLocalDataHandler {
             setDatabase(context);
             sDatabase.beginTransaction();
 
-            ContentValues questionValues = getContentValueForQuestion(questionId);
+            ContentValues questionValues = getContentValueForCreatedQuestion(questionId);
 
             long id = sDatabase.insert(DatabaseDef.CreatedQuestionTable.TABLE_NAME, null, questionValues);
             LogUtil.d(TAG, "id: " + id);
@@ -99,8 +99,14 @@ public class ImpressionLocalDataHandler {
                 LogUtil.d(TAG, "Failed to insert data for question");
             }
 
+            sDatabase.setTransactionSuccessful();
+
         } catch (SQLException e){
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
+        } finally {
+            if(sDatabase != null){
+                sDatabase.endTransaction();
+            }
         }
     }
 
@@ -120,7 +126,7 @@ public class ImpressionLocalDataHandler {
             setDatabase(context);
             sDatabase.beginTransaction();
 
-            ContentValues questionValues = getContentValueForQuestion(questionId);
+            ContentValues questionValues = getContentValueForRespondedQuestion(questionId);
 
             long id = sDatabase.insert(DatabaseDef.RespondedQuestionTable.TABLE_NAME, null, questionValues);
             LogUtil.d(TAG, "id: " + id);
@@ -128,9 +134,16 @@ public class ImpressionLocalDataHandler {
                 LogUtil.d(TAG, "Failed to insert data for question");
             }
 
+            sDatabase.setTransactionSuccessful();
+
         } catch (SQLException e){
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
+        } finally {
+            if(sDatabase != null){
+                sDatabase.endTransaction();
+            }
         }
+
     }
 
     public synchronized boolean isQuestionAlreadyResponed(Context context, long questionId){
@@ -189,9 +202,15 @@ public class ImpressionLocalDataHandler {
 
     }
 
-    protected ContentValues getContentValueForQuestion(long questionId){
+    protected ContentValues getContentValueForCreatedQuestion(long questionId){
         ContentValues values = new ContentValues();
         values.put(DatabaseDef.CreatedQuestionColumns.QUESTION_ID, questionId);
+        return values;
+    }
+
+    protected ContentValues getContentValueForRespondedQuestion(long questionId){
+        ContentValues values = new ContentValues();
+        values.put(DatabaseDef.RespondedQuestionColumns.QUESTION_ID, questionId);
         return values;
     }
 
