@@ -34,16 +34,16 @@ public class QuestionListAction implements Action {
         LogUtil.d(TAG, "getAccessors");
         SparseArray<Accessor> accessors = new SparseArray<Accessor>();
         accessors.put(0, new ServerAccessor());
-//        accessors.put(1, new LocalAccessor());
+        accessors.put(1, new LocalAccessor());
 
         return accessors;
     }
 
     @Override
-    public JSONObject getParemeter() throws JSONException {
+    public String getParemeter() throws JSONException {
         LogUtil.d(TAG, "getParameter");
         JSONObject param = new JSONObject();
 
-        return param;
+        return param.toString();
     }
 }

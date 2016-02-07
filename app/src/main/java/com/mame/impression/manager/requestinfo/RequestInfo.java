@@ -22,14 +22,14 @@ public class RequestInfo {
 
     private RequestAction mAction;
 
-    private JSONObject mParam;
+    private String mParam;
 
     RequestInfo() {
 
     }
 
-    void setRequestParam(JSONObject param) {
-        mParam = param;
+    void setRequestParam(String paramJsonString) {
+        mParam = paramJsonString;
     }
 
     public ResultListener getResultListener() {
@@ -56,7 +56,7 @@ public class RequestInfo {
         mAction = action;
     }
 
-    public JSONObject getParameter() {
+    public String getParameter() {
         return mParam;
     }
 

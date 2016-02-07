@@ -49,12 +49,12 @@ public class WebApiTask {
 
         private String mApi;
 
-        private JSONObject mInput;
+        private String mInput;
 
-        public RestGet(Accessor.AccessorListener listener, String api, final JSONObject input){
+        public RestGet(Accessor.AccessorListener listener, String api, final String jsonInput){
             mListener = listener;
             mApi = api;
-            mInput = input;
+            mInput = jsonInput;
         }
 
         @Override
@@ -62,7 +62,7 @@ public class WebApiTask {
             URL url = null;
             HttpURLConnection urlConnection = null;
             try {
-                url = new URL(Constants.API_URL + mApi+"?param=" + mInput.toString());
+                url = new URL(Constants.API_URL + mApi+"?param=" + mInput);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 BufferedReader r = new BufferedReader(new InputStreamReader(in));
@@ -99,9 +99,9 @@ public class WebApiTask {
 
         private String mApi;
 
-        private JSONObject mInput;
+        private String mInput;
 
-        public RestPost(Accessor.AccessorListener listener, String api, final JSONObject input) {
+        public RestPost(Accessor.AccessorListener listener, String api, final String input) {
             mListener = listener;
             mApi = api;
             mInput = input;
@@ -159,9 +159,9 @@ public class WebApiTask {
 
         private String mApi;
 
-        private JSONObject mInput;
+        private String mInput;
 
-        public RestPut(Accessor.AccessorListener listener, String api, final JSONObject input) {
+        public RestPut(Accessor.AccessorListener listener, String api, final String input) {
             mListener = listener;
             mApi = api;
             mInput = input;
@@ -217,9 +217,9 @@ public class WebApiTask {
 
         private String mApi;
 
-        private JSONObject mInput;
+        private String mInput;
 
-        public RestDelete(Accessor.AccessorListener listener, String api, final JSONObject input) {
+        public RestDelete(Accessor.AccessorListener listener, String api, final String input) {
             mListener = listener;
             mApi = api;
             mInput = input;

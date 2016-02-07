@@ -29,10 +29,10 @@ public interface Action {
     public SparseArray<Accessor> getAccessors();
 
     /**
-     * Get parameter as JSONObject format. Throw IllegalFormatException if given format is not expected.
+     * Get parameter as JSONObject or JSONArray format. Throw IllegalFormatException if given format is not expected.
      *
      * @return
      */
-    public JSONObject getParemeter() throws IllegalArgumentException, JSONException;
+    public String getParemeter() throws IllegalArgumentException, JSONException;
 
 }

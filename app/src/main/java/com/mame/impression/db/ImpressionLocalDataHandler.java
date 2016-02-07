@@ -62,8 +62,12 @@ public class ImpressionLocalDataHandler {
 //        String sortOrder = DatabaseDef.CreatedQuestionColumns.DATE + " DESC LIMIT "
 //                + LcomConst.ITEM_ON_SCREEN;
         String sortOrder = null;
-        cursor = context.getContentResolver().query(DatabaseDef.CreatedQuestionTable.URI, null,
-                selection, selectionArgs, sortOrder);
+        String groupBy = null;
+        String having = null;
+//        cursor = context.getContentResolver().query(DatabaseDef.CreatedQuestionTable.URI, null,
+//                selection, selectionArgs, sortOrder);
+        cursor = sDatabase.query(DatabaseDef.CreatedQuestionTable.URI.toString(), null,
+                selection, selectionArgs, groupBy, having, sortOrder);
         while (cursor != null && cursor.moveToNext()) {
             long questionId = cursor
                     .getLong(cursor
@@ -147,11 +151,33 @@ public class ImpressionLocalDataHandler {
     }
 
     public synchronized boolean isQuestionAlreadyResponed(Context context, long questionId){
-        LogUtil.d(TAG, "isQuestionAlreadyResponed");
+        LogUtil.d(TAG, "isQuestionAlreadyResponed" );
 
-        //TODO Need to implement
+        if(questionId == Constants.NO_QUESTION){
+            throw new IllegalArgumentException("question id cannot be null");
+        }
 
-        return true;
+        setDatabase(context);
+
+        String selection = DatabaseDef.RespondedQuestionColumns.QUESTION_ID + " = ?";
+        String selectionArgs[] = { String.valueOf(questionId)};
+        String sortOrder = null;
+        String groupBy = null;
+        String having = null;
+        Cursor cursor = sDatabase.query(DatabaseDef.RespondedQuestionTable.TABLE_NAME, null,
+                selection, selectionArgs, groupBy, having, sortOrder);
+        if(cursor != null && cursor.moveToFirst()){
+//            while (cursor.moveToNext()) {
+//                long id = cursor
+//                        .getLong(cursor
+//                                .getColumnIndex(DatabaseDef.CreatedQuestionColumns.QUESTION_ID));
+//                LogUtil.d(TAG, "id: " + id);
+//            }
+            return true;
+
+        }
+
+        return false;
     }
 
     /**

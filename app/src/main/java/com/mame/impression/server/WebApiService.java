@@ -52,7 +52,7 @@ public class WebApiService extends Service{
 
 
     public void run(Accessor.AccessorListener listener, RequestInfo info) {
-        LogUtil.d(TAG, "run: " + this);
+        LogUtil.d(TAG, "run: " + info.getParameter());
 
         ApiType apiType = ApiType.getResttype(info.getRequestAction());
         String apiName = ApiType.getApiName(info.getRequestAction());

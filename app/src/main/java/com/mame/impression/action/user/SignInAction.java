@@ -45,12 +45,12 @@ public class SignInAction implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws JSONException {
+    public String getParemeter() throws JSONException {
 
         JSONObject param = new JSONObject();
         param.put(JsonParam.USER_NAME, mUserName);
         param.put(JsonParam.USER_PASSWORD, mPassword);
 
-        return param;
+        return param.toString();
     }
 }

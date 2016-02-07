@@ -11,8 +11,12 @@ import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kosukeEndo on 2015/12/05.
@@ -37,7 +41,7 @@ public class LocalAccessor extends Accessor {
         mDataHandler = ImpressionLocalDataHandler.getInstance();
 
         RequestAction action = info.getRequestAction();
-        JSONObject param = info.getParameter();
+        String param = info.getParameter();
 
         switch(action){
             case CREATE_QUESTION:
@@ -47,7 +51,7 @@ public class LocalAccessor extends Accessor {
                 updateUserPoint(context, param);
                 break;
             case GET_POINT:
-                getUserPoint(context, param);
+                getUserPoint(context);
                 break;
             case SIGN_OUT:
                 removeUserData(context);
@@ -62,23 +66,37 @@ public class LocalAccessor extends Accessor {
 
     }
 
-    private void extractNotRespondedQuestions(Context context, JSONObject param){
-        LogUtil.d(TAG,"extractNotRespondedQuestions");
+    private void extractNotRespondedQuestions(Context context, String param){
+        LogUtil.d(TAG,"extractNotRespondedQuestions: " + param);
 
-//        try {
-//            long questionId = param.getLong(JsonParam.ID);
-//            mDataHandler.isQuestionAlreadyResponed(context, questionId);
-//        } catch (JSONException e){
-//            LogUtil.d(TAG, "JSONException: " + e.getMessage());
-//            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
-//        }
+        try {
+            JSONArray input = new JSONArray(param);
+            JSONArray output = new JSONArray();
+            for(int i=0; i<input.length();i++){
+                JSONObject obj = input.getJSONObject(i);
+                boolean result = mDataHandler.isQuestionAlreadyResponed(context, obj.getLong(JsonParam.QUESTION_ID));
+                if(!result){
+                    output.put(obj);
+                }
+            }
+
+            JSONObject outputJson = new JSONObject();
+            outputJson.put(JsonParam.PARAM, output);
+
+            mListener.onCompleted(outputJson);
+
+        } catch (JSONException e){
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+        }
+
     }
 
-    private void storeRepliedQuestionId(Context context, JSONObject param){
+    private void storeRepliedQuestionId(Context context, String param){
         LogUtil.d(TAG, "storeRepliedQuestionId");
 
         try {
-            long questionId = param.getLong(JsonParam.QUESTION_ID);
+            long questionId = new JSONObject(param).getLong(JsonParam.QUESTION_ID);
             mDataHandler.storeRespondedQuestionId(context, questionId);
         } catch (JSONException e){
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
@@ -87,11 +105,11 @@ public class LocalAccessor extends Accessor {
     }
 
 
-    private void storeCreatedQuestionId(Context context, JSONObject param){
+    private void storeCreatedQuestionId(Context context, String param){
         LogUtil.d(TAG, "storeCreatedQuestionId");
 
         try {
-            long questionId = param.getLong(JsonParam.ID);
+            long questionId = new JSONObject(param).getLong(JsonParam.ID);
             mDataHandler.storeCreatedQuestionId(context, questionId);
             //TODO
             mListener.onCompleted(new JSONObject());
@@ -101,7 +119,7 @@ public class LocalAccessor extends Accessor {
         }
     }
 
-    private void getUserPoint(Context context, JSONObject param){
+    private void getUserPoint(Context context){
         LogUtil.d(TAG, "getUserPoint");
 
         try {
@@ -117,11 +135,11 @@ public class LocalAccessor extends Accessor {
         }
     }
 
-    private void updateUserPoint(Context context, JSONObject param){
+    private void updateUserPoint(Context context, String param){
         LogUtil.d(TAG, "updateUserPoint");
 
         try {
-            int diff = param.getInt(JsonParam.USER_POINT_DIFF);
+            int diff = new JSONObject(param).getInt(JsonParam.USER_POINT_DIFF);
             int newPoint = mDataHandler.updateUserPoint(context, diff);
 
             JSONObject result = new JSONObject();

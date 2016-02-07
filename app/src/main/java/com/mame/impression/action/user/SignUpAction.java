@@ -52,7 +52,7 @@ public class SignUpAction implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws JSONException {
+    public String getParemeter() throws JSONException {
 
         JSONObject param = new JSONObject();
         param.put(JsonParam.USER_NAME, mUserName);
@@ -60,6 +60,6 @@ public class SignUpAction implements Action {
         param.put(JsonParam.USER_GENDER, mGender);
         param.put(JsonParam.USER_AGE, mAge);
 
-        return param;
+        return param.toString();
     }
 }

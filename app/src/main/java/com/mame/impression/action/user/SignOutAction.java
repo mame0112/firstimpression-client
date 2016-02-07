@@ -48,12 +48,12 @@ public class SignOutAction implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws JSONException {
+    public String getParemeter() throws JSONException {
 
         JSONObject param = new JSONObject();
         param.put(JsonParam.USER_ID, mUserId);
         param.put(JsonParam.USER_NAME, mUserName);
 
-        return param;
+        return param.toString();
     }
 }

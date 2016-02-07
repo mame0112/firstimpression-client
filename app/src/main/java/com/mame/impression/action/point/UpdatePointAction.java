@@ -44,11 +44,11 @@ public class UpdatePointAction  implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
+    public String getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
         param.put(JsonParam.USER_ID, mUserId);
         param.put(JsonParam.USER_POINT_DIFF, mPointDiff);
 
-        return param;
+        return param.toString();
     }
 }

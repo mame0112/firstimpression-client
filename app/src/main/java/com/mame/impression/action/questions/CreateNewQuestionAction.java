@@ -58,7 +58,7 @@ public class CreateNewQuestionAction  implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
+    public String getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
 
         param.put(JsonParam.QUESTION_CREATED_USER_ID, mCreatedUserId);
@@ -67,6 +67,6 @@ public class CreateNewQuestionAction  implements Action {
         param.put(JsonParam.QUESTION_CHOICE_A, mChoiceA);
         param.put(JsonParam.QUESTION_CHOICE_B, mChoiceB);
 
-        return param;
+        return param.toString();
     }
 }

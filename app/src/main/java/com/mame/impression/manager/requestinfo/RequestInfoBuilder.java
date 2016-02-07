@@ -47,8 +47,8 @@ public class RequestInfoBuilder {
         return this;
     }
 
-    public RequestInfoBuilder setRequestParam(JSONObject param) {
-        mInfo.setRequestParam(param);
+    public RequestInfoBuilder setRequestParam(String jsonString) {
+        mInfo.setRequestParam(jsonString);
         return this;
     }
 

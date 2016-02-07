@@ -55,10 +55,13 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
         if(mAccessors != null){
             Accessor accessor = mAccessors.get(mCurrentAccessorIndex);
 
-            accessor.setAccessorListener(this);
+            //TODO need to check if this null check works fine
+            if(accessor != null){
+                accessor.setAccessorListener(this);
 
-            //Request
-            accessor.request(context, info, accessor.getClass().getSimpleName());
+                //Request
+                accessor.request(context, info, accessor.getClass().getSimpleName());
+            }
 
         }
 
@@ -112,13 +115,20 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
                 // TODO Error handling
             }
 
-            JSONObject paramObject = null;
+            String paramObject = null;
 
             try {
-                paramObject = object.getJSONObject(JsonParam.PARAM);
+                LogUtil.d(TAG, "object: " + object);
+                paramObject = object.getJSONObject(JsonParam.PARAM).toString();
             } catch(JSONException e){
+                //Try to get as JSONArray format
                 LogUtil.d(TAG, "JSONException: " + e.getMessage());
-                // TODO Error handling
+                try {
+                    paramObject = object.getJSONArray(JsonParam.PARAM).toString();
+                } catch (JSONException e1) {
+                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                    //TODO Error handling
+                }
             }
 
             //Increase index
@@ -132,7 +142,7 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
             RequestInfoBuilder builder = new RequestInfoBuilder(mInfo);
 
             //Update request info
-            RequestInfo info = builder.setRequestParam(paramObject).getResult();
+            RequestInfo info = builder.setRequestParam(paramObject.toString()).getResult();
 
             accessor.request(mContext, info, accessor.getClass().getSimpleName());
         }

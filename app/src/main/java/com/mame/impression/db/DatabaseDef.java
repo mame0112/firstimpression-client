@@ -47,10 +47,4 @@ public class DatabaseDef {
         static final String QUESTION_ID = "responded_question_id";
     }
 
-    public interface Constants {
-        static final int QUESTION_MATCH = 10;
-
-        static final int POINT_MATCH = 20;
-    }
-
 }

@@ -42,10 +42,10 @@ public class GetPointAction implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
+    public String getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
         param.put(JsonParam.USER_ID, mUserId);
 
-        return param;
+        return param.toString();
     }
 }

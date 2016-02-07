@@ -48,13 +48,13 @@ public class UpdateUserDataAction  implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, IllegalFormatException, JSONException {
+    public String getParemeter() throws IllegalArgumentException, IllegalFormatException, JSONException {
 
         JSONObject param = new JSONObject();
 
         param.put(JsonParam.USER_AGE, mAge.name());
         param.put(JsonParam.USER_GENDER, mGender.name());
 
-        return param;
+        return param.toString();
     }
 }

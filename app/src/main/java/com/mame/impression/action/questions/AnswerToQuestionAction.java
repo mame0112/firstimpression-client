@@ -57,7 +57,7 @@ public class AnswerToQuestionAction implements Action {
     }
 
     @Override
-    public JSONObject getParemeter() throws IllegalArgumentException, JSONException {
+    public String getParemeter() throws IllegalArgumentException, JSONException {
         JSONObject param = new JSONObject();
 
         param.put(JsonParam.QUESTION_ID, mQuestionId);
@@ -67,6 +67,6 @@ public class AnswerToQuestionAction implements Action {
         //In client side, we just remember "Which item is seleced". Translation to"a: x, b:y" format should be done by server side.
         param.put(JsonParam.QUESTION_SELECTED_CHOICE, mSelectedItem);
 
-        return param;
+        return param.toString();
     }
 }
