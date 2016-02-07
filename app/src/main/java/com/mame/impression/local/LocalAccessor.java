@@ -98,6 +98,8 @@ public class LocalAccessor extends Accessor {
         try {
             long questionId = new JSONObject(param).getLong(JsonParam.QUESTION_ID);
             mDataHandler.storeRespondedQuestionId(context, questionId);
+            //TODO
+            mListener.onCompleted(new JSONObject());
         } catch (JSONException e){
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());

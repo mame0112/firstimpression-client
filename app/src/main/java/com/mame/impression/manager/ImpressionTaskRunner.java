@@ -106,6 +106,9 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
             //Clear index
             mCurrentAccessorIndex = 0;
 
+            // Initialize
+            mAccessors = null;
+
             //Return to client
             mListener.onCompleted(object);
         } else {
