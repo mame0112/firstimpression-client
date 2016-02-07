@@ -30,4 +30,5 @@ dependencies {
     compile project(':modules:volley')
     compile 'com.squareup.okhttp:okhttp:2.0.0'
     compile 'com.google.android.gms:play-services-analytics:8.1.0'
+    compile 'com.google.android.gms:play-services:8.1.0'
 }

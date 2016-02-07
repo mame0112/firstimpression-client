@@ -29,6 +29,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.gcm.RegistrationIntentService;
 import com.mame.impression.ui.DividerItemDecoration;
 import com.mame.impression.ui.notification.ImpressionNotificationManager;
 import com.mame.impression.ui.service.MainPageService;
@@ -153,6 +154,9 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         mSnackBar = new MainPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.main_page_root_view));
         mSnackBar.setMainPageSnackbarListener(this);
+
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 
     @Override
