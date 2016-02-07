@@ -77,4 +77,6 @@ public class Constants {
 
     public final static String INTENT_MODE_SIGNUP = "intent_mode_signup";
 
+    public final static String INTENT_USER_POINT = "intent_user_point";
+
 }

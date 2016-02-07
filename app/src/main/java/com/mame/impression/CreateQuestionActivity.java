@@ -126,6 +126,14 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     @Override
     public void onNewQuestionCreationSuccess(int updatedPoint) {
         LogUtil.d(TAG, "onNewQuestionCreationSuccess: " + updatedPoint);
+        Intent intent = new Intent();
+
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.INTENT_USER_POINT, updatedPoint);
+
+        intent.putExtras(bundle);
+
+        setResult(RESULT_OK, intent);
         finish();
     }
 

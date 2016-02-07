@@ -65,6 +65,8 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     private MainPageSnackbar mSnackBar;
 
+    private final static int REQUEST_CODE = 1;
+
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -250,13 +252,37 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     private void launchCreateQuestionActivity(){
         Intent intent = new Intent(getApplicationContext(), CreateQuestionActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivityForResult(intent, REQUEST_CODE);
     }
 
     @Override
-    public void onOpenQuestionDataReady(final List<MainPageContent> data) {
-        LogUtil.d(TAG, "onOpenQuestionDataReady");
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(data != null){
+            Bundle bundle = data.getExtras();
+
+            switch (requestCode) {
+                case REQUEST_CODE:
+                    if (resultCode == RESULT_OK) {
+                        LogUtil.d(TAG, "RESULT_OK");
+                        int point = bundle.getInt(Constants.INTENT_USER_POINT);
+                        mSnackBar.updateStatus(point);
+                    } else if (resultCode == RESULT_CANCELED) {
+                        LogUtil.d(TAG, "RESULT_CANCELED");
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+        @Override
+    public void onOpenQuestionDataReady(final List<MainPageContent> data){
+            LogUtil.d(TAG, "onOpenQuestionDataReady");
 
         if(data != null){
 
@@ -272,8 +298,8 @@ public class MainPageActivity extends ImpressionBaseActivity
     }
 
     @Override
-    public void onReplyFinished(int updatedPoint) {
-        LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
+    public void onReplyFinished ( int updatedPoint){
+            LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
         mSnackBar.updateStatus(updatedPoint);
     }
 
@@ -285,8 +311,8 @@ public class MainPageActivity extends ImpressionBaseActivity
     }
 
     @Override
-    protected void enterPage() {
-        TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
+    protected void enterPage () {
+            TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
     }
 
     @Override
