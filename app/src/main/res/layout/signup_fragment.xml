@@ -7,13 +7,15 @@
     <EditText
         android:id="@+id/signup_username"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="@string/sign_in_hint_username"
-        android:layout_height="wrap_content" />
+        android:inputType="text" />
     <EditText
         android:id="@+id/signup_password"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:hint="@string/sign_in_hint_password"
-        android:layout_height="wrap_content" />
+        android:inputType="text" />
     <Spinner
         android:id="@+id/signup_age_spinner"
         android:layout_width="match_parent"

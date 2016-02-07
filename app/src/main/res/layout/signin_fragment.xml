@@ -25,15 +25,17 @@
             android:layout_marginBottom="@dimen/default_view_vartical_margin"
             android:id="@+id/signin_username"
             android:layout_width="match_parent"
-            android:hint="@string/sign_in_hint_username"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/sign_in_hint_username" />
         <EditText
             android:layout_marginTop="@dimen/default_view_vartical_margin"
             android:layout_marginBottom="@dimen/default_view_vartical_margin"
             android:id="@+id/signin_password"
             android:layout_width="match_parent"
-            android:hint="@string/sign_in_hint_password"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:hint="@string/sign_in_hint_password" />
         <TextView
             android:layout_marginTop="@dimen/default_view_vartical_margin"
             android:layout_marginBottom="@dimen/default_view_vartical_margin"
