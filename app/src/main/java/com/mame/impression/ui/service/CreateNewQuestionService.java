@@ -12,6 +12,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
+import com.mame.impression.point.PointManager;
 import com.mame.impression.point.PointUpdateType;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
@@ -59,7 +60,7 @@ public class CreateNewQuestionService extends ImpressionBaseService {
                         try {
                             int point = response.getInt(JsonParam.USER_POINT);
                             LogUtil.d(TAG, "current point: " + point);
-                            if(point + PointUpdateType.getPointChangeValue(PointUpdateType.CREATE_NEW_QUESTION) >= 0){
+                            if(PointManager.isEnoughPointForCreateNewQuestion(point)){
                                 //We can create new question
                                 requestToCreateNewQuestion(createUserId, createUserName, description, choiceA, choiceB);
                             } else {

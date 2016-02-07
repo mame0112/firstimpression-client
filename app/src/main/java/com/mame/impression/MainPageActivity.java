@@ -34,6 +34,7 @@ import com.mame.impression.ui.notification.ImpressionNotificationManager;
 import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.data.MainPageContent;
+import com.mame.impression.ui.view.MainPageSnackbar;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 import com.mame.impression.util.TrackingUtil;
@@ -42,7 +43,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
-public class MainPageActivity extends ImpressionBaseActivity implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener {
+public class MainPageActivity extends ImpressionBaseActivity
+        implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener, MainPageSnackbar.MainPageSnackbarListener {
 
     private static final String TAG = Constants.TAG + MainPageActivity.class.getSimpleName();
 
@@ -60,6 +62,8 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
 
     private Toolbar mToolbar;
+
+    private MainPageSnackbar mSnackBar;
 
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -145,9 +149,8 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
                 });
         itemDecor.attachToRecyclerView(mRecyclerView);
 
-        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_page_root_view);
-        Snackbar.make(coordinatorLayout, "test", Snackbar.LENGTH_LONG).show();
-
+        mSnackBar = new MainPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.main_page_root_view));
+        mSnackBar.setMainPageSnackbarListener(this);
     }
 
     @Override
@@ -271,7 +274,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     @Override
     public void onReplyFinished(int updatedPoint) {
         LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
-        //TODO Show feedback
+        mSnackBar.updateStatus(updatedPoint);
     }
 
     @Override
@@ -316,4 +319,9 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
         startActivity(intent);
     }
 
+    @Override
+    public void onCreateNewQuestionPressed() {
+        LogUtil.d(TAG, "onCreateNewQuestionPressed");
+        launchCreateQuestionActivity();
+    }
 }

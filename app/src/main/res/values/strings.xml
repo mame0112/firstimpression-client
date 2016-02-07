@@ -39,6 +39,9 @@
     <!-- Main page -->
     <string name="main_card_title_divider">-</string>
 
+    <string name="main_page_current_point">Your point: %1$d</string>
+    <string name="main_pgae_create_question">Create question</string>
+
     <!-- Welcome page -->
     <string name="welcome_service_description">First impression is a service that enable you to check your idea quickly.</string>
     <string name="welcome_signin_button">Sign in</string>
