@@ -73,7 +73,7 @@ public class WebApiTask {
                 }
                 LogUtil.d(TAG, "string: " + total);
 
-                if(mListener != null){
+                if(mListener != null && total != null){
                     try {
                         mListener.onCompleted(new JSONObject(total.toString()));
                     } catch (JSONException e) {

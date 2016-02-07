@@ -32,6 +32,12 @@
     <dimen name="card_margin_left">4dp</dimen>
     <dimen name="card_subtext_divider">4dp</dimen>
 
+    <!-- Answer overview -->
+    <dimen name="answer_page_item_vertical_margin">4dp</dimen>
+    <dimen name="answer_page_item_choice_horizontal_padding">8dp</dimen>
+    <dimen name="answer_page_item_innter_horizontal_padding">2dp</dimen>
+    <dimen name="answer_page_item_choice_num_vertical_margin">2dp</dimen>
+
     <!-- Prompt dialog-->
     <dimen name="prompt_horizontal_padding">14dp</dimen>
 

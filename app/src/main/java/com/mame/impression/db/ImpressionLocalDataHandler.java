@@ -151,7 +151,6 @@ public class ImpressionLocalDataHandler {
     }
 
     public synchronized boolean isQuestionAlreadyResponed(Context context, long questionId){
-        LogUtil.d(TAG, "isQuestionAlreadyResponed" );
 
         if(questionId == Constants.NO_QUESTION){
             throw new IllegalArgumentException("question id cannot be null");
