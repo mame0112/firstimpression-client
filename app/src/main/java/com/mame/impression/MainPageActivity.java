@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewCompat;
@@ -58,27 +59,7 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
 
     private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
 
-    private DrawerLayout mDrawerLayout;
-
-    private ListView mDrawerList;
-
     private Toolbar mToolbar;
-
-    private ActionBarDrawerToggle mDrawerToggle;
-
-    private CharSequence mDrawerTitle;
-
-    private static int[] DRAWER_ITEMS;
-
-    static {
-        // Define drawer items and its layout
-        DRAWER_ITEMS = new int[] {
-            R.string.drawer_item_setting,
-                    R.string.drawer_item_about,
-                    R.string.drawer_item_privacy,
-                    R.string.drawer_item_terms
-        };
-    }
 
     private ServiceConnection mConnection = new ServiceConnection() {
 
@@ -164,31 +145,8 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
                 });
         itemDecor.attachToRecyclerView(mRecyclerView);
 
-
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, createDrawerItemStrings()));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                mToolbar, R.string.answer_detail_choice_a, R.string.answer_detail_choice_b) {
-
-            /** Called when a drawer has settled in a completely closed state. */
-            public void onDrawerClosed(View view) {
-                setTitle(R.string.app_name);
-                invalidateOptionsMenu();
-            }
-
-            /** Called when a drawer has settled in a completely open state. */
-            public void onDrawerOpened(View drawerView) {
-                setTitle(mDrawerTitle);
-                invalidateOptionsMenu();
-            }
-        };
-
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.main_page_root_view);
+        Snackbar.make(coordinatorLayout, "test", Snackbar.LENGTH_LONG).show();
 
     }
 
@@ -235,10 +193,6 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
-        if (mDrawerToggle.onOptionsItemSelected(item)) {
-            return true;
-        }
 
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
@@ -340,27 +294,13 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     @Override
     public void onConfigurationChanged(Configuration newConfig){
         LogUtil.d(TAG, "onConfigurationChanged");
-
         super.onConfigurationChanged(newConfig);
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
-    private class DrawerItemClickListener implements ListView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            LogUtil.d(TAG, "onItemClick: " + position);
-            mDrawerList.setItemChecked(position, true);
-            mDrawerLayout.closeDrawer(mDrawerList);
-//            mToolbar.setTitle("position: " + position);
-            mDrawerTitle = "position: " + position;
-        }
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
 //        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
         return super.onPrepareOptionsMenu(menu);
     }
@@ -368,18 +308,6 @@ public class MainPageActivity extends ImpressionBaseActivity implements MainPage
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    private String[] createDrawerItemStrings(){
-        String[] output = new String[DRAWER_ITEMS.length];
-
-        for(int i=0; i<DRAWER_ITEMS.length; i++){
-            output[i] = (String)getText(DRAWER_ITEMS[i]);
-        }
-
-        return output;
     }
 
     private void startSprashActivity(){

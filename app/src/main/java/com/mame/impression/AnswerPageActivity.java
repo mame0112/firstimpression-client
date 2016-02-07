@@ -8,6 +8,8 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 
