@@ -3,6 +3,7 @@ package com.mame.impression.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -39,6 +40,10 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
     private TextView mForgetView;
 
+    private TextInputLayout mUserNameWrapper;
+
+    private TextInputLayout mPasswordWrapper;
+
     private String mUserName;
 
     private String mPassword;
@@ -48,6 +53,49 @@ public class SignInPageFragment extends ImpressionBaseFragment {
     private PasswordValidator mPasswordValidator;
 
     private SignInPageFragmentListener mListener;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        LogUtil.d(TAG, "onCreate");
+
+        mUserNameValidator = new UserNameValidator();
+        mPasswordValidator = new PasswordValidator();
+
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.signin_fragment, container, false);
+        mUserNameView = (EditText) view.findViewById(R.id.signin_username);
+        mUserNameView.addTextChangedListener(mUserNmaeWatcher);
+
+        mUserNameWrapper = (TextInputLayout)view.findViewById(R.id.signin_username_wrapper);
+        mUserNameWrapper.setEnabled(true);
+
+        mPasswordView = (EditText) view.findViewById(R.id.signin_password);
+        mPasswordView.addTextChangedListener(mPasswordWatcher);
+
+        mPasswordWrapper = (TextInputLayout)view.findViewById(R.id.signin_password_wrapper);
+        mPasswordWrapper.setEnabled(true);
+
+        mSignInButton = (Button) view.findViewById(R.id.signin_button);
+        mSignInButton.setOnClickListener(mClickListener);
+        mSignInButton.setEnabled(false);
+
+        mForgetView = (TextView) view.findViewById(R.id.signin_forget_password);
+        mForgetView.setOnClickListener(mClickListener);
+
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
 
     private View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -97,6 +145,9 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         public void afterTextChanged(Editable s) {
             mUserName = s.toString();
             changeButtonState();
+
+            TextValidator.VALIDATION_RESULT result = mUserNameValidator.isValidInput(mUserName);
+            showResultForUserName(result, mUserNameWrapper);
         }
     };
     private TextWatcher mPasswordWatcher = new TextWatcher() {
@@ -114,6 +165,9 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         public void afterTextChanged(Editable s) {
             mPassword = s.toString();
             changeButtonState();
+
+            TextValidator.VALIDATION_RESULT result = mPasswordValidator.isValidInput(mPassword);
+            showResultForPassword(result, mPasswordWrapper);
         }
     };
 
@@ -124,43 +178,6 @@ public class SignInPageFragment extends ImpressionBaseFragment {
             mSignInButton.setEnabled(false);
         }
 
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        LogUtil.d(TAG, "onCreate");
-
-        mUserNameValidator = new UserNameValidator();
-        mPasswordValidator = new PasswordValidator();
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.signin_fragment, container, false);
-        mUserNameView = (EditText) view.findViewById(R.id.signin_username);
-        mUserNameView.addTextChangedListener(mUserNmaeWatcher);
-
-        mPasswordView = (EditText) view.findViewById(R.id.signin_password);
-        mPasswordView.addTextChangedListener(mPasswordWatcher);
-
-        mSignInButton = (Button) view.findViewById(R.id.signin_button);
-        mSignInButton.setOnClickListener(mClickListener);
-        mSignInButton.setEnabled(false);
-
-        mForgetView = (TextView) view.findViewById(R.id.signin_forget_password);
-        mForgetView.setOnClickListener(mClickListener);
-
-        return view;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 
     public void setSignInPageFragmentListener(SignInPageFragmentListener listener){
@@ -181,6 +198,49 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         void onSignInButtonPressed(String userName, String password);
     }
 
+    private void showResultForUserName(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
+        if(result != null){
+            switch(result){
+                case RESULT_OK:
+                    inputLayout.setError(null);
+                    break;
+                case INPUT_NULL:
+                    inputLayout.setError(getString(R.string.sign_in_error_username_null));
+                    break;
+                case INPUT_SHORT:
+                    inputLayout.setError(getString(R.string.sign_in_error_username_short));
+                    break;
+                case INPUT_LONG:
+                    inputLayout.setError(getString(R.string.sign_in_error_username_long));
+                    break;
+                case INVALIDED_INPUT_CHAR_TYPE:
+                    break;
+            }
+        }
+    }
+
+    private void showResultForPassword(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
+        if(result != null){
+            switch(result){
+                case RESULT_OK:
+                    inputLayout.setError(null);
+                    break;
+                case INPUT_NULL:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_null));
+                    break;
+                case INPUT_SHORT:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_short));
+                    break;
+                case INPUT_LONG:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_long));
+                    break;
+                case INVALIDED_INPUT_CHAR_TYPE:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_invalid_character));
+                    break;
+            }
+        }
+    }
+
     public class UserNameValidator extends TextValidator{
 
         @Override
@@ -190,7 +250,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
         @Override
         public int getMaximumInputength() {
-            return Constants.USERNAME_MIN_LENGTH;
+            return Constants.USERNAME_MAX_LENGTH;
         }
 
         @Override

@@ -1,6 +1,7 @@
 package com.mame.impression.ui;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.util.LogUtil;
 
 import java.util.regex.Pattern;
 
@@ -8,6 +9,8 @@ import java.util.regex.Pattern;
  * Created by kosukeEndo on 2016/01/03.
  */
 public abstract class TextValidator {
+
+    private final static String TAG = Constants.TAG + TextValidator.class.getSimpleName();
 
     public enum VALIDATION_RESULT{
         RESULT_OK, INPUT_NULL, INPUT_SHORT, INPUT_LONG, INVALIDED_INPUT_CHAR_TYPE
@@ -41,22 +44,26 @@ public abstract class TextValidator {
     }
 
     public boolean isValideInput(String input){
-        if(input != null){
-            return true;
+        if(input == null){
+            return false;
         }
 
         if(input.length() >= getMinimumInputength() && input.length() <= getMaximumInputength()){
             String acceptableString = getAcceptedInputType();
 
             if(acceptableString != null){
+                LogUtil.d(TAG,"acceptableString is not null");
                 Pattern pattern = Pattern.compile(acceptableString);
 
                 if(pattern.matcher(input).matches()){
+                    LogUtil.d(TAG,"match");
                     return true;
                 } else {
+                    LogUtil.d(TAG,"not match");
                     return false;
                 }
             } else {
+                LogUtil.d(TAG,"acceptableString is null");
                 return true;
             }
         }
