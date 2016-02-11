@@ -35,6 +35,8 @@ public abstract class TextValidator {
             Pattern pattern = Pattern.compile(acceptableString);
 
             if(pattern.matcher(input).matches()){
+                return VALIDATION_RESULT.RESULT_OK;
+            } else {
                 return VALIDATION_RESULT.INVALIDED_INPUT_CHAR_TYPE;
             }
         }
@@ -52,18 +54,14 @@ public abstract class TextValidator {
             String acceptableString = getAcceptedInputType();
 
             if(acceptableString != null){
-                LogUtil.d(TAG,"acceptableString is not null");
                 Pattern pattern = Pattern.compile(acceptableString);
 
                 if(pattern.matcher(input).matches()){
-                    LogUtil.d(TAG,"match");
                     return true;
                 } else {
-                    LogUtil.d(TAG,"not match");
                     return false;
                 }
             } else {
-                LogUtil.d(TAG,"acceptableString is null");
                 return true;
             }
         }

@@ -52,7 +52,7 @@ public class Constants {
 
     public final static int PASSWORD_MIN_LENGTH = 4;
 
-    public final static String PASSWORD_PATTERN = "^[a-zA-Z0-9#_~!$&'()*+,;=:.\"(),:;<>@\\[\\]\\\\]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*$";
+    public final static String PASSWORD_PATTERN = "[0-9a-zA-Z-_]+";
 
     public final static int DESCRIPTION_MIN_LENGTH = 4;
 
