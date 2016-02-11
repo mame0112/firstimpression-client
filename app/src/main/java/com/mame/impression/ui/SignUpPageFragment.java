@@ -3,6 +3,7 @@ package com.mame.impression.ui;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -35,6 +36,14 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
     private EditText mUserNameView;
 
     private EditText mPasswordView;
+
+    private TextInputLayout mUserNameWrapper;
+
+    private TextInputLayout mPasswordWrapper;
+
+    private UserNameValidator mUserNameValidator;
+
+    private PasswordValidator mPasswordValidator;
 
     private TextView mToSView;
 
@@ -77,7 +86,8 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LogUtil.d(TAG, "onCreate");
+        mUserNameValidator = new UserNameValidator();
+        mPasswordValidator = new PasswordValidator();
     }
 
     @Override
@@ -94,8 +104,14 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
         mUserNameView = (EditText) view.findViewById(R.id.signup_username);
         mUserNameView.addTextChangedListener(mUserNmaeWatcher);
 
+        mUserNameWrapper = (TextInputLayout)view.findViewById(R.id.signup_username_wrapper);
+        mUserNameWrapper.setEnabled(true);
+
         mPasswordView = (EditText) view.findViewById(R.id.signup_password);
         mPasswordView.addTextChangedListener(mPasswordWatcher);
+
+        mPasswordWrapper = (TextInputLayout)view.findViewById(R.id.signup_password_wrapper);
+        mPasswordWrapper.setEnabled(true);
 
         mSignUpButton = (Button) view.findViewById(R.id.signup_button);
         mSignUpButton.setOnClickListener(mClickListener);
@@ -164,7 +180,8 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            TextValidator.VALIDATION_RESULT result = mUserNameValidator.isValidInput(mUserName);
+            showResultForUserName(result, mUserNameWrapper);
         }
     };
     private TextWatcher mPasswordWatcher = new TextWatcher() {
@@ -181,7 +198,8 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
 
         @Override
         public void afterTextChanged(Editable s) {
-
+            TextValidator.VALIDATION_RESULT result = mPasswordValidator.isValidInput(mPassword);
+            showResultForPassword(result, mPasswordWrapper);
         }
     };
 
@@ -306,6 +324,85 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
 
     public interface SignUpFragmentListener{
         void onSignUpButtonPressed(String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age);
+    }
+
+    private void showResultForUserName(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
+        if(result != null){
+            switch(result){
+                case RESULT_OK:
+                    inputLayout.setError(null);
+                    break;
+                case INPUT_NULL:
+                    inputLayout.setError(getString(R.string.sign_in_error_username_null));
+                    break;
+                case INPUT_SHORT:
+                    inputLayout.setError(getString(R.string.sign_in_error_username_short));
+                    break;
+                case INPUT_LONG:
+                    inputLayout.setError(getString(R.string.sign_in_error_username_long));
+                    break;
+                case INVALIDED_INPUT_CHAR_TYPE:
+                    break;
+            }
+        }
+    }
+
+    private void showResultForPassword(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
+        if(result != null){
+            switch(result){
+                case RESULT_OK:
+                    inputLayout.setError(null);
+                    break;
+                case INPUT_NULL:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_null));
+                    break;
+                case INPUT_SHORT:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_short));
+                    break;
+                case INPUT_LONG:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_long));
+                    break;
+                case INVALIDED_INPUT_CHAR_TYPE:
+                    inputLayout.setError(getString(R.string.sign_in_error_password_invalid_character));
+                    break;
+            }
+        }
+    }
+
+    public class UserNameValidator extends TextValidator{
+
+        @Override
+        public int getMinimumInputength() {
+            return Constants.USERNAME_MIN_LENGTH;
+        }
+
+        @Override
+        public int getMaximumInputength() {
+            return Constants.USERNAME_MAX_LENGTH;
+        }
+
+        @Override
+        public String getAcceptedInputType() {
+            return null;
+        }
+    }
+
+    public class PasswordValidator extends TextValidator{
+
+        @Override
+        public int getMinimumInputength() {
+            return Constants.PASSWORD_MIN_LENGTH;
+        }
+
+        @Override
+        public int getMaximumInputength() {
+            return Constants.PASSWORD_MAX_LENGTH;
+        }
+
+        @Override
+        public String getAcceptedInputType() {
+            return Constants.PASSWORD_PATTERN;
+        }
     }
 
 }
