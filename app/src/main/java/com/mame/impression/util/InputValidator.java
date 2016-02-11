@@ -21,13 +21,13 @@ public abstract class InputValidator {
     private static Pattern mTextPattern = Pattern.compile(TEXT_PATTERN);
     private Matcher matcher;
 
-    public static boolean isValidText(String text) {
-        Matcher matcher  = mTextPattern.matcher(text);
-        return matcher.matches();
-//        if (isLessThanMaxLength(input, min) && isMoreThanMinLength(input, max)) {
-//
-//        }
-    }
+//    public static boolean isValidText(String text) {
+//        Matcher matcher  = mTextPattern.matcher(text);
+//        return matcher.matches();
+////        if (isLessThanMaxLength(input, min) && isMoreThanMinLength(input, max)) {
+////
+////        }
+//    }
 
 
 

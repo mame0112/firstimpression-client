@@ -46,12 +46,19 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
 
     private String mChoiceBString;
 
+    private DescriptionTextValidator mDescValidator;
+
+    private ChoiceTextValidator mChoiceValidator;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         LogUtil.d(TAG, "onCreate");
+
+        mDescValidator = new DescriptionTextValidator();
+        mChoiceValidator = new ChoiceTextValidator();
     }
 
     @Override
@@ -75,7 +82,8 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
             public void afterTextChanged(Editable s) {
                 mDescription = s.toString();
                 changeCreateButtonState();
-                InputValidator.isValidText(mDescription);
+                TextValidator.VALIDATION_RESULT result = mDescValidator.isValidInput(mDescription);
+                showResultForDescription(result, mDescriptionWrapper);
             }
         });
 
@@ -98,7 +106,9 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
             public void afterTextChanged(Editable s) {
                 mChoiceAString = s.toString();
                 changeCreateButtonState();
-                mDescriptionWrapper.setError("Error!!");
+                TextValidator.VALIDATION_RESULT result = mChoiceValidator.isValidInput(mChoiceAString);
+                showResultForChoice(result, mChoiceAEditWrapper);
+//                mDescriptionWrapper.setError("Error!!");
             }
         });
 
@@ -121,6 +131,8 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
             public void afterTextChanged(Editable s) {
                 mChoiceBString = s.toString();
                 changeCreateButtonState();
+                TextValidator.VALIDATION_RESULT result = mChoiceValidator.isValidInput(mChoiceBString);
+                showResultForChoice(result, mChoiceBEditWrapper);
             }
         });
 
@@ -187,5 +199,87 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
 
     public interface CreateQuestionFragmentListener{
         void onCreateButtonPressed(String description, String choiceA, String choiceB);
+    }
+
+    private void showResultForDescription(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
+        if(result != null){
+            switch(result){
+                case RESULT_OK:
+                    inputLayout.setError(null);
+                    break;
+                case INPUT_NULL:
+                    LogUtil.w(TAG, "Input null for Description");
+                    inputLayout.setError(getString(R.string.str_create_question_error_desc_null));
+                    break;
+                case INPUT_SHORT:
+                    LogUtil.w(TAG, "Input text is too short for Description");
+                    inputLayout.setError(getString(R.string.str_create_question_error_desc_short));
+                    break;
+                case INPUT_LONG:
+                    LogUtil.w(TAG, "Input text is too long for Description");
+                    inputLayout.setError(getString(R.string.str_create_question_error_desc_long));
+                    break;
+                case INVALIDED_INPUT_CHAR_TYPE:
+                    LogUtil.w(TAG, "Input text is invalide for Description");
+                    break;
+            }
+        }
+    }
+
+    private void showResultForChoice(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
+        if(result != null){
+            switch(result){
+                case RESULT_OK:
+                    inputLayout.setError(null);
+                    break;
+                case INPUT_NULL:
+                    inputLayout.setError(getString(R.string.str_create_question_error_choice_null));
+                    break;
+                case INPUT_SHORT:
+                    inputLayout.setError(getString(R.string.str_create_question_error_choice_short));
+                    break;
+                case INPUT_LONG:
+                    inputLayout.setError(getString(R.string.str_create_question_error_choice_long));
+                    break;
+                case INVALIDED_INPUT_CHAR_TYPE:
+                    break;
+            }
+        }
+    }
+
+    public class DescriptionTextValidator extends TextValidator{
+
+        @Override
+        public int getMinimumInputength() {
+            return Constants.DESCRIPTION_MIN_LENGTH;
+        }
+
+        @Override
+        public int getMaximumInputength() {
+            return Constants.DESCRIPTION_MAX_LENGTH;
+        }
+
+        @Override
+        public String getAcceptedInputType() {
+            return null;
+        }
+    }
+
+    public  class ChoiceTextValidator extends TextValidator{
+
+        @Override
+        public int getMinimumInputength() {
+            return Constants.DESCRIPTION_CHOICE_MIN_LENGTH;
+        }
+
+        @Override
+        public int getMaximumInputength() {
+            return Constants.DESCRIPTION_CHOICE_MAX_LENGTH;
+        }
+
+        @Override
+        public String getAcceptedInputType() {
+            return null;
+        }
     }
 }

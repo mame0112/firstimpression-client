@@ -72,6 +72,12 @@
     <string name="str_create_question_choice_a">Choice A</string>
     <string name="str_create_question_choice_b">Choice B</string>
     <string name="str_create_question_create_button">Create question</string>
+    <string name="str_create_question_error_desc_null">You must input description</string>
+    <string name="str_create_question_error_desc_short">Description must be more than 4 characters</string>
+    <string name="str_create_question_error_desc_long">Description must be less than 64 characters</string>
+    <string name="str_create_question_error_choice_null">You must input choice</string>
+    <string name="str_create_question_error_choice_short">Choice must be more than 2 characters</string>
+    <string name="str_create_question_error_choice_long">Choice must be less than 32 characters</string>
 
 
     <!-- Notification dialog -->

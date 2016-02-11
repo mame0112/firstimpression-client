@@ -43,6 +43,10 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
     private String mPassword;
 
+    private UserNameValidator mUserNameValidator;
+
+    private PasswordValidator mPasswordValidator;
+
     private SignInPageFragmentListener mListener;
 
     private View.OnClickListener mClickListener = new View.OnClickListener() {
@@ -114,7 +118,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
     };
 
     private void changeButtonState(){
-        if(TextValidator.isValidUsername(mUserName) && TextValidator.isValidPassword(mPassword)){
+        if(mUserNameValidator.isValideInput(mUserName) && mPasswordValidator.isValideInput(mPassword)){
             mSignInButton.setEnabled(true);
         } else {
             mSignInButton.setEnabled(false);
@@ -127,6 +131,9 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         super.onCreate(savedInstanceState);
 
         LogUtil.d(TAG, "onCreate");
+
+        mUserNameValidator = new UserNameValidator();
+        mPasswordValidator = new PasswordValidator();
 
     }
 
@@ -172,6 +179,42 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
     public interface SignInPageFragmentListener{
         void onSignInButtonPressed(String userName, String password);
+    }
+
+    public class UserNameValidator extends TextValidator{
+
+        @Override
+        public int getMinimumInputength() {
+            return Constants.USERNAME_MIN_LENGTH;
+        }
+
+        @Override
+        public int getMaximumInputength() {
+            return Constants.USERNAME_MIN_LENGTH;
+        }
+
+        @Override
+        public String getAcceptedInputType() {
+            return null;
+        }
+    }
+
+    public class PasswordValidator extends TextValidator{
+
+        @Override
+        public int getMinimumInputength() {
+            return Constants.PASSWORD_MIN_LENGTH;
+        }
+
+        @Override
+        public int getMaximumInputength() {
+            return Constants.PASSWORD_MAX_LENGTH;
+        }
+
+        @Override
+        public String getAcceptedInputType() {
+            return Constants.PASSWORD_PATTERN;
+        }
     }
 
 }
