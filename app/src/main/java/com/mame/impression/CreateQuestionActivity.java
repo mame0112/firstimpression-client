@@ -127,7 +127,6 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onNewQuestionCreationSuccess(int updatedPoint) {
         LogUtil.d(TAG, "onNewQuestionCreationSuccess: " + updatedPoint);
         Intent intent = new Intent();
-
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.INTENT_USER_POINT, updatedPoint);
 
@@ -145,9 +144,17 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
 
     @Override
     public void notifyNotEnoughUserPoint(int point) {
-        LogUtil.d(TAG, "notifyCurrentUserPoint: " + point);
 
-        // TODO Show error message
+        //TODO We should show some latest questions to get some points to create question quickly.
+        LogUtil.d(TAG, "notifyNotEnoughUserPoint: " + point);
+
+        Intent intent = new Intent();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.INTENT_USER_POINT, point);
+        intent.putExtras(bundle);
+
+        setResult(RESULT_CANCELED, intent);
+        finish();
 
     }
 

@@ -107,8 +107,6 @@ public class MainPageActivity extends ImpressionBaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action.", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
                 TrackingUtil.trackEvent(MainPageActivity.this, TrackingUtil.EVENT_CATEGORY_MAINPAGE, TrackingUtil.EVENT_ACTION_MAINPAGE_BUTTON, TrackingUtil.EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON, 0);
                 launchCreateQuestionActivity();
 
@@ -275,7 +273,12 @@ public class MainPageActivity extends ImpressionBaseActivity
                         mSnackBar.updateStatus(point);
                     } else if (resultCode == RESULT_CANCELED) {
                         LogUtil.d(TAG, "RESULT_CANCELED");
+                        int point = bundle.getInt(Constants.INTENT_USER_POINT);
+                        mSnackBar.updateStatusWithError(point);
+                    } else {
+                        LogUtil.d(TAG, "RESULT Unknown");
                     }
+
                     break;
                 default:
                     break;

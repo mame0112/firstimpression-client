@@ -51,6 +51,16 @@ public class MainPageSnackbar {
         }
     }
 
+    public void updateStatusWithError(int point){
+        LogUtil.d(TAG, "updateStatusWithError");
+
+        if(mListener == null){
+            throw new IllegalArgumentException("setMainPageSnackbarListener must be called first");
+        }
+
+        Snackbar.make(mRootViewGroup, String.format(mContext.getString(R.string.main_page_not_enough_point_to_create_question), point), Snackbar.LENGTH_LONG).show();
+    }
+
     private void showPoint(int point){
 
         int pt;

@@ -41,6 +41,7 @@
 
     <string name="main_page_current_point">Your point: %1$d</string>
     <string name="main_pgae_create_question">Create question</string>
+    <string name="main_page_not_enough_point_to_create_question">Not enough point to create question. Reply to question first.</string>
 
     <!-- Welcome page -->
     <string name="welcome_service_description">First impression is a service that enable you to check your idea quickly.</string>
