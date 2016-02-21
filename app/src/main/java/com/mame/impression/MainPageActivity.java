@@ -27,6 +27,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.gcm.RegistrationIntentService;
@@ -61,6 +62,8 @@ public class MainPageActivity extends ImpressionBaseActivity
     private RecyclerView.LayoutManager mLayoutManager;
 
     private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
+
+    private TextView mNoContentView;
 
     private Toolbar mToolbar;
 
@@ -112,6 +115,9 @@ public class MainPageActivity extends ImpressionBaseActivity
 
             }
         });
+
+        mNoContentView = (TextView)findViewById(R.id.main_page_no_content);
+        mNoContentView.setVisibility(View.GONE);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
@@ -296,8 +302,13 @@ public class MainPageActivity extends ImpressionBaseActivity
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    mAdapter.updateData(data);
-                    mAdapter.notifyDataSetChanged();
+                    if(data.size() != 0){
+                        mAdapter.updateData(data);
+                        mAdapter.notifyDataSetChanged();
+                    } else {
+                        mNoContentView.setVisibility(View.VISIBLE);
+                    }
+
                 }
             });
 

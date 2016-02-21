@@ -8,6 +8,7 @@ import com.google.android.gms.iid.InstanceID;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 import java.io.IOException;
 
@@ -43,7 +44,9 @@ public class RegistrationIntentService extends IntentService {
         try {
             String token = instanceID.getToken(getString(R.string.gcm_sender_id),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
+//            String token = instanceID.getToken("first-impression-backend", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             LogUtil.d(TAG, "token: " + token);
+            PreferenceUtil.setRegistrationId(getApplicationContext(), token);
         } catch (IOException e) {
             LogUtil.d(TAG, "IOException: " + e.getMessage());
         }

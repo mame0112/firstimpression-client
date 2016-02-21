@@ -25,6 +25,8 @@ public class PreferenceUtil {
 
     private static final String KEY_USER_POINT = "user_point";
 
+    private static final String KEY_USER_REGISTRATION_ID = "user_registration_id";
+
     public static String getUserName(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
@@ -123,6 +125,24 @@ public class PreferenceUtil {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
         pref.edit().remove(KEY_USER_POINT).commit();
+    }
+
+    public static void setRegistrationId(Context c, String registrationId) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().putString(KEY_USER_REGISTRATION_ID, registrationId).commit();
+    }
+
+    public static String getRegistrationId(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        return pref.getString(KEY_USER_REGISTRATION_ID, null);
+    }
+
+    public static void removeRegistrationId(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_REGISTRATION_ID).commit();
     }
 
 }

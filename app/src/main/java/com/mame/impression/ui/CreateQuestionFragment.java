@@ -149,6 +149,7 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
                 }
 
                 if(ButtonUtil.isClickable()){
+                    mCreateButton.setEnabled(false);
                     mCreateQuestionListener.onCreateButtonPressed(mDescription, mChoiceAString, mChoiceBString);
                 }
 
@@ -156,6 +157,15 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mCreateButton != null){
+            changeCreateButtonState();
+        }
+
     }
 
     private void changeCreateButtonState(){

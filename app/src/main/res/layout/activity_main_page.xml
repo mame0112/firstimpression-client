@@ -27,6 +27,12 @@
 
     </android.support.design.widget.AppBarLayout>
 
+    <TextView
+        android:id="@+id/main_page_no_content"
+        android:text="@string/main_pgae_no_question"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/my_recycler_view"
         android:scrollbars="vertical"
