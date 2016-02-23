@@ -42,6 +42,7 @@ import com.mame.impression.util.PreferenceUtil;
 import com.mame.impression.util.TrackingUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -60,8 +61,6 @@ public class MainPageActivity extends ImpressionBaseActivity
     private MainPageAdapter mAdapter;
 
     private RecyclerView.LayoutManager mLayoutManager;
-
-    private List<MainPageContent> mContents = new ArrayList<MainPageContent>();
 
     private TextView mNoContentView;
 
@@ -130,7 +129,7 @@ public class MainPageActivity extends ImpressionBaseActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext()));
 
-        mAdapter = new MainPageAdapter(getApplicationContext(), mContents);
+        mAdapter = new MainPageAdapter(getApplicationContext());
         mAdapter.setMainPageAdapterListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -152,6 +151,10 @@ public class MainPageActivity extends ImpressionBaseActivity
 //                        mContents.remove(fromPos);
                         //TODO Remove content from adapter
                         mAdapter.notifyItemRemoved(fromPos);
+                        int remain = mAdapter.remove(fromPos);
+                        if(remain == 0){
+                            mNoContentView.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
         itemDecor.attachToRecyclerView(mRecyclerView);

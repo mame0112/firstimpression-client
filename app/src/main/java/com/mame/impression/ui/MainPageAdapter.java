@@ -41,8 +41,8 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     private long mMyUserId = Constants.NO_USER;
 
-    public MainPageAdapter(Context context, List<MainPageContent> data) {
-        mData = data;
+    public MainPageAdapter(Context context) {
+        mData = new ArrayList<MainPageContent>();
         mContext = context;
         mMyUserId = PreferenceUtil.getUserId(context);
     }
@@ -51,6 +51,17 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
         LogUtil.d(TAG, "updateData");
 //        mData = Collections.unmodifiableList(data);
         mData = new ArrayList(data);
+    }
+
+    /**
+     * Remove data.
+     * return the number of remaining item.
+     * @param position
+     * @return
+     */
+    public int remove(int position){
+        mData.remove(position);
+        return mData.size();
     }
 
     public void setMainPageAdapterListener(MainPageAdapterListener listener) {
