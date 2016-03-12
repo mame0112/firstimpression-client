@@ -73,7 +73,7 @@ public class ImpressionService extends Service {
     }
 
     public void finalize(Class clazz) {
-        LogUtil.d(TAG, "finalize size: " + mClients.size());
+        LogUtil.d(TAG, "finalize: " + clazz.getSimpleName());
         if (clazz != null) {
             mClients.remove(clazz);
             LogUtil.d(TAG, "remove size: " + mClients.size());

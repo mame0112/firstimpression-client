@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.MainPageContentBuilder;
 import com.mame.impression.gcm.RegistrationIntentService;
 import com.mame.impression.ui.DividerItemDecoration;
 import com.mame.impression.ui.notification.ImpressionNotificationManager;
@@ -59,6 +60,8 @@ public class MainPageActivity extends ImpressionBaseActivity
     private RecyclerView mRecyclerView;
 
     private MainPageAdapter mAdapter;
+
+    private static List<MainPageContent> mContent = new ArrayList<>();
 
     private RecyclerView.LayoutManager mLayoutManager;
 
@@ -129,7 +132,11 @@ public class MainPageActivity extends ImpressionBaseActivity
         mRecyclerView.setLayoutManager(mLayoutManager);
 //        mRecyclerView.addItemDecoration(new DividerItemDecoration(getApplicationContext()));
 
-        mAdapter = new MainPageAdapter(getApplicationContext());
+//        MainPageContentBuilder builder = new MainPageContentBuilder();
+//        builder.setQuestionId(34567).setCreatedUserName("a").setDescription("bbb").setChoiceA("cc").setChoiceB("ddd");
+//        mContent.add(builder.getResult());
+
+        mAdapter = new MainPageAdapter(getApplicationContext(), mContent);
         mAdapter.setMainPageAdapterListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -162,13 +169,17 @@ public class MainPageActivity extends ImpressionBaseActivity
         mSnackBar = new MainPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.main_page_root_view));
         mSnackBar.setMainPageSnackbarListener(this);
 
-        Intent intent = new Intent(this, RegistrationIntentService.class);
-        startService(intent);
+//        Intent intent = new Intent(this, RegistrationIntentService.class);
+//        startService(intent);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        if(mNoContentView != null){
+            mNoContentView.setVisibility(View.GONE);
+        }
 
         //Bind to MainPageService
         startService(new Intent(MainPageActivity.this, MainPageService.class));
@@ -194,9 +205,11 @@ public class MainPageActivity extends ImpressionBaseActivity
     }
 
     void doUnbindService() {
+        LogUtil.d(TAG, "unbindService");
         if (mIsBound) {
             unbindService(mConnection);
             mIsBound = false;
+            mService = null;
         }
     }
 
@@ -306,9 +319,11 @@ public class MainPageActivity extends ImpressionBaseActivity
                 @Override
                 public void run() {
                     if(data.size() != 0){
+                        mContent.clear();
+                        mContent.addAll(data);
                         mAdapter.updateData(data);
-                        mAdapter.notifyDataSetChanged();
-                    } else {
+                    }
+                    else {
                         mNoContentView.setVisibility(View.VISIBLE);
                     }
 

@@ -41,16 +41,23 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 
     private long mMyUserId = Constants.NO_USER;
 
-    public MainPageAdapter(Context context) {
-        mData = new ArrayList<MainPageContent>();
+    public MainPageAdapter(Context context, List<MainPageContent> contents) {
+//        super();
+//        mData.clear();
+//        mData.addAll(contents);
+        mData = new ArrayList<>(contents);
         mContext = context;
         mMyUserId = PreferenceUtil.getUserId(context);
     }
 
     public void updateData(List<MainPageContent> data){
-        LogUtil.d(TAG, "updateData");
+        LogUtil.d(TAG, "updateData: " + data.size());
 //        mData = Collections.unmodifiableList(data);
-        mData = new ArrayList(data);
+        mData.clear();
+        mData.addAll(data);
+        notifyDataSetChanged();
+//        mData = new ArrayList<>(data);
+//        notifyDataSetChanged();
     }
 
     /**
@@ -92,11 +99,12 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             holder.mChoiseAButton.setText(data.getChoiceA());
             holder.mChoiseBButton.setText(data.getChoiceB());
 
+            //TODO Need to disable
             //If this question was created by this user, disable button to avoid the user respond this question
-            if(data.getCreatedUserId() == mMyUserId){
-                holder.mChoiseAButton.setEnabled(false);
-                holder.mChoiseBButton.setEnabled(false);
-            }
+//            if(data.getCreatedUserId() == mMyUserId){
+//                holder.mChoiseAButton.setEnabled(false);
+//                holder.mChoiseBButton.setEnabled(false);
+//            }
 
         }
 //        holder.mThumbnail.setImageBitmap(mData.get(position).getThumbnail());
@@ -148,11 +156,13 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             mChoiseAButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(ButtonUtil.isClickable()){
+                    LogUtil.d(TAG, "onClick");
+//                    if(ButtonUtil.isClickable()){
+                        LogUtil.d(TAG, "clikable");
                         long id = mData.get(getAdapterPosition()).getQuestionId();
                         mData.remove(getAdapterPosition()).getQuestionId();
                         mListener.onItemSelected(id, 0);
-                    }
+//                    }
                 }
             });
 
@@ -160,11 +170,11 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             mChoiseBButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(ButtonUtil.isClickable()){
+//                    if(ButtonUtil.isClickable()){
                         long id = mData.get(getAdapterPosition()).getQuestionId();
                         mData.remove(getAdapterPosition()).getQuestionId();
                         mListener.onItemSelected(id, 1);
-                    }
+//                    }
                 }
             });
         }
