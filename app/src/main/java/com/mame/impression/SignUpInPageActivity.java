@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.view.View;
 
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
@@ -39,7 +40,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     private SignUpPageFragment mSignUpFragment = new SignUpPageFragment();
 
-    private Fragment mErrorMessageFragment = new ErrorMessageFragment();
+    private ErrorMessageFragment mErrorMessageFragment = new ErrorMessageFragment();
 
     private ImpressionService mService;
 
@@ -242,7 +243,12 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                     //Close this activity
                     finish();
                 } else {
-                    // TODO Error handling
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            mErrorMessageFragment.showErrorMessage();
+                        }
+                    });
                 }
 
             }

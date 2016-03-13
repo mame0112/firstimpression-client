@@ -111,6 +111,8 @@ public class JSONParser {
 
     public UserData createUserData(JSONObject object){
 
+        LogUtil.d(TAG, "createUserData");
+
         if(object != null){
             try {
                 JSONObject paramObject = extractParamObject(object);
@@ -143,7 +145,7 @@ public class JSONParser {
                 return builder.setUserId(userId).setUserName(userName).setPassword(password).setGender(gender).setAge(age).setCreatedQuestionIds(list).getResult();
 
             } catch (JSONException e) {
-                e.printStackTrace();
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
         }

@@ -3,6 +3,7 @@ package com.mame.impression.server;
 import android.content.Context;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
@@ -83,8 +84,14 @@ public class WebApiTask {
 
             } catch (MalformedURLException e) {
                 e.printStackTrace();
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } finally {
                 if(urlConnection != null){
                     urlConnection.disconnect();
@@ -139,12 +146,24 @@ public class WebApiTask {
 
             } catch (MalformedURLException e) {
                 LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } catch (ProtocolException e) {
                 LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } catch (IOException e) {
                 LogUtil.d(TAG, "IOException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } catch (JSONException e) {
-                e.printStackTrace();
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } finally {
                 if(conn != null){
                     conn.disconnect();
@@ -198,12 +217,24 @@ public class WebApiTask {
 
             } catch (MalformedURLException e) {
                 LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } catch (ProtocolException e) {
                 LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } catch (IOException e) {
                 LogUtil.d(TAG, "IOException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } catch (JSONException e) {
                 LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } finally {
                 if (conn != null) {
                     conn.disconnect();
@@ -259,12 +290,24 @@ public class WebApiTask {
 
             } catch (MalformedURLException e) {
                 LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } catch (ProtocolException e) {
                 LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } catch (IOException e) {
                 LogUtil.d(TAG, "IOException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                }
             } catch (JSONException e) {
                 LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                if(mListener != null){
+                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                }
             } finally {
                 if (conn != null) {
                     conn.disconnect();
