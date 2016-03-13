@@ -55,49 +55,23 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
         if(mAccessors != null){
             Accessor accessor = mAccessors.get(mCurrentAccessorIndex);
 
-            //TODO need to check if this null check works fine
             if(accessor != null){
                 accessor.setAccessorListener(this);
 
                 //Request
                 accessor.request(context, info, accessor.getClass().getSimpleName());
             }
-
         }
-
-//        for(Accessor accessor : accessors){
-//            accessor.setAccessorListener(this);
-//            //Stock accessor name
-//            mAccessorIdentifiers.add(accessor.getClass().getSimpleName());
-//
-//            //Request
-//            accessor.request(listener, context, info, accessor.getClass().getSimpleName());
-//        }
-
     }
 
-//    @Override
-//    public void onNotify(String identifier) {
-//        LogUtil.d(TAG, "onNotify");
-//        //If we wait for only one accesor response
-//        if(accessors.size() >= 1){
-//
-//            //Remove last accessor from accessor list
-//            mAccessorIdentifiers.remove(identifier);
-//
-//            //Callback to client
-//            //TODO Need to handle error case and need to add response to onNotify method.
-//            mListener.onCompleted(new JSONObject());
-//        } else {
-//            //If we still wait for more than two accessor response, we more accessor identifier from identifier list and wait for a while.
-//            mAccessorIdentifiers.remove(identifier);
-//        }
-//    }
 
     @Override
     public void onCompleted(JSONObject object) {
 
         LogUtil.d(TAG, "AccessorListener onCompleted");
+        if(mAccessors == null){
+            return;
+        }
 
         //If this is last accessor
         if(mAccessors.size() == mCurrentAccessorIndex + 1){
@@ -115,7 +89,7 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
             //If more than 1 accessors remain
 
             if(object == null){
-                // TODO Error handling
+                return;
             }
 
             String paramObject = null;
@@ -130,7 +104,9 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
                     paramObject = object.getJSONArray(JsonParam.PARAM).toString();
                 } catch (JSONException e1) {
                     LogUtil.d(TAG, "JSONException: " + e.getMessage());
-                    //TODO Error handling
+                    if(mListener != null){
+                        mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
                 }
             }
 
@@ -154,6 +130,9 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
 
     @Override
     public void onFailed(ImpressionError reason, String errorMessage) {
+
+        // Initialize flag
+        mCurrentAccessorIndex = 0;
 
         if(mListener != null){
             mListener.onFailed(reason, errorMessage);
