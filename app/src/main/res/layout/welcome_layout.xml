@@ -6,7 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/sprash_bg_icn">
+    android:background="@drawable/fi_top_bg_icn">
     <LinearLayout
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:id="@+id/welcome_error_frame">
