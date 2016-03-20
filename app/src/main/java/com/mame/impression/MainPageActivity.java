@@ -105,7 +105,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
-        mToolbar.setNavigationIcon(R.drawable.dummy1);
+        mToolbar.setNavigationIcon(R.drawable.fi_app_small_icn);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.main_create_question_fab);

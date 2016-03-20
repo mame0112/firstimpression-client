@@ -24,7 +24,7 @@ public class ImpressionNotification {
     public void showNotiofication(Context context, int notificationId) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context)
-                .setSmallIcon(R.drawable.dummy1)
+                .setSmallIcon(R.drawable.fi_app_icn)
                 .setContentTitle(
                         context.getString(R.string.notification_title))
                 .setContentText(
