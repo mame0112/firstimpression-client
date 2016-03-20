@@ -31,11 +31,15 @@
         <Spinner
             android:id="@+id/signup_age_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_vertical_padding"
+            android:layout_marginBottom="@dimen/dialog_vertical_padding"/>
         <Spinner
             android:id="@+id/signup_gender_spinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dialog_vertical_padding"
+            android:layout_marginBottom="@dimen/dialog_vertical_padding"/>
     </LinearLayout>
 
     <TextView
@@ -76,7 +80,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@drawable/fi_welcome_action2_button"
+        android:background="@drawable/welcome_action2_button"
         android:textColor="@color/impression_white"
         android:layout_marginTop="@dimen/default_view_vartical_margin"
         android:layout_marginBottom="@dimen/default_view_vartical_margin"
