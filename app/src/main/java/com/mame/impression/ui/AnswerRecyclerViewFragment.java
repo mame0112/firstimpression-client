@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
@@ -37,12 +38,21 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
 
     private AnswerRecyclerViewListener mListener;
 
+    private TextView mNoContentView;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         LogUtil.d(TAG, "onCreate");
 
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        mNoContentView.setVisibility(View.GONE);
     }
 
     @Override
@@ -59,6 +69,9 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
         mAdapter.setAdapterClickListener(this);
         mRecyclerView.setAdapter(mAdapter);
 
+        mNoContentView = (TextView)view.findViewById(R.id.answer_page_no_content);
+        mNoContentView.setVisibility(View.GONE);
+
         return view;
     }
 
@@ -69,10 +82,23 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
 
     public void updateData(List<QuestionResultListData> data){
         LogUtil.d(TAG, "updateData");
-        mData = data;
-        if(mAdapter != null){
-            mAdapter.updateData(data);
-            mAdapter.notifyDataSetChanged();
+
+        //If More than 1 content available
+        if(data != null && data.size() != 0){
+
+            mNoContentView.setVisibility(View.GONE);
+
+            //TODO
+            mData = data;
+
+            if(mAdapter != null){
+                mAdapter.updateData(data);
+                mAdapter.notifyDataSetChanged();
+            }
+        } else {
+            // If no content is available
+            LogUtil.d(TAG, "No user generated content available");
+            mNoContentView.setVisibility(View.VISIBLE);
         }
     }
 
