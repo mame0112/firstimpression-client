@@ -49,6 +49,11 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     private String mChoiceA;
     private String mChoiceB;
 
+    public enum SignUpInFailure {
+        USERNAME_PASSWORD_NOT_MATCHED,
+        INTERNAL_SERVER_ERROR
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -227,30 +232,28 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "SignIn Completed");
 
-                JSONParser parser = new JSONParser();
-                UserData data = parser.createUserData(response);
+                if(response != null){
+                    JSONParser parser = new JSONParser();
+                    UserData data = parser.createUserData(response);
 
-                if(data != null){
-                    // Store user data
-                    PreferenceUtil.setUserId(getApplicationContext(), data.getUserId());
-                    PreferenceUtil.setUserName(getApplicationContext(), data.getUserName());
-                    PreferenceUtil.setUserGender(getApplicationContext(), data.getGender());
-                    PreferenceUtil.setUserAge(getApplicationContext(), data.getAge());
+                    if(data != null){
+                        // Store user data
+                        PreferenceUtil.setUserId(getApplicationContext(), data.getUserId());
+                        PreferenceUtil.setUserName(getApplicationContext(), data.getUserName());
+                        PreferenceUtil.setUserGender(getApplicationContext(), data.getGender());
+                        PreferenceUtil.setUserAge(getApplicationContext(), data.getAge());
 
-                    //Go to main page
-                    startMainPage();
+                        //Go to main page
+                        startMainPage();
 
-                    //Close this activity
-                    finish();
+                        //Close this activity
+                        finish();
+                    } else {
+                        showErrorMessage(SignUpInFailure.USERNAME_PASSWORD_NOT_MATCHED);
+                    }
                 } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            mErrorMessageFragment.showErrorMessage();
-                        }
-                    });
+                    showErrorMessage(SignUpInFailure.INTERNAL_SERVER_ERROR);
                 }
-
             }
 
             @Override
@@ -259,6 +262,15 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             }
         }, getApplicationContext(), userName, password);
 
+    }
+
+    private void showErrorMessage(final SignUpInFailure reason){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mErrorMessageFragment.showErrorMessage(reason);
+            }
+        });
     }
 
     private void startMainPage(){

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mame.impression.R;
+import com.mame.impression.SignUpInPageActivity;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
 
@@ -38,7 +39,30 @@ public class ErrorMessageFragment extends Fragment {
         return view;
     }
 
-    public void showErrorMessage(){
+    public void showErrorMessage(SignUpInPageActivity.SignUpInFailure reason){
+
+        String errorMessage = generateErrorText(reason);
+
+        if(errorMessage != null){
+            mErrorTextView.setText(errorMessage);
+        } else {
+            mErrorTextView.setText(getString(R.string.impression_generic_error));
+        }
+
+
         mErrorTextView.setVisibility(View.VISIBLE);
+    }
+
+    private String generateErrorText(SignUpInPageActivity.SignUpInFailure reason){
+        if(reason != null){
+            switch (reason){
+                case USERNAME_PASSWORD_NOT_MATCHED:
+                    return getString(R.string.sign_in_error_username_password_not_match);
+                case INTERNAL_SERVER_ERROR:
+                    return getString(R.string.sign_in_error_internal_server_error);
+            }
+        }
+
+        return null;
     }
 }

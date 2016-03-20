@@ -6,6 +6,7 @@
     <string name="impression_ok">OK</string>
     <string name="impression_cancel">Cancel</string>
     <string name="impression_divider">/</string>
+    <string name="impression_generic_error">Unknown error</string>
 
     <string name="item_gender_male">Male</string>
     <string name="item_gender_female">Female</string>
@@ -62,6 +63,8 @@
     <string name="sign_in_error_password_short">Password must be more than 4 characters</string>
     <string name="sign_in_error_password_long">Password must be less than 16 characters</string>
     <string name="sign_in_error_password_invalid_character">Invalid password character</string>
+    <string name="sign_in_error_username_password_not_match">User name and password does not match</string>
+    <string name="sign_in_error_internal_server_error">Internal server error. Please try again later</string>
 
     <!-- Sign up fragment -->
     <string name="signup_title">Sign up</string>
