@@ -1,4 +1,4 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:colorControlHighlight">
-    <item android:drawable="@drawable/fi_choice_b_button" />
+    <item android:drawable="@drawable/fi_welcome_action2_button" />
 </selector>

@@ -16,8 +16,13 @@
 
     <dimen name="impression_divider_height">1dp</dimen>
 
+    <!-- Sprash view-->
+    <dimen name="sprash_app_icon_size">100dp</dimen>
+    <dimen name="sprash_app_icon_margin">60dp</dimen>
+
     <!-- Welcome view-->
     <dimen name="welcome_divider_margin">10dp</dimen>
+    <dimen name="welcome_button_margin">10dp</dimen>
 
     <!-- Main page -->
     <dimen name="main_choice_button_vertical_padding">10dp</dimen>

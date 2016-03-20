@@ -5,7 +5,7 @@
 
     <ImageView
         android:id="@+id/welcome_service_image"
-        android:src="@drawable/impression_welcome_top"
+        android:src="@drawable/fi_app_icn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -21,13 +21,19 @@
         android:layout_width="match_parent"
         android:text="@string/welcome_signin_button"
         android:layout_above="@+id/signup_button"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:textColor="@color/impression_black"
+        android:layout_marginBottom="@dimen/welcome_button_margin"
+        android:background="@drawable/welcome_frame_button">
     </Button>
 
     <Button android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:text="@string/welcome_signup_button"
+        android:textColor="@color/impression_white"
         android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/welcome_button_margin"
+        android:background="@drawable/welcome_action_button">
     </Button>
 </RelativeLayout>

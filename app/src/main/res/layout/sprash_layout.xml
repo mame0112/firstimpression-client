@@ -8,33 +8,45 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:layout_height="match_parent">
 
-    <RelativeLayout
+    <LinearLayout
         android:orientation="vertical"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="@dimen/sprash_app_icon_margin"
         android:layout_width="match_parent"
-        android:layout_above="@+id/sprash_check_question_button"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/sprash_app_icon"
+            android:src="@drawable/fi_app_icn"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="@dimen/sprash_app_icon_size"
+            android:layout_height="@dimen/sprash_app_icon_size" />
         <TextView
             android:id="@+id/sprash_title_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:textColor="@color/impression_white"
             android:text="@string/app_name"
+            android:textAlignment="center"
             android:layout_centerVertical="true"
             android:textSize="@dimen/fi_font_extra_large"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textAlignment="center"
             android:textColor="@color/impression_white"
             android:text="@string/sprash_description_text"
-            android:layout_below="@+id/sprash_title_text"
             android:textSize="@dimen/fi_font_large"/>
-    </RelativeLayout>
+    </LinearLayout>
     <Button
         android:id="@+id/sprash_check_question_button"
         android:text="@string/sprash_check_question_button"
         android:layout_above="@+id/sprash_signinup_button"
+        android:textColor="@color/impression_black"
+        android:background="@drawable/welcome_frame_button"
+        android:layout_marginBottom="@dimen/welcome_button_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -42,6 +54,9 @@
         android:id="@+id/sprash_signinup_button"
         android:text="@string/sprash_sign_upin_button"
         android:layout_alignParentBottom="true"
+        android:textColor="@color/impression_white"
+        android:background="@drawable/welcome_action_button"
+        android:layout_marginBottom="@dimen/welcome_button_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
