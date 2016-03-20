@@ -25,12 +25,12 @@ public class Constants {
     public final static String HTTP_URL = HTTP + BASE_URL;
 
     public final static String HTTPS_URL = HTTPS + API_URL;
-    
+
     public final static String CONTACT_URL = HTTP_URL + "/contact";
 
-    public final static String TOS_URL = HTTP_URL + "";
+    public final static String TOS_URL = HTTP_URL + "/tos";
 
-    public final static String PRIVACY_URL = HTTP_URL + "";
+    public final static String PRIVACY_URL = HTTP_URL + "/privacy";
 
     public final static String USER = "/user";
 
