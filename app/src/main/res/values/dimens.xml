@@ -47,7 +47,7 @@
     <dimen name="prompt_horizontal_padding">14dp</dimen>
 
     <!-- Fonts -->
-    <dimen name="fi_font_extra_large">32dp</dimen>
+    <dimen name="fi_font_extra_large">28dp</dimen>
     <dimen name="fi_font_large">20dp</dimen>
     <dimen name="fi_font_middle">18dp</dimen>
     <dimen name="fi_font_small">16dp</dimen>

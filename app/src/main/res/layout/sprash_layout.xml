@@ -38,7 +38,7 @@
             android:textAlignment="center"
             android:textColor="@color/impression_white"
             android:text="@string/sprash_description_text"
-            android:textSize="@dimen/fi_font_large"/>
+            android:textSize="@dimen/fi_font_middle"/>
     </LinearLayout>
     <Button
         android:id="@+id/sprash_check_question_button"
