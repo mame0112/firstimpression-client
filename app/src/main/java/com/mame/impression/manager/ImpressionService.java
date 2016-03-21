@@ -193,13 +193,13 @@ public class ImpressionService extends Service {
         executeAction(listener, context, action);
     }
 
-    public void requestSignUp(ResultListener listener, Context context, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+    public void requestSignUp(ResultListener listener, Context context, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age, String deviceId) {
         if (listener == null) {
             throw new IllegalArgumentException("Listener is null");
         }
 
         SignUpAction action = new SignUpAction();
-        action.setAction(userName, password, gender, age);
+        action.setAction(userName, password, gender, age, deviceId);
 
         executeAction(listener, context, action);
 

@@ -46,7 +46,7 @@ public class RegistrationIntentService extends IntentService {
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
 //            String token = instanceID.getToken("first-impression-backend", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             LogUtil.d(TAG, "token: " + token);
-            PreferenceUtil.setRegistrationId(getApplicationContext(), token);
+            PreferenceUtil.setDeviceId(getApplicationContext(), token);
         } catch (IOException e) {
             LogUtil.d(TAG, "IOException: " + e.getMessage());
         }

@@ -31,6 +31,8 @@ public class SignUpAction implements Action {
 
     private QuestionResultListData.Age mAge;
 
+    private String mDeviceId;
+
     @Override
     public RequestAction getAction() {
         return RequestAction.SIGN_UP;
@@ -44,11 +46,12 @@ public class SignUpAction implements Action {
         return accessors;
     }
 
-    public void setAction(String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+    public void setAction(String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age, String deviceId) {
         mUserName = userName;
         mPassword = password;
         mGender = gender;
         mAge = age;
+        mDeviceId = deviceId;
     }
 
     @Override
@@ -59,6 +62,7 @@ public class SignUpAction implements Action {
         param.put(JsonParam.USER_PASSWORD, mPassword);
         param.put(JsonParam.USER_GENDER, mGender);
         param.put(JsonParam.USER_AGE, mAge);
+        param.put(JsonParam.USER_DEVICE_ID, mDeviceId);
 
         return param.toString();
     }

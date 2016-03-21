@@ -1,18 +1,15 @@
 package com.mame.impression;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.data.UserData;
-import com.mame.impression.data.UserDataBuilder;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.ui.ErrorMessageFragment;
@@ -174,6 +171,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         LogUtil.d(TAG, "onSignUpButtonPressed");
         //TODO Need to disable sign in button here
 
+        String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
+
         mService.requestSignUp(new ResultListener() {
 
             @Override
@@ -198,7 +197,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
             }
-        }, getApplicationContext(), userName, password, gender, age);
+        }, getApplicationContext(), userName, password, gender, age, deviceId);
 
     }
 
