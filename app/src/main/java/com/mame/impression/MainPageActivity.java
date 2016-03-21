@@ -169,8 +169,9 @@ public class MainPageActivity extends ImpressionBaseActivity
         mSnackBar = new MainPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.main_page_root_view));
         mSnackBar.setMainPageSnackbarListener(this);
 
-//        Intent intent = new Intent(this, RegistrationIntentService.class);
-//        startService(intent);
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
+
     }
 
     @Override
