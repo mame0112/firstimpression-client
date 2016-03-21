@@ -18,15 +18,13 @@ public class NotificationDialogFragment extends DialogFragment {
 
     private NotificationDialogFragmentListener mListener;
 
-    int mNum;
-
-    public static NotificationDialogFragment newInstance(int num) {
+    public static NotificationDialogFragment newInstance() {
         NotificationDialogFragment f = new NotificationDialogFragment();
 
         // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("num", num);
-        f.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putInt("num", num);
+//        f.setArguments(args);
 
         return f;
     }
@@ -34,7 +32,7 @@ public class NotificationDialogFragment extends DialogFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNum = getArguments().getInt("num");
+//        mNum = getArguments().getInt("num");
     }
 
     @Override

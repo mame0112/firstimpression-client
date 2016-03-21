@@ -30,8 +30,6 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
     private final static String TAG = Constants.TAG + PromptDialogActivity.class.getSimpleName();
 
-    private int mStackLevel=0;
-
     private String mDescription;
 
     private String mChoiceA;
@@ -89,7 +87,6 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     }
 
     private void showNotificationDialog() {
-        mStackLevel++;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
@@ -98,13 +95,12 @@ public class PromptDialogActivity extends ImpressionBaseActivity
         }
         ft.addToBackStack(null);
 
-        NotificationDialogFragment newFragment = NotificationDialogFragment.newInstance(mStackLevel);
+        NotificationDialogFragment newFragment = NotificationDialogFragment.newInstance();
         newFragment.show(ft, "dialog");
         newFragment.setNotificationDialogFragmentListener(this);
     }
 
     private void showProfileDialog() {
-        mStackLevel++;
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         Fragment prev = getFragmentManager().findFragmentByTag("dialog");
@@ -113,7 +109,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
         }
         ft.addToBackStack(null);
 
-        ProfileDialogFragment newFragment = ProfileDialogFragment.newInstance(mStackLevel);
+        ProfileDialogFragment newFragment = ProfileDialogFragment.newInstance();
         newFragment.setProfileDialogFragmentListener(this);
         newFragment.show(ft, "dialog");
 

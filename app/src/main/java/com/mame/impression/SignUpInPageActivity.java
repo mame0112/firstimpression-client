@@ -1,5 +1,6 @@
 package com.mame.impression;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -133,6 +134,11 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     }
 
     private void showSignInFragmentWithoutBackStack(){
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Constants.INTENT_QUESTION_DESCEIPTION, mDescription);
+//        bundle.putString(Constants.INTENT_QUESTION_CHOICE_A, mChoiceA);
+//        bundle.putString(Constants.INTENT_QUESTION_CHOICE_B, mChoiceB);
+//        mSignInFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).commit();
     }
 
@@ -142,6 +148,11 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     }
 
     private void showSignUpFragment(){
+//        Bundle bundle = new Bundle();
+//        bundle.putString(Constants.INTENT_QUESTION_DESCEIPTION, mDescription);
+//        bundle.putString(Constants.INTENT_QUESTION_CHOICE_A, mChoiceA);
+//        bundle.putString(Constants.INTENT_QUESTION_CHOICE_B, mChoiceB);
+//        mSignUpFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
                 .commit();
@@ -153,7 +164,9 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     }
 
     private void changeFragmentStatusBasedOnLauncnMode(String launchMode){
+        LogUtil.d(TAG, "changeFragmentStatusBasedOnLauncnMode");
         if(launchMode != null){
+            LogUtil.d(TAG, "Mode: " + launchMode);
             if(Constants.INTENT_MODE_SIGNUP.equals(launchMode)){
                 showSignUpFragmentWithoutBackStack();
             } else if (Constants.INTENT_MODE_SIGNIN.equals(launchMode)){
@@ -180,7 +193,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                 LogUtil.d(TAG, "SignUp Completed");
                 boolean result = parseAndStoreUserData(response, userName, password, gender, age);
 
-                if(result){
+                if (result) {
 
                     //Go to main page
                     startMainPage();
@@ -242,8 +255,16 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                         PreferenceUtil.setUserGender(getApplicationContext(), data.getGender());
                         PreferenceUtil.setUserAge(getApplicationContext(), data.getAge());
 
-                        //Go to main page
-                        startMainPage();
+                        //If user already input new question data
+                        if(mDescription != null && mChoiceA != null && mChoiceB != null){
+
+                            //Create new question
+                            createNewQuestion(data.getUserId(), data.getUserName());
+
+                        } else {
+                            //Otherwise, go to main page
+                            startMainPage();
+                        }
 
                         //Close this activity
                         finish();
@@ -263,6 +284,24 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     }
 
+    private void createNewQuestion(long userId, String userName){
+        LogUtil.d(TAG, "createNewQuestion");
+        ResultListener listener = new ResultListener() {
+            @Override
+            public void onCompleted(JSONObject response) {
+                LogUtil.d(TAG, "onCompleted");
+                startMainPage();
+            }
+
+            @Override
+            public void onFailed(ImpressionError reason, String message) {
+                LogUtil.d(TAG, "onFailed");
+            }
+        };
+
+        mService.requestToCreateNewQuestion(listener, getApplicationContext(), userId, userName, mDescription, mChoiceA, mChoiceB);
+    }
+
     private void showErrorMessage(final SignUpInFailure reason){
         runOnUiThread(new Runnable() {
             @Override
@@ -272,6 +311,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         });
     }
 
+    //TODO Need to send some information after create question so that the user can understand it.
     private void startMainPage(){
         Intent intent = new Intent(this, MainPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

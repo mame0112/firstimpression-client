@@ -41,13 +41,13 @@ public class ProfileDialogFragment extends DialogFragment {
 
     private ProfileDialogFragmentListener mListener;
 
-    public static ProfileDialogFragment newInstance(int num) {
+    public static ProfileDialogFragment newInstance() {
         ProfileDialogFragment f = new ProfileDialogFragment();
 
         // Supply num input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("num", num);
-        f.setArguments(args);
+//        Bundle args = new Bundle();
+//        args.putInt("num", num);
+//        f.setArguments(args);
 
         return f;
     }
