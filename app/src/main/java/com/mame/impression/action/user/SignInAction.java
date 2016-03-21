@@ -26,6 +26,8 @@ public class SignInAction implements Action {
 
     private String mPassword;
 
+    private String mDeviceId;
+
     @Override
     public RequestAction getAction() {
         return RequestAction.SIGN_IN;
@@ -39,9 +41,10 @@ public class SignInAction implements Action {
         return accessors;
     }
 
-    public void setAction(String userName, String password) {
+    public void setAction(String userName, String password, String deviceId) {
         mUserName = userName;
         mPassword = password;
+        mDeviceId = deviceId;
     }
 
     @Override
@@ -50,6 +53,7 @@ public class SignInAction implements Action {
         JSONObject param = new JSONObject();
         param.put(JsonParam.USER_NAME, mUserName);
         param.put(JsonParam.USER_PASSWORD, mPassword);
+        param.put(JsonParam.USER_DEVICE_ID, mDeviceId);
 
         return param.toString();
     }

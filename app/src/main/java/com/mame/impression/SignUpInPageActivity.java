@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.support.v4.app.Fragment;
 
 import com.mame.impression.action.JsonParam;
@@ -238,6 +239,9 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     @Override
     public void onSignInButtonPressed(String userName, String password) {
         LogUtil.d(TAG, "onSignInButtonPressed");
+
+        String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
+
         mService.requestSignIn(new ResultListener() {
 
             @Override
@@ -280,7 +284,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
 
             }
-        }, getApplicationContext(), userName, password);
+        }, getApplicationContext(), userName, password, deviceId);
 
     }
 
