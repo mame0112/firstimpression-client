@@ -29,6 +29,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContentBuilder;
 import com.mame.impression.gcm.RegistrationIntentService;
@@ -186,6 +188,12 @@ public class MainPageActivity extends ImpressionBaseActivity
         startService(new Intent(MainPageActivity.this, MainPageService.class));
 
         doBindService();
+
+//        TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
+        Tracker t = ((FirstImpressionApplication) getApplication()).getDefaultTracker();
+        t.setScreenName("MainPageActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
+
     }
 
     @Override
@@ -349,7 +357,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage () {
-            TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
+//        TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
     }
 
     @Override

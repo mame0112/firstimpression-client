@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.ui.notification.ImpressionNotificationManager;
+import com.mame.impression.ui.notification.NotificationData;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -19,15 +21,18 @@ public class MyGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
-        String message = data.getString("msg");
-        LogUtil.d(TAG, "From: " + from);
+        String message = data.getString(GcmConstant.MESSAGE);
+//        LogUtil.d(TAG, "From: " + from);
         LogUtil.d(TAG, "Message: " + message);
 
-        if (from.startsWith("/topics/")) {
-            // message received from some topic.
-        } else {
-            // normal downstream message.
+        GcmMessageParser parser = new GcmMessageParser();
+
+        NotificationData gcmData = parser.parseGcmMessage(message);
+
+        if(message != null){
+            ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
         }
+
     }
 
 }

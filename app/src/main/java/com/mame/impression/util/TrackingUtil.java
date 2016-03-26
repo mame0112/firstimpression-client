@@ -17,7 +17,7 @@ public class TrackingUtil {
 
     private final static String TAG = Constants.TAG + TrackingUtil.class.getSimpleName();
 
-    private static final String PROPERTY_ID = "UA-UA-48246180-5-Y";
+    private static final String PROPERTY_ID = "UA-48246180-5";
 
     private static Tracker mTracker;
 
@@ -147,8 +147,8 @@ public class TrackingUtil {
 
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(activity);
             // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-//            mTracker = analytics.newTracker(R.xml.impression_tracker);
-            mTracker = analytics.newTracker(PROPERTY_ID);
+            mTracker = analytics.newTracker(R.xml.impression_tracker);
+//            mTracker = analytics.newTracker(PROPERTY_ID);
         }
         return mTracker;
     }

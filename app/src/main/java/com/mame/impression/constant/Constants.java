@@ -68,6 +68,8 @@ public class Constants {
 
     public final static String INTENT_QUESTION_DESCEIPTION = "intent_question_description";
 
+    public final static String INTENT_QUESTION_ID = "intent_question_id";
+
     public final static String INTENT_QUESTION_CHOICE_A = "intent_question_choice_a";
 
     public final static String INTENT_QUESTION_CHOICE_B = "intent_question_choice_b";

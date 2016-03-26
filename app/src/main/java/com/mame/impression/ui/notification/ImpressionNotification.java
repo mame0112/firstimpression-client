@@ -8,8 +8,10 @@ import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
+import com.mame.impression.AnswerPageActivity;
 import com.mame.impression.MainPageActivity;
 import com.mame.impression.R;
+import com.mame.impression.constant.Constants;
 
 /**
  * Created by kosukeEndo on 2016/01/16.
@@ -21,7 +23,7 @@ public class ImpressionNotification {
 
     private static NotificationManager mNotificationManager = null;
 
-    public void showNotiofication(Context context, int notificationId) {
+    public void showNotiofication(Context context, int notificationId, NotificationData data) {
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context)
                 .setSmallIcon(R.drawable.fi_app_icn)
@@ -39,9 +41,10 @@ public class ImpressionNotification {
             builder.setVibrate(new long[] { 500, 500, 250, 500 });
 //        }
 
-        Intent intent = new Intent(context, MainPageActivity.class);
+        Intent intent = new Intent(context, AnswerPageActivity.class);
 //        intent.putExtra(LcomConst.EXTRA_USER_ID, userId);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.putExtra(Constants.INTENT_QUESTION_ID, data.getQuestionId());
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
         stackBuilder.addParentStack(MainPageActivity.class);

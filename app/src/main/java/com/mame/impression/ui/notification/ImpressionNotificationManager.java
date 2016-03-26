@@ -22,10 +22,10 @@ public class ImpressionNotificationManager {
         return sInstance;
     }
 
-    public void showNotification(Context context){
+    public void showNotification(Context context, NotificationData data){
         LogUtil.d(TAG, "showNotification");
         ImpressionNotification notification = new ImpressionNotification();
-        notification.showNotiofication(context, 1);
+        notification.showNotiofication(context, 1, data);
 
     }
 }

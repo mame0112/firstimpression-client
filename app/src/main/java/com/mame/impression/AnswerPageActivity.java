@@ -39,6 +39,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     private boolean mIsBound = false;
 
+    // Question Id that should be shown at first.
+    // If it is not necessary, this should be NO_QUESTION.
+    private long mTargetQuestionId = Constants.NO_QUESTION;
+
     /* Field name to send result list data */
     public final static String PARAM_RESULT_LIST_DATA ="result_list_data";
 
@@ -51,7 +55,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         setContentView(R.layout.answer_layout);
 
         //For the first time, launch Overview
-        if (savedInstanceState == null) {
+        Intent intent = getIntent();
+        if(intent != null) {
+            mTargetQuestionId = intent.getLongExtra(Constants.INTENT_QUESTION_ID, Constants.NO_QUESTION);
+        } else if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.answer_page_frame, mAnswerOverviewFragment)
                     .commit();
@@ -86,8 +93,14 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
             mService.setAnswerPageServiceListener(AnswerPageActivity.this);
 
-            //Get initial question data.
-            mService.requestQuestionsCreatedByUser();
+
+            //If target question already exists.
+            if(mTargetQuestionId != Constants.NO_QUESTION){
+                switchToDetailView(mTargetQuestionId);
+            } else {
+                //Otherwise, Get initial question data.
+                mService.requestQuestionsCreatedByUser();
+            }
 
         }
 
@@ -125,6 +138,9 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         doUnbindService();
 
         stopService(new Intent(this, AnswerPageService.class));
+
+        // Initialize
+        mTargetQuestionId = Constants.NO_QUESTION;
     }
 
     void doBindService() {
