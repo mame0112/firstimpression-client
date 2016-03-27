@@ -86,7 +86,9 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
         //If More than 1 content available
         if(data != null && data.size() != 0){
 
-            mNoContentView.setVisibility(View.GONE);
+            if(mNoContentView != null){
+                mNoContentView.setVisibility(View.GONE);
+            }
 
             //TODO
             mData = data;

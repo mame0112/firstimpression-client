@@ -11,11 +11,11 @@ import com.mame.impression.util.LogUtil;
 /**
  * Created by kosukeEndo on 2016/03/21.
  */
-public class MyGcmListenerService extends GcmListenerService {
+public class ImpressionGcmListenerService extends GcmListenerService {
 
-    private final static String TAG = Constants.TAG + MyGcmListenerService.class.getSimpleName();
+    private final static String TAG = Constants.TAG + ImpressionGcmListenerService.class.getSimpleName();
 
-    public MyGcmListenerService(){
+    public ImpressionGcmListenerService(){
         super();
     }
 

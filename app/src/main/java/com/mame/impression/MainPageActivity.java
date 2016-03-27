@@ -9,6 +9,7 @@ import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.preference.Preference;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -257,6 +258,8 @@ public class MainPageActivity extends ImpressionBaseActivity
                 PreferenceUtil.removeUserName(getApplicationContext());
                 PreferenceUtil.removeUserAge(getApplicationContext());
                 PreferenceUtil.removeUserGender(getApplicationContext());
+                PreferenceUtil.removeDeviceId(getApplicationContext());
+                PreferenceUtil.removeUserPoint(getApplicationContext());
                 break;
             default:
                 break;
