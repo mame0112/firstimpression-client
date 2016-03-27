@@ -182,6 +182,8 @@ public class MainPageActivity extends ImpressionBaseActivity
             mNoContentView.setVisibility(View.GONE);
         }
 
+        showProgress(null, getString(R.string.main_pgae_progress_desc));
+
         //Bind to MainPageService
         startService(new Intent(MainPageActivity.this, MainPageService.class));
 
@@ -320,7 +322,9 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         @Override
     public void onOpenQuestionDataReady(final List<MainPageContent> data){
-            LogUtil.d(TAG, "onOpenQuestionDataReady: " + data.size());
+        LogUtil.d(TAG, "onOpenQuestionDataReady: " + data.size());
+
+        hideProgress();
 
         if(data != null){
 

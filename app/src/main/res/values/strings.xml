@@ -7,6 +7,8 @@
     <string name="impression_cancel">Cancel</string>
     <string name="impression_divider">/</string>
     <string name="impression_generic_error">Unknown error</string>
+    <string name="impression_progress_dialog_title">Wait a moment...</string>
+    <string name="impression_progress_dialog_desc">Downloading contents</string>
 
     <string name="item_gender_male">Male</string>
     <string name="item_gender_female">Female</string>
@@ -44,6 +46,7 @@
     <string name="main_pgae_create_question">Create question</string>
     <string name="main_page_not_enough_point_to_create_question">Not enough point to create question. Reply to question first.</string>
     <string name="main_pgae_no_question">No question</string>
+    <string name="main_pgae_progress_desc">Downloading questions</string>
 
     <!-- Welcome page -->
     <string name="welcome_service_description">First impression is a service that enable you to check your idea quickly.</string>
