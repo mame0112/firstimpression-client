@@ -58,7 +58,9 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         Intent intent = getIntent();
         if(intent != null) {
             mTargetQuestionId = intent.getLongExtra(Constants.INTENT_QUESTION_ID, Constants.NO_QUESTION);
-        } else if (savedInstanceState == null) {
+        }
+
+        if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.answer_page_frame, mAnswerOverviewFragment)
                     .commit();
