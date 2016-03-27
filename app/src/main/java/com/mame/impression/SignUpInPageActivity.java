@@ -12,6 +12,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.data.UserData;
+import com.mame.impression.gcm.RegistrationIntentService;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.ui.ErrorMessageFragment;
@@ -89,6 +90,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     @Override
     protected void onStart() {
         super.onStart();
+        Intent intent = new Intent(this, RegistrationIntentService.class);
+        startService(intent);
     }
 
     @Override

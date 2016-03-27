@@ -20,16 +20,6 @@ public class FirstImpressionApplication extends Application {
 
     private Tracker mTracker;
 
-    @Override
-    public void onCreate(){
-        super.onCreate();
-        LogUtil.d(TAG, "onCreate");
-        // Fetch updated Instance ID token and notify our app's server of any changes (if applicable).
-        Intent intent = new Intent(this, RegistrationIntentService.class);
-        startService(intent);
-
-    }
-
     public synchronized Tracker getDefaultTracker() {
         if (mTracker == null) {
 
