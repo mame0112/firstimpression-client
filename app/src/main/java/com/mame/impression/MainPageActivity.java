@@ -64,8 +64,6 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     private MainPageAdapter mAdapter;
 
-    private static List<MainPageContent> mContent = new ArrayList<>();
-
     private RecyclerView.LayoutManager mLayoutManager;
 
     private TextView mNoContentView;
@@ -139,7 +137,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 //        builder.setQuestionId(34567).setCreatedUserName("a").setDescription("bbb").setChoiceA("cc").setChoiceB("ddd");
 //        mContent.add(builder.getResult());
 
-        mAdapter = new MainPageAdapter(getApplicationContext(), mContent);
+        mAdapter = new MainPageAdapter(getApplicationContext());
         mAdapter.setMainPageAdapterListener(this);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -158,7 +156,6 @@ public class MainPageActivity extends ImpressionBaseActivity
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                         final int fromPos = viewHolder.getAdapterPosition();
-//                        mContents.remove(fromPos);
                         //TODO Remove content from adapter
                         mAdapter.notifyItemRemoved(fromPos);
                         int remain = mAdapter.remove(fromPos);
@@ -331,8 +328,6 @@ public class MainPageActivity extends ImpressionBaseActivity
                 @Override
                 public void run() {
                     if (data.size() != 0) {
-                        mContent.clear();
-                        mContent.addAll(data);
                         mAdapter.updateData(data);
                     } else {
                         LogUtil.d(TAG, "Make No content view visible");
