@@ -101,12 +101,6 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
 //            }
 
         }
-//        holder.mThumbnail.setImageBitmap(mData.get(position).getThumbnail());
-//        holder.mPostDateView.setText(mData.get(position).getPostDate());
-//        holder.mUserName.setText(mData.get(position).getUserName());
-//        holder.mDescription.setText(mData.get(position).getDescription());
-//        holder.mChoiseAButton.setText(mData.get(position).getChoiceA());
-//        holder.mChoiseBButton.setText(mData.get(position).getChoiceB());
     }
 
     @Override

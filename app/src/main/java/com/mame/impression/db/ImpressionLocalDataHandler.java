@@ -37,6 +37,7 @@ public class ImpressionLocalDataHandler {
             ImpressionDatabaseHelper helper = new ImpressionDatabaseHelper(context);
 //            sDatabase.loadLibs(mContext);
 //            String UUID = SecurityUtil.getUniqueId(context);
+            LogUtil.d(TAG, "setDatabase");
             sDatabase = helper.getWritableDatabase();
         }
     }
@@ -223,7 +224,9 @@ public class ImpressionLocalDataHandler {
         PreferenceUtil.setUserPoint(context, Constants.NO_POINT);
 
         // Clear database
-        context.deleteDatabase(DatabaseDef.DATABASE_NAME);
+        setDatabase(context);
+        sDatabase.delete(DatabaseDef.CreatedQuestionTable.TABLE_NAME, null, null);
+        sDatabase.delete(DatabaseDef.RespondedQuestionTable.TABLE_NAME, null, null);
 
     }
 
