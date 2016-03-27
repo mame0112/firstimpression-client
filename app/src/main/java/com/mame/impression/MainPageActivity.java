@@ -323,19 +323,19 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         @Override
     public void onOpenQuestionDataReady(final List<MainPageContent> data){
-            LogUtil.d(TAG, "onOpenQuestionDataReady");
+            LogUtil.d(TAG, "onOpenQuestionDataReady: " + data.size());
 
         if(data != null){
 
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    if(data.size() != 0){
+                    if (data.size() != 0) {
                         mContent.clear();
                         mContent.addAll(data);
                         mAdapter.updateData(data);
-                    }
-                    else {
+                    } else {
+                        LogUtil.d(TAG, "Make No content view visible");
                         mNoContentView.setVisibility(View.VISIBLE);
                     }
 
@@ -349,6 +349,14 @@ public class MainPageActivity extends ImpressionBaseActivity
     public void onReplyFinished ( int updatedPoint){
             LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
         mSnackBar.updateStatus(updatedPoint);
+        if(mAdapter == null || mAdapter.getItemCount() == 0){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mNoContentView.setVisibility(View.VISIBLE);
+                }
+            });
+        }
     }
 
     @Override
