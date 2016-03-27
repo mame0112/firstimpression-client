@@ -53,7 +53,9 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
 
     protected void hideProgress(){
         LogUtil.d(TAG, "hideProgress");
-        mProgressFragment.getDialog().dismiss();
+        if(mProgressFragment != null && mProgressFragment.getDialog() != null){
+            mProgressFragment.getDialog().dismiss();
+        }
     }
 
     public static class ProgressDialogFragment extends DialogFragment {

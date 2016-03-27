@@ -204,7 +204,9 @@ public class MainPageActivity extends ImpressionBaseActivity
         doUnbindService();
 
         stopService(new Intent(MainPageActivity.this, MainPageService.class));
-//        startService(new Intent(MainPageActivity.this, MainPageService.class));
+
+        //Just in case, hide progress.
+        hideProgress();
     }
 
     void doBindService() {
