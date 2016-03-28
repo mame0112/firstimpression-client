@@ -56,7 +56,7 @@ public class NotificationDialogFragment extends DialogFragment {
     @Override
     public void onStart(){
         super.onStart();
-        TrackingUtil.trackPage(getActivity(), NotificationDialogFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(NotificationDialogFragment.class.getSimpleName());
     }
 
     private View.OnClickListener mClickListener= new View.OnClickListener(){

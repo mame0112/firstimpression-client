@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.point.PointUpdateType;
@@ -16,6 +18,7 @@ import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
+import com.mame.impression.util.TrackingUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
@@ -53,6 +56,7 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
 //        startService(new Intent(CreateQuestionActivity.this, CreateNewQuestionService.class));
 
         doBindService();
+
     }
 
     @Override
@@ -107,6 +111,9 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
 
     @Override
     protected void enterPage() {
+        LogUtil.d(TAG, "enterPage");
+
+        TrackingUtil.getInstance().trackPage(CreateQuestionActivity.class.getSimpleName());
 
     }
 

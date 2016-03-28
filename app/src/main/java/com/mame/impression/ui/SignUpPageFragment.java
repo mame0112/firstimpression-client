@@ -314,7 +314,7 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.trackPage(getActivity(), SignUpPageFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(SignUpPageFragment.class.getSimpleName());
     }
 
     @Override

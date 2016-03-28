@@ -4,7 +4,8 @@
 
     <string name="ga_trackingId">UA-48246180-5</string>
 
-    <bool name="ga_autoActivityTracking">true</bool>
+    <bool name="ga_autoActivityTracking">false</bool>
+
     <bool name="ga_reportUncaughtExceptions">true</bool>
     <string name="ga_sampleFrequency">100</string>
 </resources>

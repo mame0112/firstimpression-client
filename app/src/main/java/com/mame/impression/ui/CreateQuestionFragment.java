@@ -199,7 +199,7 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.trackPage(getActivity(), CreateQuestionFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(CreateQuestionFragment.class.getSimpleName());
     }
 
     @Override

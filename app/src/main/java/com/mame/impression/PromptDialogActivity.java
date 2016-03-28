@@ -19,6 +19,7 @@ import com.mame.impression.ui.NotificationDialogFragment;
 import com.mame.impression.ui.ProfileDialogFragment;
 import com.mame.impression.ui.service.ImpressionBaseService;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.TrackingUtil;
 
 import org.json.JSONObject;
 
@@ -146,7 +147,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage() {
-
+        // Rely on each DialogFragment
     }
 
     @Override

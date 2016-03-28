@@ -125,7 +125,7 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
 
     @Override
     protected void enterPage() {
-        TrackingUtil.trackPage(getActivity(), AnswerRecyclerViewFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(AnswerRecyclerViewFragment.class.getSimpleName());
     }
 
     @Override

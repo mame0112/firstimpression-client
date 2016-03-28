@@ -42,7 +42,6 @@ public class SprashActivity extends ImpressionBaseActivity {
 
     @Override
     protected void enterPage() {
-
     }
 
     @Override
@@ -67,6 +66,10 @@ public class SprashActivity extends ImpressionBaseActivity {
         if(userName != null){
             mUtil.startMainActivity(getApplicationContext());
             finish();
+        } else {
+            // For SplashActivity, user always passes this activity.
+            //Then track event in case user doesn't directly go to other screens.
+            TrackingUtil.getInstance().trackPage(SprashActivity.class.getSimpleName());
         }
     }
 

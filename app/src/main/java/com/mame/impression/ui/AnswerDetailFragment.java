@@ -201,7 +201,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.trackPage(getActivity(), AnswerDetailFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(AnswerDetailFragment.class.getSimpleName());
     }
 
     @Override

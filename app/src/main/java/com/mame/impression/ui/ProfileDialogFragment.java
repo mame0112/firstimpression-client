@@ -13,10 +13,7 @@ import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.QuestionResultListData;
-import com.mame.impression.manager.ImpressionService;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.TrackingUtil;
 
@@ -108,7 +105,7 @@ public class ProfileDialogFragment extends DialogFragment {
     @Override
     public void onStart(){
         super.onStart();
-        TrackingUtil.trackPage(getActivity(), ProfileDialogFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(ProfileDialogFragment.class.getSimpleName());
     }
 
     @Override

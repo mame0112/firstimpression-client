@@ -25,10 +25,6 @@ public class WelcomePageFragment extends ImpressionBaseFragment {
 
     private Button mSignUpButton;
 
-    private Activity mActivity;
-
-
-
     private WelcomePageFragmentListener mCallback;
     private View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -84,7 +80,7 @@ public class WelcomePageFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.trackPage(getActivity(), WelcomePageFragment.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(WelcomePageFragment.class.getSimpleName());
     }
 
     @Override

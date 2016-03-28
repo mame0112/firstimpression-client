@@ -1,6 +1,8 @@
 package com.mame.impression.util;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 
 import com.google.android.gms.analytics.HitBuilders;
 import com.mame.impression.FirstImpressionApplication;
@@ -20,6 +22,10 @@ public class TrackingUtil {
     private static final String PROPERTY_ID = "UA-48246180-5";
 
     private static Tracker mTracker;
+
+    private static TrackingUtil sInstance;
+
+    private final Context mContext;
 
     /* Sprash */
     public static final String EVENT_CATEGORY_SPLASH = "Splash view";
@@ -105,7 +111,19 @@ public class TrackingUtil {
     /** Custome variable7 (TBD) */
     private static final int CUSTOM_VAR_INDEX_7 = 7;
 
-    public static void trackPage(Activity activity, String page) {
+    public static synchronized void initialize(Context context){
+        if (sInstance != null) {
+            throw new IllegalStateException("Extra call to initialize analytics trackers");
+        }
+
+        sInstance = new TrackingUtil(context);
+    }
+
+    private TrackingUtil(Context context) {
+        mContext = context.getApplicationContext();
+    }
+
+    public void trackPage(String page) {
 
         LogUtil.d(TAG, "trackPage");
 
@@ -113,11 +131,12 @@ public class TrackingUtil {
             throw new IllegalArgumentException("parameter is null");
         }
 
-//        Tracker t = ((FirstImpressionApplication)activity.getApplication()).getDefaultTracker();
-        Tracker t = getDefaultTracker(activity);
+        if(mTracker == null){
+            mTracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.impression_tracker);
+        }
 
-        t.setScreenName(page);
-        t.send(new HitBuilders.AppViewBuilder().build());
+        mTracker.setScreenName(page);
+        mTracker.send(new HitBuilders.ScreenViewBuilder().build());
 
     }
 
@@ -130,26 +149,21 @@ public class TrackingUtil {
             throw new IllegalArgumentException("parameter is null");
         }
 
-        Tracker t = getDefaultTracker(activity);
+//        Tracker t = getDefaultTracker(activity);
 
-        t.send(new HitBuilders.EventBuilder()
-                .setCategory(category)
-                .setAction(action)
-                .setLabel(label)
-                .build());
+//        mTracker.send(new HitBuilders.EventBuilder()
+//                .setCategory(category)
+//                .setAction(action)
+//                .setLabel(label)
+//                .build());
 
     }
 
-    private static synchronized Tracker getDefaultTracker(Activity activity) {
-        if (mTracker == null) {
-
-            LogUtil.d(TAG, "getDefaultTracker");
-
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(activity);
-            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
-            mTracker = analytics.newTracker(R.xml.impression_tracker);
-//            mTracker = analytics.newTracker(PROPERTY_ID);
+    public static synchronized TrackingUtil getInstance() {
+        if (sInstance == null) {
+            throw new IllegalStateException("Call initialize() before getInstance()");
         }
-        return mTracker;
+
+        return sInstance;
     }
 }

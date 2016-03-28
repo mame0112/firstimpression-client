@@ -189,11 +189,6 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         doBindService();
 
-//        TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
-        Tracker t = ((FirstImpressionApplication) getApplication()).getDefaultTracker();
-        t.setScreenName("MainPageActivity");
-        t.send(new HitBuilders.ScreenViewBuilder().build());
-
     }
 
     @Override
@@ -369,7 +364,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage () {
-//        TrackingUtil.trackPage(this, MainPageActivity.class.getSimpleName());
+        TrackingUtil.getInstance().trackPage(MainPageActivity.class.getSimpleName());
     }
 
     @Override
