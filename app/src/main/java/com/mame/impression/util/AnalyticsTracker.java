@@ -129,6 +129,7 @@ public class AnalyticsTracker {
 
         if(mTracker == null){
             mTracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.impression_tracker);
+            mTracker.enableAdvertisingIdCollection(true);
         }
 
         mTracker.setScreenName(page);
@@ -146,6 +147,7 @@ public class AnalyticsTracker {
 
         if(mTracker == null){
             mTracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.impression_tracker);
+            mTracker.enableAdvertisingIdCollection(true);
         }
 
         mTracker.send(new HitBuilders.EventBuilder()
@@ -153,7 +155,6 @@ public class AnalyticsTracker {
                 .setAction(action)
                 .setLabel(label)
                 .build());
-
     }
 
     public static synchronized AnalyticsTracker getInstance() {
