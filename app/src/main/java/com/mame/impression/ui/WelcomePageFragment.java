@@ -1,9 +1,7 @@
 package com.mame.impression.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,7 @@ import android.widget.Button;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
@@ -32,12 +30,12 @@ public class WelcomePageFragment extends ImpressionBaseFragment {
             switch (v.getId()) {
                 case R.id.signin_button:
                     LogUtil.d(TAG, "signin button pressed");
-                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_WELCOME, TrackingUtil.EVENT_ACTION_WELCOME_BUTTON, TrackingUtil.EVENT_CATEGORY_WELCOME_SIGNIN_BUTTON, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_WELCOME, AnalyticsTracker.EVENT_ACTION_WELCOME_BUTTON, AnalyticsTracker.EVENT_CATEGORY_WELCOME_SIGNIN_BUTTON, 0);
                     mCallback.onStateChangeToSignIn();
                     break;
                 case R.id.signup_button:
                     LogUtil.d(TAG, "signup button pressed");
-                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_WELCOME, TrackingUtil.EVENT_ACTION_WELCOME_BUTTON, TrackingUtil.EVENT_CATEGORY_WELCOME_SIGNUP_BUTTON, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_WELCOME, AnalyticsTracker.EVENT_ACTION_WELCOME_BUTTON, AnalyticsTracker.EVENT_CATEGORY_WELCOME_SIGNUP_BUTTON, 0);
                     mCallback.onStateChangeToSignUp();
                     break;
                 default:
@@ -80,7 +78,7 @@ public class WelcomePageFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.getInstance().trackPage(WelcomePageFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(WelcomePageFragment.class.getSimpleName());
     }
 
     @Override

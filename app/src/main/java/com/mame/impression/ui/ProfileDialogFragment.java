@@ -15,9 +15,7 @@ import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
-
-import org.json.JSONObject;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/31.
@@ -105,7 +103,7 @@ public class ProfileDialogFragment extends DialogFragment {
     @Override
     public void onStart(){
         super.onStart();
-        TrackingUtil.getInstance().trackPage(ProfileDialogFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(ProfileDialogFragment.class.getSimpleName());
     }
 
     @Override

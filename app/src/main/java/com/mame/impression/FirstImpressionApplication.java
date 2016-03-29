@@ -1,17 +1,12 @@
 package com.mame.impression;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Intent;
 
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.gcm.RegistrationIntentService;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2016/01/17.
@@ -25,8 +20,7 @@ public class FirstImpressionApplication extends Application {
     @Override
     public void onCreate(){
         super.onCreate();
-//        TrackingUtil.setDefaultTracker(this);
-        TrackingUtil.initialize(getApplicationContext());
+        AnalyticsTracker.initialize(getApplicationContext());
     }
 
     public synchronized Tracker getDefaultTracker() {

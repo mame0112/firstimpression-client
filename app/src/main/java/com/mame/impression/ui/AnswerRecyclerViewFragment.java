@@ -1,8 +1,5 @@
 package com.mame.impression.ui;
 
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v4.app.Fragment;
-
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,10 +10,9 @@ import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.data.QuestionResultListDataBuilder;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -125,7 +121,7 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
 
     @Override
     protected void enterPage() {
-        TrackingUtil.getInstance().trackPage(AnswerRecyclerViewFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(AnswerRecyclerViewFragment.class.getSimpleName());
     }
 
     @Override

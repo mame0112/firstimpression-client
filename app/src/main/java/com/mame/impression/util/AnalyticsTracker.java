@@ -1,29 +1,25 @@
 package com.mame.impression.util;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 
 import com.google.android.gms.analytics.HitBuilders;
-import com.mame.impression.FirstImpressionApplication;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Logger;
 import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by kosukeEndo on 2015/12/31.
  */
-public class TrackingUtil {
+public class AnalyticsTracker {
 
-    private final static String TAG = Constants.TAG + TrackingUtil.class.getSimpleName();
+    private final static String TAG = Constants.TAG + AnalyticsTracker.class.getSimpleName();
 
     private static final String PROPERTY_ID = "UA-48246180-5";
 
     private static Tracker mTracker;
 
-    private static TrackingUtil sInstance;
+    private static AnalyticsTracker sInstance;
 
     private final Context mContext;
 
@@ -116,10 +112,10 @@ public class TrackingUtil {
             throw new IllegalStateException("Extra call to initialize analytics trackers");
         }
 
-        sInstance = new TrackingUtil(context);
+        sInstance = new AnalyticsTracker(context);
     }
 
-    private TrackingUtil(Context context) {
+    private AnalyticsTracker(Context context) {
         mContext = context.getApplicationContext();
     }
 
@@ -140,8 +136,7 @@ public class TrackingUtil {
 
     }
 
-    public static void trackEvent(Activity activity, String category,
-                                  String action, String label, int value) {
+    public void trackEvent(String category, String action, String label, int value) {
 
         LogUtil.d(TAG, "trackEvent");
 
@@ -149,17 +144,19 @@ public class TrackingUtil {
             throw new IllegalArgumentException("parameter is null");
         }
 
-//        Tracker t = getDefaultTracker(activity);
+        if(mTracker == null){
+            mTracker = GoogleAnalytics.getInstance(mContext).newTracker(R.xml.impression_tracker);
+        }
 
-//        mTracker.send(new HitBuilders.EventBuilder()
-//                .setCategory(category)
-//                .setAction(action)
-//                .setLabel(label)
-//                .build());
+        mTracker.send(new HitBuilders.EventBuilder()
+                .setCategory(category)
+                .setAction(action)
+                .setLabel(label)
+                .build());
 
     }
 
-    public static synchronized TrackingUtil getInstance() {
+    public static synchronized AnalyticsTracker getInstance() {
         if (sInstance == null) {
             throw new IllegalStateException("Call initialize() before getInstance()");
         }

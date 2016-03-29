@@ -1,54 +1,34 @@
 package com.mame.impression;
 
-import android.app.ActionBar;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.preference.Preference;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.data.MainPageContentBuilder;
 import com.mame.impression.gcm.RegistrationIntentService;
-import com.mame.impression.ui.DividerItemDecoration;
-import com.mame.impression.ui.notification.ImpressionNotificationManager;
 import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.data.MainPageContent;
 import com.mame.impression.ui.view.MainPageSnackbar;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.TreeSet;
 
 public class MainPageActivity extends ImpressionBaseActivity
         implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener, MainPageSnackbar.MainPageSnackbarListener {
@@ -113,7 +93,7 @@ public class MainPageActivity extends ImpressionBaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TrackingUtil.trackEvent(MainPageActivity.this, TrackingUtil.EVENT_CATEGORY_MAINPAGE, TrackingUtil.EVENT_ACTION_MAINPAGE_BUTTON, TrackingUtil.EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON, 0);
+                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_MAINPAGE, AnalyticsTracker.EVENT_ACTION_MAINPAGE_BUTTON, AnalyticsTracker.EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON, 0);
                 launchCreateQuestionActivity();
 
             }
@@ -364,7 +344,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage () {
-        TrackingUtil.getInstance().trackPage(MainPageActivity.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(MainPageActivity.class.getSimpleName());
     }
 
     @Override

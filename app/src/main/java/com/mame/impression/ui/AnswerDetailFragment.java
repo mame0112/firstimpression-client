@@ -1,7 +1,6 @@
 package com.mame.impression.ui;
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +10,7 @@ import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultDetailData;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/30.
@@ -201,7 +200,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.getInstance().trackPage(AnswerDetailFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(AnswerDetailFragment.class.getSimpleName());
     }
 
     @Override

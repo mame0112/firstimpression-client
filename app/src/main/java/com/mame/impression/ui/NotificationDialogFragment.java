@@ -2,14 +2,13 @@ package com.mame.impression.ui;
 
 import android.app.DialogFragment;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.mame.impression.R;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/31.
@@ -56,7 +55,7 @@ public class NotificationDialogFragment extends DialogFragment {
     @Override
     public void onStart(){
         super.onStart();
-        TrackingUtil.getInstance().trackPage(NotificationDialogFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(NotificationDialogFragment.class.getSimpleName());
     }
 
     private View.OnClickListener mClickListener= new View.OnClickListener(){

@@ -9,7 +9,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/09.
@@ -69,7 +69,7 @@ public class SprashActivity extends ImpressionBaseActivity {
         } else {
             // For SplashActivity, user always passes this activity.
             //Then track event in case user doesn't directly go to other screens.
-            TrackingUtil.getInstance().trackPage(SprashActivity.class.getSimpleName());
+            AnalyticsTracker.getInstance().trackPage(SprashActivity.class.getSimpleName());
         }
     }
 
@@ -94,12 +94,12 @@ public class SprashActivity extends ImpressionBaseActivity {
             LogUtil.d(TAG, "onClick");
             switch(v.getId()){
                 case R.id.sprash_check_question_button:
-                    TrackingUtil.trackEvent(SprashActivity.this, TrackingUtil.EVENT_CATEGORY_SPLASH, TrackingUtil.EVENT_ACTION_SPLASH_BUTTON, TrackingUtil.EVENT_LABEL_CHECK_QUESTION, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SPLASH, AnalyticsTracker.EVENT_ACTION_SPLASH_BUTTON, AnalyticsTracker.EVENT_LABEL_CHECK_QUESTION, 0);
                     mUtil.startMainActivity(getApplicationContext());
                     finish();
                     break;
                 case R.id.sprash_signinup_button:
-                    TrackingUtil.trackEvent(SprashActivity.this, TrackingUtil.EVENT_CATEGORY_SPLASH, TrackingUtil.EVENT_ACTION_SPLASH_BUTTON, TrackingUtil.EVENT_LABEL_SIGNUPIN, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SPLASH, AnalyticsTracker.EVENT_ACTION_SPLASH_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNUPIN, 0);
                     mUtil.startSignUpInActivity(getApplicationContext());
                     finish();
                     break;

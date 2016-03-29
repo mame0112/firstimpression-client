@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -22,7 +21,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
@@ -210,7 +209,7 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
                 case R.id.signup_button:
                     LogUtil.d(TAG, "signup button pressed");
                     if(ButtonUtil.isClickable()){
-                        TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNUP, TrackingUtil.EVENT_ACTION_SIGNUP_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNUP_BUTTON, 0);
+                        AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNUP_BUTTON, 0);
                         QuestionResultListData.Gender gender = getGenderValue();
                         QuestionResultListData.Age age = getAgeValue();
                         mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
@@ -218,12 +217,12 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
                     break;
                 case R.id.signup_tos:
                     LogUtil.d(TAG, "TOS");
-                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNUP, TrackingUtil.EVENT_ACTION_SIGNUP_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_TOS, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_TOS, 0);
                     openTosPage();
                     break;
                 case R.id.signup_privacy_policy:
                     LogUtil.d(TAG, "Privacy policy");
-                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNUP, TrackingUtil.EVENT_ACTION_SIGNUP_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_PRIVACY, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_PRIVACY, 0);
                     openPrivacyPolicyPage();
                     break;
 
@@ -314,7 +313,7 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.getInstance().trackPage(SignUpPageFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(SignUpPageFragment.class.getSimpleName());
     }
 
     @Override

@@ -13,9 +13,8 @@ import android.widget.EditText;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.view.ButtonUtil;
-import com.mame.impression.util.InputValidator;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
@@ -199,7 +198,7 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.getInstance().trackPage(CreateQuestionFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(CreateQuestionFragment.class.getSimpleName());
     }
 
     @Override

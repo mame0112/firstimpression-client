@@ -1,14 +1,10 @@
 package com.mame.impression;
 
-import android.app.Activity;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.view.WindowManager;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
@@ -19,7 +15,6 @@ import com.mame.impression.ui.NotificationDialogFragment;
 import com.mame.impression.ui.ProfileDialogFragment;
 import com.mame.impression.ui.service.ImpressionBaseService;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
 
 import org.json.JSONObject;
 

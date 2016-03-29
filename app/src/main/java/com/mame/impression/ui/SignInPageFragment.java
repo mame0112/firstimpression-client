@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -16,14 +15,8 @@ import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.ImpressionData;
-import com.mame.impression.manager.ImpressionService;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TrackingUtil;
-
-import org.json.JSONObject;
+import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/10.
@@ -104,7 +97,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
                 case R.id.signin_button:
                     //TODO Need to disable sign in button here
                     LogUtil.d(TAG, "sign in button pressed");
-                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNIN, TrackingUtil.EVENT_ACTION_SIGNIN_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_BUTTON, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_BUTTON, 0);
                     if(mListener != null){
                         mListener.onSignInButtonPressed(mUserName, mPassword);
                     }
@@ -113,7 +106,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
                 case R.id.signin_forget_password:
                     LogUtil.d(TAG, "Forget password? text pressed");
-                    TrackingUtil.trackEvent(getActivity(), TrackingUtil.EVENT_CATEGORY_SIGNIN, TrackingUtil.EVENT_ACTION_SIGNIN_BUTTON, TrackingUtil.EVENT_CATEGORY_SIGNIN_FORGET_PASSWORD, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_FORGET_PASSWORD, 0);
                     openContactPage();
                     break;
 
@@ -186,7 +179,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-        TrackingUtil.getInstance().trackPage(SignInPageFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(SignInPageFragment.class.getSimpleName());
     }
 
     @Override
