@@ -29,20 +29,10 @@ public class FirstImpressionApplication extends Application {
             LogUtil.d(TAG, "getDefaultTracker");
 
             GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-//            analytics.setDryRun(true);
-//            analytics.getLogger().setLogLevel(Logger.LogLevel.VERBOSE);
-            // To enable debug logging use: adb shell setprop log.tag.GAv4 DEBUG
             mTracker = analytics.newTracker(R.xml.impression_tracker);
         }
         return mTracker;
     }
-
-//    public static void trackPage(){
-//        Tracker t = getDefaultTracker();
-//        t.setScreenName(CreateQuestionActivity.class.getSimpleName());
-//        t.send(new HitBuilders.ScreenViewBuilder().build());
-//    }
-
 
 
 }

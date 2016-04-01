@@ -61,6 +61,8 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
 
         doUnbindService();
 
+        hideProgress();
+
 //        stopService(new Intent(CreateQuestionActivity.this, CreateNewQuestionService.class));
     }
 
@@ -122,6 +124,7 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onCreateButtonPressed(String description, String choiceA, String choiceB) {
         Log.d(TAG, "onCreateButtonPressed");
         if (mIsBound) {
+            showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.str_create_question_progress_dialog_desc));
             mService.requestToCreateNewQuestion(description, choiceA, choiceB);
         }
     }
@@ -129,6 +132,9 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     @Override
     public void onNewQuestionCreationSuccess(int updatedPoint) {
         LogUtil.d(TAG, "onNewQuestionCreationSuccess: " + updatedPoint);
+
+        hideProgress();
+
         Intent intent = new Intent();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.INTENT_USER_POINT, updatedPoint);
@@ -142,6 +148,7 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     @Override
     public void onNewQuestionCreationFail(ImpressionError reason) {
         LogUtil.d(TAG, "onNewQuestionCreationFail");
+        hideProgress();
         // TODO
     }
 

@@ -94,6 +94,7 @@
     <string name="str_create_question_error_choice_null">You must input choice</string>
     <string name="str_create_question_error_choice_short">Choice must be more than 2 characters</string>
     <string name="str_create_question_error_choice_long">Choice must be less than 32 characters</string>
+    <string name="str_create_question_progress_dialog_desc">Creating question</string>
 
 
     <!-- Notification dialog -->
