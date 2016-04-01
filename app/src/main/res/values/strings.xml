@@ -82,6 +82,7 @@
     <string name="answer_overview_no_content">No question</string>
     <string name="answer_detail_choice_a">A</string>
     <string name="answer_detail_choice_b">B</string>
+    <string name="answer_progress_desc">Downloading question</string>
 
     <!-- Create question fragment -->
     <string name="str_create_question_description">Description</string>

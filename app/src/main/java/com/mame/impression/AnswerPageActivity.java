@@ -101,6 +101,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                 switchToDetailView(mTargetQuestionId);
             } else {
                 //Otherwise, Get initial question data.
+                showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
                 mService.requestQuestionsCreatedByUser();
             }
 
@@ -145,6 +146,13 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         mTargetQuestionId = Constants.NO_QUESTION;
     }
 
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        hideProgress();
+    }
+
     void doBindService() {
         bindService(new Intent(this,
                 AnswerPageService.class), mConnection, Context.BIND_AUTO_CREATE);
@@ -160,6 +168,8 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     private void switchToDetailView(long targetQuestionId){
 
+        showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
+
         //Load detail info for target question
         mService.requestQuestionsResultDetail(targetQuestionId);
 
@@ -171,6 +181,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     public void onItemClicked(long targetQuestionId) {
         LogUtil.d(TAG, "onItemClicked: " + targetQuestionId);
         switchToDetailView(targetQuestionId);
+        hideProgress();
     }
 
     @Override
@@ -189,6 +200,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                 }
             });
         }
+        hideProgress();
     }
 
     @Override
@@ -203,6 +215,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                 }
             });
         }
+        hideProgress();
     }
 
     @Override
