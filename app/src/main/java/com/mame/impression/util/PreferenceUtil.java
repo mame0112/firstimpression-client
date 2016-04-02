@@ -27,6 +27,8 @@ public class PreferenceUtil {
 
     private static final String KEY_USER_DEVICE_ID = "user_registration_id";
 
+    private static final String KEY_USER_NOTIFICATION_SETTING = "user_notification_setting";
+
     public static String getUserName(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
@@ -145,19 +147,22 @@ public class PreferenceUtil {
         pref.edit().remove(KEY_USER_DEVICE_ID).commit();
     }
 
-    public static void setBooleanParameter(Context c, String tag, boolean value){
-        if(tag == null){
-            throw new IllegalArgumentException("tag cannot be null");
-        }
+    public static void setNotificationSetting(Context c, boolean enable) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        pref.edit().putBoolean(tag, value).commit();
+        pref.edit().putBoolean(KEY_USER_NOTIFICATION_SETTING, enable).commit();
     }
 
-    public static boolean getBooleanParameter(Context c, String tag) {
+    public static boolean getNotificationSetting(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        return pref.getBoolean(tag, true);
+        return pref.getBoolean(KEY_USER_NOTIFICATION_SETTING, true);
+    }
+
+    public static void removeNotificationSetting(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_NOTIFICATION_SETTING).commit();
     }
 
 }

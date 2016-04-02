@@ -7,6 +7,7 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.notification.ImpressionNotificationManager;
 import com.mame.impression.ui.notification.NotificationData;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 /**
  * Created by kosukeEndo on 2016/03/21.
@@ -25,14 +26,16 @@ public class ImpressionGcmListenerService extends GcmListenerService {
 //        LogUtil.d(TAG, "From: " + from);
         LogUtil.d(TAG, "Message: " + message);
 
-        GcmMessageParser parser = new GcmMessageParser();
+        boolean isNotificationEnabled = PreferenceUtil.getNotificationSetting(getApplicationContext());
+        if(isNotificationEnabled){
+            GcmMessageParser parser = new GcmMessageParser();
 
-        NotificationData gcmData = parser.parseGcmMessage(message);
+            NotificationData gcmData = parser.parseGcmMessage(message);
 
-        if(message != null){
-            ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
+            if(message != null){
+                ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
+            }
         }
-
     }
 
 }

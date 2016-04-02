@@ -1,5 +1,6 @@
 package com.mame.impression.ui;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,8 +35,7 @@ public class SettingFragment extends ImpressionBaseFragment implements SettingLi
 
         LogUtil.d(TAG, "onCreate");
 
-        createSettingListData(mDatas);
-        restoreDatas(mDatas);
+        SettingPreferenceManager.getInstance().createSettingListData(getContext(), mDatas);
     }
 
     @Override
@@ -63,23 +63,9 @@ public class SettingFragment extends ImpressionBaseFragment implements SettingLi
 
     }
 
-    private void createSettingListData(List<SettingListData> datas){
-        SettingListData data = new SettingListData(getString(R.string.setting_notification_main_text), getString(R.string.setting_notification_sub_text));
-        datas.add(data);
-    }
-
-    private void restoreDatas(List<SettingListData> datas){
-        for(SettingListData data : datas){
-            String mainText = data.getMainText();
-            boolean setting = PreferenceUtil.getBooleanParameter(getContext(), mainText);
-            data.setCurrentSetting(setting);
-        }
-    }
-
     @Override
     public void onSettingChanged(int position, boolean value) {
-        String mainText = mDatas.get(position).getMainText();
-        PreferenceUtil.setBooleanParameter(getContext(), mainText, value);
+        SettingPreferenceManager.getInstance().updateSettingValue(getContext(), position, value);
     }
 
     public static class SettingListData{
@@ -111,4 +97,65 @@ public class SettingFragment extends ImpressionBaseFragment implements SettingLi
         }
 
     }
+
+    public static class SettingPreferenceManager {
+        private static SettingPreferenceManager sInstance = new SettingPreferenceManager();
+
+        private SettingPreferenceManager(){
+            // Singletone
+        }
+
+        public static SettingPreferenceManager getInstance(){
+            return sInstance;
+        }
+
+        public static void createSettingListData(Context context, List<SettingListData> datas){
+
+            if(context == null){
+                throw new IllegalArgumentException("Context cannot be null");
+            }
+
+            //Create data set
+            SettingListData data = new SettingListData(context.getString(R.string.setting_notification_main_text), context.getString(R.string.setting_notification_sub_text));
+            datas.add(data);
+
+            //Restore data
+            restoreDatas(context, datas);
+        }
+
+        private static void restoreDatas(Context context, List<SettingListData> datas){
+
+            if(context == null){
+                throw new IllegalArgumentException("Context cannot be null");
+            }
+
+            for(int i=0; i< datas.size();i++){
+                SettingListData data = datas.get(i);
+                switch(i) {
+                    case 0:
+                        boolean setting = PreferenceUtil.getNotificationSetting(context);
+                        data.setCurrentSetting(setting);
+                        break;
+                    default:
+                        //TODO Need to implement if necessary
+                        break;
+                }
+            }
+        }
+
+        public static void updateSettingValue(Context context, int position, boolean value){
+            switch(position){
+                case 0:
+                    PreferenceUtil.setNotificationSetting(context, value);
+                    break;
+                default:
+                    //TODO Need to implement if necessary
+                    break;
+            }
+        }
+
+    }
+
+
+
 }
