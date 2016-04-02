@@ -37,46 +37,51 @@ public class AnalyticsTracker {
 
     public static final String EVENT_ACTION_WELCOME_BUTTON = "Button select";
 
-    public static final String EVENT_CATEGORY_WELCOME_SIGNIN_BUTTON = "SignIn button";
+    public static final String EVENT_LABEL_WELCOME_SIGNIN_BUTTON = "SignIn button";
 
-    public static final String EVENT_CATEGORY_WELCOME_SIGNUP_BUTTON = "SignUp button";
+    public static final String EVENT_LABEL_WELCOME_SIGNUP_BUTTON = "SignUp button";
 
     /* SignIn */
     public static final String EVENT_CATEGORY_SIGNIN = "Sign in view";
 
     public static final String EVENT_ACTION_SIGNIN_BUTTON = "Button select";
 
-    public static final String EVENT_CATEGORY_SIGNIN_BUTTON = "SignIn button";
+    public static final String EVENT_LABEL_SIGNIN_BUTTON = "SignIn button";
 
-    public static final String EVENT_CATEGORY_SIGNIN_FORGET_PASSWORD = "Forget password";
+    public static final String EVENT_LABEL_SIGNIN_FORGET_PASSWORD = "Forget password";
 
     /* SignUp */
     public static final String EVENT_CATEGORY_SIGNUP = "Sign up view";
 
     public static final String EVENT_ACTION_SIGNUP_BUTTON = "Button select";
 
-    public static final String EVENT_CATEGORY_SIGNUP_BUTTON = "SignIn button";
+    public static final String EVENT_LABEL_SIGNUP_BUTTON = "SignUp button";
 
-    public static final String EVENT_CATEGORY_SIGNIN_TOS = "Terms of service";
+    public static final String EVENT_LABEL_SIGNIN_TOS = "Terms of service";
 
-    public static final String EVENT_CATEGORY_SIGNIN_PRIVACY = "Privacy policy";
+    public static final String EVENT_LABEL_SIGNIN_PRIVACY = "Privacy policy";
 
     /* Main page */
     public static final String EVENT_CATEGORY_MAINPAGE = "Main view";
 
     public static final String EVENT_ACTION_MAINPAGE_BUTTON = "Button select";
 
-    public static final String EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON = "Create button";
+    public static final String EVENT_LABEL_MAINPAGE_CREATE_BUTTON = "Create button";
 
     public static final String EVENT_ACTION_MAINPAGE_OPTION = "Option select";
 
-    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_ANSWER = "Option answer";
+    public static final String EVENT_LABEL_MAINPAGE_OPTION_ANSWER = "Answer page";
 
-    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_TOS = "Option TOS";
+    public static final String EVENT_LABEL_MAINPAGE_OPTION_PROFILE = "Setting";
 
-    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_PRIVACY = "Option Privacy";
+    public static final String EVENT_LABEL_MAINPAGE_OPTION_SIGN_OUT = "Sign out";
 
-    public static final String EVENT_CATEGORY_MAINPAGE_OPTION_PROFILE = "Option Setting";
+    /* Create question page */
+    public static final String EVENT_CATEGORY_CREATE_QUESTION = "Create question view";
+
+    public static final String EVENT_ACTION_CREATE_QUESTION_BUTTON = "Button select";
+
+    public static final String EVENT_LABEL_CREATE_QUESTION_CREATE = "Create question";
 
     /* Answer page */
     public static final String EVENT_CATEGORY_ANSWER = "Answer view";
@@ -84,6 +89,14 @@ public class AnalyticsTracker {
     public static final String EVENT_ACTION_ANSWER_BUTTON = "Button select";
 
     public static final String EVENT_CATEGORY_ANSWER_ADDITIONAL_BUTTON = "Additional Question button";
+
+    /* Progress / Error dialog */
+    public static final String EVENT_CATEGORY_ERROR = "Answer view";
+
+    public static final String EVENT_ACTION_ERROR_BUTTON = "Button select";
+
+    public static final String EVENT_LABEL_ERROR_OK_BUTTON = "Error ok button";
+
 
 
     /** Custom variable 1 (Model's name). */

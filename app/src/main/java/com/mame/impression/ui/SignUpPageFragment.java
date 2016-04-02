@@ -209,7 +209,7 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
                 case R.id.signup_button:
                     LogUtil.d(TAG, "signup button pressed");
                     if(ButtonUtil.isClickable()){
-                        AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNUP_BUTTON, 0);
+                        AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNUP_BUTTON, 0);
                         QuestionResultListData.Gender gender = getGenderValue();
                         QuestionResultListData.Age age = getAgeValue();
                         mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
@@ -217,12 +217,12 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
                     break;
                 case R.id.signup_tos:
                     LogUtil.d(TAG, "TOS");
-                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_TOS, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNIN_TOS, 0);
                     openTosPage();
                     break;
                 case R.id.signup_privacy_policy:
                     LogUtil.d(TAG, "Privacy policy");
-                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_PRIVACY, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNIN_PRIVACY, 0);
                     openPrivacyPolicyPage();
                     break;
 

@@ -93,7 +93,7 @@ public class MainPageActivity extends ImpressionBaseActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_MAINPAGE, AnalyticsTracker.EVENT_ACTION_MAINPAGE_BUTTON, AnalyticsTracker.EVENT_CATEGORY_MAINPAGE_CREATE_BUTTON, 0);
+                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_MAINPAGE, AnalyticsTracker.EVENT_ACTION_MAINPAGE_BUTTON, AnalyticsTracker.EVENT_LABEL_MAINPAGE_CREATE_BUTTON, 0);
                 launchCreateQuestionActivity();
 
             }
@@ -217,15 +217,15 @@ public class MainPageActivity extends ImpressionBaseActivity
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.action_settings:
+                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_MAINPAGE, AnalyticsTracker.EVENT_ACTION_MAINPAGE_OPTION, AnalyticsTracker.EVENT_LABEL_MAINPAGE_OPTION_PROFILE, 0);
                 launchSettingActivity();
             return true;
-            case R.id.debug_answer_page:
+            case R.id.action_answer_page:
+                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_MAINPAGE, AnalyticsTracker.EVENT_ACTION_MAINPAGE_OPTION, AnalyticsTracker.EVENT_LABEL_MAINPAGE_OPTION_ANSWER, 0);
                 launchAnswerActivity();
                 return true;
-            case R.id.debug_prompt_dialog:
-                return true;
-            case R.id.debug_sign_out:
-
+            case R.id.action_sign_out:
+                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_MAINPAGE, AnalyticsTracker.EVENT_ACTION_MAINPAGE_OPTION, AnalyticsTracker.EVENT_LABEL_MAINPAGE_OPTION_SIGN_OUT, 0);
                 mService.requsetToSignOut(PreferenceUtil.getUserId(getApplicationContext()),
                         PreferenceUtil.getUserName(getApplicationContext()));
 
@@ -235,6 +235,7 @@ public class MainPageActivity extends ImpressionBaseActivity
                 PreferenceUtil.removeUserGender(getApplicationContext());
                 PreferenceUtil.removeDeviceId(getApplicationContext());
                 PreferenceUtil.removeUserPoint(getApplicationContext());
+                PreferenceUtil.removeNotificationSetting(getApplicationContext());
                 break;
             default:
                 break;

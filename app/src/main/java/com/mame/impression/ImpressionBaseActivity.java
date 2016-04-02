@@ -13,12 +13,12 @@ import android.support.v7.app.AppCompatActivity;
 import com.google.android.gms.analytics.HitBuilders;
 import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2015/11/27.
  */
-//public abstract class ImpressionBaseActivity extends FragmentActivity {
 public abstract class ImpressionBaseActivity extends AppCompatActivity {
     private final static String TAG = Constants.TAG + ImpressionBaseActivity.class.getSimpleName();
 
@@ -168,7 +168,10 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
                     new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            mErrorDialog.dismiss();
+                            if(mErrorDialog != null){
+                                mErrorDialog.dismiss();
+                            }
+                            AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_ERROR, AnalyticsTracker.EVENT_ACTION_ERROR_BUTTON, AnalyticsTracker.EVENT_LABEL_ERROR_OK_BUTTON, 0);
                         }
                     }
             );

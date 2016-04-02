@@ -148,6 +148,7 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
                 }
 
                 if(ButtonUtil.isClickable()){
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_CREATE_QUESTION, AnalyticsTracker.EVENT_ACTION_CREATE_QUESTION_BUTTON, AnalyticsTracker.EVENT_LABEL_CREATE_QUESTION_CREATE, 0);
                     mCreateButton.setEnabled(false);
                     mCreateQuestionListener.onCreateButtonPressed(mDescription, mChoiceAString, mChoiceBString);
                 }

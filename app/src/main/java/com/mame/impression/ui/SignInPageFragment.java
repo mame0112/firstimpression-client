@@ -97,7 +97,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
                 case R.id.signin_button:
                     //TODO Need to disable sign in button here
                     LogUtil.d(TAG, "sign in button pressed");
-                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_BUTTON, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNIN_BUTTON, 0);
                     if(mListener != null){
                         mListener.onSignInButtonPressed(mUserName, mPassword);
                     }
@@ -106,7 +106,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
 
                 case R.id.signin_forget_password:
                     LogUtil.d(TAG, "Forget password? text pressed");
-                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_CATEGORY_SIGNIN_FORGET_PASSWORD, 0);
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNIN_FORGET_PASSWORD, 0);
                     openContactPage();
                     break;
 
