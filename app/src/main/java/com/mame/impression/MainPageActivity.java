@@ -217,11 +217,10 @@ public class MainPageActivity extends ImpressionBaseActivity
         //noinspection SimplifiableIfStatement
         switch (id){
             case R.id.action_settings:
+                launchSettingActivity();
             return true;
             case R.id.debug_answer_page:
-                Intent intent = new Intent(getApplicationContext(), AnswerPageActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
+                launchAnswerActivity();
                 return true;
             case R.id.debug_prompt_dialog:
                 return true;
@@ -243,6 +242,20 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         return super.onOptionsItemSelected(item);
     }
+
+    private void launchSettingActivity(){
+        Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    private void launchAnswerActivity(){
+        Intent intent = new Intent(getApplicationContext(), AnswerPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+
 
     @Override
     public void onItemSelected(long id, int select) {

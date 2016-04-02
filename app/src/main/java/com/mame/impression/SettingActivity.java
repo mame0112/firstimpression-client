@@ -3,6 +3,7 @@ package com.mame.impression;
 import android.os.Bundle;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.ui.SettingFragment;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -12,10 +13,18 @@ public class SettingActivity extends ImpressionBaseActivity  {
 
     private final static String TAG = Constants.TAG + SettingActivity.class.getSimpleName();
 
-    protected void onCreate(Bundle savedInstanceState){
-        super.onCreate(savedInstanceState);
+    private SettingFragment mFragment = new SettingFragment();
 
+    protected void onCreate(Bundle savedInstanceState){
         LogUtil.d(TAG, "onCreate");
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.setting_layout);
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.setting_page_frame, mFragment)
+                    .commit();
+        }
 
     }
 
