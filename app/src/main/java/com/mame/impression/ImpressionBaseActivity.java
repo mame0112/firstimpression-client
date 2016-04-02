@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.google.android.gms.analytics.HitBuilders;
@@ -25,7 +26,15 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
 
     private final static String PROGREDD_DIALOG_DESCRIPTION = "description";
 
+    private final static long WAIT = 1000 * 10; // 10sec
+
     private ProgressDialogFragment mProgressFragment;
+
+    private Handler mHandler = new Handler();
+
+    private Runnable mTimerRunnable;
+
+    private boolean mIsWaiting = false;
 
     protected abstract void enterPage();
 
@@ -51,10 +60,27 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
         LogUtil.d(TAG, "showProgress");
         mProgressFragment = ProgressDialogFragment.newInstance(title, description);
         mProgressFragment.show(getFragmentManager(), PROGRESS_DIALOG);
+
+        mTimerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                //If time expired, make progress dialog disable
+                LogUtil.d(TAG, "Time expired");
+                hideProgress();
+            }
+        };
+        mIsWaiting = true;
+        mHandler.postDelayed(mTimerRunnable, WAIT);
     }
 
     protected void hideProgress(){
         LogUtil.d(TAG, "hideProgress");
+
+        if(mIsWaiting){
+            mHandler.removeCallbacks(mTimerRunnable);
+            mIsWaiting = false;
+        }
+
         if(mProgressFragment != null && mProgressFragment.getDialog() != null){
             mProgressFragment.getDialog().dismiss();
         }
