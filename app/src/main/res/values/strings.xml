@@ -9,6 +9,8 @@
     <string name="impression_generic_error">Unknown error</string>
     <string name="impression_progress_dialog_title">Wait a moment...</string>
     <string name="impression_progress_dialog_desc">Downloading contents</string>
+    <string name="impression_error_dialog_title">Error occurrd</string>
+    <string name="impression_error_dialog_desc">Something went wrong. Please try again later</string>
 
     <string name="item_gender_male">Male</string>
     <string name="item_gender_female">Female</string>

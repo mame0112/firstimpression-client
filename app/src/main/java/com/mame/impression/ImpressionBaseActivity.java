@@ -1,9 +1,11 @@
 package com.mame.impression;
 
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +24,8 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
 
     private final static String PROGRESS_DIALOG ="progress";
 
+    private final static String ERROR_DIALOG ="error";
+
     private final static String PROGREDD_DIALOG_TITLE = "title";
 
     private final static String PROGREDD_DIALOG_DESCRIPTION = "description";
@@ -29,6 +33,8 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
     private final static long WAIT = 1000 * 10; // 10sec
 
     private ProgressDialogFragment mProgressFragment;
+
+    private ErrorDialogFragment mErrorFragment;
 
     private Handler mHandler = new Handler();
 
@@ -67,6 +73,9 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
                 //If time expired, make progress dialog disable
                 LogUtil.d(TAG, "Time expired");
                 hideProgress();
+
+                mErrorFragment = ErrorDialogFragment.newInstance();
+                mErrorFragment.show(getFragmentManager(), ERROR_DIALOG);
             }
         };
         mIsWaiting = true;
@@ -103,8 +112,9 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState){
-            if (mProgressDialog != null)
+            if (mProgressDialog != null){
                 return mProgressDialog;
+            }
 
             String title = getArguments().getString(PROGREDD_DIALOG_TITLE);
             String description = getArguments().getString(PROGREDD_DIALOG_DESCRIPTION);
@@ -133,6 +143,52 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
         public void onDestroy(){
             super.onDestroy();
             mProgressDialog = null;
+        }
+    }
+
+    public static class ErrorDialogFragment extends DialogFragment {
+        private AlertDialog mErrorDialog = null;
+
+        public static ErrorDialogFragment newInstance(){
+            ErrorDialogFragment instance = new ErrorDialogFragment();
+            return instance;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState){
+            LogUtil.d(TAG, "onCreateDialog");
+            if (mErrorDialog != null){
+                return mErrorDialog;
+            }
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+            alertDialogBuilder.setTitle(getString(R.string.impression_error_dialog_title));
+            alertDialogBuilder.setMessage(getString(R.string.impression_error_dialog_desc));
+            alertDialogBuilder.setPositiveButton(getString(R.string.impression_ok),
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            mErrorDialog.dismiss();
+                        }
+                    }
+            );
+            alertDialogBuilder.setCancelable(false);
+            mErrorDialog = alertDialogBuilder.create();
+            mErrorDialog.show();
+
+            return mErrorDialog;
+        }
+
+
+        @Override
+        public Dialog getDialog(){
+            return mErrorDialog;
+        }
+
+        @Override
+        public void onDestroy(){
+            super.onDestroy();
+            mErrorDialog = null;
         }
     }
 
