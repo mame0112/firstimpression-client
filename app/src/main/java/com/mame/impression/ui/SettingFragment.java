@@ -64,7 +64,7 @@ public class SettingFragment extends ImpressionBaseFragment implements SettingLi
     }
 
     private void createSettingListData(List<SettingListData> datas){
-        SettingListData data = new SettingListData("1233", "234");
+        SettingListData data = new SettingListData(getString(R.string.setting_notification_main_text), getString(R.string.setting_notification_sub_text));
         datas.add(data);
     }
 
@@ -78,7 +78,6 @@ public class SettingFragment extends ImpressionBaseFragment implements SettingLi
 
     @Override
     public void onSettingChanged(int position, boolean value) {
-        LogUtil.d(TAG, "onSettingChanged: " + position + value);
         String mainText = mDatas.get(position).getMainText();
         PreferenceUtil.setBooleanParameter(getContext(), mainText, value);
     }

@@ -120,4 +120,8 @@
     <string name="notification_content">You got new notification</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
+    <!-- Setting -->
+    <string name="setting_notification_main_text">Notification</string>
+    <string name="setting_notification_sub_text">Get notification when someone replys to your question</string>
+
 </resources>

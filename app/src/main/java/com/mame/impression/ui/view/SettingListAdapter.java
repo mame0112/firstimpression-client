@@ -6,8 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.ToggleButton;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
@@ -76,8 +76,8 @@ public class SettingListAdapter extends BaseAdapter{
             viewHolder = new ViewHolder();
             viewHolder.mainText = (TextView) convertView.findViewById(R.id.setting_list_main_text);
             viewHolder.subText = (TextView) convertView.findViewById(R.id.setting_list_sub_text);
-            viewHolder.toggleButton = (ToggleButton)convertView.findViewById(R.id.setting_list_toggle);
-            viewHolder.toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            viewHolder.switchButton = (Switch)convertView.findViewById(R.id.setting_list_toggle);
+            viewHolder.switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     mListener.onSettingChanged(position, isChecked);
@@ -92,7 +92,7 @@ public class SettingListAdapter extends BaseAdapter{
 
         viewHolder.mainText.setText(mData.get(position).getMainText());
         viewHolder.subText.setText(mData.get(position).getSubText());
-        viewHolder.toggleButton.setChecked(mData.get(position).getCurrentSetting());
+        viewHolder.switchButton.setChecked(mData.get(position).getCurrentSetting());
 
         return convertView;
     }
@@ -100,7 +100,7 @@ public class SettingListAdapter extends BaseAdapter{
     public class ViewHolder {
         TextView mainText;
         TextView subText;
-        ToggleButton toggleButton;
+        Switch switchButton;
     }
 
     public interface SettingListAdaspterListener{

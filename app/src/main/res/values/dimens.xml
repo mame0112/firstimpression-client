@@ -46,6 +46,10 @@
     <!-- Prompt dialog-->
     <dimen name="prompt_horizontal_padding">14dp</dimen>
 
+    <!-- Setting -->
+    <dimen name="setting_item_margin">8dp</dimen>
+    <dimen name="setting_item_switch_right_margin">4dp</dimen>
+
     <!-- Fonts -->
     <dimen name="fi_font_extra_large">28dp</dimen>
     <dimen name="fi_font_large">20dp</dimen>
