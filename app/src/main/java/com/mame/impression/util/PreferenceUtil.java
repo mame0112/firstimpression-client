@@ -145,4 +145,19 @@ public class PreferenceUtil {
         pref.edit().remove(KEY_USER_DEVICE_ID).commit();
     }
 
+    public static void setBooleanParameter(Context c, String tag, boolean value){
+        if(tag == null){
+            throw new IllegalArgumentException("tag cannot be null");
+        }
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().putBoolean(tag, value).commit();
+    }
+
+    public static boolean getBooleanParameter(Context c, String tag) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        return pref.getBoolean(tag, true);
+    }
+
 }

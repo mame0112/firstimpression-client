@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -27,13 +28,21 @@ public class SettingListAdapter extends BaseAdapter{
 
     private LayoutInflater mInflater;
 
-    public SettingListAdapter(Context context, List<SettingFragment.SettingListData> data){
+    private SettingListAdaspterListener mListener;
+
+    public SettingListAdapter(SettingListAdaspterListener listener, Context context, List<SettingFragment.SettingListData> data){
         super();
         LogUtil.d(TAG, "SettingListAdapter");
+
+        if(listener == null){
+            throw new IllegalArgumentException("SettingListAdaspterListener cannot be null");
+        }
 
         if(context == null){
             throw new IllegalArgumentException("Context cannot be null");
         }
+
+        mListener = listener;
 
         mInflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -57,8 +66,7 @@ public class SettingListAdapter extends BaseAdapter{
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LogUtil.d(TAG, "getView");
+    public View getView(final int position, View convertView, ViewGroup parent) {
 
         ViewHolder viewHolder;
 
@@ -69,14 +77,22 @@ public class SettingListAdapter extends BaseAdapter{
             viewHolder.mainText = (TextView) convertView.findViewById(R.id.setting_list_main_text);
             viewHolder.subText = (TextView) convertView.findViewById(R.id.setting_list_sub_text);
             viewHolder.toggleButton = (ToggleButton)convertView.findViewById(R.id.setting_list_toggle);
+            viewHolder.toggleButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mListener.onSettingChanged(position, isChecked);
+                }
+            });
+
             convertView.setTag(viewHolder);
         } else {
             LogUtil.d(TAG, "convertview is not null");
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        viewHolder.mainText.setText("aa");
-        viewHolder.subText.setText("bb");
+        viewHolder.mainText.setText(mData.get(position).getMainText());
+        viewHolder.subText.setText(mData.get(position).getSubText());
+        viewHolder.toggleButton.setChecked(mData.get(position).getCurrentSetting());
 
         return convertView;
     }
@@ -85,6 +101,10 @@ public class SettingListAdapter extends BaseAdapter{
         TextView mainText;
         TextView subText;
         ToggleButton toggleButton;
+    }
+
+    public interface SettingListAdaspterListener{
+        void onSettingChanged(int position, boolean value);
     }
 
 }
