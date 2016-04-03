@@ -99,10 +99,10 @@ public class AnalyticsTracker {
 
 
 
-    /** Custom variable 1 (Model's name). */
+    /** Custom variable 1 (The number of response in one session). */
     private static final int CUSTOM_VAR_INDEX_1 = 1;
 
-    /** Custom variable 2 (TBD). */
+    /** Custom variable 2 (onFailed information). */
     private static final int CUSTOM_VAR_INDEX_2 = 2;
 
     /** Custom variable 3 (TBD). */
@@ -169,6 +169,27 @@ public class AnalyticsTracker {
                 .setLabel(label)
                 .build());
     }
+
+    public static void trackNumOfResponse(int numOfResp){
+
+        LogUtil.d(TAG, "trackNumOfResponse");
+
+        mTracker.send(new HitBuilders.ScreenViewBuilder()
+                .setCustomDimension(CUSTOM_VAR_INDEX_1, String.valueOf(numOfResp))
+                .build());
+
+    }
+
+    public static void trackFailInforamtion(){
+        StackTraceElement element = Thread.currentThread().getStackTrace()[0];
+        if(element != null){
+            String info = "class: " + element.getClassName() + " method: " + element.getMethodName() + " line: " + element.getLineNumber();
+            mTracker.send(new HitBuilders.ScreenViewBuilder()
+                    .setCustomDimension(CUSTOM_VAR_INDEX_2, info)
+                    .build());
+        }
+    }
+
 
     public static synchronized AnalyticsTracker getInstance() {
         if (sInstance == null) {

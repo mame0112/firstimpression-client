@@ -19,6 +19,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.gcm.RegistrationIntentService;
 import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.MainPageAdapter;
@@ -357,6 +358,15 @@ public class MainPageActivity extends ImpressionBaseActivity
         LogUtil.d(TAG, "signOutFinished");
         startSprashActivity();
         finish();
+    }
+
+    @Override
+    public void onFailed(ImpressionError reason, String message) {
+        LogUtil.d(TAG, "onFailed");
+        hideProgress();
+        if(mSnackBar != null){
+            mSnackBar.showErrorMessage(getString(R.string.main_pgae_snackbar_error_message));
+        }
     }
 
     @Override

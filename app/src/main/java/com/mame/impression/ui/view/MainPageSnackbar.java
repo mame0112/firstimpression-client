@@ -61,6 +61,15 @@ public class MainPageSnackbar {
         Snackbar.make(mRootViewGroup, String.format(mContext.getString(R.string.main_page_not_enough_point_to_create_question), point), Snackbar.LENGTH_LONG).show();
     }
 
+    public void showErrorMessage(String message){
+        LogUtil.d(TAG, "showErrorMessage");
+
+        if(message == null){
+            throw new IllegalArgumentException("message cannot be null");
+        }
+    }
+
+
     private void showPoint(int point){
 
         int pt;

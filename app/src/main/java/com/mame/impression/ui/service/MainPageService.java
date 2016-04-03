@@ -13,6 +13,7 @@ import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.data.MainPageContent;
 import com.mame.impression.point.PointUpdateType;
+import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
@@ -88,7 +89,11 @@ public class MainPageService extends Service{
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
-                LogUtil.d(TAG, "onFail");
+                LogUtil.d(TAG, "onFailed");
+                if(mListener != null){
+                    AnalyticsTracker.trackFailInforamtion();
+                    mListener.onFailed(reason, message);
+                }
             }
         }, getApplicationContext());
 
@@ -217,5 +222,7 @@ public class MainPageService extends Service{
         void onReplyFinished(int updatedPoint);
 
         void signOutFinished();
+
+        void onFailed(ImpressionError reason, String message);
     }
 }
