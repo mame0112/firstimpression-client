@@ -329,4 +329,5 @@ public class ImpressionService extends Service {
         LogUtil.d(TAG, "onBind");
         return null;
     }
+
 }

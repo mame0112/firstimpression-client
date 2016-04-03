@@ -168,9 +168,6 @@ public class MainPageActivity extends ImpressionBaseActivity
             mNoContentView.setVisibility(View.GONE);
         }
 
-        //Bind to MainPageService
-//        startService(new Intent(MainPageActivity.this, MainPageService.class));
-
         doBindService();
 
     }
@@ -186,6 +183,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         //Just in case, hide progress.
         hideProgress();
+
     }
 
     void doBindService() {
