@@ -66,6 +66,11 @@ public class MainPageActivity extends ImpressionBaseActivity
             mService = ((MainPageService.MainPageServiceBinder) service).getService();
             mService.setMainPageServiceListener(MainPageActivity.this);
 
+            if(mAdapter != null && mAdapter.getItemCount() == 0){
+                showProgress(null, getString(R.string.main_pgae_progress_desc));
+                mService.requestQuestions();
+            }
+
         }
 
         @Override
@@ -162,10 +167,8 @@ public class MainPageActivity extends ImpressionBaseActivity
             mNoContentView.setVisibility(View.GONE);
         }
 
-        showProgress(null, getString(R.string.main_pgae_progress_desc));
-
         //Bind to MainPageService
-        startService(new Intent(MainPageActivity.this, MainPageService.class));
+//        startService(new Intent(MainPageActivity.this, MainPageService.class));
 
         doBindService();
 
@@ -178,7 +181,7 @@ public class MainPageActivity extends ImpressionBaseActivity
         //Unbind from MainPageService
         doUnbindService();
 
-        stopService(new Intent(MainPageActivity.this, MainPageService.class));
+//        stopService(new Intent(MainPageActivity.this, MainPageService.class));
 
         //Just in case, hide progress.
         hideProgress();

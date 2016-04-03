@@ -53,7 +53,25 @@ public class MainPageService extends Service{
     public IBinder onBind(Intent intent) {
         LogUtil.d(TAG, "onBind");
         mService = ImpressionService.getService(this.getClass());
+        return mBinder;
+    }
+
+    @Override
+    public void onRebind(Intent intent) {
+        LogUtil.d(TAG, "onRdBind");
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        LogUtil.d(TAG, "onUnbind");
+        mService.finalize(this.getClass());
+
         //TODO
+        return true;
+    }
+
+    public void requestQuestions(){
+        LogUtil.d(TAG, "requestQuestions");
         mService.requestQuestions(new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
@@ -74,21 +92,6 @@ public class MainPageService extends Service{
             }
         }, getApplicationContext());
 
-        return mBinder;
-    }
-
-    @Override
-    public void onRebind(Intent intent) {
-        LogUtil.d(TAG, "onRdBind");
-    }
-
-    @Override
-    public boolean onUnbind(Intent intent) {
-        LogUtil.d(TAG, "onUnbind");
-        mService.finalize(this.getClass());
-
-        //TODO
-        return true;
     }
 
 
@@ -191,7 +194,6 @@ public class MainPageService extends Service{
                 JSONArray paramArray = (JSONArray)response.get(JsonParam.PARAM);
                 for(int i=0; i<paramArray.length();i++){
                     JSONObject contentObj = (JSONObject)paramArray.get(i);
-                    LogUtil.d(TAG, "contentObj: " + contentObj.toString());
                     JSONParser parser = new JSONParser();
                     result.add(parser.createMainPageContent(contentObj));
                 }

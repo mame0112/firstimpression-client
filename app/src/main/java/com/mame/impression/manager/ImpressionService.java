@@ -66,8 +66,8 @@ public class ImpressionService extends Service {
         mTaskRunner = ImpressionTaskRunner.getInstance();
 
         // Remember client name
-        LogUtil.d(TAG, "client size: " + mClients.size());
         mClients.add(clazz);
+        LogUtil.d(TAG, "client size: " + mClients.size());
 
         return sService;
     }
