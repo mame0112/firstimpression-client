@@ -2,50 +2,108 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_page_root_view"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainPageActivity">
-
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/my_toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="?attr/actionBarSize"-->
-        <!--android:background="?attr/colorPrimary"-->
-        <!--android:elevation="4dp"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
-
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+    android:layout_height="match_parent">
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        android:fitsSystemWindows="true"
+        android:background="?attr/colorPrimary">
+        <android.support.v7.widget.Toolbar
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed" />
     </android.support.design.widget.AppBarLayout>
-
-    <TextView
-        android:id="@+id/main_page_no_content"
-        android:text="@string/main_pgae_no_question"
-        android:gravity="center"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/my_recycler_view"
-        android:scrollbars="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/main_create_question_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/fi_create_question_icn" />
-
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/my_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/main_page_no_content"
+            android:text="@string/main_pgae_no_question"
+            android:gravity="center"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/main_create_question_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/fi_create_question_icn" />
 </android.support.design.widget.CoordinatorLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.design.widget.CoordinatorLayout-->
+    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--xmlns:app="http://schemas.android.com/apk/res-auto"-->
+    <!--xmlns:tools="http://schemas.android.com/tools"-->
+    <!--android:id="@+id/main_page_root_view"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <!--&lt;!&ndash;<android.support.v7.widget.Toolbar&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/my_toolbar"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="?attr/actionBarSize"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="?attr/colorPrimary"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:elevation="4dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:theme="@style/ThemeOverlay.AppCompat.ActionBar"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>&ndash;&gt;-->
+    <!--&lt;!&ndash;<android.support.design.widget.AppBarLayout&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:theme="@style/AppTheme.AppBarOverlay">&ndash;&gt;-->
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_width="match_parent">-->
+
+        <!--&lt;!&ndash;<android.support.v7.widget.Toolbar&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/toolbar"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="?attr/actionBarSize"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:background="?attr/colorPrimary"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:layout_collapseMode="pin"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:popupTheme="@style/AppTheme.PopupOverlay" />&ndash;&gt;-->
+        <!--&lt;!&ndash;<android.support.design.widget.CollapsingToolbarLayout&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/toolbar_layout"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:fitsSystemWindows="true"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:layout_scrollFlags="scroll|exitUntilCollapsed"&ndash;&gt;-->
+            <!--&lt;!&ndash;app:contentScrim="?attr/colorPrimary">&ndash;&gt;-->
+            <!--<android.support.v7.widget.Toolbar-->
+                <!--android:id="@+id/toolbar"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="?attr/actionBarSize"-->
+                <!--android:background="?attr/colorPrimary"-->
+                <!--app:layout_scrollFlags="scroll|enterAlways" />-->
+        <!--&lt;!&ndash;</android.support.design.widget.CollapsingToolbarLayout>&ndash;&gt;-->
+    <!--</android.support.design.widget.AppBarLayout>-->
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/my_recycler_view"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/main_page_no_content"-->
+        <!--android:text="@string/main_pgae_no_question"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_width="match_parent"/>-->
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:id="@+id/main_create_question_fab"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom|end"-->
+        <!--android:layout_margin="@dimen/fab_margin"-->
+        <!--android:src="@drawable/fi_create_question_icn" />-->
+
+<!--</android.support.design.widget.CoordinatorLayout>-->
