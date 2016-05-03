@@ -121,14 +121,15 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     @Override
     public void onCancelButtonPressed() {
         LogUtil.d(TAG, "onCancelButtonPressed");
-        startWelcomeActivity();
         finish();
+//        startWelcomeActivity();
     }
 
     private void startWelcomeActivity() {
         Intent intent = new Intent(this, SprashActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     }
 
     private void startSignUpInActivity() {

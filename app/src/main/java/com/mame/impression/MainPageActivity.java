@@ -397,16 +397,19 @@ public class MainPageActivity extends ImpressionBaseActivity
     private void setMenuState(Menu menu){
         MenuItem setting = menu.findItem(R.id.action_settings);
         MenuItem signout = menu.findItem(R.id.action_sign_out);
+        MenuItem answer = menu.findItem(R.id.action_answer_page);
 
         // If user has already sign in
         if(PreferenceUtil.getUserId(getApplicationContext()) != Constants.NO_USER){
             //Show all menus
             setting.setVisible(true);
             signout.setVisible(true);
+            answer.setVisible(true);
         } else {
             //Otherwise, hide unncessary menus
             setting.setVisible(false);
             signout.setVisible(false);
+            answer.setVisible(false);
         }
 
     }

@@ -131,23 +131,25 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     }
 
+
+    protected void onStart(){
+        super.onStart();
+        // TODO Need to check if user already cancel promot dialog (Not to show promot dialog again)
+//        startService(new Intent(this, AnswerPageService.class));
+
+        doBindService();
+    }
+
+
     @Override
     protected void onResume() {
         super.onResume();
 
-        // TODO Need to check if user already cancel promot dialog (Not to show promot dialog again)
-        startService(new Intent(this, AnswerPageService.class));
-
-        doBindService();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-
-        doUnbindService();
-
-        stopService(new Intent(this, AnswerPageService.class));
 
         // Initialize
         mTargetQuestionId = Constants.NO_QUESTION;
@@ -156,6 +158,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     @Override
     protected void onStop(){
         super.onStop();
+
+        doUnbindService();
+
+//        stopService(new Intent(this, AnswerPageService.class));
 
         hideProgress();
     }
