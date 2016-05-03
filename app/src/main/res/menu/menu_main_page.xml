@@ -4,12 +4,11 @@
     <item android:id="@+id/action_answer_page"
         android:title="Answer page"
         android:icon="@drawable/fi_user_icn"
-        android:orderInCategory="100"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:orderInCategory="90"
         app:showAsAction="never"/>
-    <item android:id="@+id/action_sign_out" android:title="Sign out"
-        android:orderInCategory="80" app:showAsAction="never" />
+    <item android:id="@+id/action_sign_out"
+        android:title="Sign out"
+        app:showAsAction="never" />
 </menu>
