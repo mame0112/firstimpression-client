@@ -15,6 +15,7 @@ import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
+import com.mame.impression.util.PreferenceUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/04.
@@ -124,7 +125,14 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onCreateButtonPressed(String description, String choiceA, String choiceB) {
         Log.d(TAG, "onCreateButtonPressed");
         if (mIsBound) {
-            showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.str_create_question_progress_dialog_desc));
+
+            //If valid user id and user name is available, shows progress dialog. Otherwise, prompt dialog shall be displayed by CreateNewQuestionService
+            final long createUserId = PreferenceUtil.getUserId(getApplicationContext());
+            final String createUserName = PreferenceUtil.getUserName(getApplicationContext());
+            if(createUserId != Constants.NO_USER && createUserName != null){
+                showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.str_create_question_progress_dialog_desc));
+            }
+
             mService.requestToCreateNewQuestion(description, choiceA, choiceB);
         }
     }

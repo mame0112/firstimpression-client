@@ -101,7 +101,14 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                 switchToDetailView(mTargetQuestionId);
             } else {
                 //Otherwise, Get initial question data.
-                showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
+                //And show progress dialog in case user id and user name are available.
+                // If those are not available, progress dialog shall be shown by service.
+                long userId = PreferenceUtil.getUserId(getApplicationContext());
+                String userName = PreferenceUtil.getUserName(getApplicationContext());
+                if(userId != Constants.NO_USER && userName != null){
+                    showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
+                }
+
                 mService.requestQuestionsCreatedByUser();
             }
 
