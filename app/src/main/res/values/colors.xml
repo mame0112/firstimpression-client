@@ -6,6 +6,8 @@
 
     <color name="impressionAccent">#3F51B5</color>
 
+    <color name="impression_warning_light_pink">#F8BBD0</color>
+
     <color name="impression_light_grey">#EEEEEE</color>
     <color name="impression_grey">#dddddd</color>
     <color name="impression_dark_grey">#aaaaaa</color>

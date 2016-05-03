@@ -28,6 +28,7 @@
     <dimen name="main_choice_button_vertical_padding">10dp</dimen>
     <dimen name="main_choice_button_horizontal_padding">6dp</dimen>
     <dimen name="main_choice_button_horizontal_margin">10dp</dimen>
+    <dimen name="main_choice_button_vertical_margin">10dp</dimen>
 
     <!-- Card view -->
     <dimen name="default_card_view_radius">4dp</dimen>

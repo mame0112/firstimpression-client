@@ -245,7 +245,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
 
-        mService.requestSignIn(new ResultListener() {
+        ResultListener listener = new ResultListener() {
 
             @Override
             public void onCompleted(JSONObject response) {
@@ -287,7 +287,9 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
 
             }
-        }, getApplicationContext(), userName, password, deviceId);
+        };
+
+        mService.requestSignIn(listener, getApplicationContext(), userName, password, deviceId);
 
     }
 
