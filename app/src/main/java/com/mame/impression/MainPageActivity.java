@@ -385,9 +385,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        // If the nav drawer is open, hide action items related to the content view
-//        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//        menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
+        setMenuState(menu);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -395,6 +393,24 @@ public class MainPageActivity extends ImpressionBaseActivity
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
     }
+
+    private void setMenuState(Menu menu){
+        MenuItem setting = menu.findItem(R.id.action_settings);
+        MenuItem signout = menu.findItem(R.id.action_sign_out);
+
+        // If user has already sign in
+        if(PreferenceUtil.getUserId(getApplicationContext()) != Constants.NO_USER){
+            //Show all menus
+            setting.setVisible(true);
+            signout.setVisible(true);
+        } else {
+            //Otherwise, hide unncessary menus
+            setting.setVisible(false);
+            signout.setVisible(false);
+        }
+
+    }
+
 
     private void startSprashActivity(){
         Intent intent = new Intent(getApplicationContext(), SprashActivity.class);
