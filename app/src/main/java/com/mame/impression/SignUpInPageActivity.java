@@ -178,7 +178,6 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             } else {
                 LogUtil.w(TAG, "Unknown mode");
             }
-
         }
     }
 
@@ -188,6 +187,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         LogUtil.d(TAG, "onSignUpButtonPressed");
         //TODO Need to disable sign in button here
 
+        showProgress(null, getString(R.string.main_pgae_progress_desc));
+
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
 
         mService.requestSignUp(new ResultListener() {
@@ -195,6 +196,9 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "SignUp Completed");
+
+                hideProgress();
+
                 boolean result = parseAndStoreUserData(response, userName, password, gender, age);
 
                 if (result) {
@@ -213,6 +217,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                hideProgress();
             }
         }, getApplicationContext(), userName, password, gender, age, deviceId);
 
@@ -243,12 +248,17 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     public void onSignInButtonPressed(String userName, String password) {
         LogUtil.d(TAG, "onSignInButtonPressed");
 
+        showProgress(null, getString(R.string.main_pgae_progress_desc));
+
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
 
         ResultListener listener = new ResultListener() {
 
             @Override
             public void onCompleted(JSONObject response) {
+
+                hideProgress();
+
                 LogUtil.d(TAG, "SignIn Completed");
 
                 if(response != null){
@@ -285,7 +295,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
-
+                LogUtil.d(TAG, "onFailed");
+                hideProgress();
             }
         };
 
