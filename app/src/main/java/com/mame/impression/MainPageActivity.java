@@ -129,8 +129,9 @@ public class MainPageActivity extends ImpressionBaseActivity
         mRecyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper itemDecor = new ItemTouchHelper(
-                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN,
-                        ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN,
+//                        ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
                     @Override
                     public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
                         final int fromPos = viewHolder.getAdapterPosition();
@@ -141,13 +142,12 @@ public class MainPageActivity extends ImpressionBaseActivity
 
                     @Override
                     public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                        final int fromPos = viewHolder.getAdapterPosition();
-                        //TODO Remove content from adapter
-                        mAdapter.notifyItemRemoved(fromPos);
-                        int remain = mAdapter.remove(fromPos);
-                        if(remain == 0){
-                            mNoContentView.setVisibility(View.VISIBLE);
-                        }
+//                        final int fromPos = viewHolder.getAdapterPosition();
+//                        mAdapter.notifyItemRemoved(fromPos);
+//                        int remain = mAdapter.remove(fromPos);
+//                        if(remain == 0){
+//                            mNoContentView.setVisibility(View.VISIBLE);
+//                        }
                     }
                 });
         itemDecor.attachToRecyclerView(mRecyclerView);
