@@ -31,7 +31,7 @@
                 android:id="@+id/signin_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:hint="@string/sign_in_hint_password" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
