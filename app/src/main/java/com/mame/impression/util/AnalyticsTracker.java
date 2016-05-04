@@ -88,7 +88,7 @@ public class AnalyticsTracker {
 
     public static final String EVENT_ACTION_ANSWER_BUTTON = "Button select";
 
-    public static final String EVENT_CATEGORY_ANSWER_ADDITIONAL_BUTTON = "Additional Question button";
+    public static final String EVENT_LABEL_QUESTION_CREATE_BUTTON = "Create button";
 
     /* Progress / Error dialog */
     public static final String EVENT_CATEGORY_ERROR = "Answer view";

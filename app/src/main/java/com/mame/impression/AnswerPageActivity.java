@@ -9,9 +9,11 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultDetailData;
@@ -19,6 +21,7 @@ import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
 import com.mame.impression.ui.service.AnswerPageService;
+import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
@@ -75,6 +78,22 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         } else {
             //TODO Error handling
         }
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.answer_fab_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LogUtil.d(TAG, "FAB button selected");
+                AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_ANSWER, AnalyticsTracker.EVENT_ACTION_ANSWER_BUTTON, AnalyticsTracker.EVENT_LABEL_QUESTION_CREATE_BUTTON, 0);
+                launchCreateQuestionActivity();
+            }
+        });
+    }
+
+    private void launchCreateQuestionActivity(){
+        Intent intent = new Intent(getApplicationContext(), CreateQuestionActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     private void setTitle(String title){
