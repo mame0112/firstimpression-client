@@ -76,7 +76,7 @@ public class QuestionResultListData {
     }
 
     public enum Age {
-        UNDER10, FROM10_20, FROM20_30, FROM30_40, FROM40_50, FROM50_60, FROM60_70, OVER70
+        UNDER10, FROM10_20, FROM20_30, FROM30_40, FROM40_50, FROM50_60, FROM60_70, OVER70, UNKNOWN
     }
 
 

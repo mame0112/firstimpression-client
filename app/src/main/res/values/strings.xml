@@ -14,6 +14,7 @@
 
     <string name="item_gender_male">Male</string>
     <string name="item_gender_female">Female</string>
+    <string name="item_gender_unknown">Unknown</string>
     <string name="item_generation_under10">Under 10</string>
     <string name="item_generation_from10_20">From 10 to 20</string>
     <string name="item_generation_from20_30">From 20 to 30</string>
@@ -22,6 +23,7 @@
     <string name="item_generation_from50_60">From 50 to 60</string>
     <string name="item_generation_from60_70">From 60 to 70</string>
     <string name="item_generation_over70">Over 70</string>
+    <string name="item_generation_unknown">Unknown</string>
 
     <!-- Drawer -->
     <string name="drawer_item_setting">Settings</string>

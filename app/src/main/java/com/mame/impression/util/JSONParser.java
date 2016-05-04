@@ -238,7 +238,7 @@ public class JSONParser {
 
 
         if(input == null){
-            //TDOO need error handling
+            //TODO need error handling
             return null;
         }
 
@@ -273,8 +273,8 @@ public class JSONParser {
 
             JSONObject itemAObj = param.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_A);
             JSONObject itemBObj = param.getJSONObject(JsonParam.QUESTION_CHOICE_ITEM_B);
-            itemA = createQuestionResultDetailItemA(itemAObj);
-            itemB = createQuestionResultDetailItemA(itemBObj);
+            itemA = createQuestionResultDetailItem(itemAObj);
+            itemB = createQuestionResultDetailItem(itemBObj);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             //TODO Need error handling
@@ -333,7 +333,7 @@ public class JSONParser {
 
     }
 
-    private QuestionResultDetailItem createQuestionResultDetailItemA(JSONObject object) {
+    private QuestionResultDetailItem createQuestionResultDetailItem(JSONObject object) {
         LogUtil.d(TAG, "createQuestionResultDetailItem");
 
         if (object != null) {
@@ -415,10 +415,18 @@ public class JSONParser {
                 LogUtil.d(TAG, "JSONException: " + e.getMessage());
             }
 
+            int generationUnknown = 0;
+            try {
+                generationUnknown = object.getInt(JsonParam.QUESTION_AGE_UNKNOWN);
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
+
             return new QuestionResultDetailItemBuilder().setMale(male).setFemale(female)
                     .setGenderUnknown(genderUnknown).setUnder10(under10).setFrom10_20(from10_20)
                     .setFrom20_30(from20_30).setFrom30_40(from30_40).setFrom40_50(from40_50)
-                    .setFrom50_60(from50_60).setFrom60_70(from60_70).setOver70(over70).getResult();
+                    .setFrom50_60(from50_60).setFrom60_70(from60_70).setOver70(over70).
+                            setGenerationUnknown(generationUnknown).getResult();
         }
 
         return null;

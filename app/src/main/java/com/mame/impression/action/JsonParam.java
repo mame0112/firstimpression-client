@@ -103,6 +103,8 @@ public class JsonParam {
 
     public final static String QUESTION_AGE_OVER70 = "over70";
 
+    public final static String QUESTION_AGE_UNKNOWN = "generation_unknown";
+
     /* Field name for choice A data */
     public final static String QUESTION_CHOICE_ITEM_A = "item_a";
 

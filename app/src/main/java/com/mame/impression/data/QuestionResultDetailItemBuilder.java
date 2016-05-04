@@ -62,6 +62,11 @@ public class QuestionResultDetailItemBuilder {
         return this;
     }
 
+    public QuestionResultDetailItemBuilder setGenerationUnknown(int generationUnknown ){
+        mData.setGenerationUnknown(generationUnknown);
+        return this;
+    }
+
     public QuestionResultDetailItem getResult(){
         return mData;
     }

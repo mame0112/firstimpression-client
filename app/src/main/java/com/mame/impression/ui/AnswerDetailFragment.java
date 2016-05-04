@@ -31,7 +31,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
 
     private TextView mFemaleAView;
 
-//    private TextView mGenderUnknownAView;
+    private TextView mGenderUnknownAView;
 
     private TextView mUnder10AView;
 
@@ -49,11 +49,13 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
 
     private TextView mOver70AView;
 
+    private TextView mGenerationUnknownAView;
+
     private TextView mMaleBView;
 
     private TextView mFemaleBView;
 
-//    private TextView mGenderUnknownBView;
+    private TextView mGenderUnknownBView;
 
     private TextView mUnder10BView;
 
@@ -70,6 +72,8 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
     private TextView mFrom60_70BView;
 
     private TextView mOver70BView;
+
+    private TextView mGenerationUnknownBView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,13 +112,13 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
     private void createGenderAViews(View view){
         mMaleAView = (TextView)view.findViewById(R.id.answer_detail_male_a);
         mFemaleAView = (TextView)view.findViewById(R.id.answer_detail_female_a);
-        //        mGenderUnknownAView = (TextView)view.findViewById(R.id);
+        mGenderUnknownAView = (TextView)view.findViewById(R.id.answer_detail_unknown_a);
     }
 
     private void createGenderBViews(View view){
         mMaleBView = (TextView)view.findViewById(R.id.answer_detail_male_b);
         mFemaleBView = (TextView)view.findViewById(R.id.answer_detail_female_b);
-//        mGenderUnknownBView = (TextView)view.findViewById(R.id);
+        mGenderUnknownBView = (TextView)view.findViewById(R.id.answer_detail_unknown_b);
     }
 
     private void createAgeAViews(View view){
@@ -126,6 +130,8 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
         mFrom50_60AView = (TextView)view.findViewById(R.id.answer_detail_from50_60_a);
         mFrom60_70AView = (TextView)view.findViewById(R.id.answer_detail_from60_70_a);
         mOver70AView = (TextView)view.findViewById(R.id.answer_detail_over70_a);
+        mGenerationUnknownAView = (TextView)view.findViewById(R.id.answer_detail_generation_unknown_a);
+
     }
 
     private void createAgeBViews(View view){
@@ -137,6 +143,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
         mFrom50_60BView = (TextView)view.findViewById(R.id.answer_detail_from50_60_b);
         mFrom60_70BView = (TextView)view.findViewById(R.id.answer_detail_from60_70_b);
         mOver70BView = (TextView)view.findViewById(R.id.answer_detail_over70_b);
+        mGenerationUnknownBView = (TextView)view.findViewById(R.id.answer_detail_generation_unknown_b);
     }
 
     private void updateViews(){
@@ -152,13 +159,17 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
 
         mMaleAView.setText(String.valueOf(mData.getChoiceAItem().getMale()));
         mFemaleAView.setText(String.valueOf(mData.getChoiceAItem().getFemale()));
+        mGenderUnknownAView.setText(String.valueOf(mData.getChoiceAItem().getGenderUnknown()));
         mMaleBView.setText(String.valueOf(mData.getChoiceBItem().getMale()));
         mFemaleBView.setText(String.valueOf(mData.getChoiceBItem().getFemale()));
+        mGenderUnknownBView.setText(String.valueOf(mData.getChoiceBItem().getGenderUnknown()));
 
         mMaleAView.invalidate();
         mFemaleAView.invalidate();
         mMaleBView.invalidate();
         mFemaleBView.invalidate();
+        mGenderUnknownAView.invalidate();
+        mGenderUnknownBView.invalidate();
 
         mUnder10AView.setText(String.valueOf(mData.getChoiceAItem().getUnder10()));
         mFrom10_20AView.setText(String.valueOf(mData.getChoiceAItem().getFrom10_20()));
@@ -168,6 +179,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
         mFrom50_60AView.setText(String.valueOf(mData.getChoiceAItem().getFrom50_60()));
         mFrom60_70AView.setText(String.valueOf(mData.getChoiceAItem().getFrom60_70()));
         mOver70AView.setText(String.valueOf(mData.getChoiceAItem().getFrom60_70()));
+        mGenerationUnknownAView.setText(String.valueOf(mData.getChoiceAItem().getGenerationUnknown()));
 
         mUnder10AView.invalidate();
         mFrom10_20AView.invalidate();
@@ -177,6 +189,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
         mFrom50_60AView.invalidate();
         mFrom60_70AView.invalidate();
         mOver70AView.invalidate();
+        mGenerationUnknownAView.invalidate();
 
         mUnder10BView.setText(String.valueOf(mData.getChoiceBItem().getUnder10()));
         mFrom10_20BView.setText(String.valueOf(mData.getChoiceBItem().getFrom10_20()));
@@ -186,6 +199,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
         mFrom50_60BView.setText(String.valueOf(mData.getChoiceBItem().getFrom50_60()));
         mFrom60_70BView.setText(String.valueOf(mData.getChoiceBItem().getFrom60_70()));
         mOver70BView.setText(String.valueOf(mData.getChoiceBItem().getFrom60_70()));
+        mGenerationUnknownBView.setText(String.valueOf(mData.getChoiceBItem().getGenerationUnknown()));
 
         mUnder10BView.invalidate();
         mFrom10_20BView.invalidate();
@@ -195,6 +209,7 @@ public class AnswerDetailFragment extends ImpressionBaseFragment {
         mFrom50_60BView.invalidate();
         mFrom60_70BView.invalidate();
         mOver70BView.invalidate();
+        mGenerationUnknownBView.invalidate();
 
     }
 

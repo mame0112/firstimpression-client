@@ -150,6 +150,36 @@
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
                         android:layout_weight="1"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/impression_light_grey"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="right"
+                        android:layout_marginTop="@dimen/card_chart_vertical_padding"
+                        android:layout_marginBottom="@dimen/card_chart_vertical_padding"
+                        android:text="@string/item_gender_unknown"/>
+                    <TextView
+                        android:id="@+id/answer_detail_unknown_a"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/card_chart_vertical_padding"
+                        android:layout_marginBottom="@dimen/card_chart_vertical_padding"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/answer_detail_unknown_b"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/card_chart_vertical_padding"
+                        android:layout_marginBottom="@dimen/card_chart_vertical_padding"
+                        android:layout_weight="1"/>
+                </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
         <android.support.v7.widget.CardView
@@ -424,6 +454,36 @@
                         android:layout_weight="1"/>
                     <TextView
                         android:id="@+id/answer_detail_over70_b"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/card_chart_vertical_padding"
+                        android:layout_marginBottom="@dimen/card_chart_vertical_padding"
+                        android:layout_weight="1"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:background="@color/impression_light_grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:layout_marginTop="@dimen/card_chart_vertical_padding"
+                        android:layout_marginBottom="@dimen/card_chart_vertical_padding"
+                        android:layout_weight="1"
+                        android:text="@string/item_generation_unknown"/>
+                    <TextView
+                        android:id="@+id/answer_detail_generation_unknown_a"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginTop="@dimen/card_chart_vertical_padding"
+                        android:layout_marginBottom="@dimen/card_chart_vertical_padding"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/answer_detail_generation_unknown_b"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"

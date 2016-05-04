@@ -90,7 +90,7 @@ public class MainPageService extends Service{
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
-                if(mListener != null){
+                if (mListener != null) {
                     AnalyticsTracker.trackFailInforamtion();
                     mListener.onFailed(reason, message);
                 }
@@ -124,7 +124,9 @@ public class MainPageService extends Service{
             mService.respondToQuestion(questionListener, getApplicationContext(), id, select, gender, age);
         } else {
             LogUtil.w(TAG, "Gender or Age is null");
-            // TODO Show Profile prompt dialog
+            // TODO Show Profile prompt dialog.
+            // Send data as "Unknown" user.
+            mService.respondToQuestion(questionListener, getApplicationContext(), id, select, QuestionResultListData.Gender.UNKNOWN, QuestionResultListData.Age.UNKNOWN);
         }
 
     }
@@ -178,7 +180,11 @@ public class MainPageService extends Service{
 
         long userId = PreferenceUtil.getUserId(getApplicationContext());
 
-        mService.updateCurrentUserPoint(pointListener, getApplicationContext(), userId, PointUpdateType.RESPOND_TO_QUESTION);
+        //If user doesn't sign in
+        if(userId != Constants.NO_USER){
+            mService.updateCurrentUserPoint(pointListener, getApplicationContext(), userId, PointUpdateType.RESPOND_TO_QUESTION);
+        }
+
     }
 
     //Binder to connect service
