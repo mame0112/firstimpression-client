@@ -88,15 +88,17 @@ public class AnswerPageService extends ImpressionBaseService {
                     if(data != null){
                         mListener.onAnswerDetailReady(data);
                     } else {
-                        // TODO Need error handling
+                        mListener.onAnswerDetailLoadFailed();
                     }
-
                 }
             }
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                if(mListener != null){
+                    mListener.onAnswerDetailLoadFailed();
+                }
             }
         };
 
@@ -166,6 +168,8 @@ public class AnswerPageService extends ImpressionBaseService {
         void onAnswerResultListReady(List<QuestionResultListData> resultLists);
 
         void onAnswerDetailReady(QuestionResultDetailData detail);
+
+        void onAnswerDetailLoadFailed();
 
         void onUserPointReady(int point);
     }

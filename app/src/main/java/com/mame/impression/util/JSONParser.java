@@ -238,7 +238,6 @@ public class JSONParser {
 
 
         if(input == null){
-            //TODO need error handling
             return null;
         }
 
@@ -250,7 +249,6 @@ public class JSONParser {
         }
 
         if(param == null){
-            //TODO Need error handling
             return null;
         }
 
