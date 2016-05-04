@@ -14,16 +14,16 @@
 
     <string name="item_gender_male">Male</string>
     <string name="item_gender_female">Female</string>
-    <string name="item_gender_unknown">Unknown</string>
-    <string name="item_generation_under10">Under 10</string>
-    <string name="item_generation_from10_20">From 10 to 20</string>
-    <string name="item_generation_from20_30">From 20 to 30</string>
-    <string name="item_generation_from30_40">From 30 to 40</string>
-    <string name="item_generation_from40_50">From 40 to 50</string>
-    <string name="item_generation_from50_60">From 50 to 60</string>
-    <string name="item_generation_from60_70">From 60 to 70</string>
-    <string name="item_generation_over70">Over 70</string>
-    <string name="item_generation_unknown">Unknown</string>
+    <string name="item_gender_unknown">Unknown / not set</string>
+    <string name="item_generation_under10">Under 10 years old</string>
+    <string name="item_generation_from10_20">10 - 20 years old</string>
+    <string name="item_generation_from20_30">20 - 30 years old</string>
+    <string name="item_generation_from30_40">30 - 40 years old</string>
+    <string name="item_generation_from40_50">40 - 50 years old</string>
+    <string name="item_generation_from50_60">50 - 60 years old</string>
+    <string name="item_generation_from60_70">60 - 70 years old</string>
+    <string name="item_generation_over70">Over 70 years</string>
+    <string name="item_generation_unknown">Unknown / not set</string>
 
     <!-- Drawer -->
     <string name="drawer_item_setting">Settings</string>

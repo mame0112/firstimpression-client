@@ -75,7 +75,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="1.25"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
@@ -84,7 +84,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="1.25"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
@@ -111,7 +111,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_male_b"
                         android:layout_width="match_parent"
@@ -119,7 +119,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -140,7 +140,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_female_b"
                         android:layout_width="match_parent"
@@ -148,7 +148,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -170,7 +170,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_unknown_b"
                         android:layout_width="match_parent"
@@ -178,7 +178,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -210,7 +210,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_weight="1"
+                        android:layout_weight="1.25"
                         android:textStyle="bold"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
@@ -219,7 +219,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:layout_weight="1"
+                        android:layout_weight="1.25"
                         android:textStyle="bold"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
@@ -245,7 +245,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_under10_b"
                         android:layout_width="match_parent"
@@ -253,7 +253,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -274,7 +274,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_from10_20_b"
                         android:layout_width="match_parent"
@@ -282,7 +282,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -304,7 +304,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_from20_30_b"
                         android:layout_width="match_parent"
@@ -312,7 +312,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -333,7 +333,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_from30_40_b"
                         android:layout_width="match_parent"
@@ -341,7 +341,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -363,7 +363,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_from40_50_b"
                         android:layout_width="match_parent"
@@ -371,7 +371,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -392,7 +392,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_from50_60_b"
                         android:layout_width="match_parent"
@@ -400,7 +400,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -422,7 +422,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_from60_70_b"
                         android:layout_width="match_parent"
@@ -430,7 +430,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -451,7 +451,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_over70_b"
                         android:layout_width="match_parent"
@@ -459,7 +459,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="horizontal"
@@ -481,7 +481,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                     <TextView
                         android:id="@+id/answer_detail_generation_unknown_b"
                         android:layout_width="match_parent"
@@ -489,7 +489,7 @@
                         android:gravity="center"
                         android:layout_marginTop="@dimen/card_chart_vertical_padding"
                         android:layout_marginBottom="@dimen/card_chart_vertical_padding"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.25"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
