@@ -100,6 +100,14 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
         }
     }
 
+    public int getItemCount(){
+        if(mData != null){
+            return mData.size();
+        }
+        return 0;
+    }
+
+
     public void setAnswerRecyclerViewListener(AnswerRecyclerViewListener listener){
         mListener = listener;
     }

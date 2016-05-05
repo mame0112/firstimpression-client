@@ -12,6 +12,7 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -49,6 +50,10 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     /* Field name to send result list data */
     public final static String PARAM_RESULT_LIST_DATA ="result_list_data";
 
+    private final static String TAG_OVERVIEW_FRAGMENT = "overview";
+
+    private final static String TAG_DETAIL_FRAGMENT = "detail";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -65,7 +70,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.answer_page_frame, mAnswerOverviewFragment)
+                    .add(R.id.answer_page_frame, mAnswerOverviewFragment, TAG_OVERVIEW_FRAGMENT)
                     .commit();
         }
 
@@ -122,13 +127,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
                 //Otherwise, Get initial question data.
                 //And show progress dialog in case user id and user name are available.
                 // If those are not available, progress dialog shall be shown by service.
-                long userId = PreferenceUtil.getUserId(getApplicationContext());
-                String userName = PreferenceUtil.getUserName(getApplicationContext());
-                if(userId != Constants.NO_USER && userName != null){
-                    showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
-                }
-
-                mService.requestQuestionsCreatedByUser();
+                switchToOverviewView();
             }
 
         }
@@ -198,6 +197,17 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         }
     }
 
+    private void switchToOverviewView(){
+        long userId = PreferenceUtil.getUserId(getApplicationContext());
+        String userName = PreferenceUtil.getUserName(getApplicationContext());
+        if(userId != Constants.NO_USER && userName != null){
+            showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
+        }
+
+        mService.requestQuestionsCreatedByUser();
+    }
+
+
     private void switchToDetailView(long targetQuestionId){
 
         showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
@@ -206,7 +216,44 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         mService.requestQuestionsResultDetail(targetQuestionId);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.answer_page_frame, mDetailFragment).addToBackStack(null).commit();
+                .replace(R.id.answer_page_frame, mDetailFragment, TAG_OVERVIEW_FRAGMENT).addToBackStack(null).commit();
+//        getSupportFragmentManager().beginTransaction()
+//                .add(R.id.answer_page_frame, mDetailFragment, TAG_DETAIL_FRAGMENT).addToBackStack(null).commit();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode != KeyEvent.KEYCODE_BACK){
+            return super.onKeyDown(keyCode, event);
+        }else{
+
+            int stackNum2 = getSupportFragmentManager().getBackStackEntryCount();
+            LogUtil.d(TAG, "stackNum:::: " + stackNum2);
+
+            //Check if Overview fragment is in stack
+            Fragment fg = getSupportFragmentManager().findFragmentByTag(TAG_OVERVIEW_FRAGMENT);
+
+            if(fg != null){
+                // If detail fragment is displayed
+                if(fg instanceof AnswerDetailFragment){
+
+                    //Check Data size of OverviewFragment
+                    int size = mAnswerOverviewFragment.getItemCount();
+
+                    //If data is 0 (meaning user skip overview fragment and go to detail view)
+                    if(size == 0){
+
+                        //Switch to overview fragment.
+                        switchToOverviewView();
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.answer_page_frame, mAnswerOverviewFragment, TAG_OVERVIEW_FRAGMENT).addToBackStack(null).commit();
+                    }
+                }
+            }
+
+            return super.onKeyDown(keyCode, event);
+
+        }
     }
 
     @Override
