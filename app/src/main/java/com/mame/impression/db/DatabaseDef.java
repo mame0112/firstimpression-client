@@ -29,6 +29,8 @@ public class DatabaseDef {
 
     public interface CreatedQuestionColumns extends BaseColumns{
         static final String QUESTION_ID = "created_question_id";
+
+        static final String QUESTION_DESCRIPTION = "created_question_description";
     }
 
     interface RespondedQuestionTable {

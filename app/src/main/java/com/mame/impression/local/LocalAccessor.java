@@ -15,9 +15,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by kosukeEndo on 2015/12/05.
  */
@@ -45,7 +42,7 @@ public class LocalAccessor extends Accessor {
 
         switch(action){
             case CREATE_QUESTION:
-                storeCreatedQuestionId(context, param);
+                storeCreatedQuestionData(context, param);
                 break;
             case UPDATE_POINT:
                 updateUserPoint(context, param);
@@ -62,8 +59,27 @@ public class LocalAccessor extends Accessor {
             case GET_QUESTION_LIST:
                 extractNotRespondedQuestions(context, param);
                 break;
+            case NOTIFICATION_GET_DATA:
+                getCreatedQuestionData(context, param);
+                break;
         }
 
+    }
+
+    private void getCreatedQuestionData(Context context, String param){
+        LogUtil.d(TAG, "getCreatedQuestionData");
+        try {
+            long questionId = new JSONObject(param).getLong(JsonParam.QUESTION_ID);
+            String description = mDataHandler.getQuestionDescription(context, questionId);
+
+            JSONObject result = new JSONObject();
+            result.put(JsonParam.QUESTION_DESCRIPTION, description);
+
+            mListener.onCompleted(result);
+        } catch (JSONException e){
+            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+        }
     }
 
     private void extractNotRespondedQuestions(Context context, String param){
@@ -107,12 +123,14 @@ public class LocalAccessor extends Accessor {
     }
 
 
-    private void storeCreatedQuestionId(Context context, String param){
-        LogUtil.d(TAG, "storeCreatedQuestionId");
+    private void storeCreatedQuestionData(Context context, String param){
+        LogUtil.d(TAG, "storeCreatedQuestionData");
 
         try {
-            long questionId = new JSONObject(param).getLong(JsonParam.ID);
-            mDataHandler.storeCreatedQuestionId(context, questionId);
+            JSONObject obj = new JSONObject(param);
+            long questionId = obj.getLong(JsonParam.ID);
+            String description = obj.getString(JsonParam.QUESTION_DESCRIPTION);
+            mDataHandler.storeCreatedQuestionData(context, questionId, description);
             //TODO
             mListener.onCompleted(new JSONObject());
         } catch (JSONException e){

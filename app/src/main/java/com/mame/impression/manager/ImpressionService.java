@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 
 import com.mame.impression.action.Action;
 import com.mame.impression.action.lists.QuestionListAction;
+import com.mame.impression.action.notification.GetCreatedQuestionAction;
 import com.mame.impression.action.point.GetPointAction;
 import com.mame.impression.action.point.UpdatePointAction;
 import com.mame.impression.action.result.QuestionListWithUserIdAction;
@@ -203,6 +204,23 @@ public class ImpressionService extends Service {
 
         executeAction(listener, context, action);
 
+    }
+
+    public void requestCreatedQuestionData(ResultListener listener, Context context, long questionId){
+        LogUtil.d(TAG, "requestCreatedQuestionData");
+
+        if (listener == null) {
+            throw new IllegalArgumentException("Listener is null");
+        }
+
+        if(context == null){
+            throw new IllegalArgumentException("Context is null");
+        }
+
+        GetCreatedQuestionAction action = new GetCreatedQuestionAction();
+        action.setAction(questionId);
+
+        executeAction(listener, context, action);
     }
 
     public void requestToCreateNewQuestion(ResultListener listener, Context context, long createUserId, String createUserName, String description, String choiceA, String choiceB) {

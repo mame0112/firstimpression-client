@@ -35,6 +35,11 @@ public enum RequestAction {
     DETAIL,         // Request detail information for target message (GET)
 
     /**
+     * Notification actin
+     */
+    NOTIFICATION_GET_DATA,
+
+    /**
      * Point action
      */
     GET_POINT,

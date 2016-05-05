@@ -6,12 +6,19 @@ package com.mame.impression.ui.notification;
 public class NotificationData {
     private long mQuestionId;
 
-    public NotificationData(long questionId){
+    private String mQuestionTitle;
+
+    public NotificationData(long questionId, String title){
         mQuestionId = questionId;
+        mQuestionTitle = title;
     }
 
     public long getQuestionId(){
         return mQuestionId;
+    }
+
+    public String getQuestionTitle(){
+        return mQuestionTitle;
     }
 
 }

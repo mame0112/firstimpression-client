@@ -80,12 +80,16 @@ public class ImpressionLocalDataHandler {
         return ids;
     }
 
-    public synchronized void storeCreatedQuestionId(Context context, long questionId){
+    public synchronized void storeCreatedQuestionData(Context context, long questionId, String description){
 
-        LogUtil.d(TAG, "storeCreatedQuestionId");
+        LogUtil.d(TAG, "storeCreatedQuestionData");
 
         if(questionId == Constants.NO_QUESTION){
             throw new IllegalArgumentException("Question id cannot be null");
+        }
+
+        if(description == null){
+            throw new IllegalArgumentException("Description cannot be null");
         }
 
         if(context == null){
@@ -96,7 +100,7 @@ public class ImpressionLocalDataHandler {
             setDatabase(context);
             sDatabase.beginTransaction();
 
-            ContentValues questionValues = getContentValueForCreatedQuestion(questionId);
+            ContentValues questionValues = getContentValueForCreatedQuestion(questionId, description);
 
             long id = sDatabase.insert(DatabaseDef.CreatedQuestionTable.TABLE_NAME, null, questionValues);
             LogUtil.d(TAG, "id: " + id);
@@ -180,6 +184,40 @@ public class ImpressionLocalDataHandler {
         return false;
     }
 
+    public synchronized String getQuestionDescription(Context context, long questionId){
+        LogUtil.d(TAG, "getQuestionDescription");
+
+        if(context == null){
+            throw new IllegalArgumentException("Context cannot be null");
+        }
+
+        if(questionId == Constants.NO_QUESTION){
+            throw new IllegalArgumentException("Question id cannot be NO_QUESTION");
+        }
+
+        setDatabase(context);
+
+        String selection = DatabaseDef.RespondedQuestionColumns.QUESTION_ID + " = ?";
+        String selectionArgs[] = { String.valueOf(questionId)};
+        String sortOrder = null;
+        String groupBy = null;
+        String having = null;
+        Cursor cursor = sDatabase.query(DatabaseDef.RespondedQuestionTable.TABLE_NAME, null,
+                selection, selectionArgs, groupBy, having, sortOrder);
+        if(cursor != null && cursor.moveToFirst()){
+            try {
+                String description = cursor.getString(cursor
+                        .getColumnIndex(DatabaseDef.CreatedQuestionColumns.QUESTION_DESCRIPTION));
+                return description;
+            } catch (IllegalStateException e){
+                LogUtil.d(TAG, "IllegalStateException: " + e.getMessage());
+            }
+        }
+
+        return null;
+
+    }
+
     /**
      * We might want to manage point on Database. Then, we handle point information in this class.
      * @param context
@@ -230,9 +268,10 @@ public class ImpressionLocalDataHandler {
 
     }
 
-    protected ContentValues getContentValueForCreatedQuestion(long questionId){
+    protected ContentValues getContentValueForCreatedQuestion(long questionId, String description){
         ContentValues values = new ContentValues();
         values.put(DatabaseDef.CreatedQuestionColumns.QUESTION_ID, questionId);
+        values.put(DatabaseDef.CreatedQuestionColumns.QUESTION_DESCRIPTION, description);
         return values;
     }
 

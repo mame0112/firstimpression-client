@@ -22,7 +22,7 @@ public class GcmMessageParser {
         try {
             JSONObject object = new JSONObject(message);
             long questionId = object.getLong(GcmConstant.PARAM_QUESTION_ID);
-            return new NotificationData(questionId);
+            return new NotificationData(questionId, null);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
         }

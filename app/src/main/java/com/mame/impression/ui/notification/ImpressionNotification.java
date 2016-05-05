@@ -12,11 +12,15 @@ import com.mame.impression.AnswerPageActivity;
 import com.mame.impression.MainPageActivity;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/16.
  */
 public class ImpressionNotification {
+
+    private final static String TAG = Constants.TAG + ImpressionNotification.class.getSimpleName();
+
     private final static int REQUEST_CODE = 1;
 
     private final static int LED_INTERVAL = 1000; // 1 sec
@@ -24,6 +28,9 @@ public class ImpressionNotification {
     private static NotificationManager mNotificationManager = null;
 
     public void showNotiofication(Context context, int notificationId, NotificationData data) {
+        LogUtil.d(TAG, "showNotiofication: " + data.getQuestionTitle());
+
+        //TODO Need to implement both for w/ title and w/o title.
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context)
                 .setSmallIcon(R.drawable.fi_app_icn)
