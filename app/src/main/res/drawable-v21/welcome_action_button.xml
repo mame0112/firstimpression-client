@@ -1,4 +1,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:colorControlHighlight">
+    <item  android:drawable="@drawable/fi_welcome_action_disable_button" android:state_enabled="false"/>
     <item android:drawable="@drawable/fi_welcome_action_button" />
 </selector>
