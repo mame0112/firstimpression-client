@@ -63,7 +63,7 @@
 
     <!-- Sign in fragment -->
     <string name="signin_title">サインイン</string>
-    <string name="sign_in_button">サインインn</string>
+    <string name="sign_in_button">サインイン</string>
     <string name="sign_in_hint_username">ユーザ名</string>
     <string name="sign_in_hint_password">パスワード</string>
     <string name="sign_in_forget_password">パスワードを忘れた？</string>
