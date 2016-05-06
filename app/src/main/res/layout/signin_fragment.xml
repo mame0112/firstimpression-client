@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:textColor="@drawable/welcome_action_button_text"
         android:background="@drawable/welcome_action_button"
-        android:textColor="@color/impression_white"
         android:text="@string/sign_in_button"/>
 </RelativeLayout>
