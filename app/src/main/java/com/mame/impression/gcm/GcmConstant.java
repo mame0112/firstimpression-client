@@ -8,4 +8,6 @@ public class GcmConstant {
     public final static String MESSAGE = "message";
 
     public final static String PARAM_QUESTION_ID = "question_id";
+
+    public final static String PARAM_QUESTION_DESCRIPTION = "description";
 }

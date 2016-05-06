@@ -30,22 +30,35 @@ public class ImpressionNotification {
     public void showNotiofication(Context context, int notificationId, NotificationData data) {
         LogUtil.d(TAG, "showNotiofication: " + data.getQuestionTitle());
 
-        //TODO Need to implement both for w/ title and w/o title.
+        //If data is empty nothing to do.
+        if(data == null){
+            LogUtil.w(TAG, "Notification data is null");
+            return;
+        }
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context)
                 .setSmallIcon(R.drawable.fi_app_icn)
                 .setContentTitle(
                         context.getString(R.string.notification_title))
-                .setContentText(
-                        context.getString(R.string.notification_content))
-                .setTicker(
-                        context.getString(R.string.notification_content))
                 .setLights(Color.MAGENTA, LED_INTERVAL, LED_INTERVAL)
+                .setVibrate(new long[] { 500, 500, 250, 500 })
                 .setAutoCancel(true);
+
+        if(data.getQuestionTitle() != null){
+            builder.setContentText(
+                    context.getString(R.string.notification_content_with_description, data.getQuestionTitle()))
+                    .setTicker(
+                            context.getString(R.string.notification_content_with_description, data.getQuestionTitle()));
+        } else {
+            builder.setContentText(
+                    context.getString(R.string.notification_content_without_description))
+                    .setTicker(
+                            context.getString(R.string.notification_content_without_description));
+        }
 
         // If current vibration setting is on
 //        if (PreferenceUtil.getCurrentVibrationSetting(context)) {
-            builder.setVibrate(new long[] { 500, 500, 250, 500 });
 //        }
 
         Intent intent = new Intent(context, AnswerPageActivity.class);

@@ -123,7 +123,8 @@
 
     <!-- Notification -->
     <string name="notification_title">First impression</string>
-    <string name="notification_content">You got new notification</string>
+    <string name="notification_content_without_description">You got new answer for your question</string>
+    <string name="notification_content_with_description">You got new answer for \'%1$s\'</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
     <!-- Setting -->
