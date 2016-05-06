@@ -8,6 +8,8 @@
 
     <color name="impression_warning_light_pink">#F8BBD0</color>
 
+    <color name="impression_page_background">#f1f1f1</color>
+
     <color name="impression_light_grey">#EEEEEE</color>
     <color name="impression_grey">#dddddd</color>
     <color name="impression_dark_grey">#aaaaaa</color>
