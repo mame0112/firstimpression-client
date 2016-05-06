@@ -1,0 +1,136 @@
+<resources>
+    <string name="app_name">First Impression</string>
+
+    <!-- Common -->
+    <string name="impression_ok">OK</string>
+    <string name="impression_cancel">キャンセル</string>
+    <string name="impression_divider">/</string>
+    <string name="impression_generic_error">不明なエラー</string>
+    <string name="impression_progress_dialog_title">しばらくお待ちください...</string>
+    <string name="impression_progress_dialog_desc">ダウンロード中</string>
+    <string name="impression_error_dialog_title">エラーが発生しました</string>
+    <string name="impression_error_dialog_desc">問題が起きたようです。後ほど再度お試しください</string>
+
+    <string name="item_gender_male">男性</string>
+    <string name="item_gender_female">女性</string>
+    <string name="item_gender_unknown">不明 / 指定なし</string>
+    <string name="item_generation_under10">10歳未満</string>
+    <string name="item_generation_from10_20">10代</string>
+    <string name="item_generation_from20_30">20代</string>
+    <string name="item_generation_from30_40">30代</string>
+    <string name="item_generation_from40_50">40代</string>
+    <string name="item_generation_from50_60">50代</string>
+    <string name="item_generation_from60_70">60代</string>
+    <string name="item_generation_over70">70際以上</string>
+    <string name="item_generation_unknown">不明 / 指定なし</string>
+
+    <!-- Drawer -->
+    <string name="drawer_item_setting">設定</string>
+    <string name="drawer_item_about">概要</string>
+    <string name="drawer_item_privacy">プライバシーポリシー</string>
+    <string name="drawer_item_terms">利用規約</string>
+
+    <!-- Time -->
+    <string name="str_generic_time_before">"前"</string>
+    <string name="str_generic_time_sec">"秒"</string>
+    <string name="str_generic_time_min">"分"</string>
+    <string name="str_generic_time_hour">"時感"</string>
+    <string name="str_generic_time_unknown_date">不明</string>
+
+    <!-- Sprash page -->
+    <string name="sprash_description_text">リアルタイムに、あなたのアイデアへの反応を見てみよう。</string>
+    <string name="sprash_check_question_button">とりあえず質問を見てみる</string>
+    <string name="sprash_sign_upin_button">サインアップ / サインイン</string>
+
+    <!-- Main page -->
+    <string name="main_card_title_divider">-</string>
+    <string name="main_option_menu_results">回答</string>
+    <string name="main_option_menu_settings">設定</string>
+    <string name="main_option_menu_sign_out">サインアウト</string>
+
+    <string name="main_page_current_point">現在のポイント: %1$d</string>
+    <string name="main_pgae_create_question">質問を作成</string>
+    <string name="main_page_not_enough_point_to_create_question">ポイントが足りません。他の人の質問に答えてポイントを集めましょう</string>
+    <string name="main_pgae_no_question">質問がありません</string>
+    <string name="main_pgae_progress_desc">質問をダウンロード中</string>
+
+    <string name="main_pgae_snackbar_error_message">問題が起きたようです。後ほど再度お試しください</string>
+
+    <!-- Welcome page -->
+    <string name="welcome_service_description">「First impression」はリアルタイムに、あなたのアイデアへの反応を見ることができるサービスです</string>
+    <string name="welcome_signin_button">サインイン</string>
+    <string name="welcome_signup_button">サインアップ</string>
+
+    <!-- Sign in fragment -->
+    <string name="signin_title">サインイン</string>
+    <string name="sign_in_button">サインインn</string>
+    <string name="sign_in_hint_username">ユーザ名</string>
+    <string name="sign_in_hint_password">パスワード</string>
+    <string name="sign_in_forget_password">パスワードを忘れた？</string>
+    <string name="sign_in_error_username_null">ユーザ名を入力してください</string>
+    <string name="sign_in_error_username_short">ユーザ名は4文字以上です</string>
+    <string name="sign_in_error_username_long">ユーザ名は16文字以下です</string>
+    <string name="sign_in_error_password_null">パスワードを入力してください</string>
+    <string name="sign_in_error_password_short">パスワードは4文字以上です</string>
+    <string name="sign_in_error_password_long">パスワードは16文字以下です。</string>
+    <string name="sign_in_error_password_invalid_character">パスワードに使えない文字が含まれています</string>
+    <string name="sign_in_error_username_password_not_match">ユーザ名とパスワードが一致しません</string>
+    <string name="sign_in_error_internal_server_error">サーバでエラーが発生しました。後ほど再度お試しください</string>
+
+    <!-- Sign up fragment -->
+    <string name="signup_title">サインアップ</string>
+    <string name="sign_up_button">サインアップ</string>
+    <string name="sign_up_service_notice">サインアップすると、下記に同意したこととみなします</string>
+    <string name="sign_up_tos">利用規約</string>
+    <string name="sign_up_privacy_policy">プライバシーポリシー</string>
+    <string name="spinner_gender_select_indication">性別を選択</string>
+    <string name="spinner_age_select_indication">年齢を選択</string>
+
+    <!-- Answer fragment -->
+    <string name="answer_overview_no_content">質問がありません</string>
+    <string name="answer_detail_choice_a">A</string>
+    <string name="answer_detail_choice_b">B</string>
+    <string name="answer_progress_desc">質問をダウンロード中</string>
+
+    <!-- Create question fragment -->
+    <string name="str_create_question_description">質問文</string>
+    <string name="str_create_question_choice_a">選択肢A</string>
+    <string name="str_create_question_choice_b">選択肢B</string>
+    <string name="str_create_question_create_button">質問を作成</string>
+    <string name="str_create_question_error_desc_null">質問文を入力してください</string>
+    <string name="str_create_question_error_desc_short">質問文は4文字以上です</string>
+    <string name="str_create_question_error_desc_long">質問文は64文字以下です</string>
+    <string name="str_create_question_error_choice_null">選択肢を入力してください</string>
+    <string name="str_create_question_error_choice_short">選択肢は2文字以上です</string>
+    <string name="str_create_question_error_choice_long">選択肢は32文字以下です</string>
+    <string name="str_create_question_progress_dialog_desc">質問を作成中</string>
+
+
+    <!-- Notification dialog -->
+    <string name="notification_dialog_title">お知らせ</string>
+    <string name="notification_dialog_desc">質問に答える前にサインインする必要があります</string>
+    <string name="notification_dialog_sign_up">サインイン</string>
+
+    <!-- Profile dialog -->
+    <string name="profile_dialog_age_text">年齢</string>
+    <string name="profile_dialog_gender_text">性別</string>
+    <string name="profile_dialog_answer">回答</string>
+    <string name="profile_dialog_signup_merit_text">サインアップすると、質問をすることができます</string>
+    <string name="profile_dialog_signup_button">サインアップ</string>
+    <string name="profile_dialog_signin_note">アカウントをお持ちの方</string>
+    <string name="profile_dialog_signin_button">アカウントをお持ちですか？サインイン</string>
+
+    <!-- Error message fragment -->
+    <string name="error_message_title">エラー</string>
+
+    <!-- Notification -->
+    <string name="notification_title">First impression</string>
+    <string name="notification_content_without_description">あなたの質問に対する回答が届きました</string>
+    <string name="notification_content_with_description">「%1$s」に対する回答が届きました</string>
+    <string name="title_activity_scrolling">ScrollingActivity</string>
+
+    <!-- Setting -->
+    <string name="setting_notification_main_text">通知</string>
+    <string name="setting_notification_sub_text">質問へ回答されたら、通知を受ける</string>
+
+</resources>

@@ -2,13 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainPageActivity">
     <item android:id="@+id/action_answer_page"
-        android:title="Answer page"
+        android:title="@string/main_option_menu_results"
         android:icon="@drawable/fi_user_icn"
         app:showAsAction="ifRoom" />
     <item android:id="@+id/action_settings"
-        android:title="@string/action_settings"
+        android:title="@string/main_option_menu_settings"
         app:showAsAction="never"/>
     <item android:id="@+id/action_sign_out"
-        android:title="Sign out"
+        android:title="@string/main_option_menu_sign_out"
         app:showAsAction="never" />
 </menu>

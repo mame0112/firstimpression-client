@@ -69,6 +69,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         }
 
         if (savedInstanceState == null) {
+            LogUtil.d(TAG, "savedInstanceState is null");
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.answer_page_frame, mAnswerOverviewFragment, TAG_OVERVIEW_FRAGMENT)
                     .commit();
@@ -198,6 +199,7 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     }
 
     private void switchToOverviewView(){
+        LogUtil.d(TAG, "switchToOverviewView");
         long userId = PreferenceUtil.getUserId(getApplicationContext());
         String userName = PreferenceUtil.getUserName(getApplicationContext());
         if(userId != Constants.NO_USER && userName != null){
@@ -217,9 +219,11 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.answer_page_frame, mDetailFragment, TAG_OVERVIEW_FRAGMENT).addToBackStack(null).commit();
+
 //        getSupportFragmentManager().beginTransaction()
 //                .add(R.id.answer_page_frame, mDetailFragment, TAG_DETAIL_FRAGMENT).addToBackStack(null).commit();
     }
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -227,27 +231,36 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
             return super.onKeyDown(keyCode, event);
         }else{
 
-            int stackNum2 = getSupportFragmentManager().getBackStackEntryCount();
-            LogUtil.d(TAG, "stackNum:::: " + stackNum2);
-
             //Check if Overview fragment is in stack
             Fragment fg = getSupportFragmentManager().findFragmentByTag(TAG_OVERVIEW_FRAGMENT);
 
             if(fg != null){
+                LogUtil.d(TAG, "A");
                 // If detail fragment is displayed
                 if(fg instanceof AnswerDetailFragment){
+
+                    LogUtil.d(TAG, "B");
 
                     //Check Data size of OverviewFragment
                     int size = mAnswerOverviewFragment.getItemCount();
 
                     //If data is 0 (meaning user skip overview fragment and go to detail view)
-                    if(size == 0){
-
-                        //Switch to overview fragment.
-                        switchToOverviewView();
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.answer_page_frame, mAnswerOverviewFragment, TAG_OVERVIEW_FRAGMENT).addToBackStack(null).commit();
-                    }
+//                    if(size == 0){
+//                        LogUtil.d(TAG, "C");
+//
+//                        //Switch to overview fragment.
+//                        switchToOverviewView();
+//                        getSupportFragmentManager().beginTransaction()
+//                                .remove(mDetailFragment).commit();
+//                        return true;
+//                    } else {
+//                        LogUtil.d(TAG, "D");
+//                    }
+                    switchToOverviewView();
+                    getSupportFragmentManager().beginTransaction()
+                            .remove(mDetailFragment).commit();
+                } else{
+                    LogUtil.d(TAG, "E");
                 }
             }
 
@@ -255,6 +268,50 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
         }
     }
+
+//    @Override
+//    public boolean onKeyDown(int keyCode, KeyEvent event) {
+//        if(keyCode != KeyEvent.KEYCODE_BACK){
+//            return super.onKeyDown(keyCode, event);
+//        }else{
+//
+//            int stackNum2 = getSupportFragmentManager().getBackStackEntryCount();
+//            LogUtil.d(TAG, "stackNum:::: " + stackNum2);
+//
+//            //Check if Overview fragment is in stack
+//            Fragment fg = getSupportFragmentManager().findFragmentByTag(TAG_OVERVIEW_FRAGMENT);
+//
+//            if(fg != null){
+//                LogUtil.d(TAG, "A");
+//                // If detail fragment is displayed
+//                if(fg instanceof AnswerDetailFragment){
+//
+//                    LogUtil.d(TAG, "B");
+//
+//                    //Check Data size of OverviewFragment
+//                    int size = mAnswerOverviewFragment.getItemCount();
+//
+//                    //If data is 0 (meaning user skip overview fragment and go to detail view)
+//                    if(size == 0){
+//                        LogUtil.d(TAG, "C");
+//
+//                        //Switch to overview fragment.
+//                        switchToOverviewView();
+//                        getSupportFragmentManager().beginTransaction()
+//                                .replace(R.id.answer_page_frame, mAnswerOverviewFragment, TAG_OVERVIEW_FRAGMENT).commit();
+//                        return false;
+//                    } else {
+//                        LogUtil.d(TAG, "D");
+//                    }
+//                } else{
+//                    LogUtil.d(TAG, "E");
+//                }
+//            }
+//
+//            return super.onKeyDown(keyCode, event);
+//
+//        }
+//    }
 
     @Override
     public void onItemClicked(long targetQuestionId) {
