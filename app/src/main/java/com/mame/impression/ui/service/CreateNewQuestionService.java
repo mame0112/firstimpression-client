@@ -72,8 +72,10 @@ public class CreateNewQuestionService extends ImpressionBaseService {
                             }
 //                        mListener.notifyCurrentUserPoint(point);
                         } catch (JSONException e) {
-                            //TODO Error handling
                             LogUtil.w(TAG, "JSONException: " + e.getMessage());
+                            if(mListener != null){
+                                //TODO
+                            }
                         }
                     } else {
                         //TODO
@@ -177,5 +179,7 @@ public class CreateNewQuestionService extends ImpressionBaseService {
         void onNewQuestionCreationFail(ImpressionError reason);
 
         void notifyNotEnoughUserPoint(int point);
+
+        void onFailed(ImpressionError reason, String message);
     }
 }

@@ -114,6 +114,9 @@ public class MainPageService extends Service{
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "respondToQuestion onFailed");
+                if(mListener != null){
+                    mListener.onFailed(reason, message);
+                }
             }
         };
 
@@ -158,23 +161,32 @@ public class MainPageService extends Service{
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "Point onCompleted");
-                if (response != null && mListener != null) {
+                if (response != null) {
                     try {
                         int updatedPoint = response.getInt(JsonParam.USER_POINT);
-                        mListener.onReplyFinished(updatedPoint);
+                        if(mListener != null){
+                            mListener.onReplyFinished(updatedPoint);
+                        }
                     } catch (JSONException e) {
                         LogUtil.w(TAG, "JSONException: " + e.getMessage());
-                        //TODO Error handling
+                        if(mListener != null){
+                            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                        }
                     }
                 } else {
                     LogUtil.w(TAG, "response or mListner is null");
-                    //TODO Error handling
+                    if(mListener != null){
+                        mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, "Point response is null");
+                    }
                 }
             }
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                if(mListener != null){
+                    mListener.onFailed(reason, message);
+                }
             }
         };
 

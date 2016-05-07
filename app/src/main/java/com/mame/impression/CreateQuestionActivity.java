@@ -177,6 +177,12 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     }
 
     @Override
+    public void onFailed(ImpressionError reason, String message) {
+        LogUtil.d(TAG, "onFailed");
+        //TODO
+    }
+
+    @Override
     public void onConfigurationChanged(Configuration newConfig){
         super.onConfigurationChanged(newConfig);
     }
