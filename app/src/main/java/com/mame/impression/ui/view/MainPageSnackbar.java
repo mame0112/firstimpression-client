@@ -67,6 +67,8 @@ public class MainPageSnackbar {
         if(message == null){
             throw new IllegalArgumentException("message cannot be null");
         }
+
+        Snackbar.make(mRootViewGroup, message, Snackbar.LENGTH_LONG).show();
     }
 
 

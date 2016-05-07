@@ -11,6 +11,10 @@
     <string name="impression_error_dialog_title">エラーが発生しました</string>
     <string name="impression_error_dialog_desc">問題が起きたようです。後ほど再度お試しください</string>
 
+    <!-- Impression error -->
+    <string name="impression_error_general">問題が起きたようです。後ほどお試しください</string>
+    <string name="impression_error_network_error">ネットワーク接続がありません</string>
+
     <string name="item_gender_male">男性</string>
     <string name="item_gender_female">女性</string>
     <string name="item_gender_unknown">不明 / 指定なし</string>

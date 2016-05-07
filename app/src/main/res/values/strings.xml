@@ -11,6 +11,10 @@
     <string name="impression_error_dialog_title">Error occurrd</string>
     <string name="impression_error_dialog_desc">Something went wrong. Please try again later</string>
 
+    <!-- Impression error -->
+    <string name="impression_error_general">Unknown error ocurred. Please try again later.</string>
+    <string name="impression_error_network_error">No network connection</string>
+
     <string name="item_gender_male">Male</string>
     <string name="item_gender_female">Female</string>
     <string name="item_gender_unknown">Unknown / not set</string>

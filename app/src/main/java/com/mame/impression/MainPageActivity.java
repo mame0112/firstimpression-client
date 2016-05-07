@@ -363,7 +363,7 @@ public class MainPageActivity extends ImpressionBaseActivity
         LogUtil.d(TAG, "onFailed");
         hideProgress();
         if(mSnackBar != null){
-            mSnackBar.showErrorMessage(getString(R.string.main_pgae_snackbar_error_message));
+            mSnackBar.showErrorMessage(generateErrorMessage(reason));
         }
     }
 
@@ -393,6 +393,21 @@ public class MainPageActivity extends ImpressionBaseActivity
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
     }
+
+    private String generateErrorMessage(ImpressionError reason){
+        switch(reason){
+            case GENERAL_ERROR:
+            case UNEXPECTED_DATA_FORMAT:
+            case INTERNAL_SERVER_ERROR:
+                return getString(R.string.impression_error_general);
+            case NO_NETWORK_CONNECTION:
+            case NOT_REACHED_TO_SERVER:
+                return getString(R.string.impression_error_network_error);
+        }
+
+        return null;
+    }
+
 
     private void setMenuState(Menu menu){
         MenuItem setting = menu.findItem(R.id.action_settings);
