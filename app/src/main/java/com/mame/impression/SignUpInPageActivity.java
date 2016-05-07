@@ -51,7 +51,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     public enum SignUpInFailure {
         USERNAME_PASSWORD_NOT_MATCHED,
-        INTERNAL_SERVER_ERROR
+        INTERNAL_SERVER_ERROR,
+        NO_NEtWORK_CONNECTION
     }
 
 
@@ -218,9 +219,16 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
                 hideProgress();
+                checkAndShowErrorMessage(reason);
             }
         }, getApplicationContext(), userName, password, gender, age, deviceId);
 
+    }
+
+    private void checkAndShowErrorMessage(ImpressionError reason){
+        if(ImpressionError.NO_NETWORK_CONNECTION == reason){
+            showErrorMessage(SignUpInFailure.NO_NEtWORK_CONNECTION);
+        }
     }
 
     private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
@@ -297,6 +305,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
                 hideProgress();
+                checkAndShowErrorMessage(reason);
             }
         };
 
@@ -316,6 +325,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                checkAndShowErrorMessage(reason);
             }
         };
 

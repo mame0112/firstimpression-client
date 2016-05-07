@@ -60,6 +60,8 @@ public class ErrorMessageFragment extends Fragment {
                     return getString(R.string.sign_in_error_username_password_not_match);
                 case INTERNAL_SERVER_ERROR:
                     return getString(R.string.sign_in_error_internal_server_error);
+                case NO_NEtWORK_CONNECTION:
+                    return getString(R.string.sign_in_error_no_network_connection);
             }
         }
 

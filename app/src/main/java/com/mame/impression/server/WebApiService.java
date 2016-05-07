@@ -8,10 +8,12 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.NetworkUtil;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -54,29 +56,35 @@ public class WebApiService extends Service{
     public void run(Accessor.AccessorListener listener, RequestInfo info) {
         LogUtil.d(TAG, "run: " + info.getParameter());
 
-        ApiType apiType = ApiType.getResttype(info.getRequestAction());
-        String apiName = ApiType.getApiName(info.getRequestAction());
+        if (NetworkUtil.isNetworkConnected(getApplicationContext())){
+            ApiType apiType = ApiType.getResttype(info.getRequestAction());
+            String apiName = ApiType.getApiName(info.getRequestAction());
 
-        switch (apiType) {
-            case GET:
-                mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
+            switch (apiType) {
+                case GET:
+                    mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
 //                mWebApi.get(listener, apiName, info.getParameter());
-                break;
-            case POST:
+                    break;
+                case POST:
 //                mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
-                mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
+                    mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
 //                mWebApi.post(listener, apiName, info.getParameter());
-                break;
-            case PUT:
-                mExec.execute(new WebApiTask.RestPut(listener, apiName, info.getParameter()));
+                    break;
+                case PUT:
+                    mExec.execute(new WebApiTask.RestPut(listener, apiName, info.getParameter()));
 //                mWebApi.put(listener, apiName, info.getParameter());
-                break;
-            case DELETE:
-                mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
+                    break;
+                case DELETE:
+                    mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
 //                mWebApi.delete(listener, apiName, info.getParameter());
-                break;
-            default:
-                break;
+                    break;
+                default:
+                    break;
+            }
+        } else {
+            if(listener != null){
+                listener.onFailed(ImpressionError.NO_NETWORK_CONNECTION, "No network connection");
+            }
         }
 
     }
