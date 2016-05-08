@@ -74,19 +74,23 @@ public class CreateNewQuestionService extends ImpressionBaseService {
                         } catch (JSONException e) {
                             LogUtil.w(TAG, "JSONException: " + e.getMessage());
                             if(mListener != null){
-                                //TODO
+                                mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
                             }
                         }
                     } else {
-                        //TODO
                         LogUtil.w(TAG, "mListener or response JSONObject is null");
+                        if(mListener != null){
+                            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, "Empty response from server");
+                        }
                     }
                 }
 
                 @Override
                 public void onFailed(ImpressionError reason, String message) {
-                    //TODO Error handling
                     LogUtil.w(TAG, "onFailed: " + message);
+                    if(mListener != null){
+                        mListener.onFailed(reason, message);
+                    }
                 }
             };
 
