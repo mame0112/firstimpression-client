@@ -49,13 +49,6 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     private String mChoiceA;
     private String mChoiceB;
 
-    public enum SignUpInFailure {
-        USERNAME_PASSWORD_NOT_MATCHED,
-        INTERNAL_SERVER_ERROR,
-        NO_NEtWORK_CONNECTION
-    }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -227,7 +220,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     private void checkAndShowErrorMessage(ImpressionError reason){
         if(ImpressionError.NO_NETWORK_CONNECTION == reason){
-            showErrorMessage(SignUpInFailure.NO_NEtWORK_CONNECTION);
+            showErrorMessage(ImpressionError.NO_NETWORK_CONNECTION);
         }
     }
 
@@ -294,10 +287,10 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                         //Close this activity
                         finish();
                     } else {
-                        showErrorMessage(SignUpInFailure.USERNAME_PASSWORD_NOT_MATCHED);
+                        showErrorMessage(ImpressionError.USERNAME_PASSWORD_NOT_MATCHED);
                     }
                 } else {
-                    showErrorMessage(SignUpInFailure.INTERNAL_SERVER_ERROR);
+                    showErrorMessage(ImpressionError.INTERNAL_SERVER_ERROR);
                 }
             }
 
@@ -332,7 +325,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         mService.requestToCreateNewQuestion(listener, getApplicationContext(), userId, userName, mDescription, mChoiceA, mChoiceB);
     }
 
-    private void showErrorMessage(final SignUpInFailure reason){
+    private void showErrorMessage(final ImpressionError reason){
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.SignUpInPageActivity;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.util.LogUtil;
 
 /**
@@ -39,7 +40,7 @@ public class ErrorMessageFragment extends Fragment {
         return view;
     }
 
-    public void showErrorMessage(SignUpInPageActivity.SignUpInFailure reason){
+    public void showErrorMessage(ImpressionError reason){
 
         String errorMessage = generateErrorText(reason);
 
@@ -53,14 +54,14 @@ public class ErrorMessageFragment extends Fragment {
         mErrorTextView.setVisibility(View.VISIBLE);
     }
 
-    private String generateErrorText(SignUpInPageActivity.SignUpInFailure reason){
+    private String generateErrorText(ImpressionError reason){
         if(reason != null){
             switch (reason){
                 case USERNAME_PASSWORD_NOT_MATCHED:
                     return getString(R.string.sign_in_error_username_password_not_match);
                 case INTERNAL_SERVER_ERROR:
                     return getString(R.string.sign_in_error_internal_server_error);
-                case NO_NEtWORK_CONNECTION:
+                case NO_NETWORK_CONNECTION:
                     return getString(R.string.sign_in_error_no_network_connection);
             }
         }
