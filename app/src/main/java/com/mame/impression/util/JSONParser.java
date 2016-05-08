@@ -168,7 +168,8 @@ public class JSONParser {
                     QuestionResultListData data = createQuestionResultListData(obj);
                     results.add(data);
                 } catch (JSONException e) {
-//                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                    LogUtil.d(TAG, "JSONException; " + e.getMessage());
+                    return null;
                 }
             }
         }

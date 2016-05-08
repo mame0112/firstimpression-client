@@ -56,13 +56,19 @@ public class AnswerPageService extends ImpressionBaseService {
                 if(mListener != null){
                     JSONParser parser = new JSONParser();
                     List<QuestionResultListData> lists = parser.createQuestionResultListDataFromJsonObject(response);
-                    mListener.onAnswerResultListReady(lists);
+                    if(lists != null){
+                        mListener.onAnswerResultListReady(lists);
+                    } else {
+                        mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, "Unexpected json format");
+                    }
                 }
             }
 
             @Override
             public void onFailed(ImpressionError reason, String message) {
-
+                if(mListener != null){
+                    mListener.onFailed(reason, message);
+                }
             }
         };
 
@@ -132,6 +138,9 @@ public class AnswerPageService extends ImpressionBaseService {
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                if(mListener != null){
+                    mListener.onFailed(reason, message);
+                }
             }
         };
 
@@ -172,6 +181,8 @@ public class AnswerPageService extends ImpressionBaseService {
         void onAnswerDetailLoadFailed();
 
         void onUserPointReady(int point);
+
+        void onFailed(ImpressionError reason, String message);
     }
 
 }

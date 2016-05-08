@@ -17,11 +17,14 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.data.QuestionResultDetailData;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
 import com.mame.impression.ui.service.AnswerPageService;
+import com.mame.impression.ui.view.AnswerPageSnackbar;
+import com.mame.impression.ui.view.MainPageSnackbar;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
@@ -40,6 +43,8 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     private AnswerDetailFragment mDetailFragment = new AnswerDetailFragment();
 
     private AnswerPageService mService;
+
+    private AnswerPageSnackbar mSnackBar;
 
     private boolean mIsBound = false;
 
@@ -85,6 +90,8 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
             //TODO Error handling
         }
 
+        mSnackBar = new AnswerPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.answer_page_root_view));
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.answer_fab_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +126,6 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
             mService = ((AnswerPageService.AnswerPageServiceBinder) service).getService();
 
             mService.setAnswerPageServiceListener(AnswerPageActivity.this);
-
 
             //If target question already exists.
             if(mTargetQuestionId != Constants.NO_QUESTION){
@@ -222,6 +228,20 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
 //        getSupportFragmentManager().beginTransaction()
 //                .add(R.id.answer_page_frame, mDetailFragment, TAG_DETAIL_FRAGMENT).addToBackStack(null).commit();
+    }
+
+    private String generateErrorMessage(ImpressionError reason){
+        switch(reason){
+            case GENERAL_ERROR:
+            case UNEXPECTED_DATA_FORMAT:
+            case INTERNAL_SERVER_ERROR:
+                return getString(R.string.impression_error_general);
+            case NO_NETWORK_CONNECTION:
+            case NOT_REACHED_TO_SERVER:
+                return getString(R.string.impression_error_network_error);
+        }
+
+        return null;
     }
 
 
@@ -364,6 +384,14 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     @Override
     public void onUserPointReady(int point) {
         LogUtil.d(TAG, "onUserPointReady: " + point);
+    }
+
+    @Override
+    public void onFailed(ImpressionError reason, String message) {
+        hideProgress();
+        if(mSnackBar != null){
+            mSnackBar.showErrorMessage(generateErrorMessage(reason));
+        }
     }
 
     @Override
