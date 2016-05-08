@@ -50,8 +50,6 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     protected void onStart() {
         super.onStart();
 
-//        startService(new Intent(CreateQuestionActivity.this, CreateNewQuestionService.class));
-
         doBindService();
 
     }
@@ -63,8 +61,6 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
         doUnbindService();
 
         hideProgress();
-
-//        stopService(new Intent(CreateQuestionActivity.this, CreateNewQuestionService.class));
     }
 
     private ServiceConnection mConnection = new ServiceConnection() {
