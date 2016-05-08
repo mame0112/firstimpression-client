@@ -156,7 +156,11 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     public void onNewQuestionCreationFail(final ImpressionError reason) {
         LogUtil.d(TAG, "onNewQuestionCreationFail");
         hideProgress();
-        //TODO
+
+        if(mCreateQuestionFragment != null){
+            mCreateQuestionFragment.changeCreateButtonState();
+        }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -184,6 +188,10 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     @Override
     public void onFailed(final ImpressionError reason, String message) {
         LogUtil.d(TAG, "onFailed");
+
+        if(mCreateQuestionFragment != null){
+            mCreateQuestionFragment.changeCreateButtonState();
+        }
 
         runOnUiThread(new Runnable() {
             @Override

@@ -168,7 +168,7 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
 
     }
 
-    private void changeCreateButtonState(){
+    public void changeCreateButtonState(){
         if(mDescription != null && mChoiceAString != null && mChoiceBString != null){
             if(mDescription.length() >= Constants.DESCRIPTION_MIN_LENGTH && mDescription.length() <= Constants.DESCRIPTION_MAX_LENGTH){
                 if(mChoiceAString.length() >= Constants.DESCRIPTION_CHOICE_MIN_LENGTH && mChoiceAString.length() <= Constants.DESCRIPTION_CHOICE_MAX_LENGTH){
