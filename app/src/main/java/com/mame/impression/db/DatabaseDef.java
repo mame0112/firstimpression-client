@@ -21,8 +21,6 @@ public class DatabaseDef {
         String MIME_TYPE = "impression-question";
 
         String QUESTION_PATH = "created_question";
-//
-//        static final String SINGLE_FRIENDSHIP_PATH = "friendship/#";
 
         static final Uri URI = Uri.withAppendedPath(BASE_URI, QUESTION_PATH);
     }
@@ -39,8 +37,6 @@ public class DatabaseDef {
         String MIME_TYPE = "impression-question";
 
         String QUESTION_PATH = "responded_question";
-//
-//        static final String SINGLE_FRIENDSHIP_PATH = "friendship/#";
 
         static final Uri URI = Uri.withAppendedPath(BASE_URI, QUESTION_PATH);
     }

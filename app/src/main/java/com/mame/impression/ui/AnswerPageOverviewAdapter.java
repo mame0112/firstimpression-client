@@ -42,7 +42,6 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        LogUtil.d(TAG, "onCreateViewHolder");
         View v = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.answer_card_item, parent, false);
         v.setOnClickListener(this);

@@ -19,7 +19,8 @@ public class ImpressionDatabaseHelper extends SQLiteOpenHelper {
             + DatabaseDef.CreatedQuestionTable.TABLE_NAME + " ("
             + DatabaseDef.CreatedQuestionColumns._ID
             + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-            + DatabaseDef.CreatedQuestionColumns.QUESTION_ID + " INTEGER DEFAULT 0)";
+            + DatabaseDef.CreatedQuestionColumns.QUESTION_ID + " INTEGER DEFAULT 0,"
+            + DatabaseDef.CreatedQuestionColumns.QUESTION_DESCRIPTION + ")";
 
     static final String RESPONDED_QUESTION_DATA_SQL = "CREATE TABLE IF NOT EXISTS "
             + DatabaseDef.RespondedQuestionTable.TABLE_NAME + " ("
