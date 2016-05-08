@@ -12,6 +12,7 @@ import android.util.Log;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.ui.CreateQuestionFragment;
+import com.mame.impression.ui.ErrorMessageFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
@@ -28,7 +29,9 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
 
     private boolean mIsBound = false;
 
-    private CreateQuestionFragment mFragment = new CreateQuestionFragment();
+    private CreateQuestionFragment mCreateQuestionFragment = new CreateQuestionFragment();
+
+    private ErrorMessageFragment mErrorMessageFragment = new ErrorMessageFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +42,11 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
         setContentView(R.layout.create_question_layout);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.create_question_frame, mFragment)
+            getSupportFragmentManager().beginTransaction().add(R.id.create_question_frame, mErrorMessageFragment)
+                    .add(R.id.create_question_frame, mCreateQuestionFragment)
                     .commit();
         }
-        mFragment.setCreateQuestionFragmentListener(this);
+        mCreateQuestionFragment.setCreateQuestionFragmentListener(this);
     }
 
     @Override
@@ -150,10 +153,16 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     }
 
     @Override
-    public void onNewQuestionCreationFail(ImpressionError reason) {
+    public void onNewQuestionCreationFail(final ImpressionError reason) {
         LogUtil.d(TAG, "onNewQuestionCreationFail");
         hideProgress();
-        // TODO
+        //TODO
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mErrorMessageFragment.showErrorMessage(reason);
+            }
+        });
     }
 
     @Override
@@ -173,9 +182,15 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
     }
 
     @Override
-    public void onFailed(ImpressionError reason, String message) {
+    public void onFailed(final ImpressionError reason, String message) {
         LogUtil.d(TAG, "onFailed");
-        //TODO
+
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mErrorMessageFragment.showErrorMessage(reason);
+            }
+        });
     }
 
     @Override

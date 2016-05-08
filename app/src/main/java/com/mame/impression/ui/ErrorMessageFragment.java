@@ -36,6 +36,7 @@ public class ErrorMessageFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.error_message_fragment, container, false);
         mErrorTextView = (TextView)view.findViewById(R.id.error_fragment_title);
+        mErrorTextView.setVisibility(View.GONE);
 
         return view;
     }
@@ -57,9 +58,12 @@ public class ErrorMessageFragment extends Fragment {
     private String generateErrorText(ImpressionError reason){
         if(reason != null){
             switch (reason){
+                case GENERAL_ERROR:
+                    return getString(R.string.impression_error_general);
                 case USERNAME_PASSWORD_NOT_MATCHED:
                     return getString(R.string.sign_in_error_username_password_not_match);
                 case INTERNAL_SERVER_ERROR:
+                case UNEXPECTED_DATA_FORMAT:
                     return getString(R.string.sign_in_error_internal_server_error);
                 case NO_NETWORK_CONNECTION:
                     return getString(R.string.sign_in_error_no_network_connection);
