@@ -36,7 +36,6 @@ public class ImpressionNotificationManager {
         LogUtil.d(TAG, "showNotification");
 
         if(data == null){
-            //TODO Need to have error handling.
             return;
         }
         ImpressionNotification notification = new ImpressionNotification();

@@ -86,7 +86,6 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
         if(data != null){
             //TODO
 //            holder.mThumbnail.setImageBitmap(data.getThumbnail());
-            //TODO
             holder.mPostDateView.setText(TimeUtil.getDateForDisplay(data.getPostDate(), mContext));
             holder.mUserName.setText(data.getUserName());
             holder.mDescription.setText(data.getDescription());

@@ -67,8 +67,7 @@ public class MainPageService extends Service{
         LogUtil.d(TAG, "onUnbind");
         mService.finalize(this.getClass());
 
-        //TODO
-        return true;
+        return false;
     }
 
     public void requestQuestions(){
@@ -127,7 +126,6 @@ public class MainPageService extends Service{
             mService.respondToQuestion(questionListener, getApplicationContext(), id, select, gender, age);
         } else {
             LogUtil.w(TAG, "Gender or Age is null");
-            // TODO Show Profile prompt dialog.
             // Send data as "Unknown" user.
             mService.respondToQuestion(questionListener, getApplicationContext(), id, select, QuestionResultListData.Gender.UNKNOWN, QuestionResultListData.Age.UNKNOWN);
         }

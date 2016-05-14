@@ -130,7 +130,7 @@ public class AnswerPageService extends ImpressionBaseService {
                         mListener.onUserPointReady(point);
                     } catch (JSONException e) {
                         LogUtil.d(TAG, "JSONException: " + e.getMessage());
-                        //TODO Error handling
+                        mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
                     }
                 }
             }
@@ -158,8 +158,7 @@ public class AnswerPageService extends ImpressionBaseService {
         LogUtil.d(TAG, "onUnbind");
         mService.finalize(this.getClass());
 
-        //TODO
-        return true;
+        return false;
     }
 
     public class AnswerPageServiceBinder extends Binder {

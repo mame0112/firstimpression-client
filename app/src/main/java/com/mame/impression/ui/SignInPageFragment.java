@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
 
@@ -95,11 +96,15 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.signin_button:
-                    //TODO Need to disable sign in button here
                     LogUtil.d(TAG, "sign in button pressed");
-                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNIN_BUTTON, 0);
-                    if(mListener != null){
-                        mListener.onSignInButtonPressed(mUserName, mPassword);
+
+                    mSignInButton.setEnabled(false);
+
+                    if(ButtonUtil.isClickable()){
+                        AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNIN, AnalyticsTracker.EVENT_ACTION_SIGNIN_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNIN_BUTTON, 0);
+                        if(mListener != null){
+                            mListener.onSignInButtonPressed(mUserName, mPassword);
+                        }
                     }
 
                     break;
@@ -137,7 +142,7 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         @Override
         public void afterTextChanged(Editable s) {
             mUserName = s.toString();
-            changeButtonState();
+            changeSignInButtonState();
 
             TextValidator.VALIDATION_RESULT result = mUserNameValidator.isValidInput(mUserName);
             showResultForUserName(result, mUserNameWrapper);
@@ -157,14 +162,14 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         @Override
         public void afterTextChanged(Editable s) {
             mPassword = s.toString();
-            changeButtonState();
+            changeSignInButtonState();
 
             TextValidator.VALIDATION_RESULT result = mPasswordValidator.isValidInput(mPassword);
             showResultForPassword(result, mPasswordWrapper);
         }
     };
 
-    private void changeButtonState(){
+    public void changeSignInButtonState(){
         if(mUserNameValidator.isValideInput(mUserName) && mPasswordValidator.isValideInput(mPassword)){
             mSignInButton.setEnabled(true);
         } else {

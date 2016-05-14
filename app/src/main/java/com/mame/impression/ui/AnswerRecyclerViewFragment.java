@@ -86,8 +86,8 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
                 mNoContentView.setVisibility(View.GONE);
             }
 
-            //TODO
-            mData = data;
+            //Copy to another instance
+            mData = new ArrayList<QuestionResultListData>(data);
 
             if(mAdapter != null){
                 mAdapter.updateData(data);

@@ -162,9 +162,7 @@ public class CreateNewQuestionService extends ImpressionBaseService {
     public boolean onUnbind(Intent intent) {
         LogUtil.d(TAG, "onUnbind");
         mService.finalize(this.getClass());
-
-        //TODO
-        return true;
+        return false;
     }
 
     public class CreateNewQuestionServiceBinder extends Binder {

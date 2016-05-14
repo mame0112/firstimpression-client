@@ -35,8 +35,8 @@ public class AnswerPageOverviewAdapter  extends RecyclerView.Adapter<AnswerPageO
     }
 
     public void updateData(List<QuestionResultListData> data){
-//        mData = new ArrayList<QuestionResultListData>(data);
-        //TODO Should copy to another instance.
+
+        //Copy has been done by Activity
         mData = data;
     }
 

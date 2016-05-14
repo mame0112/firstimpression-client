@@ -226,6 +226,15 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         });
     }
 
+    private void changeSignInButtonState(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mSignInFragment.changeSignInButtonState();
+            }
+        });
+    }
+
 
     private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
 
@@ -297,6 +306,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                 } else {
                     showErrorMessage(ImpressionError.INTERNAL_SERVER_ERROR);
                 }
+
+                changeSignInButtonState();
             }
 
             @Override
@@ -304,6 +315,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                 LogUtil.d(TAG, "onFailed");
                 hideProgress();
                 showErrorMessage(reason);
+
+                changeSignInButtonState();
             }
         };
 
