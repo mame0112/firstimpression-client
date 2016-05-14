@@ -32,7 +32,9 @@ import com.mame.impression.util.AnalyticsTracker;
 import java.util.List;
 
 public class MainPageActivity extends ImpressionBaseActivity
-        implements MainPageAdapter.MainPageAdapterListener, MainPageService.MainPageServiceListener, MainPageSnackbar.MainPageSnackbarListener {
+        implements MainPageAdapter.MainPageAdapterListener,
+        MainPageService.MainPageServiceListener,
+        MainPageSnackbar.MainPageSnackbarListener {
 
     private static final String TAG = Constants.TAG + MainPageActivity.class.getSimpleName();
 
@@ -266,10 +268,6 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         if (mAdapter != null) {
             mAdapter.notifyDataSetChanged();
-//            mAdapter.notifyItemRemoved(2);
-            if (mAdapter.getItemCount() == 0) {
-                //TODO Show "No item" or more item.
-            }
         }
 
         if (mService != null) {

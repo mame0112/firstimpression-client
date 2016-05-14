@@ -111,14 +111,11 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage() {
-        LogUtil.d(TAG, "enterPage");
         // Rely on fragment for GA tracking
     }
 
     @Override
     protected void escapePage() {
-        // TODO Track page
-        LogUtil.d(TAG, "escapePage");
     }
 
     @Override
@@ -206,6 +203,8 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                     // TODO Error handling
                 }
 
+                changeSignUpButtonState();
+
             }
 
             @Override
@@ -213,10 +212,21 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                 LogUtil.d(TAG, "onFailed");
                 hideProgress();
                 showErrorMessage(reason);
+                changeSignUpButtonState();
             }
         }, getApplicationContext(), userName, password, gender, age, deviceId);
 
     }
+
+    private void changeSignUpButtonState(){
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                mSignUpFragment.changeSignUpButtonState();
+            }
+        });
+    }
+
 
     private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
 

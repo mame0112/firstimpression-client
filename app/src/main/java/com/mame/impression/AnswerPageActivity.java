@@ -86,8 +86,6 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
         if(titleText != null){
             setTitle(titleText);
-        } else {
-            //TODO Error handling
         }
 
         mSnackBar = new AnswerPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.answer_page_root_view));
@@ -159,8 +157,6 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
 
     protected void onStart(){
         super.onStart();
-        // TODO Need to check if user already cancel promot dialog (Not to show promot dialog again)
-//        startService(new Intent(this, AnswerPageService.class));
 
         doBindService();
     }

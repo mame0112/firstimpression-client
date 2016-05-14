@@ -212,6 +212,7 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
                         AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_CATEGORY_SIGNUP, AnalyticsTracker.EVENT_ACTION_SIGNUP_BUTTON, AnalyticsTracker.EVENT_LABEL_SIGNUP_BUTTON, 0);
                         QuestionResultListData.Gender gender = getGenderValue();
                         QuestionResultListData.Age age = getAgeValue();
+                        mSignUpButton.setEnabled(false);
                         mListener.onSignUpButtonPressed(mUserName, mPassword, gender, age);
                     }
                     break;
@@ -285,7 +286,7 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
         startActivity(i);
     }
 
-    private void changeSignUpButtonState(){
+    public void changeSignUpButtonState(){
         if(isValidButtonState()){
             mSignUpButton.setEnabled(true);
         } else {

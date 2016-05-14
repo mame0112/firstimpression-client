@@ -22,9 +22,12 @@ import org.json.JSONObject;
  * Created by kosukeEndo on 2015/12/30.
  */
 public class PromptDialogActivity extends ImpressionBaseActivity
-        implements NotificationDialogFragment.NotificationDialogFragmentListener, ProfileDialogFragment.ProfileDialogFragmentListener {
+        implements NotificationDialogFragment.NotificationDialogFragmentListener,
+        ProfileDialogFragment.ProfileDialogFragmentListener {
 
     private final static String TAG = Constants.TAG + PromptDialogActivity.class.getSimpleName();
+
+    private final static String DIALOG_TAG = "PROMPT_DIALOG";
 
     private String mDescription;
 
@@ -61,7 +64,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             }
 
         } else {
-            //TODO Need to have error handling here.
+            //If intent is null, we have to show dialog that never uses extra in intent instaed.
+            showProfileDialog();
         }
 
     }
@@ -85,21 +89,21 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     private void showNotificationDialog() {
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        Fragment prev = getFragmentManager().findFragmentByTag(DIALOG_TAG);
         if (prev != null) {
             ft.remove(prev);
         }
         ft.addToBackStack(null);
 
         NotificationDialogFragment newFragment = NotificationDialogFragment.newInstance();
-        newFragment.show(ft, "dialog");
+        newFragment.show(ft, DIALOG_TAG);
         newFragment.setNotificationDialogFragmentListener(this);
     }
 
     private void showProfileDialog() {
 
         FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment prev = getFragmentManager().findFragmentByTag("dialog");
+        Fragment prev = getFragmentManager().findFragmentByTag(DIALOG_TAG);
         if (prev != null) {
             ft.remove(prev);
         }
@@ -107,7 +111,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
         ProfileDialogFragment newFragment = ProfileDialogFragment.newInstance();
         newFragment.setProfileDialogFragmentListener(this);
-        newFragment.show(ft, "dialog");
+        newFragment.show(ft, DIALOG_TAG);
 
     }
 
