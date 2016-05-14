@@ -94,7 +94,7 @@ public class AnswerPageService extends ImpressionBaseService {
                     if(data != null){
                         mListener.onAnswerDetailReady(data);
                     } else {
-                        mListener.onAnswerDetailLoadFailed();
+                        mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, "Unexpected json format");
                     }
                 }
             }
@@ -103,7 +103,7 @@ public class AnswerPageService extends ImpressionBaseService {
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
                 if(mListener != null){
-                    mListener.onAnswerDetailLoadFailed();
+                    mListener.onFailed(reason, message);
                 }
             }
         };
@@ -177,8 +177,6 @@ public class AnswerPageService extends ImpressionBaseService {
         void onAnswerResultListReady(List<QuestionResultListData> resultLists);
 
         void onAnswerDetailReady(QuestionResultDetailData detail);
-
-        void onAnswerDetailLoadFailed();
 
         void onUserPointReady(int point);
 

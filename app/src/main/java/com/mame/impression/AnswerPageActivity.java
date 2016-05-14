@@ -375,13 +375,6 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
     }
 
     @Override
-    public void onAnswerDetailLoadFailed() {
-        LogUtil.d(TAG, "onAnswerDetailLoadFailed");
-        hideProgress();
-        //TODO Need to implement error message
-    }
-
-    @Override
     public void onUserPointReady(int point) {
         LogUtil.d(TAG, "onUserPointReady: " + point);
     }
