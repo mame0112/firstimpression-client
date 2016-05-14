@@ -218,19 +218,15 @@ public class CreateQuestionFragment extends ImpressionBaseFragment {
                     inputLayout.setError(null);
                     break;
                 case INPUT_NULL:
-                    LogUtil.d(TAG, "Input null for Description");
                     inputLayout.setError(getString(R.string.str_create_question_error_desc_null));
                     break;
                 case INPUT_SHORT:
-                    LogUtil.d(TAG, "Input text is too short for Description");
                     inputLayout.setError(getString(R.string.str_create_question_error_desc_short));
                     break;
                 case INPUT_LONG:
-                    LogUtil.d(TAG, "Input text is too long for Description");
                     inputLayout.setError(getString(R.string.str_create_question_error_desc_long));
                     break;
                 case INVALIDED_INPUT_CHAR_TYPE:
-                    LogUtil.d(TAG, "Input text is invalide for Description");
                     break;
             }
         }

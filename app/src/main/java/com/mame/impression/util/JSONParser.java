@@ -276,7 +276,6 @@ public class JSONParser {
             itemB = createQuestionResultDetailItem(itemBObj);
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            //TODO Need error handling
             return null;
         }
 
