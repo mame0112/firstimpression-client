@@ -80,7 +80,14 @@ public class ImpressionLocalDataHandler {
         return ids;
     }
 
-    public synchronized void storeCreatedQuestionData(Context context, long questionId, String description){
+    /**
+     * Store created question to loca lDB
+     * @param context
+     * @param questionId
+     * @param description
+     * @return true if data is stored successfully. Otherwise false.
+     */
+    public synchronized boolean storeCreatedQuestionData(Context context, long questionId, String description){
 
         LogUtil.d(TAG, "storeCreatedQuestionData");
 
@@ -98,25 +105,21 @@ public class ImpressionLocalDataHandler {
 
         try {
             setDatabase(context);
-            sDatabase.beginTransaction();
-
             ContentValues questionValues = getContentValueForCreatedQuestion(questionId, description);
 
             long id = sDatabase.insert(DatabaseDef.CreatedQuestionTable.TABLE_NAME, null, questionValues);
             LogUtil.d(TAG, "id: " + id);
             if(id < 0){
                 LogUtil.d(TAG, "Failed to insert data for question");
+                return false;
             }
-
-            sDatabase.setTransactionSuccessful();
 
         } catch (SQLException e){
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
-        } finally {
-            if(sDatabase != null){
-                sDatabase.endTransaction();
-            }
+            return false;
         }
+
+        return true;
     }
 
     /**
