@@ -176,7 +176,6 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     @Override
     public void onSignUpButtonPressed(final String userName, final String password, final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onSignUpButtonPressed");
-        //TODO Need to disable sign in button here
 
         showProgress(null, getString(R.string.main_pgae_progress_desc));
 
@@ -200,7 +199,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                     //Close this activity
                     finish();
                 } else {
-                    // TODO Error handling
+                    mErrorMessageFragment.showErrorMessage(ImpressionError.GENERAL_ERROR);
                 }
 
                 changeSignUpButtonState();
@@ -230,20 +229,22 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
     private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
 
-        try {
-            JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
-            long userId = (long) paramObject.get(JsonParam.USER_ID);
+        if(response != null){
+            try {
+                JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
+                long userId = (long) paramObject.get(JsonParam.USER_ID);
 
-            //Store userdata
-            PreferenceUtil.setUserId(getApplicationContext(), userId);
-            PreferenceUtil.setUserName(getApplicationContext(), userName);
-            PreferenceUtil.setUserGender(getApplicationContext(), gender);
-            PreferenceUtil.setUserAge(getApplicationContext(), age);
+                //Store userdata
+                PreferenceUtil.setUserId(getApplicationContext(), userId);
+                PreferenceUtil.setUserName(getApplicationContext(), userName);
+                PreferenceUtil.setUserGender(getApplicationContext(), gender);
+                PreferenceUtil.setUserAge(getApplicationContext(), age);
 
-            return true;
+                return true;
 
-        } catch (JSONException e) {
-            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            } catch (JSONException e) {
+                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+            }
         }
 
         return false;
@@ -338,7 +339,6 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         });
     }
 
-    //TODO Need to send some information after create question so that the user can understand it.
     private void startMainPage(){
         Intent intent = new Intent(this, MainPageActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

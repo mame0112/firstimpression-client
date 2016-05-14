@@ -119,7 +119,13 @@ public class ImpressionLocalDataHandler {
         }
     }
 
-    public synchronized void storeRespondedQuestionId(Context context, long questionId){
+    /**
+     * Store responsed question Id.
+     * @param context
+     * @param questionId
+     * @return true if successfully created. Otherwise. return false
+     */
+    public synchronized boolean storeRespondedQuestionId(Context context, long questionId){
 
         LogUtil.d(TAG, "storeRespondedQuestionId");
 
@@ -133,25 +139,21 @@ public class ImpressionLocalDataHandler {
 
         try {
             setDatabase(context);
-            sDatabase.beginTransaction();
-
             ContentValues questionValues = getContentValueForRespondedQuestion(questionId);
 
             long id = sDatabase.insert(DatabaseDef.RespondedQuestionTable.TABLE_NAME, null, questionValues);
             LogUtil.d(TAG, "id: " + id);
             if(id < 0){
                 LogUtil.d(TAG, "Failed to insert data for question");
+                return false;
             }
-
-            sDatabase.setTransactionSuccessful();
 
         } catch (SQLException e){
             LogUtil.d(TAG, "SQLException: " + e.getMessage());
-        } finally {
-            if(sDatabase != null){
-                sDatabase.endTransaction();
-            }
+            return false;
         }
+
+        return true;
 
     }
 

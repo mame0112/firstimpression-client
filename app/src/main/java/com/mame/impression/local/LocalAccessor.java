@@ -113,9 +113,20 @@ public class LocalAccessor extends Accessor {
 
         try {
             long questionId = new JSONObject(param).getLong(JsonParam.QUESTION_ID);
-            mDataHandler.storeRespondedQuestionId(context, questionId);
-            //TODO
-            mListener.onCompleted(new JSONObject());
+            boolean isStored = mDataHandler.storeRespondedQuestionId(context, questionId);
+
+            if(isStored){
+                //Just in case, return created question id
+                JSONObject result = new JSONObject();
+                result.put(JsonParam.QUESTION_ID, questionId);
+                mListener.onCompleted(result);
+            } else {
+                //Just in case, return created question id
+                JSONObject result = new JSONObject();
+                result.put(JsonParam.QUESTION_ID, questionId);
+                mListener.onFailed(ImpressionError.GENERAL_ERROR, "Failed to store data to local DB");
+            }
+
         } catch (JSONException e){
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
             mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
