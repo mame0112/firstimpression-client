@@ -52,6 +52,7 @@
 
     <!-- Prompt dialog-->
     <dimen name="prompt_horizontal_padding">14dp</dimen>
+    <dimen name="prompt_vertical_margin">10dp</dimen>
 
     <!-- Setting -->
     <dimen name="setting_item_margin">8dp</dimen>

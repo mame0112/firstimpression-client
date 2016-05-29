@@ -113,8 +113,9 @@
 
     <!-- Notification dialog -->
     <string name="notification_dialog_title">Information</string>
-    <string name="notification_dialog_desc">You need to sign up before answer question</string>
+    <string name="notification_dialog_desc">Let\'s sign in to create new question</string>
     <string name="notification_dialog_sign_up">Sign in/up</string>
+    <string name="notification_dialog_already_have_account">Already have account? Sign in</string>
 
     <!-- Profile dialog -->
     <string name="profile_dialog_age_text">Age</string>

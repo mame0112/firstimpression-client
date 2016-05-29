@@ -26,7 +26,7 @@ import com.mame.impression.util.AnalyticsTracker;
 /**
  * Created by kosukeEndo on 2015/12/10.
  */
-public class SignUpPageFragment extends ImpressionBaseFragment {
+public class SignUpPageFragment extends ImpressionSignUpBaseFragment {
 
     private static final String TAG = Constants.TAG + SignUpPageFragment.class.getSimpleName();
 
@@ -39,10 +39,6 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
     private TextInputLayout mUserNameWrapper;
 
     private TextInputLayout mPasswordWrapper;
-
-    private UserNameValidator mUserNameValidator;
-
-    private PasswordValidator mPasswordValidator;
 
     private TextView mToSView;
 
@@ -274,18 +270,6 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
         return QuestionResultListData.Age.FROM10_20;
     }
 
-    private void openTosPage(){
-        Uri uri = Uri.parse(Constants.TOS_URL);
-        Intent i = new Intent(Intent.ACTION_VIEW,uri);
-        startActivity(i);
-    }
-
-    private void openPrivacyPolicyPage(){
-        Uri uri = Uri.parse(Constants.PRIVACY_URL);
-        Intent i = new Intent(Intent.ACTION_VIEW,uri);
-        startActivity(i);
-    }
-
     public void changeSignUpButtonState(){
         if(isValidButtonState()){
             mSignUpButton.setEnabled(true);
@@ -324,85 +308,6 @@ public class SignUpPageFragment extends ImpressionBaseFragment {
 
     public interface SignUpFragmentListener{
         void onSignUpButtonPressed(String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age);
-    }
-
-    private void showResultForUserName(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
-        if(result != null){
-            switch(result){
-                case RESULT_OK:
-                    inputLayout.setError(null);
-                    break;
-                case INPUT_NULL:
-                    inputLayout.setError(getString(R.string.sign_in_error_username_null));
-                    break;
-                case INPUT_SHORT:
-                    inputLayout.setError(getString(R.string.sign_in_error_username_short));
-                    break;
-                case INPUT_LONG:
-                    inputLayout.setError(getString(R.string.sign_in_error_username_long));
-                    break;
-                case INVALIDED_INPUT_CHAR_TYPE:
-                    break;
-            }
-        }
-    }
-
-    private void showResultForPassword(TextValidator.VALIDATION_RESULT result, TextInputLayout inputLayout){
-        if(result != null){
-            switch(result){
-                case RESULT_OK:
-                    inputLayout.setError(null);
-                    break;
-                case INPUT_NULL:
-                    inputLayout.setError(getString(R.string.sign_in_error_password_null));
-                    break;
-                case INPUT_SHORT:
-                    inputLayout.setError(getString(R.string.sign_in_error_password_short));
-                    break;
-                case INPUT_LONG:
-                    inputLayout.setError(getString(R.string.sign_in_error_password_long));
-                    break;
-                case INVALIDED_INPUT_CHAR_TYPE:
-                    inputLayout.setError(getString(R.string.sign_in_error_password_invalid_character));
-                    break;
-            }
-        }
-    }
-
-    public class UserNameValidator extends TextValidator{
-
-        @Override
-        public int getMinimumInputength() {
-            return Constants.USERNAME_MIN_LENGTH;
-        }
-
-        @Override
-        public int getMaximumInputength() {
-            return Constants.USERNAME_MAX_LENGTH;
-        }
-
-        @Override
-        public String getAcceptedInputType() {
-            return null;
-        }
-    }
-
-    public class PasswordValidator extends TextValidator{
-
-        @Override
-        public int getMinimumInputength() {
-            return Constants.PASSWORD_MIN_LENGTH;
-        }
-
-        @Override
-        public int getMaximumInputength() {
-            return Constants.PASSWORD_MAX_LENGTH;
-        }
-
-        @Override
-        public String getAcceptedInputType() {
-            return Constants.PASSWORD_PATTERN;
-        }
     }
 
 }

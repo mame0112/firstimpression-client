@@ -1,6 +1,9 @@
 package com.mame.impression.ui;
 
-import android.app.DialogFragment;
+//import android.app.DialogFragment;
+
+import android.support.v4.app.DialogFragment;
+
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +23,7 @@ import com.mame.impression.util.AnalyticsTracker;
 /**
  * Created by kosukeEndo on 2015/12/31.
  */
-public class ProfileDialogFragment extends DialogFragment {
+public class ProfileDialogFragment extends ImpressionBaseFragment {
 
     private final static String TAG = Constants.TAG + ProfileDialogFragment.class.getSimpleName();
 
@@ -28,29 +31,26 @@ public class ProfileDialogFragment extends DialogFragment {
 
     private int mAgeItem = 0;
 
-    int mNum;
-
     private Button mAnswerButton;
 
     private Button mCancelButton;
 
     private ProfileDialogFragmentListener mListener;
 
-    public static ProfileDialogFragment newInstance() {
-        ProfileDialogFragment f = new ProfileDialogFragment();
-
-        // Supply num input as an argument.
-//        Bundle args = new Bundle();
-//        args.putInt("num", num);
-//        f.setArguments(args);
-
-        return f;
-    }
+//    public static ProfileDialogFragment newInstance() {
+//        ProfileDialogFragment f = new ProfileDialogFragment();
+//
+//        // Supply num input as an argument.
+////        Bundle args = new Bundle();
+////        args.putInt("num", num);
+////        f.setArguments(args);
+//
+//        return f;
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mNum = getArguments().getInt("num");
     }
 
     @Override
@@ -92,12 +92,22 @@ public class ProfileDialogFragment extends DialogFragment {
         Button signUpButton = (Button)v.findViewById(R.id.profile_signup_button);
         signUpButton.setOnClickListener(mClickListener);
 
-        getDialog().setTitle(R.string.notification_dialog_title);
-
-        getDialog().setCanceledOnTouchOutside(false);
-        setCancelable(false);
+//        getDialog().setTitle(R.string.notification_dialog_title);
+//
+//        getDialog().setCanceledOnTouchOutside(false);
+//        setCancelable(false);
 
         return v;
+    }
+
+    @Override
+    protected void enterPage() {
+
+    }
+
+    @Override
+    protected void escapePage() {
+
     }
 
     @Override

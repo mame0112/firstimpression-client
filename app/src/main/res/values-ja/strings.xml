@@ -113,8 +113,9 @@
 
     <!-- Notification dialog -->
     <string name="notification_dialog_title">お知らせ</string>
-    <string name="notification_dialog_desc">質問に答える前にサインインする必要があります</string>
+    <string name="notification_dialog_desc">サインインすると、質問することができるようになります</string>
     <string name="notification_dialog_sign_up">サインイン</string>
+    <string name="notification_dialog_already_have_account">すでにアカウントを持っている場合はサインイン</string>
 
     <!-- Profile dialog -->
     <string name="profile_dialog_age_text">年齢</string>
