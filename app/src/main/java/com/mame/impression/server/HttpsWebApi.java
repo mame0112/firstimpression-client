@@ -5,6 +5,7 @@ import android.content.Context;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 
 import org.json.JSONObject;
@@ -24,22 +25,22 @@ public class HttpsWebApi implements WebApi {
     }
 
     @Override
-    public void get(ResultListener listener, String api, JSONObject input) {
-
+    public Runnable get(Accessor.AccessorListener listener, String api, String input) {
+        return null;
     }
 
     @Override
-    public void post(ResultListener listener, String api, JSONObject input) {
-
+    public Runnable post(Accessor.AccessorListener listener, String api, String input) {
+        return null;
     }
 
     @Override
-    public void put(ResultListener listener, String api, JSONObject input) {
-
+    public Runnable put(Accessor.AccessorListener listener, String api, String input) {
+        return null;
     }
 
     @Override
-    public void delete(ResultListener listener, String api, JSONObject input) {
-
+    public Runnable delete(Accessor.AccessorListener listener, String api, String input) {
+        return null;
     }
 }

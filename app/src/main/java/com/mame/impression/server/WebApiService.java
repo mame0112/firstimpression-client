@@ -60,9 +60,13 @@ public class WebApiService extends Service{
             ApiType apiType = ApiType.getResttype(info.getRequestAction());
             String apiName = ApiType.getApiName(info.getRequestAction());
 
+            WebApi webApi = WebApiClientFactory.getWebApi(getApplicationContext());
+
             switch (apiType) {
                 case GET:
-                    mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
+                    //TODO
+                    mExec.execute(webApi.get(listener, apiName, info.getParameter()));
+//                    mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
 //                mWebApi.get(listener, apiName, info.getParameter());
                     break;
                 case POST:

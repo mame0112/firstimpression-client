@@ -37,25 +37,4 @@
         android:textColor="@color/impressionAccent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
-        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<Button-->
-            <!--android:id="@+id/prompt_dialog_cancel"-->
-            <!--android:layout_weight="1"-->
-            <!--android:paddingLeft="@dimen/dialog_horizontal_padding"-->
-            <!--android:paddingRight="@dimen/dialog_horizontal_padding"-->
-            <!--android:text="@string/impression_cancel"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<Button-->
-            <!--android:id="@+id/prompt_dialog_accept"-->
-            <!--android:layout_weight="1"-->
-            <!--android:text="@string/notification_dialog_sign_up"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-    <!--</LinearLayout>-->
 </LinearLayout>

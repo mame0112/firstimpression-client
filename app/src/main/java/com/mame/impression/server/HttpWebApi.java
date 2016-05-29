@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 
@@ -59,16 +60,17 @@ public class HttpWebApi implements WebApi {
     }
 
     @Override
-    public void get(ResultListener listener, final String api, JSONObject input) {
+    public Runnable get(final Accessor.AccessorListener listener, final String api, final String input) {
         LogUtil.d(TAG, "get");
 
-        new Thread(new Runnable() {
+        return new Runnable() {
             @Override
             public void run() {
+
                 URL url = null;
                 HttpURLConnection urlConnection = null;
                 try {
-                    url = new URL(Constants.API_URL + api+"?id=2");
+                    url = new URL(Constants.API_URL + api+"?param=" + input);
                     urlConnection = (HttpURLConnection) url.openConnection();
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader r = new BufferedReader(new InputStreamReader(in));
@@ -77,206 +79,232 @@ public class HttpWebApi implements WebApi {
                     while ((line = r.readLine()) != null) {
                         total.append(line);
                     }
-                    LogUtil.d(TAG, "string: " + line);
+                    LogUtil.d(TAG, "string: " + total);
+
+                    if(listener != null && total != null){
+                        try {
+                            listener.onCompleted(new JSONObject(total.toString()));
+                        } catch (JSONException e) {
+                            LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                        }
+                    }
+
                 } catch (MalformedURLException e) {
                     e.printStackTrace();
+                    if(listener != null){
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
+                    if(listener != null){
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
                 } finally {
                     if(urlConnection != null){
                         urlConnection.disconnect();
                     }
                 }
-
             }
-        }).start();
+        };
+
      }
 
     @Override
-    public void post(ResultListener listener, final String api, JSONObject input) {
+    public Runnable post(final Accessor.AccessorListener listener, final String api, final String input) {
         LogUtil.d(TAG, "post: " + Constants.HTTP_URL + api);
 
-        new Thread(new Runnable() {
+        return new Runnable() {
+
             @Override
             public void run() {
-            URL url = null;
-            HttpURLConnection conn = null;
-            try {
-                url = new URL(Constants.API_URL + api);
-                conn = (HttpURLConnection) url.openConnection();
-    //            urlConnection.setChunkedStreamingMode(0);
-                conn.setReadTimeout(10000);
-                conn.setConnectTimeout(15000);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-                conn.setRequestProperty("Content-Type", "application/json");
-
-                JSONObject jsonParam = new JSONObject();
+                HttpURLConnection conn = null;
+                URL url = null;
                 try {
-                    jsonParam.put("id", 1);
-                    jsonParam.put("param", new JSONObject());
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
 
-                DataOutputStream printout = new DataOutputStream(conn.getOutputStream ());
-                printout.writeUTF(URLEncoder.encode(jsonParam.toString(), "UTF-8"));
-                printout.flush ();
-                printout.close ();
+                    url = new URL(Constants.API_URL + api);
+                    conn = (HttpURLConnection) url.openConnection();
 
-                int responseCode=conn.getResponseCode();
-                LogUtil.d(TAG, "responseCode: " + responseCode);
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("POST");
 
-                String response = null;
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.toString().getBytes("UTF-8"));
+                    os.close();
 
-                if (responseCode == HttpsURLConnection.HTTP_OK) {
                     String line;
-                    BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    while ((line=br.readLine()) != null) {
-                        response+=line;
+                    StringBuffer jsonString = new StringBuffer();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = br.readLine()) != null) {
+                        jsonString.append(line);
                     }
-                }
-                else {
-                    response="";
+                    LogUtil.d(TAG, "jsonString: " + jsonString);
+                    br.close();
+                    conn.disconnect();
 
-                }
-
-                LogUtil.d(TAG, "response: " + response);
-
-//                conn.connect();
+                    JSONObject resultJson = new JSONObject(jsonString.toString());
+                    listener.onCompleted(resultJson);
 
                 } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                    LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                    if(listener != null){
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
+                } catch (ProtocolException e) {
+                    LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+                    if(listener != null){
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
                 } catch (IOException e) {
-                    e.printStackTrace();
-                LogUtil.d(TAG, "IOException: " + e.getMessage());                }
-
-            }
-        }).start();
-
-    }
-
-    private String buildPostParameters(Object content) {
-        String output = null;
-        if ((content instanceof String) ||
-                (content instanceof JSONObject) ||
-                (content instanceof JSONArray)) {
-            output = content.toString();
-        } else if (content instanceof Map) {
-            Uri.Builder builder = new Uri.Builder();
-            HashMap hashMap = (HashMap) content;
-            if (hashMap != null) {
-                Iterator entries = hashMap.entrySet().iterator();
-                while (entries.hasNext()) {
-                    Map.Entry entry = (Map.Entry) entries.next();
-                    builder.appendQueryParameter(entry.getKey().toString(), entry.getValue().toString());
-                    entries.remove(); // avoids a ConcurrentModificationException
+                    LogUtil.d(TAG, "IOException: " + e.getMessage());
+                    if(listener != null){
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
+                } catch (JSONException e) {
+                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                    if(listener != null){
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
+                } finally {
+                    if(conn != null){
+                        conn.disconnect();
+                    }
                 }
-                output = builder.build().getEncodedQuery();
+
             }
-        }
+        };
 
-        return output;
-    }
-
-    private String getQuery(Map params) throws UnsupportedEncodingException
-    {
-        StringBuilder result = new StringBuilder();
-        boolean first = true;
-
-        for(Map.Entry<String, Object> e : ((Map<String, Object>)params).entrySet()) {
-            if (first){
-                first = false;
-            }else {
-                result.append("&");
-            }
-
-            result.append(URLEncoder.encode(e.getKey(), "UTF-8"));
-            result.append("=");
-            result.append(URLEncoder.encode(String.valueOf(e.getValue()), "UTF-8"));
-        }
-
-        return result.toString();
     }
 
     @Override
-    public void put(ResultListener listener, final String api, JSONObject input) {
+    public Runnable put(final Accessor.AccessorListener listener, final String api, final String input) {
         LogUtil.d(TAG, "put");
-        URL url = null;
-        try {
-            url = new URL(Constants.API_URL + api);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestMethod("PUT");
 
-            OutputStream os = conn.getOutputStream();
-            BufferedWriter writer = new BufferedWriter(
-                    new OutputStreamWriter(os, "UTF-8"));
+        return new Runnable() {
 
-            Map<String, Object> values = new HashMap<String, Object>();
-            values.put("username","test name");
-            values.put("password","test password");
-            writer.write(getQuery(values));
+            @Override
+            public void run() {
+                HttpURLConnection conn = null;
+                URL url = null;
+                try {
 
-            writer.flush();
-            writer.close();
-            os.close();
+                    url = new URL(Constants.API_URL + api);
+                    conn = (HttpURLConnection) url.openConnection();
 
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("PUT");
 
-//            OutputStreamWriter out = new OutputStreamWriter(
-//                    conn.getOutputStream());
-//            out.write("Resource content");
-//            out.close();
-            int responseCode=conn.getResponseCode();
-            LogUtil.d(TAG, "responseCode: " + responseCode);
+                    OutputStream os = conn.getOutputStream();
+                    os.write(input.toString().getBytes("UTF-8"));
+                    os.close();
 
-            String response = null;
+                    String line;
+                    StringBuffer jsonString = new StringBuffer();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = br.readLine()) != null) {
+                        jsonString.append(line);
+                    }
+                    LogUtil.d(TAG, "jsonString: " + jsonString);
+                    br.close();
+                    conn.disconnect();
 
-            if (responseCode == HttpsURLConnection.HTTP_OK) {
-                String line;
-                BufferedReader br=new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                while ((line=br.readLine()) != null) {
-                    response+=line;
+                    JSONObject resultJson = new JSONObject(jsonString.toString());
+                    listener.onCompleted(resultJson);
+
+                } catch (MalformedURLException e) {
+                    LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
+                } catch (ProtocolException e) {
+                    LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
+                } catch (IOException e) {
+                    LogUtil.d(TAG, "IOException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
+                } catch (JSONException e) {
+                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
                 }
             }
-            else {
-                response="";
 
-            }
-
-            LogUtil.d(TAG, "response: " + response);
-            LogUtil.d(TAG, "response: " + response);
-        } catch (MalformedURLException e) {
-            LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
-        } catch (ProtocolException e) {
-            LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
-        } catch (IOException e) {
-            LogUtil.d(TAG, "IOException: " + e.getMessage());
-        }
+        };
 
     }
 
     @Override
-    public void delete(ResultListener listener, String api, JSONObject input) {
-        URL url = null;
-        try {
-            url = new URL(Constants.API_URL + api);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-            conn.setDoOutput(true);
-            conn.setRequestProperty(
-                    "Content-Type", "application/x-www-form-urlencoded");
-            conn.setRequestMethod("DELETE");
-            conn.connect();
-        } catch (MalformedURLException e) {
-            LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
-        } catch (ProtocolException e) {
-            LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
-        } catch (IOException e) {
-            LogUtil.d(TAG, "IOException: " + e.getMessage());
-        }
+    public Runnable delete(final Accessor.AccessorListener listener, final String api, final String input) {
 
+        return new Runnable() {
+
+            @Override
+            public void run() {
+                LogUtil.d(TAG, "RestDelete run");
+                HttpURLConnection conn = null;
+                URL url = null;
+                try {
+
+                    url = new URL(Constants.API_URL + api + "?param=" + input.toString());
+                    conn = (HttpURLConnection) url.openConnection();
+
+                    conn.setDoOutput(true);
+                    conn.setRequestMethod("DELETE");
+                    conn.setRequestProperty(
+                            "Content-Type", "application/x-www-form-urlencoded");
+
+//                OutputStream os = conn.getOutputStream();
+//                os.write(mInput.toString().getBytes("UTF-8"));
+//                os.close();
+
+                    String line;
+                    StringBuffer jsonString = new StringBuffer();
+                    BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                    while ((line = br.readLine()) != null) {
+                        jsonString.append(line);
+                    }
+                    LogUtil.d(TAG, "jsonString: " + jsonString);
+                    br.close();
+                    conn.disconnect();
+
+                    JSONObject resultJson = new JSONObject(jsonString.toString());
+                    listener.onCompleted(resultJson);
+
+                } catch (MalformedURLException e) {
+                    LogUtil.d(TAG, "MalformedURLException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
+                } catch (ProtocolException e) {
+                    LogUtil.d(TAG, "MProtocolException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
+                } catch (IOException e) {
+                    LogUtil.d(TAG, "IOException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.GENERAL_ERROR, e.getMessage());
+                    }
+                } catch (JSONException e) {
+                    LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                    if (listener != null) {
+                        listener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                    }
+                } finally {
+                    if (conn != null) {
+                        conn.disconnect();
+                    }
+                }
+            }
+        };
     }
 
 }
