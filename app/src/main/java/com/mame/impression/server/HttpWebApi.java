@@ -56,7 +56,7 @@ public class HttpWebApi implements WebApi {
 
     private static final String TAG = Constants.TAG + HttpWebApi.class.getSimpleName();
 
-    public HttpWebApi(Context context) {
+    public HttpWebApi() {
     }
 
     @Override
@@ -70,7 +70,7 @@ public class HttpWebApi implements WebApi {
                 URL url = null;
                 HttpURLConnection urlConnection = null;
                 try {
-                    url = new URL(Constants.API_URL + api+"?param=" + input);
+                    url = new URL(Constants.HTTP_API_URL + api+"?param=" + input);
                     urlConnection = (HttpURLConnection) url.openConnection();
                     InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                     BufferedReader r = new BufferedReader(new InputStreamReader(in));
@@ -121,7 +121,7 @@ public class HttpWebApi implements WebApi {
                 URL url = null;
                 try {
 
-                    url = new URL(Constants.API_URL + api);
+                    url = new URL(Constants.HTTP_API_URL + api);
                     conn = (HttpURLConnection) url.openConnection();
 
                     conn.setDoOutput(true);
@@ -187,7 +187,7 @@ public class HttpWebApi implements WebApi {
                 URL url = null;
                 try {
 
-                    url = new URL(Constants.API_URL + api);
+                    url = new URL(Constants.HTTP_API_URL + api);
                     conn = (HttpURLConnection) url.openConnection();
 
                     conn.setDoOutput(true);
@@ -253,7 +253,7 @@ public class HttpWebApi implements WebApi {
                 URL url = null;
                 try {
 
-                    url = new URL(Constants.API_URL + api + "?param=" + input.toString());
+                    url = new URL(Constants.HTTP_API_URL + api + "?param=" + input.toString());
                     conn = (HttpURLConnection) url.openConnection();
 
                     conn.setDoOutput(true);

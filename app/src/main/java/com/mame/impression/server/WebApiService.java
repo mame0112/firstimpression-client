@@ -60,27 +60,23 @@ public class WebApiService extends Service{
             ApiType apiType = ApiType.getResttype(info.getRequestAction());
             String apiName = ApiType.getApiName(info.getRequestAction());
 
-            WebApi webApi = WebApiClientFactory.getWebApi(getApplicationContext());
+            //Change http or https depends on Constants
+            WebApi webApi = WebApiClientFactory.getWebApi();
 
             switch (apiType) {
                 case GET:
-                    //TODO
                     mExec.execute(webApi.get(listener, apiName, info.getParameter()));
 //                    mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
-//                mWebApi.get(listener, apiName, info.getParameter());
                     break;
                 case POST:
 //                mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
-                    mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
-//                mWebApi.post(listener, apiName, info.getParameter());
+                    mExec.execute(webApi.post(listener, apiName, info.getParameter()));
                     break;
                 case PUT:
-                    mExec.execute(new WebApiTask.RestPut(listener, apiName, info.getParameter()));
-//                mWebApi.put(listener, apiName, info.getParameter());
+                    mExec.execute(webApi.put(listener, apiName, info.getParameter()));
                     break;
                 case DELETE:
-                    mExec.execute(new WebApiTask.RestDelete(listener, apiName, info.getParameter()));
-//                mWebApi.delete(listener, apiName, info.getParameter());
+                    mExec.execute(webApi.delete(listener, apiName, info.getParameter()));
                     break;
                 default:
                     break;

@@ -63,7 +63,7 @@ public class WebApiTask {
             URL url = null;
             HttpURLConnection urlConnection = null;
             try {
-                url = new URL(Constants.API_URL + mApi+"?param=" + mInput);
+                url = new URL(Constants.HTTP_API_URL + mApi+"?param=" + mInput);
                 urlConnection = (HttpURLConnection) url.openConnection();
                 InputStream in = new BufferedInputStream(urlConnection.getInputStream());
                 BufferedReader r = new BufferedReader(new InputStreamReader(in));
@@ -121,7 +121,7 @@ public class WebApiTask {
             URL url = null;
             try {
 
-                url = new URL(Constants.API_URL + mApi);
+                url = new URL(Constants.HTTP_API_URL + mApi);
                 conn = (HttpURLConnection) url.openConnection();
 
                 conn.setDoOutput(true);
@@ -192,7 +192,7 @@ public class WebApiTask {
             URL url = null;
             try {
 
-                url = new URL(Constants.API_URL + mApi);
+                url = new URL(Constants.HTTP_API_URL + mApi);
                 conn = (HttpURLConnection) url.openConnection();
 
                 conn.setDoOutput(true);
@@ -263,7 +263,7 @@ public class WebApiTask {
             URL url = null;
             try {
 
-                url = new URL(Constants.API_URL + mApi+"?param=" + mInput.toString());
+                url = new URL(Constants.HTTP_API_URL + mApi+"?param=" + mInput.toString());
                 conn = (HttpURLConnection) url.openConnection();
 
                 conn.setDoOutput(true);

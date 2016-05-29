@@ -10,7 +10,7 @@ public class Constants {
 
     public final static int INITIAL_REQUEST_NUM = 20;
 
-    public final static boolean IS_HTTPS = false;
+    public final static boolean IS_HTTPS = true;
 
     public final static String API = "/api/v1";
 
@@ -20,11 +20,13 @@ public class Constants {
 
     public final static String BASE_URL = "first-impression-backend.appspot.com";
 
-    public final static String API_URL = HTTP + BASE_URL + API;
+    public final static String HTTP_API_URL = HTTP + BASE_URL + API;
+
+    public final static String HTTPS_API_URL = HTTPS + BASE_URL + API;
 
     public final static String HTTP_URL = HTTP + BASE_URL;
 
-    public final static String HTTPS_URL = HTTPS + API_URL;
+    public final static String HTTPS_URL = HTTPS + BASE_URL;
 
     public final static String CONTACT_URL = HTTP_URL + "/#/contact";
 

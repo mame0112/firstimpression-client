@@ -9,22 +9,22 @@ import com.mame.impression.constant.Constants;
  */
 public class WebApiClientFactory {
 
+    private static WebApi sApi;
+
     private WebApiClientFactory() {
     }
 
-    public static WebApi getWebApi(Context context) {
+    public static WebApi getWebApi() {
 
-        if (context == null) {
-            throw new IllegalArgumentException("Context cannot be null");
+        if(sApi == null){
+            if (Constants.IS_HTTPS) {
+                sApi = new HttpsWebApi();
+            } else {
+                sApi = new HttpWebApi();
+            }
         }
 
-        if (Constants.IS_HTTPS) {
-            return new HttpsWebApi(context);
-        } else {
-            return new HttpWebApi(context);
-        }
+        return sApi;
 
     }
-
-
 }
