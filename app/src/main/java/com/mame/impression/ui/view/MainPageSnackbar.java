@@ -37,6 +37,14 @@ public class MainPageSnackbar {
         mRootViewGroup = rootViewGroup;
     }
 
+    /**
+     * This is mainly used for case the user hasn't sign in
+     */
+    public void notifyReplyFinished(){
+        LogUtil.d(TAG, "notifyReplyFinished");
+        Snackbar.make(mRootViewGroup, mContext.getString(R.string.main_page_reply_finished), Snackbar.LENGTH_SHORT).show();
+    }
+
     public void updateStatus(int point){
         LogUtil.d(TAG, "updateStatus");
 

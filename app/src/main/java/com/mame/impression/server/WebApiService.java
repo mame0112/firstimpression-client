@@ -26,8 +26,6 @@ public class WebApiService extends Service{
 
     private static final String TAG = Constants.TAG + WebApiService.class.getSimpleName();
 
-//    private WebApi mWebApi;
-
     private IBinder mBinder = new WebApiServiceBinder();
 
     private ExecutorService mExec;
@@ -37,10 +35,6 @@ public class WebApiService extends Service{
         super.onCreate();
 
         LogUtil.d(TAG, "onCreate:" + this);
-
-//        if (mWebApi == null) {
-//            mWebApi = WebApiClientFactory.getWebApi(getApplicationContext());
-//        }
 
         if(mExec == null){
             mExec = Executors.newFixedThreadPool(3);
@@ -66,10 +60,8 @@ public class WebApiService extends Service{
             switch (apiType) {
                 case GET:
                     mExec.execute(webApi.get(listener, apiName, info.getParameter()));
-//                    mExec.execute(new WebApiTask.RestGet(listener, apiName, info.getParameter()));
                     break;
                 case POST:
-//                mExec.execute(new WebApiTask.RestPost(listener, apiName, info.getParameter()));
                     mExec.execute(webApi.post(listener, apiName, info.getParameter()));
                     break;
                 case PUT:

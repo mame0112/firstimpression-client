@@ -350,6 +350,14 @@ public class MainPageActivity extends ImpressionBaseActivity
     }
 
     @Override
+    public void onReplyFinishedWithNoUser() {
+        LogUtil.d(TAG, "onReplyFinishedWithNoUser");
+        if(mSnackBar != null){
+            mSnackBar.notifyReplyFinished();
+        }
+    }
+
+    @Override
     public void signOutFinished() {
         LogUtil.d(TAG, "signOutFinished");
         startSprashActivity();

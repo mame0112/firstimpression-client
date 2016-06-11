@@ -193,6 +193,10 @@ public class MainPageService extends Service{
         //If user doesn't sign in
         if(userId != Constants.NO_USER){
             mService.updateCurrentUserPoint(pointListener, getApplicationContext(), userId, PointUpdateType.RESPOND_TO_QUESTION);
+        } else {
+            if(mListener != null){
+                mListener.onReplyFinishedWithNoUser();
+            }
         }
 
     }
@@ -236,6 +240,8 @@ public class MainPageService extends Service{
         void onOpenQuestionDataReady(List<MainPageContent> data);
 
         void onReplyFinished(int updatedPoint);
+
+        void onReplyFinishedWithNoUser();
 
         void signOutFinished();
 
