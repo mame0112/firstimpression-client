@@ -57,6 +57,8 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     private final static int REQUEST_CODE = 1;
 
+    private final static int THRETHOLD_CHANGE_REPLY_MESSAGE = 5;
+
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -282,6 +284,12 @@ public class MainPageActivity extends ImpressionBaseActivity
         startActivityForResult(intent, REQUEST_CODE);
     }
 
+    private void startSignUpPage(){
+        Intent intent = new Intent(getApplicationContext(), SignUpInPageActivity.class);
+        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNUP);
+        startActivity(intent);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -352,10 +360,26 @@ public class MainPageActivity extends ImpressionBaseActivity
     @Override
     public void onReplyFinishedWithNoUser() {
         LogUtil.d(TAG, "onReplyFinishedWithNoUser");
-        if(mSnackBar != null){
-            mSnackBar.notifyReplyFinished();
+
+        int replyCount = PreferenceUtil.getReplyCount(getApplicationContext());
+
+        if(replyCount < THRETHOLD_CHANGE_REPLY_MESSAGE){
+
+            if(mSnackBar != null){
+                mSnackBar.notifyReplyFinished();
+            }
+
+            //Update reply count
+            replyCount = replyCount + 1;
+            PreferenceUtil.updateReplyCount(getApplicationContext(), replyCount);
+
+        } else {
+            //Change reply count to 0
+            PreferenceUtil.updateReplyCount(getApplicationContext(), 0);
+            mSnackBar.promptToSignUp();
         }
     }
+
 
     @Override
     public void signOutFinished() {
@@ -446,5 +470,11 @@ public class MainPageActivity extends ImpressionBaseActivity
     public void onCreateNewQuestionPressed() {
         LogUtil.d(TAG, "onCreateNewQuestionPressed");
         launchCreateQuestionActivity();
+    }
+
+    @Override
+    public void onSignUpPressed() {
+        LogUtil.d(TAG, "onSignUpPressed");
+        startSignUpPage();
     }
 }

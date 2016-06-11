@@ -54,6 +54,8 @@
 
     <string name="main_page_current_point">現在のポイント: %1$d</string>
     <string name="main_page_reply_finished">回答ありがとうございkます。</string>
+    <string name="main_page_prompt_sign_up">サインアップすると、質問できます</string>
+    <string name="main_pgae_sign_up_action">サインアップ</string>
     <string name="main_pgae_create_question">質問を作成</string>
     <string name="main_page_not_enough_point_to_create_question">ポイントが足りません。他の人の質問に答えてポイントを集めましょう</string>
     <string name="main_pgae_no_question">質問がありません</string>

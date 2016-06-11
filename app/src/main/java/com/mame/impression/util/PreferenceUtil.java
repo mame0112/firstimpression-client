@@ -29,6 +29,10 @@ public class PreferenceUtil {
 
     private static final String KEY_USER_NOTIFICATION_SETTING = "user_notification_setting";
 
+    private static final String KEY_USER_REPLY_COUNT = "user_reply?count";
+
+    private final static int DEFAULT_COUNT = 0;
+
     public static String getUserName(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
@@ -163,6 +167,24 @@ public class PreferenceUtil {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
         pref.edit().remove(KEY_USER_NOTIFICATION_SETTING).commit();
+    }
+
+    public static void updateReplyCount(Context c, int newCount) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().putInt(KEY_USER_REPLY_COUNT, newCount).commit();
+    }
+
+    public static int getReplyCount(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        return pref.getInt(KEY_USER_REPLY_COUNT, DEFAULT_COUNT);
+    }
+
+    public static void removeReplyCount(Context c) {
+        SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
+                Context.MODE_PRIVATE);
+        pref.edit().remove(KEY_USER_REPLY_COUNT).commit();
     }
 
 }

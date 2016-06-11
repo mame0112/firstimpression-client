@@ -35,6 +35,7 @@ public class MainPageSnackbar {
 
         mContext = context;
         mRootViewGroup = rootViewGroup;
+
     }
 
     /**
@@ -43,6 +44,19 @@ public class MainPageSnackbar {
     public void notifyReplyFinished(){
         LogUtil.d(TAG, "notifyReplyFinished");
         Snackbar.make(mRootViewGroup, mContext.getString(R.string.main_page_reply_finished), Snackbar.LENGTH_SHORT).show();
+    }
+
+    public void promptToSignUp(){
+        LogUtil.d(TAG, "promptToSignUp");
+        Snackbar.make(mRootViewGroup, mContext.getString(R.string.main_page_prompt_sign_up), Snackbar.LENGTH_LONG).
+                setAction(mContext.getString(R.string.main_pgae_sign_up_action), new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mListener != null) {
+                            mListener.onSignUpPressed();
+                        }
+                    }
+                }).show();
     }
 
     public void updateStatus(int point){
@@ -111,8 +125,9 @@ public class MainPageSnackbar {
 
     public interface MainPageSnackbarListener{
         void onCreateNewQuestionPressed();
-    }
 
+        void onSignUpPressed();
+    }
 
 
 }
