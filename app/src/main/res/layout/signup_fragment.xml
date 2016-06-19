@@ -1,49 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <LinearLayout
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/default_form_horizontal_space"
+    android:layout_marginRight="@dimen/default_form_vertical_block">
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_username_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signup_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sign_in_hint_username"
+            android:inputType="text" />
+    </android.support.design.widget.TextInputLayout>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/signup_password_wrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/signup_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/sign_in_hint_password"
+            android:inputType="textPassword" />
+    </android.support.design.widget.TextInputLayout>
+    <Spinner
+        android:id="@+id/signup_age_spinner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/signup_username_wrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/signup_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/sign_in_hint_username"
-                android:inputType="text" />
-        </android.support.design.widget.TextInputLayout>
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/signup_password_wrapper"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <EditText
-                android:id="@+id/signup_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/sign_in_hint_password"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
-        <Spinner
-            android:id="@+id/signup_age_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dialog_vertical_padding"
-            android:layout_marginBottom="@dimen/dialog_vertical_padding"/>
-        <Spinner
-            android:id="@+id/signup_gender_spinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dialog_vertical_padding"
-            android:layout_marginBottom="@dimen/dialog_vertical_padding"/>
-    </LinearLayout>
+        android:layout_marginTop="@dimen/dialog_vertical_padding"
+        android:layout_marginBottom="@dimen/dialog_vertical_padding"/>
+    <Spinner
+        android:id="@+id/signup_gender_spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dialog_vertical_padding"
+        android:layout_marginBottom="@dimen/dialog_vertical_padding"/>
 
     <TextView
         android:layout_width="wrap_content"
+        android:layout_marginTop="@dimen/default_form_vertical_block"
         android:text="@string/sign_up_service_notice"
         android:gravity="right"
         android:layout_above="@+id/signup_terms_tos"
@@ -83,10 +82,9 @@
     <Button android:id="@+id/signup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="@drawable/welcome_action2_button"
         android:textColor="@drawable/welcome_action_button_text"
         android:layout_marginTop="@dimen/default_view_vartical_margin"
         android:layout_marginBottom="@dimen/default_view_vartical_margin"
         android:text="@string/sign_up_button"/>
-</RelativeLayout>
+</LinearLayout>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginRight="@dimen/dialog_horizontal_margin"
-    android:layout_marginLeft="@dimen/dialog_horizontal_margin">
+    android:layout_marginRight="@dimen/default_form_horizontal_space"
+    android:layout_marginLeft="@dimen/default_form_horizontal_space">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,7 +37,7 @@
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>
     <TextView
-        android:layout_marginTop="@dimen/default_view_vartical_margin"
+        android:layout_marginTop="@dimen/default_form_vertical_block"
         android:layout_marginBottom="@dimen/default_view_vartical_margin"
         android:id="@+id/signin_forget_password"
         android:layout_width="match_parent"
@@ -50,8 +51,7 @@
         android:layout_marginBottom="@dimen/default_view_vartical_margin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:textColor="@drawable/welcome_action_button_text"
         android:background="@drawable/welcome_action_button"
         android:text="@string/sign_in_button"/>
-</RelativeLayout>
+</LinearLayout>
