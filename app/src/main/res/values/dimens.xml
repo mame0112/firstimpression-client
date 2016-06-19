@@ -14,6 +14,9 @@
     <dimen name="default_view_vartical_margin">6dp</dimen>
     <dimen name="activity_button_button_margin">30dp</dimen>
 
+    <dimen name="default_form_vertical_block">36dp</dimen>
+    <dimen name="default_form_horizontal_space">20dp</dimen>
+
     <dimen name="impression_divider_height">1dp</dimen>
 
     <!-- Sprash view-->
