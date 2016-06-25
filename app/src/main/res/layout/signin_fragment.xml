@@ -3,6 +3,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/default_form_vertical_block"
     android:layout_marginRight="@dimen/default_form_horizontal_space"
     android:layout_marginLeft="@dimen/default_form_horizontal_space">
     <LinearLayout

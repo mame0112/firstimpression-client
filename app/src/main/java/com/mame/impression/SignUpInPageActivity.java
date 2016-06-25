@@ -22,6 +22,7 @@ import com.mame.impression.ui.WelcomePageFragment;
 import com.mame.impression.util.JSONParser;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
+import com.mame.impression.util.SecurityUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -181,6 +182,9 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
 
+        //Create Hashed password
+        String hashedPassword = SecurityUtil.getPasswordHash(userName, password);
+
         mService.requestSignUp(new ResultListener() {
 
             @Override
@@ -213,7 +217,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
                 showErrorMessage(reason);
                 changeSignUpButtonState();
             }
-        }, getApplicationContext(), userName, password, gender, age, deviceId);
+        }, getApplicationContext(), userName, hashedPassword, gender, age, deviceId);
 
     }
 
@@ -266,6 +270,9 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
         showProgress(null, getString(R.string.main_pgae_progress_desc));
 
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
+
+        //Create Hashed password
+        String hashedPassword = SecurityUtil.getPasswordHash(userName, password);
 
         ResultListener listener = new ResultListener() {
 
@@ -320,7 +327,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
             }
         };
 
-        mService.requestSignIn(listener, getApplicationContext(), userName, password, deviceId);
+        mService.requestSignIn(listener, getApplicationContext(), userName, hashedPassword, deviceId);
 
     }
 
