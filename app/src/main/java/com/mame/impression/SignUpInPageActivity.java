@@ -125,7 +125,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     }
 
     private void showSignInFragment(){
-        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
+        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mErrorMessageFragment).add(R.id.welcome_frame, mSignInFragment).addToBackStack(null)
                 .commit();
     }
 
@@ -135,7 +135,7 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 //        bundle.putString(Constants.INTENT_QUESTION_CHOICE_A, mChoiceA);
 //        bundle.putString(Constants.INTENT_QUESTION_CHOICE_B, mChoiceB);
 //        mSignInFragment.setArguments(bundle);
-        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mSignInFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.welcome_frame, mErrorMessageFragment).add(R.id.welcome_frame, mSignInFragment).commit();
     }
 
     @Override
@@ -150,13 +150,13 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 //        bundle.putString(Constants.INTENT_QUESTION_CHOICE_B, mChoiceB);
 //        mSignUpFragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).addToBackStack(null)
+                .replace(R.id.welcome_frame, mErrorMessageFragment).add(R.id.welcome_frame, mSignUpFragment).addToBackStack(null)
                 .commit();
     }
 
     private void showSignUpFragmentWithoutBackStack(){
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.welcome_frame, mSignUpFragment).add(R.id.welcome_error_frame, mErrorMessageFragment).commit();
+                .replace(R.id.welcome_frame, mErrorMessageFragment).add(R.id.welcome_frame, mSignUpFragment).commit();
     }
 
     private void changeFragmentStatusBasedOnLauncnMode(String launchMode){
