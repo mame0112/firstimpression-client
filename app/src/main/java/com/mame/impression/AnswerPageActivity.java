@@ -208,7 +208,9 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
             showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.answer_progress_desc));
         }
 
-        mService.requestQuestionsCreatedByUser();
+        if(mService != null){
+            mService.requestQuestionsCreatedByUser();
+        }
     }
 
 
@@ -240,93 +242,23 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         return null;
     }
 
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if(keyCode != KeyEvent.KEYCODE_BACK){
-            return super.onKeyDown(keyCode, event);
-        }else{
-
-            //Check if Overview fragment is in stack
-            Fragment fg = getSupportFragmentManager().findFragmentByTag(TAG_OVERVIEW_FRAGMENT);
-
-            if(fg != null){
-                LogUtil.d(TAG, "A");
-                // If detail fragment is displayed
-                if(fg instanceof AnswerDetailFragment){
-
-                    LogUtil.d(TAG, "B");
-
-                    //Check Data size of OverviewFragment
-                    int size = mAnswerOverviewFragment.getItemCount();
-
-                    //If data is 0 (meaning user skip overview fragment and go to detail view)
-//                    if(size == 0){
-//                        LogUtil.d(TAG, "C");
-//
-//                        //Switch to overview fragment.
-//                        switchToOverviewView();
-//                        getSupportFragmentManager().beginTransaction()
-//                                .remove(mDetailFragment).commit();
-//                        return true;
-//                    } else {
-//                        LogUtil.d(TAG, "D");
-//                    }
-                    switchToOverviewView();
-                    getSupportFragmentManager().beginTransaction()
-                            .remove(mDetailFragment).commit();
-                } else{
-                    LogUtil.d(TAG, "E");
-                }
-            }
-
-            return super.onKeyDown(keyCode, event);
-
-        }
-    }
-
 //    @Override
 //    public boolean onKeyDown(int keyCode, KeyEvent event) {
 //        if(keyCode != KeyEvent.KEYCODE_BACK){
 //            return super.onKeyDown(keyCode, event);
-//        }else{
-//
-//            int stackNum2 = getSupportFragmentManager().getBackStackEntryCount();
-//            LogUtil.d(TAG, "stackNum:::: " + stackNum2);
-//
-//            //Check if Overview fragment is in stack
+//        }else {
 //            Fragment fg = getSupportFragmentManager().findFragmentByTag(TAG_OVERVIEW_FRAGMENT);
-//
 //            if(fg != null){
 //                LogUtil.d(TAG, "A");
-//                // If detail fragment is displayed
 //                if(fg instanceof AnswerDetailFragment){
-//
 //                    LogUtil.d(TAG, "B");
-//
-//                    //Check Data size of OverviewFragment
-//                    int size = mAnswerOverviewFragment.getItemCount();
-//
-//                    //If data is 0 (meaning user skip overview fragment and go to detail view)
-//                    if(size == 0){
-//                        LogUtil.d(TAG, "C");
-//
-//                        //Switch to overview fragment.
-//                        switchToOverviewView();
-//                        getSupportFragmentManager().beginTransaction()
-//                                .replace(R.id.answer_page_frame, mAnswerOverviewFragment, TAG_OVERVIEW_FRAGMENT).commit();
-//                        return false;
-//                    } else {
-//                        LogUtil.d(TAG, "D");
-//                    }
-//                } else{
-//                    LogUtil.d(TAG, "E");
+////                    switchToOverviewView();
 //                }
 //            }
-//
-//            return super.onKeyDown(keyCode, event);
-//
 //        }
+//
+//    return super.onKeyDown(keyCode, event);
+//
 //    }
 
     @Override
@@ -334,6 +266,14 @@ public class AnswerPageActivity extends ImpressionBaseActivity implements Answer
         LogUtil.d(TAG, "onItemClicked: " + targetQuestionId);
         switchToDetailView(targetQuestionId);
         hideProgress();
+    }
+
+    @Override
+    public void onOverviewFragmentShownWithoutData() {
+        LogUtil.d(TAG, "onOverviewFragmentShownWithoutData");
+        if(mIsBound){
+            switchToOverviewView();
+        }
     }
 
     @Override

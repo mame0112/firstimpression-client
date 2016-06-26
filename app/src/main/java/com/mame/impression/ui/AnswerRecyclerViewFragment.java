@@ -129,7 +129,15 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
 
     @Override
     protected void enterPage() {
+        LogUtil.d(TAG, "enterPage");
         AnalyticsTracker.getInstance().trackPage(AnswerRecyclerViewFragment.class.getSimpleName());
+
+        //If Overview data is empty (Meaning user came from notification)
+        if(mData == null || mData.size() == 0){
+            if(mListener != null){
+                mListener.onOverviewFragmentShownWithoutData();
+            }
+        }
     }
 
     @Override
@@ -139,5 +147,7 @@ public class AnswerRecyclerViewFragment extends ImpressionBaseFragment implement
 
     public interface AnswerRecyclerViewListener{
         void onItemClicked(long targetQuestionId);
+
+        void onOverviewFragmentShownWithoutData();
     }
 }
