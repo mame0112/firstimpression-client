@@ -91,11 +91,24 @@ public class AnalyticsTracker {
     public static final String EVENT_LABEL_QUESTION_CREATE_BUTTON = "Create button";
 
     /* Progress / Error dialog */
-    public static final String EVENT_CATEGORY_ERROR = "Answer view";
+    public static final String EVENT_CATEGORY_ERROR = "Error view";
 
     public static final String EVENT_ACTION_ERROR_BUTTON = "Button select";
 
     public static final String EVENT_LABEL_ERROR_OK_BUTTON = "Error ok button";
+
+    /* Notification dialog */
+    public static final String EVENT_NOTIFICATION_DIALOG = "Notification dialog";
+
+    public static final String EVENT_ACTION_NOTIFICATION_BUTTON = "Button select";
+
+    public static final String EVENT_LABEL_NOTIFICATION_SIGNIN_BUTTON = "SignIn button";
+
+    public static final String EVENT_LABEL_NOTIFICATION_SIGNUP_BUTTON = "SignUp button";
+
+    public static final String EVENT_LABEL_NOTIFICATION_SIGNIN_TOS = "Terms of service";
+
+    public static final String EVENT_LABEL_NOTIFICATION_SIGNIN_PRIVACY = "Privacy policy";
 
 
 

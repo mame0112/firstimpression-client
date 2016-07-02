@@ -91,7 +91,7 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.prompt_dialog_already_account_exist:
-                    LogUtil.d(TAG, "Sign in");
+                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_NOTIFICATION_DIALOG, AnalyticsTracker.EVENT_ACTION_NOTIFICATION_BUTTON, AnalyticsTracker.EVENT_LABEL_NOTIFICATION_SIGNIN_BUTTON, 0);
                     if(mListener != null){
                         mListener.onNotificationSigninButtonPressed();
                     }
@@ -99,14 +99,6 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
             }
         }
     };
-
-//    private void startSignInView(){
-//        Intent intent = new Intent(getActivity(), SignUpInPageActivity.class);
-//        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNIN);
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//        startActivity(intent);
-//    }
-
 
     @Override
     public void onStart(){
