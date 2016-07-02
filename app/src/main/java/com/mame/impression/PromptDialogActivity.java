@@ -119,14 +119,13 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     @Override
     public void onNotificationCancelButtonPressed() {
         finish();
-//        startWelcomeActivity();
     }
 
     @Override
     public void onSignUpButtonPressed(final String userName, String password) {
         LogUtil.d(TAG, "onSignUpButtonPressed");
 
-        showProgress("a", "b");
+        showProgress(null, getString(R.string.profile_dialog_signin_dialog_desc));
 
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
 

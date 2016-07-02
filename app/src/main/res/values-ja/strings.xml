@@ -128,6 +128,7 @@
     <string name="profile_dialog_signup_button">サインアップ</string>
     <string name="profile_dialog_signin_note">アカウントをお持ちの方</string>
     <string name="profile_dialog_signin_button">アカウントをお持ちですか？サインイン</string>
+    <string name="profile_dialog_signin_dialog_desc">サインイン中</string>
 
     <!-- Error message fragment -->
     <string name="error_message_title">エラー</string>

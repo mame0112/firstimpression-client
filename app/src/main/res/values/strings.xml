@@ -128,6 +128,7 @@
     <string name="profile_dialog_signup_button">Sign up</string>
     <string name="profile_dialog_signin_note">If you already have account</string>
     <string name="profile_dialog_signin_button">Already have account? Sign in</string>
+    <string name="profile_dialog_signin_dialog_desc">Wait a moment....</string>
 
     <!-- Error message fragment -->
     <string name="error_message_title">Error message</string>
