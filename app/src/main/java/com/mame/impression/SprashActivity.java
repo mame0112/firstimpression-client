@@ -36,8 +36,6 @@ public class SprashActivity extends ImpressionBaseActivity {
         Button mSignInUpButton = (Button)findViewById(R.id.sprash_signinup_button);
         mSignInUpButton.setOnClickListener(mClickListener);
 
-
-
     }
 
     @Override

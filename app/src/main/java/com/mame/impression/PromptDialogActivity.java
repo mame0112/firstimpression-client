@@ -240,7 +240,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
     @Override
     protected void enterPage() {
-        AnalyticsTracker.getInstance().trackPage(PromptDialogActivity.class.getSimpleName());
+        // Rely on each fragments to handle user flow
     }
 
     @Override

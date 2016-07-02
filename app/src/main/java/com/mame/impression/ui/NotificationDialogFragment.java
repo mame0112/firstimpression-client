@@ -1,15 +1,20 @@
 package com.mame.impression.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.mame.impression.R;
+import com.mame.impression.SignUpInPageActivity;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.view.SimpleSignUpFragment;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by kosukeEndo on 2015/12/31.
@@ -23,6 +28,8 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
     private final static String NOTIFICATION_FRAGMENT_TAG ="notification_fragment_tag";
 
     private NotificationDialogFragmentListener mListener;
+
+    private TextView mAccountExistView;
 
 //    public static NotificationDialogFragment newInstance() {
 //        NotificationDialogFragment f = new NotificationDialogFragment();
@@ -48,7 +55,11 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.prompt_dialog_fragment, container, false);
+        View v = inflater.inflate(R.layout.notification_dialog_fragment, container, false);
+
+        mAccountExistView = (TextView)v.findViewById(R.id.prompt_dialog_already_account_exist);
+        mAccountExistView.setOnClickListener(mClickListener);
+
         getChildFragmentManager().beginTransaction().add(R.id.notification_fragment_frame, mSignUpFragment, NOTIFICATION_FRAGMENT_TAG).commit();
 
 //        Button cancelButton = (Button)v.findViewById(R.id.prompt_dialog_cancel);
@@ -66,7 +77,7 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
 
     @Override
     protected void enterPage() {
-
+        AnalyticsTracker.getInstance().trackPage(NotificationDialogFragment.class.getSimpleName());
     }
 
     @Override
@@ -74,10 +85,32 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
 
     }
 
+    private View.OnClickListener mClickListener = new View.OnClickListener(){
+
+        @Override
+        public void onClick(View v) {
+            switch(v.getId()){
+                case R.id.prompt_dialog_already_account_exist:
+                    LogUtil.d(TAG, "Sign in");
+                    if(mListener != null){
+                        mListener.onNotificationSigninButtonPressed();
+                    }
+                    break;
+            }
+        }
+    };
+
+//    private void startSignInView(){
+//        Intent intent = new Intent(getActivity(), SignUpInPageActivity.class);
+//        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNIN);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(intent);
+//    }
+
+
     @Override
     public void onStart(){
         super.onStart();
-        AnalyticsTracker.getInstance().trackPage(NotificationDialogFragment.class.getSimpleName());
     }
 
 //    private View.OnClickListener mClickListener= new View.OnClickListener(){

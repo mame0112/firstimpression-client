@@ -29,6 +29,7 @@
         android:layout_width="match_parent"
         android:background="@color/impression_grey"/>
     <TextView
+        android:id="@+id/prompt_dialog_already_account_exist"
         android:text="@string/notification_dialog_already_have_account"
         android:paddingBottom="@dimen/dialog_vertical_padding"
         android:layout_marginLeft="@dimen/dialog_horizontal_margin"

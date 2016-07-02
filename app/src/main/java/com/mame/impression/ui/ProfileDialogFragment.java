@@ -1,7 +1,5 @@
 package com.mame.impression.ui;
 
-//import android.app.DialogFragment;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -100,7 +98,7 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
 
     @Override
     protected void enterPage() {
-
+        AnalyticsTracker.getInstance().trackPage(ProfileDialogFragment.class.getSimpleName());
     }
 
     @Override
