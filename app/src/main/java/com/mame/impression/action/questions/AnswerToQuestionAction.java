@@ -2,7 +2,6 @@ package com.mame.impression.action.questions;
 
 import android.util.SparseArray;
 
-import com.android.volley.toolbox.StringRequest;
 import com.mame.impression.action.Action;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
@@ -14,10 +13,6 @@ import com.mame.impression.server.ServerAccessor;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.IllegalFormatException;
-import java.util.List;
 
 /**
  * Created by kosukeEndo on 2016/01/01.

@@ -2,11 +2,11 @@ package com.mame.impression.util;
 
 import android.content.Context;
 
+import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.google.android.gms.analytics.GoogleAnalytics;
-import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by kosukeEndo on 2015/12/31.

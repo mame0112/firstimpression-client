@@ -1,7 +1,6 @@
 package com.mame.impression.ui;
 
 import com.mame.impression.constant.Constants;
-import com.mame.impression.util.LogUtil;
 
 import java.util.regex.Pattern;
 

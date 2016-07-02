@@ -16,8 +16,8 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.view.ButtonUtil;
-import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
+import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/10.

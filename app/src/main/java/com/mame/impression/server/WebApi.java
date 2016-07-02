@@ -1,9 +1,6 @@
 package com.mame.impression.server;
 
 import com.mame.impression.manager.Accessor;
-import com.mame.impression.manager.ResultListener;
-
-import org.json.JSONObject;
 
 /**
  * Created by kosukeEndo on 2015/12/25.

@@ -2,10 +2,6 @@ package com.mame.impression.data;
 
 import com.mame.impression.constant.Constants;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * Created by kosukeEndo on 2015/12/29.
  */

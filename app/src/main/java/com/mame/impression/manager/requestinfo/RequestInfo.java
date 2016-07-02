@@ -6,11 +6,6 @@ import com.mame.impression.constant.RequestAction;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.ResultListener;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by kosukeEndo on 2015/12/05.
  */

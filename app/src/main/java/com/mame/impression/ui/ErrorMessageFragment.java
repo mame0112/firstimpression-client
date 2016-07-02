@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mame.impression.R;
-import com.mame.impression.SignUpInPageActivity;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.util.LogUtil;

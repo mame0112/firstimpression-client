@@ -1,7 +1,6 @@
 package com.mame.impression.ui;
 
 import android.content.Context;
-import android.preference.Preference;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,13 +14,11 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.MainPageContent;
-import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 import com.mame.impression.util.TimeUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

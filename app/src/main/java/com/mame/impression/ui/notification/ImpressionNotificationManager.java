@@ -2,15 +2,9 @@ package com.mame.impression.ui.notification;
 
 import android.content.Context;
 
-import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.ImpressionService;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by kosukeEndo on 2016/01/16.

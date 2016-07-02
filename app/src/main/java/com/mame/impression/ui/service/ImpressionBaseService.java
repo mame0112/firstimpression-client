@@ -8,7 +8,6 @@ import android.support.annotation.Nullable;
 import com.mame.impression.PromptDialogActivity;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.LogUtil;
-import com.mame.impression.util.TimeUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/30.

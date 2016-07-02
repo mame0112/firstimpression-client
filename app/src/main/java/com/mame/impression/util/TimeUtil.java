@@ -6,7 +6,6 @@ import android.content.res.Resources;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 
-import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

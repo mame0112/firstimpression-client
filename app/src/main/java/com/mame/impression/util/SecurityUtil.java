@@ -1,8 +1,5 @@
 package com.mame.impression.util;
 
-import android.content.Context;
-import android.provider.Settings;
-
 import com.mame.impression.constant.Constants;
 
 import java.io.UnsupportedEncodingException;

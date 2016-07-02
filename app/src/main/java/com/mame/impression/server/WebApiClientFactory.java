@@ -1,7 +1,5 @@
 package com.mame.impression.server;
 
-import android.content.Context;
-
 import com.mame.impression.constant.Constants;
 
 /**

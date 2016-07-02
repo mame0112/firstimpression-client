@@ -12,9 +12,6 @@ import com.mame.impression.server.ServerAccessor;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by kosukeEndo on 2015/12/27.
  */

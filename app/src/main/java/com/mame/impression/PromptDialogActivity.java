@@ -1,6 +1,5 @@
 package com.mame.impression;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -18,8 +17,6 @@ import com.mame.impression.ui.service.ImpressionBaseService;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
-
-import android.support.v4.app.Fragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,7 +1,6 @@
 package com.mame.impression.server;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
@@ -10,7 +9,6 @@ import android.support.annotation.Nullable;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.Accessor;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.NetworkUtil;

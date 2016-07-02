@@ -1,7 +1,5 @@
 package com.mame.impression.ui;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
@@ -20,8 +18,8 @@ import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.view.ButtonUtil;
-import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
+import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2015/12/10.

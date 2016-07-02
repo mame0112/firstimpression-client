@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.data.QuestionResultListData;
-import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
+import com.mame.impression.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,5 @@
 package com.mame.impression.data;
 
-import android.graphics.Bitmap;
-
 import com.mame.impression.constant.Constants;
 
 import java.util.List;

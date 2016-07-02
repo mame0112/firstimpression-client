@@ -20,14 +20,14 @@ import android.widget.TextView;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.gcm.RegistrationIntentService;
-import com.mame.impression.ui.service.MainPageService;
-import com.mame.impression.ui.MainPageAdapter;
 import com.mame.impression.data.MainPageContent;
+import com.mame.impression.gcm.RegistrationIntentService;
+import com.mame.impression.ui.MainPageAdapter;
+import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.ui.view.MainPageSnackbar;
+import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
-import com.mame.impression.util.AnalyticsTracker;
 
 import java.util.List;
 

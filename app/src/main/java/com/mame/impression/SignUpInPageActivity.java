@@ -1,10 +1,8 @@
 package com.mame.impression;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.preference.Preference;
 import android.support.v4.app.Fragment;
 
 import com.mame.impression.action.JsonParam;

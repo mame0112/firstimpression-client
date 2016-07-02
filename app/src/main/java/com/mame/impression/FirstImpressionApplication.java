@@ -5,8 +5,8 @@ import android.app.Application;
 import com.google.android.gms.analytics.GoogleAnalytics;
 import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
+import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/17.

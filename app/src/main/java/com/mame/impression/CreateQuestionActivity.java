@@ -14,8 +14,8 @@ import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.ErrorMessageFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
-import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.AnalyticsTracker;
+import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
 /**

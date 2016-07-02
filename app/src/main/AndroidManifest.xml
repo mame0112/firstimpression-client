@@ -46,12 +46,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".DebugActivity"
-            android:label="Debug activity"
-            android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
             android:name=".AnswerPageActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"

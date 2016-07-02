@@ -7,12 +7,8 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.mame.impression.constant.Constants;
-import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.ImpressionData;
 import com.mame.impression.manager.Accessor;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.manager.requestinfo.RequestInfo;
-import com.mame.impression.ui.service.MainPageService;
 import com.mame.impression.util.LogUtil;
 
 /**

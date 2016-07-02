@@ -8,7 +8,6 @@ import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.local.LocalAccessor;
 import com.mame.impression.manager.Accessor;
-import com.mame.impression.server.ServerAccessor;
 import com.mame.impression.util.LogUtil;
 
 import org.json.JSONException;

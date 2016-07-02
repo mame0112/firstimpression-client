@@ -7,9 +7,9 @@ import android.widget.Button;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.manager.ImpressionService;
+import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
-import com.mame.impression.util.AnalyticsTracker;
 
 /**
  * Created by kosukeEndo on 2015/12/09.

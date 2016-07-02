@@ -1,7 +1,5 @@
 package com.mame.impression.server;
 
-import org.json.JSONObject;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;

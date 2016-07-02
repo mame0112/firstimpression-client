@@ -13,9 +13,6 @@ import com.mame.impression.util.LogUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by kosukeEndo on 2016/01/10.
  */

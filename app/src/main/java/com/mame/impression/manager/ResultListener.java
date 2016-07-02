@@ -1,7 +1,6 @@
 package com.mame.impression.manager;
 
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.data.ImpressionData;
 
 import org.json.JSONObject;
 

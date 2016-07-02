@@ -10,10 +10,6 @@ import android.os.IBinder;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
-import android.view.KeyEvent;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.mame.impression.constant.Constants;
@@ -24,7 +20,6 @@ import com.mame.impression.ui.AnswerDetailFragment;
 import com.mame.impression.ui.AnswerRecyclerViewFragment;
 import com.mame.impression.ui.service.AnswerPageService;
 import com.mame.impression.ui.view.AnswerPageSnackbar;
-import com.mame.impression.ui.view.MainPageSnackbar;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;

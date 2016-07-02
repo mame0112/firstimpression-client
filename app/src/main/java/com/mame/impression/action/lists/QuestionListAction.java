@@ -3,7 +3,6 @@ package com.mame.impression.action.lists;
 import android.util.SparseArray;
 
 import com.mame.impression.action.Action;
-import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.RequestAction;
 import com.mame.impression.local.LocalAccessor;
@@ -13,9 +12,6 @@ import com.mame.impression.util.LogUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by kosukeEndo on 2015/12/27.

@@ -1,53 +1,23 @@
 package com.mame.impression.server;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.net.Uri;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.Accessor;
-import com.mame.impression.manager.ResultListener;
 import com.mame.impression.util.LogUtil;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
-import java.net.URLEncoder;
-
-import javax.net.ssl.HttpsURLConnection;
 
 /**
  * Created by kosukeEndo on 2015/12/15.

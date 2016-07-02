@@ -2,6 +2,7 @@ package com.mame.impression.util;
 
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.data.MainPageContent;
 import com.mame.impression.data.MainPageContentBuilder;
 import com.mame.impression.data.QuestionResultDetailData;
 import com.mame.impression.data.QuestionResultDetailDataBuilder;
@@ -11,7 +12,6 @@ import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.data.QuestionResultListDataBuilder;
 import com.mame.impression.data.UserData;
 import com.mame.impression.data.UserDataBuilder;
-import com.mame.impression.data.MainPageContent;
 
 import org.json.JSONArray;
 import org.json.JSONException;

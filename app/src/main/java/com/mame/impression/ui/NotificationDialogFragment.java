@@ -4,11 +4,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
-import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.view.SimpleSignUpFragment;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;

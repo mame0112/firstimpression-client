@@ -6,10 +6,6 @@ import com.mame.impression.constant.RequestAction;
 import com.mame.impression.manager.Accessor;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.IllegalFormatException;
-import java.util.List;
 
 /**
  * Define Action, Accessor(s) and parameters for each operation.

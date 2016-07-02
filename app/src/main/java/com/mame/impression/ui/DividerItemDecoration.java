@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.mame.impression.constant.Constants;
-import com.mame.impression.util.LogUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/23.

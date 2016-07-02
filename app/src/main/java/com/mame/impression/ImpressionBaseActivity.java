@@ -10,8 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
