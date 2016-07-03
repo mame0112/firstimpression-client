@@ -140,11 +140,17 @@ public class PromptDialogActivity extends ImpressionBaseActivity
                         JSONObject paramObject = response.getJSONObject(JsonParam.PARAM);
                         long userId = paramObject.getLong(JsonParam.USER_ID);
 
-                        //Store userdata
-                        PreferenceUtil.setUserId(getApplicationContext(), userId);
-                        PreferenceUtil.setUserName(getApplicationContext(), userName);
+                        // If user name is not used by another user
+                        if(userId != Constants.NO_USER){
+                            //Store userdata
+                            PreferenceUtil.setUserId(getApplicationContext(), userId);
+                            PreferenceUtil.setUserName(getApplicationContext(), userName);
 
-                        createNewQuestion(userId, userName);
+                            createNewQuestion(userId, userName);
+                        } else {
+                            //Show error message
+                            showErrorMessage(ImpressionError.USERNAME_ALREADY_USED);
+                        }
 
                     }catch (JSONException e){
                         LogUtil.d(TAG, "JSONException: " + e.getMessage());
@@ -252,35 +258,17 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     }
 
     @Override
-    public void onProfileCancelButtonPressed() {
-        LogUtil.d(TAG, "onProfileCancelButtonPressed");
-        finish();
-    }
-
-    @Override
-    public void onProfileSignUpButtonPressed() {
-        Intent intent = new Intent(this, SignUpInPageActivity.class);
-        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNUP);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onProfileSignInButtonPressed() {
-        Intent intent = new Intent(this, SignUpInPageActivity.class);
-        intent.putExtra(Constants.INTENT_SIGNUPIN_MODE, Constants.INTENT_MODE_SIGNIN);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-    @Override
     public void onProfileIsfulfilled(QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onProfileIsfulfilled");
+
+        final long userId = PreferenceUtil.getUserId(getApplicationContext());
+        final String userName = PreferenceUtil.getUserName(getApplicationContext());
 
         ResultListener listener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "onCompleted");
+                createNewQuestion(userId, userName);
             }
 
             @Override
@@ -289,7 +277,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             }
         };
 
-        mService.updateUserData(listener, this, gender, age);
+        mService.updateUserData(listener, this, userId, userName, gender, age);
 
     }
 

@@ -29,8 +29,6 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
 
     private Button mAnswerButton;
 
-    private Button mCancelButton;
-
     private ProfileDialogFragmentListener mListener;
 
     @Override
@@ -67,15 +65,6 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
 
         mAnswerButton = (Button)v.findViewById(R.id.profile_answer_button);
         mAnswerButton.setOnClickListener(mClickListener);
-
-        mCancelButton = (Button)v.findViewById(R.id.profile_cancel_button);
-        mCancelButton.setOnClickListener(mClickListener);
-
-        TextView signInButton = (TextView)v.findViewById(R.id.profile_signin_text_button);
-        signInButton.setOnClickListener(mClickListener);
-
-        Button signUpButton = (Button)v.findViewById(R.id.profile_signup_button);
-        signUpButton.setOnClickListener(mClickListener);
 
 //        getDialog().setTitle(R.string.notification_dialog_title);
 //
@@ -143,26 +132,25 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
                         mListener.onProfileIsfulfilled(getGenderValue(mGenderItem), getAgeValue(mAgeItem));
                     }
                     break;
-                case R.id.profile_signin_text_button:
-                    LogUtil.d(TAG, "Signin text pressed");
-                    if(mListener != null){
-                        mListener.onProfileSignInButtonPressed();
-                    }
-                    break;
-                case R.id.profile_signup_button:
-                    LogUtil.d(TAG, "Signup button pressed");
-                    if(mListener != null){
-                        mListener.onProfileSignUpButtonPressed();
-                    }
-                    break;
-                case R.id.profile_cancel_button:
-                    LogUtil.d(TAG, "Cancel button pressed");
-
-                    if(mListener != null){
-                        mListener.onProfileCancelButtonPressed();
-                    }
-
-                    break;
+//                case R.id.profile_signin_text_button:
+//                    LogUtil.d(TAG, "Signin text pressed");
+//                    if(mListener != null){
+//                        mListener.onProfileSignInButtonPressed();
+//                    }
+//                    break;
+//                case R.id.profile_signup_button:
+//                    LogUtil.d(TAG, "Signup button pressed");
+//                    if(mListener != null){
+//                        mListener.onProfileSignUpButtonPressed();
+//                    }
+//                    break;
+//                case R.id.profile_cancel_button:
+//                    LogUtil.d(TAG, "Cancel button pressed");
+//
+//                    if(mListener != null){
+//                        mListener.onProfileCancelButtonPressed();
+//                    }
+//                    break;
                 default:
                     break;
             }
@@ -222,12 +210,6 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
     }
 
     public interface ProfileDialogFragmentListener{
-        void onProfileCancelButtonPressed();
-
-        void onProfileSignUpButtonPressed();
-
-        void onProfileSignInButtonPressed();
-
         void onProfileIsfulfilled(QuestionResultListData.Gender gender, QuestionResultListData.Age age);
     }
 }

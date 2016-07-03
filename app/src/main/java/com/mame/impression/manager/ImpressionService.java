@@ -293,7 +293,16 @@ public class ImpressionService extends Service {
         return false;
     }
 
-    public void updateUserData(ResultListener listener, Context context, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+    /**
+     * Based on user id and user name, update gender and age information.
+     * @param listener
+     * @param context
+     * @param userId
+     * @param userName
+     * @param gender
+     * @param age
+     */
+    public void updateUserData(ResultListener listener, Context context, long userId, String userName, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
         LogUtil.d(TAG, "updateUserData");
 
         if (listener == null) {
@@ -309,7 +318,7 @@ public class ImpressionService extends Service {
         }
 
         UpdateUserDataAction action = new UpdateUserDataAction();
-        action.setAction(gender, age);
+        action.setAction(userId, userName, gender, age);
 
         executeAction(listener, context, action);
 

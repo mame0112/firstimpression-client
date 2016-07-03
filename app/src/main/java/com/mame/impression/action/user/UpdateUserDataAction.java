@@ -22,6 +22,10 @@ public class UpdateUserDataAction  implements Action {
 
     private final static String TAG = Constants.TAG + UpdateUserDataAction.class.getSimpleName();
 
+    private long mUserId = Constants.NO_USER;
+
+    private String mUserName;
+
     private QuestionResultListData.Gender mGender;
 
     private QuestionResultListData.Age mAge;
@@ -40,7 +44,9 @@ public class UpdateUserDataAction  implements Action {
 
     }
 
-    public void setAction(QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+    public void setAction(long userId, String userName, QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+        mUserId = userId;
+        mUserName = userName;
         mGender = gender;
         mAge = age;
     }
@@ -50,6 +56,8 @@ public class UpdateUserDataAction  implements Action {
 
         JSONObject param = new JSONObject();
 
+        param.put(JsonParam.USER_ID, mUserId);
+        param.put(JsonParam.USER_NAME, mUserName);
         param.put(JsonParam.USER_AGE, mAge.name());
         param.put(JsonParam.USER_GENDER, mGender.name());
 

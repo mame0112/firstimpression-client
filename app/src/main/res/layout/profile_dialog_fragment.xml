@@ -55,38 +55,38 @@
         android:paddingTop="@dimen/dialog_vertical_padding"
         android:paddingBottom="@dimen/dialog_vertical_padding"
         android:background="@color/impression_grey"/>
-    <TextView
-        android:text="@string/profile_dialog_signup_merit_text"
-        android:paddingTop="@dimen/dialog_vertical_padding"
-        android:paddingBottom="@dimen/dialog_vertical_padding"
-        android:layout_marginLeft="@dimen/dialog_horizontal_margin"
-        android:layout_marginRight="@dimen/dialog_horizontal_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <Button
-            android:id="@+id/profile_cancel_button"
-            android:text="@string/impression_cancel"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <Button
-            android:id="@+id/profile_signup_button"
-            android:text="@string/profile_dialog_signup_button"
-            android:layout_weight="1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <TextView
-        android:id="@+id/profile_signin_text_button"
-        android:text="@string/profile_dialog_signin_button"
-        android:paddingTop="@dimen/dialog_vertical_padding"
-        android:paddingBottom="@dimen/dialog_vertical_padding"
-        android:gravity="right"
-        android:textColor="@color/colorPrimary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+    <!--<TextView-->
+        <!--android:text="@string/profile_dialog_signup_merit_text"-->
+        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
+        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
+        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
+        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<LinearLayout-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<Button-->
+            <!--android:id="@+id/profile_cancel_button"-->
+            <!--android:text="@string/impression_cancel"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+        <!--<Button-->
+            <!--android:id="@+id/profile_signup_button"-->
+            <!--android:text="@string/profile_dialog_signup_button"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+    <!--<TextView-->
+        <!--android:id="@+id/profile_signin_text_button"-->
+        <!--android:text="@string/profile_dialog_signin_button"-->
+        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
+        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
+        <!--android:gravity="right"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content" />-->
 </LinearLayout>
