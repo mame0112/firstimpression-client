@@ -33,17 +33,6 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
 
     private ProfileDialogFragmentListener mListener;
 
-//    public static ProfileDialogFragment newInstance() {
-//        ProfileDialogFragment f = new ProfileDialogFragment();
-//
-//        // Supply num input as an argument.
-////        Bundle args = new Bundle();
-////        args.putInt("num", num);
-////        f.setArguments(args);
-//
-//        return f;
-//    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -17,7 +17,7 @@ public class ImpressionBaseService extends Service {
     private final static String TAG = ImpressionBaseService.class.getSimpleName();
 
     public enum PromptMode {
-        PROFILE, NOTICE
+        ADDITIONAL_INFO, BASIC_INFO
     }
 
     @Nullable

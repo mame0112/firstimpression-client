@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.ui.CreateQuestionFragment;
 import com.mame.impression.ui.ErrorMessageFragment;
 import com.mame.impression.ui.service.CreateNewQuestionService;
@@ -125,10 +126,13 @@ public class CreateQuestionActivity extends ImpressionBaseActivity implements Cr
         Log.d(TAG, "onCreateButtonPressed");
         if (mIsBound) {
 
-            //If valid user id and user name is available, shows progress dialog. Otherwise, prompt dialog shall be displayed by CreateNewQuestionService
+            //If valid user id, user name, gender and age is available,
+            // shows progress dialog. Otherwise, prompt dialog shall be displayed by CreateNewQuestionService
             final long createUserId = PreferenceUtil.getUserId(getApplicationContext());
             final String createUserName = PreferenceUtil.getUserName(getApplicationContext());
-            if(createUserId != Constants.NO_USER && createUserName != null){
+            final QuestionResultListData.Age age = PreferenceUtil.getUserAge(getApplicationContext());
+            final QuestionResultListData.Gender gender = PreferenceUtil.getUserGender(getApplicationContext());
+            if(createUserId != Constants.NO_USER && createUserName != null && age != null && gender != null){
                 showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.str_create_question_progress_dialog_desc));
             }
 

@@ -76,7 +76,7 @@ public class AnswerPageService extends ImpressionBaseService {
         if(userId != Constants.NO_USER){
             mService.requestQuestionsCreatedByUser(listener, getApplicationContext(), userId);
         } else {
-            showPromptDialog(PromptMode.NOTICE);
+            showPromptDialog(PromptMode.BASIC_INFO);
         }
     }
 
@@ -112,7 +112,7 @@ public class AnswerPageService extends ImpressionBaseService {
         if(userId != Constants.NO_USER){
             mService.requestQuestionResultDetail(listener, getApplicationContext(), userId, questionId);
         } else {
-            showPromptDialog(PromptMode.NOTICE);
+            showPromptDialog(PromptMode.BASIC_INFO);
         }
 
     }
@@ -148,7 +148,7 @@ public class AnswerPageService extends ImpressionBaseService {
         if(userId != Constants.NO_USER){
             mService.requestCurrentUserPoint(listener, getApplicationContext(), userId);
         } else {
-            showPromptDialog(PromptMode.NOTICE);
+            showPromptDialog(PromptMode.BASIC_INFO);
         }
 
     }

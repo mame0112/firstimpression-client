@@ -46,7 +46,6 @@ public class WebApiService extends Service{
 
 
     public void run(Accessor.AccessorListener listener, RequestInfo info) {
-        LogUtil.d(TAG, "run: " + info.getParameter());
 
         if (NetworkUtil.isNetworkConnected(getApplicationContext())){
             ApiType apiType = ApiType.getResttype(info.getRequestAction());

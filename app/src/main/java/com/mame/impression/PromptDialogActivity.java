@@ -11,10 +11,9 @@ import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.ui.ErrorMessageFragment;
-import com.mame.impression.ui.NotificationDialogFragment;
+import com.mame.impression.ui.BasicUserInfoPromptDialogFragment;
 import com.mame.impression.ui.ProfileDialogFragment;
 import com.mame.impression.ui.service.ImpressionBaseService;
-import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
 
@@ -25,7 +24,7 @@ import org.json.JSONObject;
  * Created by kosukeEndo on 2015/12/30.
  */
 public class PromptDialogActivity extends ImpressionBaseActivity
-        implements NotificationDialogFragment.NotificationDialogFragmentListener,
+        implements BasicUserInfoPromptDialogFragment.NotificationDialogFragmentListener,
         ProfileDialogFragment.ProfileDialogFragmentListener {
 
     private final static String TAG = Constants.TAG + PromptDialogActivity.class.getSimpleName();
@@ -40,7 +39,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
     private ImpressionService mService;
 
-    private NotificationDialogFragment mNotificationDialogFragment = new NotificationDialogFragment();
+    private BasicUserInfoPromptDialogFragment mBasicInfoDialogFragment = new BasicUserInfoPromptDialogFragment();
 
     private ProfileDialogFragment mProfileDialogFragment = new ProfileDialogFragment();
 
@@ -54,7 +53,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.prompt_dialog_activity);
 
-        mNotificationDialogFragment.setNotificationDialogFragmentListener(this);
+        mBasicInfoDialogFragment.setNotificationDialogFragmentListener(this);
         mProfileDialogFragment.setProfileDialogFragmentListener(this);
 
         Intent intent = getIntent();
@@ -66,11 +65,11 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             mChoiceB = intent.getStringExtra(Constants.INTENT_QUESTION_CHOICE_B);
 
             switch(launchMode){
-                case NOTICE:
-                    showNotificationDialog();
+                case BASIC_INFO:
+                    showBasicProfileDialog();
                     break;
-                case PROFILE:
-                    showProfileDialog();
+                case ADDITIONAL_INFO:
+                    showAdditionalProfileDialog();
                     break;
                 default:
                     break;
@@ -78,7 +77,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
         } else {
             //If intent is null, we have to show dialog that never uses extra in intent instaed.
-            showProfileDialog();
+            showAdditionalProfileDialog();
         }
 
     }
@@ -99,12 +98,12 @@ public class PromptDialogActivity extends ImpressionBaseActivity
         }
     }
 
-    private void showNotificationDialog() {
-        getSupportFragmentManager().beginTransaction().replace(R.id.promot_layout_frame, mNotificationDialogFragment, DIALOG_TAG).add(R.id.promot_error_message_frame, mErrorMessageFragment)
+    private void showBasicProfileDialog() {
+        getSupportFragmentManager().beginTransaction().replace(R.id.promot_layout_frame, mBasicInfoDialogFragment, DIALOG_TAG).add(R.id.promot_error_message_frame, mErrorMessageFragment)
                 .commit();
     }
 
-    private void showProfileDialog() {
+    private void showAdditionalProfileDialog() {
         getSupportFragmentManager().beginTransaction().replace(R.id.promot_layout_frame, mProfileDialogFragment, DIALOG_TAG).add(R.id.promot_error_message_frame, mErrorMessageFragment)
                 .commit();
 

@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import com.mame.impression.action.JsonParam;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.data.QuestionResultListData;
 import com.mame.impression.manager.ImpressionService;
 import com.mame.impression.manager.ResultListener;
 import com.mame.impression.point.PointManager;
@@ -47,52 +48,60 @@ public class CreateNewQuestionService extends ImpressionBaseService {
         final long createUserId = PreferenceUtil.getUserId(getApplicationContext());
         final String createUserName = PreferenceUtil.getUserName(getApplicationContext());
         if(createUserId == Constants.NO_USER || createUserName == null){
-            showPromptDialog(PromptMode.NOTICE, description, choiceA, choiceB);
+            showPromptDialog(PromptMode.BASIC_INFO, description, choiceA, choiceB);
         } else {
 
-            //First, request current user point
-            ResultListener listener = new ResultListener() {
-                @Override
-                public void onCompleted(JSONObject response) {
-                    if(response != null){
-                        try {
-                            int point = response.getInt(JsonParam.USER_POINT);
-                            LogUtil.d(TAG, "current point: " + point);
-                            if(PointManager.isEnoughPointForCreateNewQuestion(point)){
-                                //We can create new question
-                                requestToCreateNewQuestion(createUserId, createUserName, description, choiceA, choiceB);
-                            } else {
-                                //Not enough point. Need to callback to Activity
-                                LogUtil.d(TAG, "Not enough point: " + point);
+            QuestionResultListData.Gender gender = PreferenceUtil.getUserGender(getApplicationContext());
+            QuestionResultListData.Age age = PreferenceUtil.getUserAge(getApplicationContext());
+
+            //If gender or age is null
+            if(gender == null || age == null){
+                showPromptDialog(PromptMode.ADDITIONAL_INFO, description, choiceA, choiceB);
+            } else {
+                //First, request current user point
+                ResultListener listener = new ResultListener() {
+                    @Override
+                    public void onCompleted(JSONObject response) {
+                        if(response != null){
+                            try {
+                                int point = response.getInt(JsonParam.USER_POINT);
+                                LogUtil.d(TAG, "current point: " + point);
+                                if(PointManager.isEnoughPointForCreateNewQuestion(point)){
+                                    //We can create new question
+                                    requestToCreateNewQuestion(createUserId, createUserName, description, choiceA, choiceB);
+                                } else {
+                                    //Not enough point. Need to callback to Activity
+                                    LogUtil.d(TAG, "Not enough point: " + point);
+                                    if(mListener != null){
+                                        mListener.notifyNotEnoughUserPoint(point);
+                                    }
+                                }
+//                        mListener.notifyCurrentUserPoint(point);
+                            } catch (JSONException e) {
+                                LogUtil.w(TAG, "JSONException: " + e.getMessage());
                                 if(mListener != null){
-                                    mListener.notifyNotEnoughUserPoint(point);
+                                    mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
                                 }
                             }
-//                        mListener.notifyCurrentUserPoint(point);
-                        } catch (JSONException e) {
-                            LogUtil.w(TAG, "JSONException: " + e.getMessage());
+                        } else {
+                            LogUtil.w(TAG, "mListener or response JSONObject is null");
                             if(mListener != null){
-                                mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                                mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, "Empty response from server");
                             }
                         }
-                    } else {
-                        LogUtil.w(TAG, "mListener or response JSONObject is null");
+                    }
+
+                    @Override
+                    public void onFailed(ImpressionError reason, String message) {
+                        LogUtil.w(TAG, "onFailed: " + message);
                         if(mListener != null){
-                            mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, "Empty response from server");
+                            mListener.onFailed(reason, message);
                         }
                     }
-                }
+                };
 
-                @Override
-                public void onFailed(ImpressionError reason, String message) {
-                    LogUtil.w(TAG, "onFailed: " + message);
-                    if(mListener != null){
-                        mListener.onFailed(reason, message);
-                    }
-                }
-            };
-
-            mService.requestCurrentUserPoint(listener, getApplicationContext(), createUserId);
+                mService.requestCurrentUserPoint(listener, getApplicationContext(), createUserId);
+            }
         }
     }
 

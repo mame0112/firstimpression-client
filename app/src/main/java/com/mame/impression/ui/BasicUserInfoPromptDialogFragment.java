@@ -1,6 +1,5 @@
 package com.mame.impression.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,20 +7,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.mame.impression.R;
-import com.mame.impression.SignUpInPageActivity;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.ui.view.SimpleSignUpFragment;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
 
-import org.w3c.dom.Text;
-
 /**
  * Created by kosukeEndo on 2015/12/31.
+ * This Fragment is for letting user sign up (Mainly comes from Create new question)
  */
-public class NotificationDialogFragment extends ImpressionBaseFragment implements SimpleSignUpFragment.SimpleSignUpFragmentListener {
+public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment implements SimpleSignUpFragment.SimpleSignUpFragmentListener {
 
-    private final static String TAG = Constants.TAG + NotificationDialogFragment.class.getSimpleName();
+    private final static String TAG = Constants.TAG + BasicUserInfoPromptDialogFragment.class.getSimpleName();
 
     private SimpleSignUpFragment mSignUpFragment = new SimpleSignUpFragment();
 
@@ -30,17 +27,6 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
     private NotificationDialogFragmentListener mListener;
 
     private TextView mAccountExistView;
-
-//    public static NotificationDialogFragment newInstance() {
-//        NotificationDialogFragment f = new NotificationDialogFragment();
-//
-//        // Supply num input as an argument.
-////        Bundle args = new Bundle();
-////        args.putInt("num", num);
-////        f.setArguments(args);
-//
-//        return f;
-//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -77,7 +63,7 @@ public class NotificationDialogFragment extends ImpressionBaseFragment implement
 
     @Override
     protected void enterPage() {
-        AnalyticsTracker.getInstance().trackPage(NotificationDialogFragment.class.getSimpleName());
+        AnalyticsTracker.getInstance().trackPage(BasicUserInfoPromptDialogFragment.class.getSimpleName());
     }
 
     @Override
