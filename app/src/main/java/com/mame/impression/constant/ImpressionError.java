@@ -16,5 +16,7 @@ public enum ImpressionError {
     /**
      * Sign in and Sign up errors
      */
-    USERNAME_PASSWORD_NOT_MATCHED
+    USERNAME_PASSWORD_NOT_MATCHED,
+    USERNAME_ALREADY_USED,
+
 }

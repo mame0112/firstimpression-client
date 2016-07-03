@@ -61,6 +61,8 @@ public class ErrorMessageFragment extends Fragment {
                     return getString(R.string.impression_error_general);
                 case USERNAME_PASSWORD_NOT_MATCHED:
                     return getString(R.string.sign_in_error_username_password_not_match);
+                case USERNAME_ALREADY_USED:
+                    return getString(R.string.sign_in_error_username_already_used);
                 case INTERNAL_SERVER_ERROR:
                 case UNEXPECTED_DATA_FORMAT:
                     return getString(R.string.sign_in_error_internal_server_error);

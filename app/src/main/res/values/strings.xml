@@ -82,6 +82,7 @@
     <string name="sign_in_error_password_long">Password must be less than 16 characters</string>
     <string name="sign_in_error_password_invalid_character">Invalid password character</string>
     <string name="sign_in_error_username_password_not_match">User name and password does not match</string>
+    <string name="sign_in_error_username_already_used">User name has already been used</string>
     <string name="sign_in_error_internal_server_error">Internal server error. Please try again later</string>
     <string name="sign_in_error_no_network_connection">No network connection</string>
 

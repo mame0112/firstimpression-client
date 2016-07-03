@@ -191,19 +191,37 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
 
                 hideProgress();
 
-                boolean result = parseAndStoreUserData(response, userName, password, gender, age);
+                if (response != null) {
+                    try {
+                        JSONObject paramObject = (JSONObject) response.get(JsonParam.PARAM);
+                        long userId = paramObject.getLong(JsonParam.USER_ID);
 
-                if (result) {
+                        LogUtil.d(TAG, "userId: " + userId);
 
-                    //Go to main page
-                    startMainPage();
+                        if (userId != Constants.NO_USER) {
+                            //Store userdata
+                            PreferenceUtil.setUserId(getApplicationContext(), userId);
+                            PreferenceUtil.setUserName(getApplicationContext(), userName);
+                            PreferenceUtil.setUserGender(getApplicationContext(), gender);
+                            PreferenceUtil.setUserAge(getApplicationContext(), age);
 
-                    //Close this activity
-                    finish();
+                            //Go to main page
+                            startMainPage();
+
+                            //Close this activity
+                            finish();
+
+                        } else {
+                            //If user name has already been used
+                            showErrorMessage(ImpressionError.USERNAME_ALREADY_USED);
+                        }
+                    } catch (JSONException e) {
+                        LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                        showErrorMessage(ImpressionError.GENERAL_ERROR);
+                    }
                 } else {
-                    mErrorMessageFragment.showErrorMessage(ImpressionError.GENERAL_ERROR);
+                    showErrorMessage(ImpressionError.GENERAL_ERROR);
                 }
-
                 changeSignUpButtonState();
 
             }
@@ -238,28 +256,32 @@ public class SignUpInPageActivity extends ImpressionBaseActivity
     }
 
 
-    private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
-
-        if(response != null){
-            try {
-                JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
-                long userId = (long) paramObject.get(JsonParam.USER_ID);
-
-                //Store userdata
-                PreferenceUtil.setUserId(getApplicationContext(), userId);
-                PreferenceUtil.setUserName(getApplicationContext(), userName);
-                PreferenceUtil.setUserGender(getApplicationContext(), gender);
-                PreferenceUtil.setUserAge(getApplicationContext(), age);
-
-                return true;
-
-            } catch (JSONException e) {
-                LogUtil.d(TAG, "JSONException: " + e.getMessage());
-            }
-        }
-
-        return false;
-    }
+//    private boolean parseAndStoreUserData(JSONObject response, String userName, String password, QuestionResultListData.Gender gender, QuestionResultListData.Age age){
+//
+//        if(response != null){
+//            try {
+//                JSONObject paramObject = (JSONObject)response.get(JsonParam.PARAM);
+//                int userId = (int) paramObject.get(JsonParam.USER_ID);
+//
+//                LogUtil.d(TAG,"userId: " + userId);
+//
+//                if(userId != Constants.NO_USER){
+//                    //Store userdata
+//                    PreferenceUtil.setUserId(getApplicationContext(), userId);
+//                    PreferenceUtil.setUserName(getApplicationContext(), userName);
+//                    PreferenceUtil.setUserGender(getApplicationContext(), gender);
+//                    PreferenceUtil.setUserAge(getApplicationContext(), age);
+//
+//                    return true;
+//
+//                }
+//            } catch (JSONException e) {
+//                LogUtil.d(TAG, "JSONException: " + e.getMessage());
+//            }
+//        }
+//
+//        return false;
+//    }
 
     @Override
     public void onSignInButtonPressed(String userName, String password) {
