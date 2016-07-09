@@ -1,27 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:paddingLeft="@dimen/prompt_horizontal_padding"
-    android:paddingRight="@dimen/prompt_horizontal_padding"
+    android:layout_marginBottom="@dimen/prompt_vertical_margin"
     android:paddingBottom="@dimen/dialog_vertical_padding"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:background="@color/colorAccent"
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/prompt_vertical_margin"
+        android:padding="@dimen/padding_zero"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="@string/profile_dialog_profile_update_title"
+            android:textSize="@dimen/fi_font_large"
+            android:textColor="@color/impression_white"
+            android:padding="@dimen/prompt_horizontal_padding"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:text="@string/profile_dialog_profile_update_desc"
+        android:textSize="@dimen/fi_font_small"
+        android:paddingLeft="@dimen/prompt_horizontal_padding"
+        android:paddingRight="@dimen/prompt_horizontal_padding"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <LinearLayout
         android:orientation="horizontal"
         android:paddingTop="@dimen/dialog_vertical_padding"
         android:paddingBottom="@dimen/dialog_vertical_padding"
+        android:layout_marginTop="@dimen/prompt_vertical_margin"
         android:layout_marginLeft="@dimen/dialog_horizontal_margin"
         android:layout_marginRight="@dimen/dialog_horizontal_margin"
+        android:paddingLeft="@dimen/prompt_horizontal_padding"
+        android:paddingRight="@dimen/prompt_horizontal_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:text="@string/profile_dialog_age_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
         <Spinner
             android:id="@+id/profile_age_spinner"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+            android:layout_marginRight="@dimen/dialog_horizontal_margin"
+            android:layout_weight="1"
             android:entries="@array/impression_age"/>
     </LinearLayout>
     <LinearLayout
@@ -30,63 +58,36 @@
         android:paddingBottom="@dimen/dialog_vertical_padding"
         android:layout_marginLeft="@dimen/dialog_horizontal_margin"
         android:layout_marginRight="@dimen/dialog_horizontal_margin"
+        android:layout_marginBottom="@dimen/prompt_vertical_margin"
+        android:paddingLeft="@dimen/prompt_horizontal_padding"
+        android:paddingRight="@dimen/prompt_horizontal_padding"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:text="@string/profile_dialog_gender_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2"/>
         <Spinner
             android:id="@+id/profile_gender_spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:entries="@array/impression_gender"/>
+            android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+            android:layout_marginRight="@dimen/dialog_horizontal_margin"
+            android:entries="@array/impression_gender"
+            android:layout_weight="1"/>
     </LinearLayout>
     <Button
         android:id="@+id/profile_answer_button"
         android:text="@string/profile_dialog_answer"
-        android:paddingLeft="@dimen/dialog_horizontal_padding"
-        android:paddingRight="@dimen/dialog_horizontal_padding"
+        android:layout_marginTop="@dimen/default_view_vartical_margin"
+        android:layout_marginBottom="@dimen/default_view_vartical_margin"
+        android:layout_marginLeft="@dimen/dialog_horizontal_margin"
+        android:layout_marginRight="@dimen/dialog_horizontal_margin"
+        android:paddingLeft="@dimen/prompt_horizontal_padding"
+        android:paddingRight="@dimen/prompt_horizontal_padding"
+        android:background="@drawable/welcome_action_button"
+        android:textColor="@drawable/welcome_action_button_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/impression_divider_height"
-        android:paddingTop="@dimen/dialog_vertical_padding"
-        android:paddingBottom="@dimen/dialog_vertical_padding"
-        android:background="@color/impression_grey"/>
-    <!--<TextView-->
-        <!--android:text="@string/profile_dialog_signup_merit_text"-->
-        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
-        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
-        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<Button-->
-            <!--android:id="@+id/profile_cancel_button"-->
-            <!--android:text="@string/impression_cancel"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-        <!--<Button-->
-            <!--android:id="@+id/profile_signup_button"-->
-            <!--android:text="@string/profile_dialog_signup_button"-->
-            <!--android:layout_weight="1"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content" />-->
-    <!--</LinearLayout>-->
-    <!--<TextView-->
-        <!--android:id="@+id/profile_signin_text_button"-->
-        <!--android:text="@string/profile_dialog_signin_button"-->
-        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
-        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
-        <!--android:gravity="right"-->
-        <!--android:textColor="@color/colorPrimary"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
 </LinearLayout>

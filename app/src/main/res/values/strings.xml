@@ -124,12 +124,14 @@
     <!-- Profile dialog -->
     <string name="profile_dialog_age_text">Age</string>
     <string name="profile_dialog_gender_text">Gender</string>
-    <string name="profile_dialog_answer">Answer</string>
+    <string name="profile_dialog_answer">Create question</string>
     <string name="profile_dialog_signup_merit_text">If you sign up, you can ask question</string>
     <string name="profile_dialog_signup_button">Sign up</string>
     <string name="profile_dialog_signin_note">If you already have account</string>
     <string name="profile_dialog_signin_button">Already have account? Sign in</string>
-    <string name="profile_dialog_signin_dialog_desc">Wait a moment....</string>
+    <string name="profile_dialog_signin_dialog_desc">Wait a moment...</string>
+    <string name="profile_dialog_profile_update_title">Update your profile</string>
+    <string name="profile_dialog_profile_update_desc">Add your profile information to create more questions.</string>
 
     <!-- Error message fragment -->
     <string name="error_message_title">Error message</string>

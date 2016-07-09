@@ -124,7 +124,7 @@
     <!-- Profile dialog -->
     <string name="profile_dialog_age_text">年齢</string>
     <string name="profile_dialog_gender_text">性別</string>
-    <string name="profile_dialog_answer">回答</string>
+    <string name="profile_dialog_answer">質問を作成</string>
     <string name="profile_dialog_signup_merit_text">サインアップすると、質問をすることができます</string>
     <string name="profile_dialog_signup_button">サインアップ</string>
     <string name="profile_dialog_signin_note">アカウントをお持ちの方</string>

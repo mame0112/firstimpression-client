@@ -10,6 +10,7 @@
     <dimen name="subscreen_horizontal_margin">32dp</dimen>
     <dimen name="default_card_horizontal_margin">10dp</dimen>
     <dimen name="default_card_vertical_margin">5dp</dimen>
+    <dimen name="padding_zero">0dp</dimen>
 
     <dimen name="default_view_vartical_margin">6dp</dimen>
     <dimen name="activity_button_button_margin">30dp</dimen>
@@ -56,6 +57,8 @@
     <!-- Prompt dialog-->
     <dimen name="prompt_horizontal_padding">14dp</dimen>
     <dimen name="prompt_vertical_margin">10dp</dimen>
+    <dimen name="prompt_dialog_title_padding">4dp</dimen>
+    <dimen name="prompt_update_profile_category_text_width">100dp</dimen>
 
     <!-- Setting -->
     <dimen name="setting_item_margin">8dp</dimen>
