@@ -16,6 +16,7 @@ import com.mame.impression.ui.ProfileDialogFragment;
 import com.mame.impression.ui.service.ImpressionBaseService;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.PreferenceUtil;
+import com.mame.impression.util.SecurityUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -128,6 +129,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
         String deviceId = PreferenceUtil.getDeviceId(getApplicationContext());
 
+        String hashedPassword = SecurityUtil.getPasswordHash(userName, password);
+
         ResultListener listener = new ResultListener() {
             @Override
             public void onCompleted(JSONObject response) {
@@ -169,7 +172,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             }
         };
 
-        mService.requestSignUp(listener, getApplicationContext(), userName, password, QuestionResultListData.Gender.UNKNOWN, QuestionResultListData.Age.UNKNOWN, deviceId);
+        mService.requestSignUp(listener, getApplicationContext(), userName, hashedPassword, QuestionResultListData.Gender.UNKNOWN, QuestionResultListData.Age.UNKNOWN, deviceId);
 
     }
 
