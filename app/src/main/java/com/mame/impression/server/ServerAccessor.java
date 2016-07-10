@@ -7,20 +7,21 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.manager.Accessor;
 import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 
+import org.json.JSONObject;
+
 /**
  * Created by kosukeEndo on 2015/12/05.
  */
-public class ServerAccessor extends Accessor {
+public class ServerAccessor extends Accessor implements WebApiService.WebApiServiceListener{
 
     private static final String TAG = Constants.TAG + ServerAccessor.class.getSimpleName();
 
     private AccessorListener mListener;
-
-//    private ResultListener mResultListener;
 
     private WebApiService mService;
 
@@ -49,26 +50,25 @@ public class ServerAccessor extends Accessor {
 
         //TODO Need to call mListener.onNotify();
         mIdentifier = identifier;
+        mInfo = info;
 
         //If this is the first time to launch service
         if(mService == null){
             doBindService(context);
-            mInfo = info;
 //            mListener = listener;
         } else {
-            mService.run(mListener, info);
+            mService.run(info);
         }
     }
 
-    void doBindService(Context context) {
+    private void doBindService(Context context) {
         LogUtil.d(TAG, "doBindService");
         context.bindService(new Intent(context,
                 WebApiService.class), mConnection, Context.BIND_AUTO_CREATE);
         mIsBound = true;
     }
 
-    //TODO
-    void doUnbindService() {
+    private void doUnbindService() {
         if (mIsBound) {
             mContext.unbindService(mConnection);
             mIsBound = false;
@@ -85,7 +85,9 @@ public class ServerAccessor extends Accessor {
 
             mService = ((WebApiService.WebApiServiceBinder) service).getService();
 
-            mService.run(mListener, mInfo);
+            mService.setWebApiServiceListener(ServerAccessor.this);
+
+            mService.run(mInfo);
 
         }
 
@@ -96,4 +98,20 @@ public class ServerAccessor extends Accessor {
             LogUtil.d(TAG, "onServiceDisconnected");
         }
     };
+
+    @Override
+    public void onApiCallCompleted(JSONObject result) {
+        LogUtil.d(TAG, "onApiCallCompleted");
+        //TODO Check if we can unbind from here since other task is still on-going.
+        doUnbindService();
+        mListener.onCompleted(result);
+    }
+
+    @Override
+    public void onApiCallFailed(ImpressionError error, String message) {
+        LogUtil.d(TAG, "onApiCallFailed");
+        //TODO If we want to retry API call, it should be done here.
+        doUnbindService();
+        mListener.onFailed(error, message);
+    }
 }

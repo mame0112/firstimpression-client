@@ -6,11 +6,11 @@ import com.mame.impression.manager.Accessor;
  * Created by kosukeEndo on 2015/12/25.
  */
 public interface WebApi {
-    public Runnable get(Accessor.AccessorListener listener, String api, final String input);
+    public Runnable get(WebApiBase.WebApiListener listener, String api, final String input);
 
-    public Runnable post(Accessor.AccessorListener listener, String api, final String input);
+    public Runnable post(WebApiBase.WebApiListener listener, String api, final String input);
 
-    public Runnable put(Accessor.AccessorListener listener, String api, final String input);
+    public Runnable put(WebApiBase.WebApiListener listener, String api, final String input);
 
-    public Runnable delete(Accessor.AccessorListener listener, String api, final String input);
+    public Runnable delete(WebApiBase.WebApiListener listener, String api, final String input);
 }

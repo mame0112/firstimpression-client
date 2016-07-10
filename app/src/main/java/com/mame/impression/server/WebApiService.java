@@ -13,6 +13,8 @@ import com.mame.impression.manager.requestinfo.RequestInfo;
 import com.mame.impression.util.LogUtil;
 import com.mame.impression.util.NetworkUtil;
 
+import org.json.JSONObject;
+
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -20,13 +22,15 @@ import java.util.concurrent.Executors;
  * In this method, HTTP and HTTPS connection is switched.
  * Created by kosukeEndo on 2015/12/05.
  */
-public class WebApiService extends Service{
+public class WebApiService extends Service  implements WebApiBase.WebApiListener{
 
     private static final String TAG = Constants.TAG + WebApiService.class.getSimpleName();
 
     private IBinder mBinder = new WebApiServiceBinder();
 
     private ExecutorService mExec;
+
+    private WebApiServiceListener mListener;
 
     @Override
     public void onCreate(){
@@ -45,37 +49,49 @@ public class WebApiService extends Service{
     }
 
 
-    public void run(Accessor.AccessorListener listener, RequestInfo info) {
+    public void run(RequestInfo info) {
 
         if (NetworkUtil.isNetworkConnected(getApplicationContext())){
             ApiType apiType = ApiType.getResttype(info.getRequestAction());
             String apiName = ApiType.getApiName(info.getRequestAction());
 
             //Change http or https depends on Constants
-            WebApi webApi = WebApiClientFactory.getWebApi();
+            WebApi webApi = WebApiClientFactory.getWebApi(this);
 
             switch (apiType) {
                 case GET:
-                    mExec.execute(webApi.get(listener, apiName, info.getParameter()));
+                    mExec.execute(webApi.get(this, apiName, info.getParameter()));
                     break;
                 case POST:
-                    mExec.execute(webApi.post(listener, apiName, info.getParameter()));
+                    mExec.execute(webApi.post(this, apiName, info.getParameter()));
                     break;
                 case PUT:
-                    mExec.execute(webApi.put(listener, apiName, info.getParameter()));
+                    mExec.execute(webApi.put(this, apiName, info.getParameter()));
                     break;
                 case DELETE:
-                    mExec.execute(webApi.delete(listener, apiName, info.getParameter()));
+                    mExec.execute(webApi.delete(this, apiName, info.getParameter()));
                     break;
                 default:
                     break;
             }
         } else {
-            if(listener != null){
-                listener.onFailed(ImpressionError.NO_NETWORK_CONNECTION, "No network connection");
+            if(mListener != null){
+                mListener.onApiCallFailed(ImpressionError.NO_NETWORK_CONNECTION, "No network connection");
             }
         }
 
+    }
+
+    @Override
+    public void onCompleted(JSONObject result) {
+        LogUtil.d(TAG, "onCompleted");
+        mListener.onApiCallCompleted(result);
+    }
+
+    @Override
+    public void onFailed(ImpressionError error, String message) {
+        LogUtil.d(TAG, "onFailed");
+        mListener.onApiCallFailed(error, message);
     }
 
     public class WebApiServiceBinder extends Binder {
@@ -89,4 +105,15 @@ public class WebApiService extends Service{
     public IBinder onBind(Intent intent) {
         return mBinder;
     }
+
+    public void setWebApiServiceListener(WebApiServiceListener listener){
+        mListener = listener;
+    }
+
+    interface WebApiServiceListener{
+        void onApiCallCompleted(JSONObject result);
+
+        void onApiCallFailed(ImpressionError error, String message);
+    }
+
 }

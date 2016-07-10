@@ -22,15 +22,16 @@ import java.net.URL;
 /**
  * Created by kosukeEndo on 2015/12/15.
  */
-public class HttpWebApi implements WebApi {
+public class HttpWebApi extends WebApiBase implements WebApi {
 
     private static final String TAG = Constants.TAG + HttpWebApi.class.getSimpleName();
 
-    public HttpWebApi() {
+    public HttpWebApi(WebApiListener listener) {
+        super(listener);
     }
 
     @Override
-    public Runnable get(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable get(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "get");
 
         return new Runnable() {
@@ -80,7 +81,7 @@ public class HttpWebApi implements WebApi {
      }
 
     @Override
-    public Runnable post(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable post(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "post: " + Constants.HTTP_URL + api);
 
         return new Runnable() {
@@ -146,7 +147,7 @@ public class HttpWebApi implements WebApi {
     }
 
     @Override
-    public Runnable put(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable put(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "put");
 
         return new Runnable() {
@@ -212,7 +213,7 @@ public class HttpWebApi implements WebApi {
     }
 
     @Override
-    public Runnable delete(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable delete(final WebApiBase.WebApiListener listener, final String api, final String input) {
 
         return new Runnable() {
 

@@ -23,17 +23,16 @@ import javax.net.ssl.HttpsURLConnection;
 /**
  * Created by kosukeEndo on 2015/12/25.
  */
-public class HttpsWebApi implements WebApi {
+public class HttpsWebApi extends WebApiBase implements WebApi {
 
     private static final String TAG = Constants.TAG + HttpsWebApi.class.getSimpleName();
 
-
-    public HttpsWebApi() {
+    public HttpsWebApi(WebApiListener listener) {
+        super(listener);
     }
 
-
     @Override
-    public Runnable get(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable get(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "HTTPS get");
 
         return new Runnable() {
@@ -83,7 +82,7 @@ public class HttpsWebApi implements WebApi {
     }
 
     @Override
-    public Runnable post(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable post(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "post: " + Constants.HTTP_URL + api);
 
         return new Runnable() {
@@ -149,7 +148,7 @@ public class HttpsWebApi implements WebApi {
     }
 
     @Override
-    public Runnable put(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable put(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "put");
 
         return new Runnable() {
@@ -215,7 +214,7 @@ public class HttpsWebApi implements WebApi {
     }
 
     @Override
-    public Runnable delete(final Accessor.AccessorListener listener, final String api, final String input) {
+    public Runnable delete(final WebApiBase.WebApiListener listener, final String api, final String input) {
 
         return new Runnable() {
 

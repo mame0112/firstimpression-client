@@ -12,13 +12,13 @@ public class WebApiClientFactory {
     private WebApiClientFactory() {
     }
 
-    public static WebApi getWebApi() {
+    public static WebApi getWebApi(WebApiBase.WebApiListener listener) {
 
         if(sApi == null){
             if (Constants.IS_HTTPS) {
-                sApi = new HttpsWebApi();
+                sApi = new HttpsWebApi(listener);
             } else {
-                sApi = new HttpWebApi();
+                sApi = new HttpWebApi(listener);
             }
         }
 
