@@ -258,7 +258,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     }
 
     @Override
-    public void onProfileIsfulfilled(QuestionResultListData.Gender gender, QuestionResultListData.Age age) {
+    public void onProfileIsfulfilled(final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onProfileIsfulfilled");
 
         final long userId = PreferenceUtil.getUserId(getApplicationContext());
@@ -268,6 +268,10 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "onCompleted");
+                //Update user profile
+                PreferenceUtil.setUserAge(getApplicationContext(), age);
+                PreferenceUtil.setUserGender(getApplicationContext(), gender);
+
                 createNewQuestion(userId, userName);
             }
 
