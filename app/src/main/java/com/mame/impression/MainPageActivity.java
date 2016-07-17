@@ -134,29 +134,29 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         mRecyclerView.setAdapter(mAdapter);
 
-        ItemTouchHelper itemDecor = new ItemTouchHelper(
-//                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN,
-//                        ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
-                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
-                    @Override
-                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                        final int fromPos = viewHolder.getAdapterPosition();
-                        final int toPos = target.getAdapterPosition();
-                        mAdapter.notifyItemMoved(fromPos, toPos);
-                        return true;
-                    }
+//        ItemTouchHelper itemDecor = new ItemTouchHelper(
+////                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN,
+////                        ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+//                new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, 0) {
+//                    @Override
+//                    public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+//                        final int fromPos = viewHolder.getAdapterPosition();
+//                        final int toPos = target.getAdapterPosition();
+//                        mAdapter.notifyItemMoved(fromPos, toPos);
+//                        return true;
+//                    }
 
-                    @Override
-                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+//                    @Override
+//                    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
 //                        final int fromPos = viewHolder.getAdapterPosition();
 //                        mAdapter.notifyItemRemoved(fromPos);
 //                        int remain = mAdapter.remove(fromPos);
 //                        if(remain == 0){
 //                            mNoContentView.setVisibility(View.VISIBLE);
 //                        }
-                    }
-                });
-        itemDecor.attachToRecyclerView(mRecyclerView);
+//                    }
+//                });
+//        itemDecor.attachToRecyclerView(mRecyclerView);
 
         mSnackBar = new MainPageSnackbar(getApplicationContext(), (CoordinatorLayout) findViewById(R.id.main_page_root_view));
         mSnackBar.setMainPageSnackbarListener(this);
