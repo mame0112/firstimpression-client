@@ -62,6 +62,11 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
      */
     protected void showProgress(String title, String description){
         LogUtil.d(TAG, "showProgress");
+        // If progress dialog is visible, do nothing.
+        if(isProgressDialogShown()){
+            return;
+        }
+
         mProgressFragment = ProgressDialogFragment.newInstance(title, description);
         mProgressFragment.show(getFragmentManager(), PROGRESS_DIALOG);
 
@@ -79,6 +84,15 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
         mIsWaiting = true;
         mHandler.postDelayed(mTimerRunnable, WAIT);
     }
+
+    private boolean isProgressDialogShown(){
+        if(mProgressFragment != null){
+            return mProgressFragment.isVisible();
+        }
+
+        return false;
+    }
+
 
     protected void hideProgress(){
         LogUtil.d(TAG, "hideProgress");

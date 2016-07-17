@@ -153,14 +153,17 @@ public class PromptDialogActivity extends ImpressionBaseActivity
                         } else {
                             //Show error message
                             showErrorMessage(ImpressionError.USERNAME_ALREADY_USED);
+                            hideProgress();
                         }
 
                     }catch (JSONException e){
                         LogUtil.d(TAG, "JSONException: " + e.getMessage());
+                        hideProgress();
                     }
                 } else {
                     //TODO Error handling
                     LogUtil.d(TAG, "response is null");
+                    hideProgress();
                 }
             }
 
@@ -169,6 +172,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
                 hideProgress();
                 LogUtil.d(TAG, "onFailed");
                 //TODO Error handling
+                hideProgress();
             }
         };
 
@@ -183,6 +187,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             @Override
             public void onCompleted(JSONObject response) {
                 LogUtil.d(TAG, "onCompleted: " + response.toString());
+
+                hideProgress();
 
                 if(response != null){
                     try {
@@ -203,6 +209,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
                 showErrorMessage(reason);
+                hideProgress();
             }
         };
 
@@ -264,6 +271,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     public void onProfileIsfulfilled(final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onProfileIsfulfilled");
 
+        showProgress(getString(R.string.impression_progress_dialog_title), getString(R.string.str_create_question_progress_dialog_desc));
+
         final long userId = PreferenceUtil.getUserId(getApplicationContext());
         final String userName = PreferenceUtil.getUserName(getApplicationContext());
 
@@ -281,6 +290,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                hideProgress();
             }
         };
 
