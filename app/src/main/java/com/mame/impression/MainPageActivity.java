@@ -59,6 +59,8 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     private final static int THRETHOLD_CHANGE_REPLY_MESSAGE = 5;
 
+    private Menu mMenu;
+
     private ServiceConnection mConnection = new ServiceConnection() {
 
         @Override
@@ -174,6 +176,9 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         doBindService();
 
+        if(mMenu != null){
+            setMenuState(mMenu);
+        }
     }
 
     @Override
@@ -209,6 +214,7 @@ public class MainPageActivity extends ImpressionBaseActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main_page, menu);
+        mMenu = menu;
         return true;
     }
 
@@ -412,6 +418,7 @@ public class MainPageActivity extends ImpressionBaseActivity
         LogUtil.d(TAG, "onConfigurationChanged");
         super.onConfigurationChanged(newConfig);
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

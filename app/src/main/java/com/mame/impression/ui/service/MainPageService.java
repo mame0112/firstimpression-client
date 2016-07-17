@@ -147,6 +147,9 @@ public class MainPageService extends Service{
             @Override
             public void onFailed(ImpressionError reason, String message) {
                 LogUtil.d(TAG, "onFailed");
+                if(mListener != null){
+                    mListener.onFailed(reason, message);
+                }
             }
         };
 
