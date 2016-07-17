@@ -2,7 +2,6 @@ package com.mame.impression.server;
 
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
-import com.mame.impression.manager.Accessor;
 import com.mame.impression.util.LogUtil;
 
 import org.json.JSONException;
@@ -84,6 +83,7 @@ public class HttpsWebApi extends WebApiBase implements WebApi {
     @Override
     public Runnable post(final WebApiBase.WebApiListener listener, final String api, final String input) {
         LogUtil.d(TAG, "post: " + Constants.HTTP_URL + api);
+        LogUtil.d(TAG, "input: " + input);
 
         return new Runnable() {
 

@@ -27,13 +27,18 @@ public class SecurityUtil {
             md.update(target.getBytes());
             byte[] digest = md.digest();
             //byte[] -> String
-            hash = new String(digest, "UTF-8");
+//            hash = new String(digest, "UTF-8");
+            StringBuffer hexString = new StringBuffer();
+            for (int i=0; i<digest.length; i++)
+                hexString.append(Integer.toHexString(0xFF & digest[i]));
+            return hexString.toString();
 
         } catch (NoSuchAlgorithmException e) {
             LogUtil.d(TAG, "NoSuchAlgorithmException: " + e.getMessage());
-        } catch (UnsupportedEncodingException e) {
-            LogUtil.d(TAG, "UnsupportedEncodingException: " + e.getMessage());
         }
+//        catch (UnsupportedEncodingException e) {
+//            LogUtil.d(TAG, "UnsupportedEncodingException: " + e.getMessage());
+//        }
         return hash;
 
     }

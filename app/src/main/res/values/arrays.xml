@@ -4,7 +4,6 @@
         <item>Please select</item>
         <item>Male</item>
         <item>Female</item>
-        <item>Unknown</item>
     </string-array>
     <string-array name="impression_age">
         <item>Please select</item>

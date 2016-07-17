@@ -173,8 +173,8 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
                 return QuestionResultListData.Gender.MALE;
             case 2: // Female
                 return QuestionResultListData.Gender.FEMALE;
-            case 3: // Unknown
-                return QuestionResultListData.Gender.UNKNOWN;
+//            case 3: // Unknown
+//                return QuestionResultListData.Gender.UNKNOWN;
             default:
                 return null;
         }
