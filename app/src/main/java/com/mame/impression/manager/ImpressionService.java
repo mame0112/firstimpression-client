@@ -284,7 +284,7 @@ public class ImpressionService extends Service {
 
         try {
             RequestInfo info = builder.setResultListener(listener).setAccessors(action.getAccessors()).setRequestAction(action.getAction()).setRequestParam(action.getParemeter()).getResult();
-            mTaskRunner.run(listener, context, info);
+            mTaskRunner.run(new ImpressionServiceTask(listener, context, info));
             return true;
         } catch (JSONException e) {
             LogUtil.d(TAG, "JSONException: " + e.getMessage());
@@ -356,5 +356,31 @@ public class ImpressionService extends Service {
         LogUtil.d(TAG, "onBind");
         return null;
     }
+
+    public static class ImpressionServiceTask {
+        private ResultListener mListener;
+        private Context mContext;
+        private RequestInfo mInfo;
+
+        public ImpressionServiceTask(ResultListener listener, Context context, RequestInfo info){
+            mListener = listener;
+            mContext = context;
+            mInfo = info;
+        }
+
+        public ResultListener getResultListener(){
+            return mListener;
+        }
+
+        public Context getContext(){
+            return mContext;
+        }
+
+        public RequestInfo getRequestInfo(){
+            return mInfo;
+        }
+
+    }
+
 
 }

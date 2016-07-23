@@ -13,6 +13,8 @@ import com.mame.impression.util.LogUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.concurrent.LinkedBlockingDeque;
+
 /**
  * Created by kosukeEndo on 2015/12/31.
  */
@@ -32,6 +34,10 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
 
     private RequestInfo mInfo;
 
+    private final LinkedBlockingDeque<ImpressionService.ImpressionServiceTask> mQueue = new LinkedBlockingDeque<>();
+
+    private boolean mIsRunning = false;
+
     private ImpressionTaskRunner(){
         // Singletone
     }
@@ -40,33 +46,76 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
         return sIntance;
     }
 
-    public void run(ResultListener listener, Context context, RequestInfo info){
+    public void run(final ImpressionService.ImpressionServiceTask task){
         LogUtil.d(TAG, "run");
 
-        mListener = listener;
-        mContext = context;
-        mInfo = info;
 
-        mAccessors = info.getAccessors();
+        new Thread(new Runnable() {
+            public void run() {
 
-        if(mAccessors != null){
-            Accessor accessor = mAccessors.get(mCurrentAccessorIndex);
+                mQueue.add(task);
 
-            if(accessor != null){
-                accessor.setAccessorListener(this);
+                LogUtil.d(TAG, "mQueue.size(): " +mQueue.size());
 
-                //Request
-                accessor.request(context, info, accessor.getClass().getSimpleName());
+                if(mIsRunning){
+                    return;
+                }
+                startOperation();
+
             }
-        }
+        }).start();
+
     }
 
+    private void startOperation(){
+        LogUtil.d(TAG, "startOperation: " + mIsRunning);
+
+        try {
+
+            mIsRunning = true;
+
+            ImpressionService.ImpressionServiceTask task = mQueue.take();
+
+            mListener = task.getResultListener();
+            mContext = task.getContext();
+            mInfo = task.getRequestInfo();
+
+    //        mListener = listener;
+    //        mContext = context;
+    //        mInfo = info;
+
+            mAccessors = mInfo.getAccessors();
+
+            if(mAccessors != null){
+                Accessor accessor = mAccessors.get(mCurrentAccessorIndex);
+
+                if(accessor != null){
+                    accessor.setAccessorListener(this);
+
+                    //Request
+                    accessor.request(mContext, mInfo, accessor.getClass().getSimpleName());
+                } else {
+                    LogUtil.w(TAG, "accessor is null");
+                    mIsRunning = false;
+                }
+            } else {
+                LogUtil.w(TAG, "mAccessors is null");
+                mIsRunning = false;
+            }
+
+        } catch (InterruptedException e) {
+            LogUtil.d(TAG, "InterruptedException: " + e.getMessage());
+            mIsRunning = false;
+        }
+    }
 
     @Override
     public void onCompleted(JSONObject object) {
 
         LogUtil.d(TAG, "AccessorListener onCompleted");
         if(mAccessors == null){
+            mIsRunning = false;
+            mListener.onFailed(ImpressionError.GENERAL_ERROR, "Accessor is null");
             return;
         }
 
@@ -82,10 +131,20 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
 
             //Return to client
             mListener.onCompleted(object);
+
+            if(mQueue.size() == 0){
+                mIsRunning = false;
+            } else {
+                //Operate new queue
+                startOperation();
+            }
+
         } else {
             //If more than 1 accessors remain
 
             if(object == null){
+                mIsRunning = false;
+                mListener.onFailed(ImpressionError.GENERAL_ERROR, "Object is null");
                 return;
             }
 
@@ -103,6 +162,7 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
                     LogUtil.d(TAG, "JSONException: " + e.getMessage());
                     if(mListener != null){
                         mListener.onFailed(ImpressionError.UNEXPECTED_DATA_FORMAT, e.getMessage());
+                        mIsRunning = false;
                     }
                 }
             }
