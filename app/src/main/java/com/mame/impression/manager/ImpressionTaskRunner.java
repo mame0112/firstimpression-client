@@ -49,7 +49,6 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
     public void run(final ImpressionService.ImpressionServiceTask task){
         LogUtil.d(TAG, "run");
 
-
         new Thread(new Runnable() {
             public void run() {
 
@@ -115,7 +114,7 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
         LogUtil.d(TAG, "AccessorListener onCompleted");
         if(mAccessors == null){
             mIsRunning = false;
-            mListener.onFailed(ImpressionError.GENERAL_ERROR, "Accessor is null");
+//            mListener.onFailed(ImpressionError.GENERAL_ERROR, "Accessor is null");
             return;
         }
 

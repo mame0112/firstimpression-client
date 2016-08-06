@@ -353,14 +353,7 @@ public class MainPageActivity extends ImpressionBaseActivity
     public void onReplyFinished ( int updatedPoint){
             LogUtil.d(TAG, "onReplyFinished: " + updatedPoint);
         mSnackBar.updateStatus(updatedPoint);
-        if(mAdapter == null || mAdapter.getItemCount() == 0){
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    mNoContentView.setVisibility(View.VISIBLE);
-                }
-            });
-        }
+        showNoContentView();
     }
 
     @Override
@@ -384,8 +377,20 @@ public class MainPageActivity extends ImpressionBaseActivity
             PreferenceUtil.updateReplyCount(getApplicationContext(), 0);
             mSnackBar.promptToSignUp();
         }
+
+        showNoContentView();
     }
 
+    private void showNoContentView(){
+        if(mAdapter == null || mAdapter.getItemCount() == 0){
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mNoContentView.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+    }
 
     @Override
     public void signOutFinished() {
