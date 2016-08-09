@@ -34,17 +34,15 @@ public class RegistrationIntentService extends IntentService {
         super(name);
         LogUtil.d(TAG, "RegistrationIntentService");
     }
-    // ...
 
     @Override
     public void onHandleIntent(Intent intent) {
         LogUtil.d(TAG, "onHandleIntent");
-        // ...
+
         InstanceID instanceID = InstanceID.getInstance(this);
         try {
             String token = instanceID.getToken(getString(R.string.gcm_sender_id),
                     GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
-//            String token = instanceID.getToken("first-impression-backend", GoogleCloudMessaging.INSTANCE_ID_SCOPE, null);
             LogUtil.d(TAG, "token: " + token);
             PreferenceUtil.setDeviceId(getApplicationContext(), token);
         } catch (IOException e) {

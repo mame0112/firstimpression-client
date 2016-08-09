@@ -32,7 +32,7 @@ public class ImpressionGcmListenerService extends GcmListenerService {
 
             NotificationData gcmData = parser.parseGcmMessage(message);
 
-            if(message != null){
+            if(gcmData != null){
                 ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
             }
         }
