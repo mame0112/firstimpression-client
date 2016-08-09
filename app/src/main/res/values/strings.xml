@@ -42,7 +42,7 @@
     <string name="str_generic_time_unknown_date">Unknown date</string>
 
     <!-- Sprash page -->
-    <string name="sprash_description_text">Get feedback for your question immediately</string>
+    <string name="sprash_description_text">Get real-time feedback for your idea</string>
     <string name="sprash_check_question_button">Check questions without sign in</string>
     <string name="sprash_sign_upin_button">Sign up / in</string>
 

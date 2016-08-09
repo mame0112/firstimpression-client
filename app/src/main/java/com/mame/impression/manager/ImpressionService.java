@@ -78,6 +78,9 @@ public class ImpressionService extends Service {
         if (clazz != null) {
             mClients.remove(clazz);
             LogUtil.d(TAG, "remove size: " + mClients.size());
+
+            mTaskRunner.finalize();
+
         }
 
     }
