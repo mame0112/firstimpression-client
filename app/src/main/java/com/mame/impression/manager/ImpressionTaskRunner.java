@@ -66,16 +66,6 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
 
     }
 
-    /**
-     * This API should be called when application is closed down
-     */
-    public synchronized void finalize(){
-        LogUtil.d(TAG, "finalize");
-        if(mQueue != null){
-            mQueue.clear();
-        }
-    }
-
 
     private void startOperation(){
         LogUtil.d(TAG, "startOperation: " + mIsRunning);
@@ -89,10 +79,6 @@ public class ImpressionTaskRunner implements Accessor.AccessorListener {
             mListener = task.getResultListener();
             mContext = task.getContext();
             mInfo = task.getRequestInfo();
-
-    //        mListener = listener;
-    //        mContext = context;
-    //        mInfo = info;
 
             mAccessors = mInfo.getAccessors();
 
