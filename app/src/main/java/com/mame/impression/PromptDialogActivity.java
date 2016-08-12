@@ -155,11 +155,13 @@ public class PromptDialogActivity extends ImpressionBaseActivity
                             //Show error message
                             showErrorMessage(ImpressionError.USERNAME_ALREADY_USED);
                             hideProgress();
+
                         }
 
                     }catch (JSONException e){
                         LogUtil.d(TAG, "JSONException: " + e.getMessage());
                         hideProgress();
+
                     }
                 } else {
                     //TODO Error handling
@@ -222,6 +224,8 @@ public class PromptDialogActivity extends ImpressionBaseActivity
             @Override
             public void run() {
                 mErrorMessageFragment.showErrorMessage(reason);
+                //Notify to profile fragment
+                mBasicInfoDialogFragment.notifyErrorMessage(reason);
             }
         });
     }

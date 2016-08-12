@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
+import com.mame.impression.constant.ImpressionError;
 import com.mame.impression.ui.view.SimpleSignUpFragment;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
@@ -65,11 +66,6 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
 
         mPositiveButton = (Button)v.findViewById(R.id.signup_prompt_positive_button);
         mPositiveButton.setOnClickListener(mClickListener);
-
-//        mAccountExistView = (TextView)v.findViewById(R.id.prompt_dialog_already_account_exist);
-//        mAccountExistView.setOnClickListener(mClickListener);
-//
-//        getChildFragmentManager().beginTransaction().add(R.id.notification_fragment_frame, mSignUpFragment, NOTIFICATION_FRAGMENT_TAG).commit();
 
         return v;
     }
@@ -190,7 +186,6 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
         mPositiveButton.setEnabled(true);
         mNegativeButton.setEnabled(true);
 
-        //TODO We should check user name availability here
         mUserName = userName;
         mPassword = password;
     }
@@ -198,6 +193,20 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
     @Override
     public void onSignUpNotReadyIn2ndPage() {
         mPositiveButton.setEnabled(false);
+    }
+
+    public void notifyErrorMessage(ImpressionError reason){
+        LogUtil.d(TAG, "notifyErrorMessage");
+
+        backToFormPage();
+
+    }
+
+    private void backToFormPage(){
+        mViewPager.setCurrentItem(1, true);
+        mNegativeButton.setText(R.string.impression_back);
+        mPositiveButton.setText(R.string.impression_ok);
+        mCurrentPage = 1;
     }
 
 
