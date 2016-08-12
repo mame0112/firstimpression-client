@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.mame.impression.R;
@@ -16,11 +17,12 @@ import com.mame.impression.util.LogUtil;
  * Created by kosukeEndo on 2015/12/31.
  * This Fragment is for letting user sign up (Mainly comes from Create new question)
  */
-public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment implements SimpleSignUpFragment.SimpleSignUpFragmentListener {
+//public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment implements SimpleSignUpFragment.SimpleSignUpFragmentListener {
+public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment implements SignupPromptFragmentPagerAdapter.SignupPromptFragmentPagerAdapterListener {
 
     private final static String TAG = Constants.TAG + BasicUserInfoPromptDialogFragment.class.getSimpleName();
 
-    private SimpleSignUpFragment mSignUpFragment = new SimpleSignUpFragment();
+//    private SimpleSignUpFragment mSignUpFragment = new SimpleSignUpFragment();
 
     private final static String NOTIFICATION_FRAGMENT_TAG ="notification_fragment_tag";
 
@@ -28,14 +30,25 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
 
     private TextView mAccountExistView;
 
+    private Button mNegativeButton;
+
+    private Button mPositiveButton;
+
+    private SignupPromptFragmentPagerAdapter mAdapter;
+
+    private NonSwipeableViewPager mViewPager;
+
+    private int mCurrentPage = 0;
+
+    private String mUserName;
+
+    private String mPassword;
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mSignUpFragment.setSimpleSignUpFragmentListener(this);
-
-//        getSupportFragmentManager().beginTransaction().replace(R.id.promot_layout_frame, mNotificationDialogFragment, DIALOG_TAG)
-//                .commit();
-//        mNum = getArguments().getInt("num");
+//        mSignUpFragment.setSimpleSignUpFragmentListener(this);
     }
 
     @Override
@@ -43,20 +56,20 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.notification_dialog_fragment, container, false);
 
-        mAccountExistView = (TextView)v.findViewById(R.id.prompt_dialog_already_account_exist);
-        mAccountExistView.setOnClickListener(mClickListener);
+        mViewPager = (NonSwipeableViewPager)v.findViewById(R.id.signup_prompt_viewpager);
+        mAdapter = new SignupPromptFragmentPagerAdapter(getChildFragmentManager(), this);
+        mViewPager.setAdapter(mAdapter);
 
-        getChildFragmentManager().beginTransaction().add(R.id.notification_fragment_frame, mSignUpFragment, NOTIFICATION_FRAGMENT_TAG).commit();
+        mNegativeButton = (Button)v.findViewById(R.id.signup_prompt_negative_button);
+        mNegativeButton.setOnClickListener(mClickListener);
 
-//        Button cancelButton = (Button)v.findViewById(R.id.prompt_dialog_cancel);
-//        cancelButton.setOnClickListener(mClickListener);
+        mPositiveButton = (Button)v.findViewById(R.id.signup_prompt_positive_button);
+        mPositiveButton.setOnClickListener(mClickListener);
+
+//        mAccountExistView = (TextView)v.findViewById(R.id.prompt_dialog_already_account_exist);
+//        mAccountExistView.setOnClickListener(mClickListener);
 //
-//        Button acceptButton = (Button)v.findViewById(R.id.prompt_dialog_accept);
-//        acceptButton.setOnClickListener(mClickListener);
-
-//        getDialog().setTitle(R.string.notification_dialog_title);
-//        getDialog().setCanceledOnTouchOutside(false);
-//        setCancelable(false);
+//        getChildFragmentManager().beginTransaction().add(R.id.notification_fragment_frame, mSignUpFragment, NOTIFICATION_FRAGMENT_TAG).commit();
 
         return v;
     }
@@ -68,59 +81,123 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
 
     @Override
     protected void escapePage() {
-
+        //Initialize
+        mCurrentPage = 0;
+        mPositiveButton.setEnabled(true);
     }
 
-    private View.OnClickListener mClickListener = new View.OnClickListener(){
+    private View.OnClickListener mClickListener = new View.OnClickListener() {
 
         @Override
         public void onClick(View v) {
+
             switch(v.getId()){
-                case R.id.prompt_dialog_already_account_exist:
-                    AnalyticsTracker.getInstance().trackEvent(AnalyticsTracker.EVENT_NOTIFICATION_DIALOG, AnalyticsTracker.EVENT_ACTION_NOTIFICATION_BUTTON, AnalyticsTracker.EVENT_LABEL_NOTIFICATION_SIGNIN_BUTTON, 0);
-                    if(mListener != null){
-                        mListener.onNotificationSigninButtonPressed();
+                case R.id.signup_prompt_negative_button:
+                    LogUtil.d(TAG, "signup_prompt_negative_button");
+
+                    if(mListener == null){
+                        throw new IllegalArgumentException("setSignUpPromptFragment1Listener must be called first");
                     }
+
+                    if(mCurrentPage == 0){
+                        LogUtil.d(TAG, "Close wizard");
+                        if(mListener != null){
+                            mListener.onNotificationCancelButtonPressed();
+                        }
+                    } else {
+                        mCurrentPage = mCurrentPage - 1;
+                    }
+
+                    switchView(mCurrentPage);
+
+                    break;
+                case R.id.signup_prompt_positive_button:
+                    LogUtil.d(TAG, "signup_prompt_positive_button");
+                    if(mListener == null){
+                        throw new IllegalArgumentException("setSignUpPromptFragment1Listener must be called first");
+                    }
+
+                    if(mCurrentPage == mAdapter.getCount() - 1){
+                        // Finish
+                        LogUtil.d(TAG, "Finish wizard");
+                        if(mListener != null){
+                            mListener.onSignUpButtonPressed(mUserName, mPassword);
+                        }
+                    } else {
+                        mCurrentPage = mCurrentPage + 1;
+                    }
+
+                    switchView(mCurrentPage);
+
                     break;
             }
         }
     };
+
+    private void switchView(int nextPage){
+        LogUtil.d(TAG, "switchView: " + nextPage);
+        switch (nextPage){
+            case 0:
+                mViewPager.setCurrentItem(nextPage, true);
+                mPositiveButton.setEnabled(true);
+                mNegativeButton.setText(R.string.impression_cancel);
+                mPositiveButton.setText(R.string.profile_prompt_dialog_next_button);
+                break;
+            case 1:
+                mViewPager.setCurrentItem(nextPage, true);
+
+                //If user data is already ready (resume case), we positive button should be enabled.
+                boolean isUserDataFulfilled = mAdapter.isAlreadyInformationFulfilled();
+                mPositiveButton.setEnabled(isUserDataFulfilled);
+
+                mNegativeButton.setText(R.string.impression_back);
+                mPositiveButton.setText(R.string.impression_ok);
+                break;
+            case 2:
+                mViewPager.setCurrentItem(nextPage, true);
+                mPositiveButton.setEnabled(true);
+                mNegativeButton.setText(R.string.impression_back);
+                mPositiveButton.setText(R.string.profile_prompt_dialog_signup_button);
+
+                break;
+
+            default:
+                // Somethikng go wrong.
+                break;
+        }
+    }
 
     @Override
     public void onStart(){
         super.onStart();
     }
 
-//    private View.OnClickListener mClickListener= new View.OnClickListener(){
-//        @Override
-//        public void onClick(View v) {
-//            switch(v.getId()){
-//                case R.id.prompt_dialog_accept:
-//                    if(mListener != null){
-//                        mListener.onNotificationSigninButtonPressed();
-//                    }
-//                    break;
-//                case R.id.prompt_dialog_cancel:
-//                    if(mListener != null) {
-//                        mListener.onNotificationCancelButtonPressed();
-//                    }
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
-//    };
-
     public void setNotificationDialogFragmentListener(NotificationDialogFragmentListener listener){
         mListener = listener;
     }
 
+//    @Override
+//    public void onSignUpButtonPressed(String userName, String password) {
+//        LogUtil.d(TAG, "onSignUpButtonPressed");
+////        if(mListener != null){
+////            mListener.onSignUpButtonPressed(userName, password);
+////        }
+//    }
+
     @Override
-    public void onSignUpButtonPressed(String userName, String password) {
-        LogUtil.d(TAG, "onSignUpButtonPressed");
-        if(mListener != null){
-            mListener.onSignUpButtonPressed(userName, password);
-        }
+    public void onSignUpReadyIn2ndPage(String userName, String password) {
+        LogUtil.d(TAG, "onSignUpReadyIn2ndPage");
+        mPositiveButton.setEnabled(true);
+        mNegativeButton.setEnabled(true);
+
+        //TODO We should check user name availability here
+        mUserName = userName;
+        mPassword = password;
+    }
+
+    @Override
+    public void onSignUpNotReadyIn2ndPage() {
+        mPositiveButton.setEnabled(false);
     }
 
 

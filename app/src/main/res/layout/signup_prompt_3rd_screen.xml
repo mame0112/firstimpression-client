@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@drawable/fi_app_small_icn"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/fi_font_middle"
+        android:gravity="center"
+        android:text="@string/profile_prompt_dialog_3rd_main_text"/>
+    <LinearLayout
+        android:id="@+id/simple_signup_terms_tos"
+        android:orientation="horizontal"
+        android:layout_above="@+id/signup_button"
+        android:layout_width="match_parent"
+        android:layout_marginBottom="@dimen/prompt_vertical_margin"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/signup_prompt_tos"
+            android:layout_width="wrap_content"
+            android:text="@string/sign_up_tos"
+            android:textSize="@dimen/fi_font_extra_small"
+            android:gravity="right"
+            android:textColor="@color/impressionAccent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="@string/impression_divider"
+            android:textSize="@dimen/fi_font_extra_small"
+            android:gravity="right"
+            android:layout_marginLeft="@dimen/welcome_divider_margin"
+            android:layout_marginRight="@dimen/welcome_divider_margin"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/signup_prompt_privacy_policy"
+            android:layout_width="wrap_content"
+            android:textSize="@dimen/fi_font_extra_small"
+            android:text="@string/sign_up_privacy_policy"
+            android:gravity="right"
+            android:textColor="@color/impressionAccent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

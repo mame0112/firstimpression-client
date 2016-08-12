@@ -112,6 +112,7 @@ public class PromptDialogActivity extends ImpressionBaseActivity
 
     @Override
     public void onNotificationSigninButtonPressed() {
+        //TODO Need to check sequence.
         startSignUpInActivity();
         finish();
     }

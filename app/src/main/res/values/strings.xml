@@ -4,6 +4,7 @@
     <!-- Common -->
     <string name="impression_ok">OK</string>
     <string name="impression_cancel">Cancel</string>
+    <string name="impression_back">Back</string>
     <string name="impression_divider">/</string>
     <string name="impression_generic_error">Unknown error</string>
     <string name="impression_progress_dialog_title">Wait a moment...</string>
@@ -133,6 +134,13 @@
     <string name="profile_dialog_profile_update_title">Update your profile</string>
     <string name="profile_dialog_profile_update_desc">Add your profile information to create more questions.</string>
 
+    <string name="profile_prompt_dialog_1st_main_text">Join to First Impression</string>
+    <string name="profile_prompt_dialog_1st_sub_text">If you join to First impression, you can ask your question to someone.</string>
+    <string name="profile_prompt_dialog_3rd_main_text">Here we go!</string>
+    <string name="profile_prompt_dialog_next_button">Next</string>
+    <string name="profile_prompt_dialog_signup_button">Sign up</string>
+
+
     <!-- Error message fragment -->
     <string name="error_message_title">Error message</string>
 
@@ -144,6 +152,6 @@
 
     <!-- Setting -->
     <string name="setting_notification_main_text">Notification</string>
-    <string name="setting_notification_sub_text">Get notification when someone replys to your question</string>
+    <string name="setting_notification_sub_text">Get notification when someone replies to your question</string>
 
 </resources>

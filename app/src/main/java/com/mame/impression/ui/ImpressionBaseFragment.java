@@ -39,6 +39,10 @@ public abstract class ImpressionBaseFragment extends Fragment {
         startActivity(i);
     }
 
-
+    protected void openContactPage(){
+        Uri uri = Uri.parse(Constants.CONTACT_URL);
+        Intent i = new Intent(Intent.ACTION_VIEW,uri);
+        startActivity(i);
+    }
 
 }

@@ -4,6 +4,7 @@
     <!-- Common -->
     <string name="impression_ok">OK</string>
     <string name="impression_cancel">キャンセル</string>
+    <string name="impression_back">戻る</string>
     <string name="impression_divider">/</string>
     <string name="impression_generic_error">不明なエラー</string>
     <string name="impression_progress_dialog_title">しばらくお待ちください...</string>

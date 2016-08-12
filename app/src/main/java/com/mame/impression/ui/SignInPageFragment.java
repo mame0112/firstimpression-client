@@ -122,12 +122,6 @@ public class SignInPageFragment extends ImpressionBaseFragment {
         }
     };
 
-    private void openContactPage(){
-        Uri uri = Uri.parse(Constants.CONTACT_URL);
-        Intent i = new Intent(Intent.ACTION_VIEW,uri);
-        startActivity(i);
-    }
-
     private TextWatcher mUserNmaeWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

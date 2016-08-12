@@ -6,36 +6,65 @@
     android:paddingBottom="@dimen/dialog_vertical_padding"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-    <TextView
-        android:text="@string/notification_dialog_desc"
-        android:paddingTop="@dimen/dialog_vertical_padding"
-        android:paddingBottom="@dimen/dialog_vertical_padding"
-        android:layout_marginLeft="@dimen/dialog_horizontal_margin"
-        android:layout_marginRight="@dimen/dialog_horizontal_margin"
-        android:textSize="@dimen/fi_font_middle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-    <LinearLayout
-        android:id="@+id/notification_fragment_frame"
+    <com.mame.impression.ui.NonSwipeableViewPager
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:id="@+id/signup_prompt_viewpager"/>
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-    </LinearLayout>
-    <View
-        android:layout_marginTop="@dimen/prompt_vertical_margin"
-        android:layout_marginBottom="@dimen/prompt_vertical_margin"
-        android:layout_height="@dimen/impression_divider_height"
-        android:layout_width="match_parent"
-        android:background="@color/impression_grey"/>
-    <TextView
-        android:id="@+id/prompt_dialog_already_account_exist"
-        android:text="@string/notification_dialog_already_have_account"
-        android:paddingBottom="@dimen/dialog_vertical_padding"
-        android:layout_marginLeft="@dimen/dialog_horizontal_margin"
-        android:layout_marginRight="@dimen/dialog_horizontal_margin"
-        android:gravity="right"
-        android:textColor="@color/impressionAccent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_alignParentBottom="true">
+        <Button
+            android:id="@+id/signup_prompt_negative_button"
+            android:text="@string/impression_cancel"
+            android:background="@null"
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentLeft="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/signup_prompt_positive_button"
+            android:text="@string/profile_prompt_dialog_next_button"
+            android:layout_alignParentRight="true"
+            android:textColor="@color/colorAccent"
+            android:background="@null"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RelativeLayout>
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:id="@+id/signup_prompt_viewpager"/>-->
+
+    <!--<TextView-->
+        <!--android:text="@string/notification_dialog_desc"-->
+        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
+        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
+        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
+        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
+        <!--android:textSize="@dimen/fi_font_middle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
+    <!--<LinearLayout-->
+        <!--android:id="@+id/notification_fragment_frame"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+    <!--</LinearLayout>-->
+    <!--<View-->
+        <!--android:layout_marginTop="@dimen/prompt_vertical_margin"-->
+        <!--android:layout_marginBottom="@dimen/prompt_vertical_margin"-->
+        <!--android:layout_height="@dimen/impression_divider_height"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:background="@color/impression_grey"/>-->
+    <!--<TextView-->
+        <!--android:id="@+id/prompt_dialog_already_account_exist"-->
+        <!--android:text="@string/notification_dialog_already_have_account"-->
+        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
+        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
+        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
+        <!--android:gravity="right"-->
+        <!--android:textColor="@color/impressionAccent"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content" />-->
 </LinearLayout>
