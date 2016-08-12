@@ -56,27 +56,6 @@ public class SignUpPromptFragment2  extends ImpressionSignUpBaseFragment {
         mPasswordValidator = new ImpressionSignUpBaseFragment.PasswordValidator();
     }
 
-//    @Override
-//    public void onResume(){
-//        super.onResume();
-//
-//
-//        LogUtil.d(TAG, "onResume");
-//
-//        //If user comes to this fragment and already user name and password is fulfilled (resume case)
-//        if(isAlreadyInformationFulfilled()){
-//            if(mListener != null){
-//                mListener.onSignUpReady(mUserName, mPassword);
-//            }
-//        } else {
-//            if(mListener != null){
-//                mListener.onSignUpNotReady();
-//            }
-//        }
-//    }
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){

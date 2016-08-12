@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?android:colorControlHighlight">
+    <item  android:drawable="@null"
+        android:state_enabled="false"
+        android:color="@color/impression_dark_grey"/>
+    <item android:drawable="@null"
+        android:color="@color/colorAccent" />
+</selector>

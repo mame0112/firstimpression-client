@@ -59,6 +59,9 @@
     <dimen name="prompt_vertical_margin">10dp</dimen>
     <dimen name="prompt_dialog_title_padding">4dp</dimen>
     <dimen name="prompt_update_profile_category_text_width">100dp</dimen>
+    <dimen name="prompt_wizard_header_top_margin">30dp</dimen>
+    <dimen name="prompt_wizard_header_bottom_margin">20dp</dimen>
+    <dimen name="prompt_wizard_signup_notice_margin">6dp</dimen>
 
     <!-- Setting -->
     <dimen name="setting_item_margin">8dp</dimen>

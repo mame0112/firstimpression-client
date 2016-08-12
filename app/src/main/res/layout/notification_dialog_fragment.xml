@@ -18,7 +18,7 @@
             android:id="@+id/signup_prompt_negative_button"
             android:text="@string/impression_cancel"
             android:background="@null"
-            android:textColor="@color/colorAccent"
+            android:textColor="@drawable/signup_prompt_wizard_button_text"
             android:layout_alignParentLeft="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -26,7 +26,7 @@
             android:id="@+id/signup_prompt_positive_button"
             android:text="@string/profile_prompt_dialog_next_button"
             android:layout_alignParentRight="true"
-            android:textColor="@color/colorAccent"
+            android:textColor="@drawable/signup_prompt_wizard_button_text"
             android:background="@null"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
