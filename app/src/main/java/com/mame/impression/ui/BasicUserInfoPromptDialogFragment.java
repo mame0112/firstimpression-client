@@ -172,14 +172,6 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
         mListener = listener;
     }
 
-//    @Override
-//    public void onSignUpButtonPressed(String userName, String password) {
-//        LogUtil.d(TAG, "onSignUpButtonPressed");
-////        if(mListener != null){
-////            mListener.onSignUpButtonPressed(userName, password);
-////        }
-//    }
-
     @Override
     public void onSignUpReadyIn2ndPage(String userName, String password) {
         LogUtil.d(TAG, "onSignUpReadyIn2ndPage");

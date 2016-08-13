@@ -42,6 +42,8 @@ public class Constants {
 
     public final static int NO_POINT = 0;
 
+    public final static int THRETHOLD_CHANGE_REPLY_MESSAGE = 4;
+
     /**
      * UI part
      */

@@ -57,8 +57,6 @@ public class MainPageActivity extends ImpressionBaseActivity
 
     private final static int REQUEST_CODE = 1;
 
-    private final static int THRETHOLD_CHANGE_REPLY_MESSAGE = 5;
-
     private Menu mMenu;
 
     private ServiceConnection mConnection = new ServiceConnection() {
@@ -362,7 +360,7 @@ public class MainPageActivity extends ImpressionBaseActivity
 
         int replyCount = PreferenceUtil.getReplyCount(getApplicationContext());
 
-        if(replyCount < THRETHOLD_CHANGE_REPLY_MESSAGE){
+        if(replyCount < Constants.THRETHOLD_CHANGE_REPLY_MESSAGE){
 
             if(mSnackBar != null){
                 mSnackBar.notifyReplyFinished();
