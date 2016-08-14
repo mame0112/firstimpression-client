@@ -1,44 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/prompt_wizard_header_image_height"
-        android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"
-        android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"
-        android:layout_gravity="center"
-        android:src="@drawable/fi_signup_prompt_wizard_2nd"/>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/signup_prompt_username_wrapper"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signup_prompt_username"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/prompt_wizard_header_image_height"
+            android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"
+            android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"
+            android:layout_gravity="center"
+            android:src="@drawable/fi_signup_prompt_wizard_2nd"/>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_prompt_username_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/signup_prompt_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_in_hint_username"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/signup_prompt_password_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/signup_prompt_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/sign_in_hint_password"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            android:id="@+id/signup_prompt_forget_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/sign_in_hint_username"
-            android:inputType="text" />
-    </android.support.design.widget.TextInputLayout>
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/signup_prompt_password_wrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/signup_prompt_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/sign_in_hint_password"
-            android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
-    <TextView
-        android:id="@+id/signup_prompt_forget_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/prompt_dialog_title_padding"
-        android:layout_marginRight="@dimen/prompt_dialog_title_padding"
-        android:layout_marginTop="@dimen/prompt_vertical_margin"
-        android:textColor="@color/impressionAccent"
-        android:text="@string/sign_in_forget_password"/>
-</LinearLayout>
+            android:layout_marginLeft="@dimen/prompt_dialog_title_padding"
+            android:layout_marginRight="@dimen/prompt_dialog_title_padding"
+            android:layout_marginTop="@dimen/prompt_vertical_margin"
+            android:layout_marginBottom="@dimen/prompt_vertical_margin"
+            android:textColor="@color/impressionAccent"
+            android:text="@string/sign_in_forget_password"/>
+    </LinearLayout>
+</ScrollView>

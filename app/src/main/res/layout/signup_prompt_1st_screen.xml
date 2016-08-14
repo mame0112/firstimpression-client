@@ -1,27 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <ImageView
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/prompt_wizard_header_image_height"
-        android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"
-        android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"
-        android:layout_gravity="center"
-        android:src="@drawable/fi_signup_prompt_wizard_1st"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/fi_font_middle"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/prompt_vertical_margin"
-        android:text="@string/profile_prompt_dialog_1st_main_text"/>
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/fi_font_small"
-        android:gravity="center"
-        android:layout_marginTop="@dimen/prompt_vertical_margin"
-        android:text="@string/profile_prompt_dialog_1st_sub_text"/>
-</LinearLayout>
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/prompt_wizard_header_image_height"
+            android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"
+            android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"
+            android:layout_gravity="center"
+            android:src="@drawable/fi_signup_prompt_wizard_1st"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/fi_font_middle"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/prompt_vertical_margin"
+            android:text="@string/profile_prompt_dialog_1st_main_text"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/fi_font_small"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/prompt_vertical_margin"
+            android:text="@string/profile_prompt_dialog_1st_sub_text"/>
+    </LinearLayout>
+</ScrollView>
