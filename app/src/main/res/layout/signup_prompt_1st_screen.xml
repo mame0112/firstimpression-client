@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/prompt_wizard_header_image_height"
         android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"
         android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"
         android:layout_gravity="center"
-        android:src="@drawable/fi_app_small_icn"/>
+        android:src="@drawable/fi_signup_prompt_wizard_1st"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/prompt_wizard_header_image_height"
         android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"
         android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"
-        android:layout_gravity="center"
-        android:src="@drawable/fi_app_small_icn"/>
+        android:layout_gravity="center_horizontal"
+        android:scaleType="fitCenter"
+        android:src="@drawable/fi_signup_prompt_wizard_3rd"/>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -62,6 +62,7 @@
     <dimen name="prompt_wizard_header_top_margin">30dp</dimen>
     <dimen name="prompt_wizard_header_bottom_margin">20dp</dimen>
     <dimen name="prompt_wizard_signup_notice_margin">6dp</dimen>
+    <dimen name="prompt_wizard_header_image_height">100dp</dimen>
 
     <!-- Setting -->
     <dimen name="setting_item_margin">8dp</dimen>
