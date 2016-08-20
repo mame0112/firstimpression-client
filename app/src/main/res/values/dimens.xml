@@ -55,10 +55,15 @@
     <dimen name="answer_page_item_desc_max_width">190dp</dimen>
 
     <!-- Prompt dialog-->
+    <dimen name="prompt_dialog_height">300dp</dimen>
+    <dimen name="prompt_large_dialog_height">400dp</dimen>
     <dimen name="prompt_horizontal_padding">14dp</dimen>
     <dimen name="prompt_vertical_margin">10dp</dimen>
     <dimen name="prompt_dialog_title_padding">4dp</dimen>
     <dimen name="prompt_update_profile_category_text_width">100dp</dimen>
+    <dimen name="prompt_update_profile_spinner_margin">10dp</dimen>
+    <dimen name="prompt_update_profile_spinner_width">200dp</dimen>
+    <dimen name="prompt_update_horizontal_pading">10dp</dimen>
     <dimen name="prompt_wizard_header_top_margin">30dp</dimen>
     <dimen name="prompt_wizard_header_bottom_margin">20dp</dimen>
     <dimen name="prompt_wizard_signup_notice_margin">6dp</dimen>

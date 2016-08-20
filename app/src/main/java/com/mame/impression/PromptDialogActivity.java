@@ -273,6 +273,11 @@ public class PromptDialogActivity extends ImpressionBaseActivity
     }
 
     @Override
+    public void onProfileInputCancelled() {
+        LogUtil.d(TAG, "onProfileInputCancelled");
+    }
+
+    @Override
     public void onProfileIsfulfilled(final QuestionResultListData.Gender gender, final QuestionResultListData.Age age) {
         LogUtil.d(TAG, "onProfileIsfulfilled");
 

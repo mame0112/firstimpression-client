@@ -132,25 +132,12 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
                         mListener.onProfileIsfulfilled(getGenderValue(mGenderItem), getAgeValue(mAgeItem));
                     }
                     break;
-//                case R.id.profile_signin_text_button:
-//                    LogUtil.d(TAG, "Signin text pressed");
-//                    if(mListener != null){
-//                        mListener.onProfileSignInButtonPressed();
-//                    }
-//                    break;
-//                case R.id.profile_signup_button:
-//                    LogUtil.d(TAG, "Signup button pressed");
-//                    if(mListener != null){
-//                        mListener.onProfileSignUpButtonPressed();
-//                    }
-//                    break;
-//                case R.id.profile_cancel_button:
-//                    LogUtil.d(TAG, "Cancel button pressed");
-//
-//                    if(mListener != null){
-//                        mListener.onProfileCancelButtonPressed();
-//                    }
-//                    break;
+                case R.id.profile_cancel_button:
+                    LogUtil.d(TAG, "Cancel button pressed");
+                    if(mListener != null){
+                        mListener.onProfileInputCancelled();
+                    }
+                    break;
                 default:
                     break;
             }
@@ -210,6 +197,8 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
     }
 
     public interface ProfileDialogFragmentListener{
+        void onProfileInputCancelled();
+
         void onProfileIsfulfilled(QuestionResultListData.Gender gender, QuestionResultListData.Age age);
     }
 }

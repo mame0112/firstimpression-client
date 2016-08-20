@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingLeft="@dimen/prompt_update_horizontal_pading"
+    android:paddingRight="@dimen/prompt_update_horizontal_pading"
+    android:paddingTop="@dimen/dialog_vertical_padding"
+    android:paddingBottom="@dimen/dialog_vertical_padding"
+    android:layout_margin="10dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="@dimen/prompt_wizard_header_image_height"
@@ -27,162 +32,121 @@
             android:gravity="center"
             android:layout_marginTop="@dimen/prompt_vertical_margin"
             android:text="@string/profile_dialog_profile_update_desc"/>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/dialog_vertical_padding"
-            android:paddingBottom="@dimen/dialog_vertical_padding"
-            android:layout_marginTop="@dimen/prompt_vertical_margin"
+        <Spinner
+            android:id="@+id/profile_age_spinner"
+            android:layout_width="@dimen/prompt_update_profile_spinner_width"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dialog_horizontal_margin"
             android:layout_marginRight="@dimen/dialog_horizontal_margin"
-            android:paddingLeft="@dimen/prompt_horizontal_padding"
-            android:paddingRight="@dimen/prompt_horizontal_padding"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="@string/profile_dialog_age_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"/>
-            <Spinner
-                android:id="@+id/profile_age_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dialog_horizontal_margin"
-                android:layout_marginRight="@dimen/dialog_horizontal_margin"
-                android:layout_weight="1"
-                android:entries="@array/impression_age"/>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/dialog_vertical_padding"
-            android:paddingBottom="@dimen/dialog_vertical_padding"
+            android:layout_marginTop="@dimen/prompt_update_profile_spinner_margin"
+            android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin"
+            android:entries="@array/impression_age"/>
+        <Spinner
+            android:id="@+id/profile_gender_spinner"
+            android:layout_width="@dimen/prompt_update_profile_spinner_width"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dialog_horizontal_margin"
             android:layout_marginRight="@dimen/dialog_horizontal_margin"
-            android:layout_marginBottom="@dimen/prompt_vertical_margin"
-            android:paddingLeft="@dimen/prompt_horizontal_padding"
-            android:paddingRight="@dimen/prompt_horizontal_padding"
+            android:layout_marginTop="@dimen/prompt_update_profile_spinner_margin"
+            android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin"
+            android:entries="@array/impression_gender" />
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:text="@string/profile_dialog_gender_text"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+            <Button
+                android:id="@+id/profile_cancel_button"
+                android:text="@string/impression_cancel"
+                android:background="@null"
+                android:textColor="@drawable/signup_prompt_wizard_button_text"
+                android:layout_alignParentLeft="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"/>
-            <Spinner
-                android:id="@+id/profile_gender_spinner"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/profile_answer_button"
+                android:text="@string/profile_prompt_dialog_next_button"
+                android:layout_alignParentRight="true"
+                android:textColor="@drawable/signup_prompt_wizard_button_text"
+                android:background="@null"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dialog_horizontal_margin"
-                android:layout_marginRight="@dimen/dialog_horizontal_margin"
-                android:entries="@array/impression_gender"
-                android:layout_weight="1"/>
-        </LinearLayout>
-        <Button
-            android:id="@+id/profile_answer_button"
-            android:text="@string/profile_dialog_answer"
-            android:layout_marginTop="@dimen/default_view_vartical_margin"
-            android:layout_marginBottom="@dimen/default_view_vartical_margin"
-            android:layout_marginLeft="@dimen/dialog_horizontal_margin"
-            android:layout_marginRight="@dimen/dialog_horizontal_margin"
-            android:paddingLeft="@dimen/prompt_horizontal_padding"
-            android:paddingRight="@dimen/prompt_horizontal_padding"
-            android:background="@drawable/welcome_action_button"
-            android:textColor="@drawable/welcome_action_button_text"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        </LinearLayout>
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+    </LinearLayout>
 </ScrollView>
-
-
-<!--<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--android:orientation="vertical"-->
-    <!--android:layout_marginBottom="@dimen/prompt_vertical_margin"-->
+    <!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+    <!--android:paddingLeft="@dimen/prompt_horizontal_padding"-->
+    <!--android:paddingRight="@dimen/prompt_horizontal_padding"-->
     <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
     <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-    <!--<LinearLayout-->
-        <!--android:background="@color/colorAccent"-->
-        <!--android:orientation="vertical"-->
-        <!--android:layout_marginBottom="@dimen/prompt_vertical_margin"-->
-        <!--android:padding="@dimen/padding_zero"-->
+    <!--android:layout_height="@dimen/prompt_large_dialog_height">-->
+    <!--<ScrollView-->
         <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<TextView-->
-            <!--android:text="@string/profile_dialog_profile_update_title"-->
-            <!--android:textSize="@dimen/fi_font_large"-->
-            <!--android:textColor="@color/impression_white"-->
-            <!--android:padding="@dimen/prompt_horizontal_padding"-->
+        <!--android:layout_height="match_parent">-->
+        <!--<LinearLayout-->
             <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<ImageView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/prompt_wizard_header_image_height"-->
+                <!--android:layout_marginTop="@dimen/prompt_wizard_header_top_margin"-->
+                <!--android:layout_marginBottom="@dimen/prompt_wizard_header_bottom_margin"-->
+                <!--android:layout_gravity="center"-->
+                <!--android:src="@drawable/fi_profile_prompt_dialog"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="@dimen/fi_font_middle"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginBottom="@dimen/prompt_vertical_margin"-->
+                <!--android:text="@string/profile_dialog_profile_update_title"/>-->
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textSize="@dimen/fi_font_small"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginTop="@dimen/prompt_vertical_margin"-->
+                <!--android:text="@string/profile_dialog_profile_update_desc"/>-->
+            <!--<Spinner-->
+                <!--android:id="@+id/profile_age_spinner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
+                <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
+                <!--android:layout_marginTop="@dimen/prompt_update_profile_spinner_margin"-->
+                <!--android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin"-->
+                <!--android:entries="@array/impression_age"/>-->
+            <!--<Spinner-->
+                <!--android:id="@+id/profile_gender_spinner"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
+                <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
+                <!--android:layout_marginTop="@dimen/prompt_update_profile_spinner_margin"-->
+                <!--android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin"-->
+                <!--android:entries="@array/impression_gender" />-->
+        <!--</LinearLayout>-->
+    <!--</ScrollView>-->
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true">-->
+        <!--<Button-->
+            <!--android:id="@+id/profile_cancel_button"-->
+            <!--android:text="@string/impression_cancel"-->
+            <!--android:background="@null"-->
+            <!--android:textColor="@drawable/signup_prompt_wizard_button_text"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content" />-->
-    <!--</LinearLayout>-->
-    <!--<TextView-->
-        <!--android:text="@string/profile_dialog_profile_update_desc"-->
-        <!--android:textSize="@dimen/fi_font_small"-->
-        <!--android:paddingLeft="@dimen/prompt_horizontal_padding"-->
-        <!--android:paddingRight="@dimen/prompt_horizontal_padding"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
-        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
-        <!--android:layout_marginTop="@dimen/prompt_vertical_margin"-->
-        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
-        <!--android:paddingLeft="@dimen/prompt_horizontal_padding"-->
-        <!--android:paddingRight="@dimen/prompt_horizontal_padding"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<TextView-->
-            <!--android:text="@string/profile_dialog_age_text"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="2"/>-->
-        <!--<Spinner-->
-            <!--android:id="@+id/profile_age_spinner"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
-            <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
-            <!--android:layout_weight="1"-->
-            <!--android:entries="@array/impression_age"/>-->
-    <!--</LinearLayout>-->
-    <!--<LinearLayout-->
-        <!--android:orientation="horizontal"-->
-        <!--android:paddingTop="@dimen/dialog_vertical_padding"-->
-        <!--android:paddingBottom="@dimen/dialog_vertical_padding"-->
-        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
-        <!--android:layout_marginBottom="@dimen/prompt_vertical_margin"-->
-        <!--android:paddingLeft="@dimen/prompt_horizontal_padding"-->
-        <!--android:paddingRight="@dimen/prompt_horizontal_padding"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content">-->
-        <!--<TextView-->
-            <!--android:text="@string/profile_dialog_gender_text"-->
+        <!--<Button-->
+            <!--android:id="@+id/profile_answer_button"-->
+            <!--android:text="@string/profile_prompt_dialog_next_button"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:textColor="@drawable/signup_prompt_wizard_button_text"-->
+            <!--android:background="@null"-->
             <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_weight="2"/>-->
-        <!--<Spinner-->
-            <!--android:id="@+id/profile_gender_spinner"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
-            <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
-            <!--android:entries="@array/impression_gender"-->
-            <!--android:layout_weight="1"/>-->
-    <!--</LinearLayout>-->
-    <!--<Button-->
-        <!--android:id="@+id/profile_answer_button"-->
-        <!--android:text="@string/profile_dialog_answer"-->
-        <!--android:layout_marginTop="@dimen/default_view_vartical_margin"-->
-        <!--android:layout_marginBottom="@dimen/default_view_vartical_margin"-->
-        <!--android:layout_marginLeft="@dimen/dialog_horizontal_margin"-->
-        <!--android:layout_marginRight="@dimen/dialog_horizontal_margin"-->
-        <!--android:paddingLeft="@dimen/prompt_horizontal_padding"-->
-        <!--android:paddingRight="@dimen/prompt_horizontal_padding"-->
-        <!--android:background="@drawable/welcome_action_button"-->
-        <!--android:textColor="@drawable/welcome_action_button_text"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-<!--</LinearLayout>-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</RelativeLayout>-->
+<!--</RelativeLayout>-->

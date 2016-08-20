@@ -28,7 +28,7 @@ public abstract class ImpressionBaseActivity extends AppCompatActivity {
 
     private final static String PROGREDD_DIALOG_DESCRIPTION = "description";
 
-    private final static long WAIT = 1000 * 10; // 10sec
+    private final static long WAIT = 1000 * 30; // 30sec
 
     private ProgressDialogFragment mProgressFragment;
 
