@@ -4,7 +4,8 @@
     android:paddingRight="@dimen/prompt_update_horizontal_pading"
     android:paddingTop="@dimen/dialog_vertical_padding"
     android:paddingBottom="@dimen/dialog_vertical_padding"
-    android:layout_margin="10dp"
+    android:layout_marginRight="@dimen/prompt_horizontal_padding"
+    android:layout_marginLeft="@dimen/prompt_horizontal_padding"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
     <LinearLayout
