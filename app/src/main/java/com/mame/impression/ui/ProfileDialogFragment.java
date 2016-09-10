@@ -42,34 +42,39 @@ public class ProfileDialogFragment extends ImpressionBaseFragment {
         View v = inflater.inflate(R.layout.profile_dialog_fragment, container, false);
 
         Spinner ageSpinner = (Spinner)v.findViewById(R.id.profile_age_spinner);
-        ArrayAdapter<CharSequence> ageAdapter =
-                ArrayAdapter.createFromResource(
-                        getActivity(),
-                        R.array.impression_age,
-                        android.R.layout.simple_spinner_item
-                );
+
+        ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        for(int i=0; i<Constants.AGE_ITEM.length; i++){
+            ageAdapter.add(getResources().getString(Constants.AGE_ITEM[i]));
+        }
+
+//        ArrayAdapter<CharSequence> ageAdapter =
+//                ArrayAdapter.createFromResource(
+//                        getActivity(),
+//                        R.array.impression_age,
+//                        android.R.layout.simple_spinner_item
+//                );
         ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ageSpinner.setAdapter(ageAdapter);
         ageSpinner.setOnItemSelectedListener(mSpinnerListener);
 
         Spinner genderSpinner = (Spinner)v.findViewById(R.id.profile_gender_spinner);
-        ArrayAdapter<CharSequence> genderAdapter =
-                ArrayAdapter.createFromResource(
-                        getActivity(),
-                        R.array.impression_gender,
-                        android.R.layout.simple_spinner_item
-                );
+//        ArrayAdapter<CharSequence> genderAdapter =
+//                ArrayAdapter.createFromResource(
+//                        getActivity(),
+//                        R.array.impression_gender,
+//                        android.R.layout.simple_spinner_item
+//                );
+        ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
+        for(int i=0; i<Constants.GENDER_ITEM.length; i++){
+            genderAdapter.add(getResources().getString(Constants.GENDER_ITEM[i]));
+        }
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(genderAdapter);
         genderSpinner.setOnItemSelectedListener(mSpinnerListener);
 
         mAnswerButton = (Button)v.findViewById(R.id.profile_answer_button);
         mAnswerButton.setOnClickListener(mClickListener);
-
-//        getDialog().setTitle(R.string.notification_dialog_title);
-//
-//        getDialog().setCanceledOnTouchOutside(false);
-//        setCancelable(false);
 
         return v;
     }

@@ -56,25 +56,6 @@ public class SignUpPageFragment extends ImpressionSignUpBaseFragment {
 
     private SignUpFragmentListener mListener;
 
-    private static int AGE_ITEM[] = {
-        R.string.spinner_gender_select_indication,
-        R.string.item_generation_under10,
-        R.string.item_generation_from10_20,
-        R.string.item_generation_from20_30,
-        R.string.item_generation_from30_40,
-        R.string.item_generation_from40_50,
-        R.string.item_generation_from50_60,
-        R.string.item_generation_from60_70,
-        R.string.item_generation_over70
-    };
-
-    private static int GENDER_ITEM[] = {
-            R.string.spinner_age_select_indication,
-            R.string.item_gender_male,
-            R.string.item_gender_female
-    };
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -112,15 +93,15 @@ public class SignUpPageFragment extends ImpressionSignUpBaseFragment {
         // Age spinner
         mAgeSpinner = (Spinner)view.findViewById(R.id.signup_age_spinner);
         ArrayAdapter<String> ageAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
-        for(int i=0; i<AGE_ITEM.length; i++){
-            ageAdapter.add(getResources().getString(AGE_ITEM[i]));
+        for(int i=0; i<Constants.AGE_ITEM.length; i++){
+            ageAdapter.add(getResources().getString(Constants.AGE_ITEM[i]));
         }
         ageAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mAgeSpinner.setAdapter(ageAdapter);
         mAgeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mAgeSelectedId = AGE_ITEM[position];
+                mAgeSelectedId = Constants.AGE_ITEM[position];
                 changeSignUpButtonState();
             }
             @Override
@@ -132,15 +113,15 @@ public class SignUpPageFragment extends ImpressionSignUpBaseFragment {
         // Gender spinner
         mGenderSpinner = (Spinner)view.findViewById(R.id.signup_gender_spinner);
         ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(getContext(), android.R.layout.simple_spinner_item);
-        for(int i=0; i<GENDER_ITEM.length; i++){
-            genderAdapter.add(getResources().getString(GENDER_ITEM[i]));
+        for(int i=0; i<Constants.GENDER_ITEM.length; i++){
+            genderAdapter.add(getResources().getString(Constants.GENDER_ITEM[i]));
         }
         genderAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mGenderSpinner.setAdapter(genderAdapter);
         mGenderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mGenderSelectedId = GENDER_ITEM[position];
+                mGenderSelectedId = Constants.GENDER_ITEM[position];
                 changeSignUpButtonState();
             }
             @Override
@@ -148,7 +129,6 @@ public class SignUpPageFragment extends ImpressionSignUpBaseFragment {
 
             }
         });
-
 
         mToSView = (TextView)view.findViewById(R.id.signup_tos);
         mToSView.setOnClickListener(mClickListener);

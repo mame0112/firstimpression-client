@@ -40,8 +40,7 @@
             android:layout_marginLeft="@dimen/dialog_horizontal_margin"
             android:layout_marginRight="@dimen/dialog_horizontal_margin"
             android:layout_marginTop="@dimen/prompt_update_profile_spinner_margin"
-            android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin"
-            android:entries="@array/impression_age"/>
+            android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin" />
         <Spinner
             android:id="@+id/profile_gender_spinner"
             android:layout_width="@dimen/prompt_update_profile_spinner_width"
@@ -49,8 +48,7 @@
             android:layout_marginLeft="@dimen/dialog_horizontal_margin"
             android:layout_marginRight="@dimen/dialog_horizontal_margin"
             android:layout_marginTop="@dimen/prompt_update_profile_spinner_margin"
-            android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin"
-            android:entries="@array/impression_gender" />
+            android:layout_marginBottom="@dimen/prompt_update_profile_spinner_margin" />
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

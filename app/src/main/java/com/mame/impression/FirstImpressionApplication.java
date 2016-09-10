@@ -23,16 +23,14 @@ public class FirstImpressionApplication extends Application {
         AnalyticsTracker.initialize(getApplicationContext());
     }
 
-    public synchronized Tracker getDefaultTracker() {
-        if (mTracker == null) {
-
-            LogUtil.d(TAG, "getDefaultTracker");
-
-            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
-            mTracker = analytics.newTracker(R.xml.impression_tracker);
-        }
-        return mTracker;
-    }
-
-
+//    public synchronized Tracker getDefaultTracker() {
+//        if (mTracker == null) {
+//
+//            LogUtil.d(TAG, "getDefaultTracker");
+//
+//            GoogleAnalytics analytics = GoogleAnalytics.getInstance(this);
+//            mTracker = analytics.newTracker(R.xml.impression_tracker);
+//        }
+//        return mTracker;
+//    }
 }

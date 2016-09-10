@@ -1,5 +1,7 @@
 package com.mame.impression.constant;
 
+import com.mame.impression.R;
+
 /**
  * Created by kosukeEndo on 2015/11/27.
  */
@@ -85,5 +87,30 @@ public class Constants {
     public final static String INTENT_MODE_SIGNUP = "intent_mode_signup";
 
     public final static String INTENT_USER_POINT = "intent_user_point";
+
+
+    /**
+     * Age constants
+     */
+    public static int AGE_ITEM[] = {
+            R.string.spinner_gender_select_indication,
+            R.string.item_generation_under10,
+            R.string.item_generation_from10_20,
+            R.string.item_generation_from20_30,
+            R.string.item_generation_from30_40,
+            R.string.item_generation_from40_50,
+            R.string.item_generation_from50_60,
+            R.string.item_generation_from60_70,
+            R.string.item_generation_over70
+    };
+
+    /**
+     * Gender constants
+     */
+    public static int GENDER_ITEM[] = {
+            R.string.spinner_age_select_indication,
+            R.string.item_gender_male,
+            R.string.item_gender_female
+    };
 
 }
