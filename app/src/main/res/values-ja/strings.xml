@@ -54,7 +54,7 @@
     <string name="main_option_menu_sign_out">サインアウト</string>
 
     <string name="main_page_current_point">現在のポイント: %1$d</string>
-    <string name="main_page_reply_finished">回答ありがとうございkます。</string>
+    <string name="main_page_reply_finished">回答ありがとうございます。</string>
     <string name="main_page_prompt_sign_up">サインアップすると、質問できます</string>
     <string name="main_pgae_sign_up_action">サインアップ</string>
     <string name="main_pgae_create_question">質問を作成</string>

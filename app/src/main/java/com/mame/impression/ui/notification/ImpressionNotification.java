@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.content.ContextCompat;
 
 import com.mame.impression.AnswerPageActivity;
 import com.mame.impression.MainPageActivity;
@@ -36,13 +37,19 @@ public class ImpressionNotification {
             return;
         }
 
+        if(context == null){
+            LogUtil.w(TAG, "Context cannot be null");
+            return;
+        }
+
         NotificationCompat.Builder builder = new NotificationCompat.Builder(
                 context)
-                .setSmallIcon(R.drawable.fi_app_icn)
+                .setSmallIcon(R.drawable.fi_notification_icon)
                 .setContentTitle(
                         context.getString(R.string.notification_title))
                 .setLights(Color.MAGENTA, LED_INTERVAL, LED_INTERVAL)
                 .setVibrate(new long[] { 500, 500, 250, 500 })
+                .setColor(ContextCompat.getColor(context, R.color.colorAccent))
                 .setAutoCancel(true);
 
         if(data.getQuestionTitle() != null){
