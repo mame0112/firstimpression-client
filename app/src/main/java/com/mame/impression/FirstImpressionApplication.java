@@ -7,6 +7,7 @@ import com.google.android.gms.analytics.Tracker;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
+import com.mame.impression.util.PreferenceUtil;
 
 /**
  * Created by kosukeEndo on 2016/01/17.
@@ -21,6 +22,9 @@ public class FirstImpressionApplication extends Application {
     public void onCreate(){
         super.onCreate();
         AnalyticsTracker.initialize(getApplicationContext());
+
+        // Initialize user point
+        PreferenceUtil.setUserPoint(getApplicationContext(), Constants.DEFAULT_USER_POINT);
     }
 
 //    public synchronized Tracker getDefaultTracker() {

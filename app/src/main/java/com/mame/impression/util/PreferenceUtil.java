@@ -124,7 +124,8 @@ public class PreferenceUtil {
     public static int getUserPoint(Context c) {
         SharedPreferences pref = c.getSharedPreferences(PREF_KEY,
                 Context.MODE_PRIVATE);
-        return pref.getInt(KEY_USER_POINT, Constants.NO_POINT);
+        //If no user point is available, return 10.
+        return pref.getInt(KEY_USER_POINT, Constants.DEFAULT_USER_POINT);
     }
 
     public static void removeUserPoint(Context c) {

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.mame.impression.R;
 import com.mame.impression.constant.Constants;
 import com.mame.impression.constant.ImpressionError;
+import com.mame.impression.ui.view.ButtonUtil;
 import com.mame.impression.ui.view.SimpleSignUpFragment;
 import com.mame.impression.util.AnalyticsTracker;
 import com.mame.impression.util.LogUtil;
@@ -113,18 +114,19 @@ public class BasicUserInfoPromptDialogFragment extends ImpressionBaseFragment im
                         throw new IllegalArgumentException("setSignUpPromptFragment1Listener must be called first");
                     }
 
-                    if(mCurrentPage == mAdapter.getCount() - 1){
-                        // Finish
-                        LogUtil.d(TAG, "Finish wizard");
-                        if(mListener != null){
-                            mListener.onSignUpButtonPressed(mUserName, mPassword);
+                    if(ButtonUtil.isClickable()){
+                        if(mCurrentPage == mAdapter.getCount() - 1){
+                            // Finish
+                            LogUtil.d(TAG, "Finish wizard");
+                            if(mListener != null){
+                                mListener.onSignUpButtonPressed(mUserName, mPassword);
+                            }
+                        } else {
+                            mCurrentPage = mCurrentPage + 1;
                         }
-                    } else {
-                        mCurrentPage = mCurrentPage + 1;
+
+                        switchView(mCurrentPage);
                     }
-
-                    switchView(mCurrentPage);
-
                     break;
             }
         }

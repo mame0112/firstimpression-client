@@ -65,7 +65,7 @@
     <string name="main_pgae_snackbar_error_message">問題が起きたようです。後ほど再度お試しください</string>
 
     <!-- Welcome page -->
-    <string name="welcome_service_description">「First impression」はリアルタイムに、あなたのアイデアへの反応を見ることができるサービスです</string>
+    <string name="welcome_service_description">「First Impression」はリアルタイムに、あなたのアイデアへの反応を見ることができるサービスです</string>
     <string name="welcome_signin_button">サインイン</string>
     <string name="welcome_signup_button">サインアップ</string>
 
@@ -135,8 +135,8 @@
     <string name="profile_dialog_profile_update_desc">プロフィールを更新して質問を作ろう</string>
 
     <string name="profile_prompt_dialog_1st_main_text">First Impressionに参加</string>
-    <string name="profile_prompt_dialog_1st_sub_text">First impressionに参加すると,質問を投稿できるようになります</string>
-    <string name="profile_prompt_dialog_3rd_main_text">あと少し！</string>
+    <string name="profile_prompt_dialog_1st_sub_text">First Impressionに参加すると、質問を投稿できるようになります</string>
+    <string name="profile_prompt_dialog_3rd_main_text">おめでとう！</string>
     <string name="profile_prompt_dialog_next_button">次</string>
     <string name="profile_prompt_dialog_signup_button">サインアップ</string>
 
@@ -144,7 +144,7 @@
     <string name="error_message_title">エラー</string>
 
     <!-- Notification -->
-    <string name="notification_title">First impression</string>
+    <string name="notification_title">First Impression</string>
     <string name="notification_content_without_description">あなたの質問に対する回答が届きました</string>
     <string name="notification_content_with_description">「%1$s」に対する回答が届きました</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>

@@ -20,7 +20,8 @@ public class Constants {
 
     public final static String HTTPS = "https://";
 
-    public final static String BASE_URL = "first-impression-backend.appspot.com";
+    public final static String BASE_URL = "first-impression-prod.appspot.com";
+//    public final static String BASE_URL = "first-impression-backend.appspot.com";
 
     public final static String HTTP_API_URL = HTTP + BASE_URL + API;
 
@@ -45,6 +46,8 @@ public class Constants {
     public final static int NO_POINT = 0;
 
     public final static int THRETHOLD_CHANGE_REPLY_MESSAGE = 4;
+
+    public final static int DEFAULT_USER_POINT = 10;
 
     /**
      * UI part
