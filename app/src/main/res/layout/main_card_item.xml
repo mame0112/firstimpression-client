@@ -73,7 +73,7 @@
                     android:id="@+id/main_card_choise_a"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/impression_white"
+                    android:textColor="@drawable/welcome_action_button_text"
                     android:background="@drawable/choice_button_a"
                     android:layout_marginRight="@dimen/main_choice_button_horizontal_margin"
                     android:layout_weight="1"/>
@@ -81,7 +81,7 @@
                     android:id="@+id/main_card_choise_b"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/impression_white"
+                    android:textColor="@drawable/welcome_action_button_text"
                     android:layout_marginLeft="@dimen/main_choice_button_horizontal_margin"
                     android:background="@drawable/choice_button_b"
                     android:layout_weight="1"/>

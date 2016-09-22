@@ -89,12 +89,11 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
             holder.mChoiseAButton.setText(data.getChoiceA());
             holder.mChoiseBButton.setText(data.getChoiceB());
 
-            //TODO Need to disable
             //If this question was created by this user, disable button to avoid the user respond this question
-//            if(data.getCreatedUserId() == mMyUserId){
-//                holder.mChoiseAButton.setEnabled(false);
-//                holder.mChoiseBButton.setEnabled(false);
-//            }
+            if(data.getCreatedUserId() == mMyUserId){
+                holder.mChoiseAButton.setEnabled(false);
+                holder.mChoiseBButton.setEnabled(false);
+            }
 
         }
     }
