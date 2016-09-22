@@ -86,10 +86,6 @@
                     android:background="@drawable/choice_button_b"
                     android:layout_weight="1"/>
             </LinearLayout>
-            <!--<View-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/impression_divider_height"-->
-                <!--android:background="@color/impression_grey"/>-->
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>

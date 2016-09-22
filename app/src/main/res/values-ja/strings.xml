@@ -94,7 +94,7 @@
     <string name="sign_up_tos">利用規約</string>
     <string name="sign_up_privacy_policy">プライバシーポリシー</string>
     <string name="spinner_gender_select_indication">性別を選択</string>
-    <string name="spinner_age_select_indication">年齢を選択</string>
+    <string name="spinner_age_select_indication">年代を選択</string>
 
     <!-- Answer fragment -->
     <string name="answer_overview_no_content">質問がありません</string>
@@ -123,7 +123,7 @@
     <string name="notification_dialog_already_have_account">すでにアカウントを持っている場合はサインイン</string>
 
     <!-- Profile dialog -->
-    <string name="profile_dialog_age_text">年齢</string>
+    <string name="profile_dialog_age_text">年代</string>
     <string name="profile_dialog_gender_text">性別</string>
     <string name="profile_dialog_answer">質問を作成</string>
     <string name="profile_dialog_signup_merit_text">サインアップすると、質問をすることができます</string>

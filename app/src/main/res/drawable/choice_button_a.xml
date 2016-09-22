@@ -1,5 +1,5 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="?android:colorControlHighlight">
-    <item android:drawable="@drawable/fi_choice_a_button" />
     <item android:drawable="@drawable/fi_choice_a_button_disabled" android:state_enabled="false"/>
+    <ripple android:drawable="@drawable/fi_choice_a_button" />
 </selector>
