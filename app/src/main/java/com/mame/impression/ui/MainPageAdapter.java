@@ -62,6 +62,10 @@ public class MainPageAdapter extends RecyclerView.Adapter<MainPageAdapter.ViewHo
         return mData.size();
     }
 
+    public void clear(){
+        mData.clear();
+    }
+
     public void setMainPageAdapterListener(MainPageAdapterListener listener) {
         mListener = listener;
     }

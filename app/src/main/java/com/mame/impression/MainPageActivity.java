@@ -306,7 +306,17 @@ public class MainPageActivity extends ImpressionBaseActivity
                     if (resultCode == RESULT_OK) {
                         LogUtil.d(TAG, "RESULT_OK");
                         int point = bundle.getInt(Constants.INTENT_USER_POINT);
+
+                        // Show user point result in SnackBar
                         mSnackBar.updateStatus(point);
+
+                        // Update Question list so that user can see new question is successfully created
+                        // (This Activity is already unbinded from its service, then we have to start from bindService)
+                        if(mAdapter != null){
+                            //Remove old all items
+                            mAdapter.clear();
+                        }
+                        doBindService();
                     } else if (resultCode == RESULT_CANCELED) {
                         LogUtil.d(TAG, "RESULT_CANCELED");
                         int point = bundle.getInt(Constants.INTENT_USER_POINT);
