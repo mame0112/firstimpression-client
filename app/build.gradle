@@ -9,8 +9,8 @@ android {
         applicationId "com.mame.impression"
         minSdkVersion 21
         targetSdkVersion 23
-        versionCode 10200
-        versionName "1.0.2"
+        versionCode 10300
+        versionName "1.0.3"
     }
     buildTypes {
         release {
