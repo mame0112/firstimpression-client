@@ -8,7 +8,7 @@ import com.mame.impression.R;
 public class Constants {
     public final static String TAG = "FirstImpression/";
 
-    public final static boolean IS_DEBUG = true;
+    public final static boolean IS_DEBUG = false;
 
     public final static int INITIAL_REQUEST_NUM = 20;
 
