@@ -147,6 +147,7 @@
     <string name="notification_title">First Impression</string>
     <string name="notification_content_without_description">あなたの質問に対する回答が届きました</string>
     <string name="notification_content_with_description">「%1$s」に対する回答が届きました</string>
+    <string name="notification_new_question_description">新着の質問「%1$s」があります</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
 
     <!-- Setting -->

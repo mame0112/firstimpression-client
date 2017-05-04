@@ -28,8 +28,8 @@ public class ImpressionNotification {
 
     private static NotificationManager mNotificationManager = null;
 
-    public void showNotiofication(Context context, int notificationId, NotificationData data) {
-        LogUtil.d(TAG, "showNotiofication: " + data.getQuestionTitle());
+    public void showAnswerRepliedNotification(Context context, int notificationId, NotificationData data) {
+        LogUtil.d(TAG, "showAnswerRepliedNotification");
 
         //If data is empty nothing to do.
         if(data == null){
@@ -64,12 +64,7 @@ public class ImpressionNotification {
                             context.getString(R.string.notification_content_without_description));
         }
 
-        // If current vibration setting is on
-//        if (PreferenceUtil.getCurrentVibrationSetting(context)) {
-//        }
-
         Intent intent = new Intent(context, AnswerPageActivity.class);
-//        intent.putExtra(LcomConst.EXTRA_USER_ID, userId);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         intent.putExtra(Constants.INTENT_QUESTION_ID, data.getQuestionId());
 
@@ -83,6 +78,49 @@ public class ImpressionNotification {
         mNotificationManager = (NotificationManager) context
                 .getSystemService(Context.NOTIFICATION_SERVICE);
         mNotificationManager.notify(notificationId, builder.build());
+    }
+
+    public void showNewQuestionCreatedNotification(Context context, int notificationId, NotificationData data) {
+        LogUtil.d(TAG, "showNewQuestionCreatedNotification: " + data.getQuestionTitle());
+
+        //If data is empty nothing to do.
+        if(data == null){
+            LogUtil.w(TAG, "Notification data is null");
+            return;
+        }
+
+        if(context == null){
+            LogUtil.w(TAG, "Context cannot be null");
+            return;
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(
+                context)
+                .setSmallIcon(R.drawable.fi_notification_icon)
+                .setContentTitle(
+                        context.getString(R.string.notification_title))
+                .setContentText(context.getString(R.string.notification_new_question_description, data.getQuestionTitle()))
+                .setTicker(context.getString(R.string.notification_new_question_description, data.getQuestionTitle()))
+                .setLights(Color.MAGENTA, LED_INTERVAL, LED_INTERVAL)
+                .setVibrate(new long[] { 500, 500, 250, 500 })
+                .setColor(ContextCompat.getColor(context, R.color.colorAccent))
+                .setAutoCancel(true);
+
+        Intent intent = new Intent(context, MainPageActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.putExtra(Constants.INTENT_QUESTION_ID, data.getQuestionId());
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+        stackBuilder.addParentStack(MainPageActivity.class);
+        stackBuilder.addNextIntent(intent);
+
+        PendingIntent pIntent = stackBuilder.getPendingIntent(REQUEST_CODE,
+                PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pIntent);
+        mNotificationManager = (NotificationManager) context
+                .getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager.notify(notificationId, builder.build());
+
     }
 
     public void removeNotification() {

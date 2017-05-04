@@ -41,8 +41,7 @@ public class ImpressionGcmListenerService extends GcmListenerService {
                     parseMessageRepliedNotification(message);
                     break;
                 case MESSAGE_CREATED:
-                    //TODO Need to implement
-//                    parseMessageCreatedNotification(message);
+                    parseMessageCreatedNotification(message);
                     break;
             }
         }
@@ -55,7 +54,7 @@ public class ImpressionGcmListenerService extends GcmListenerService {
         NotificationData gcmData = parser.parseGcmMessage(message);
 
         if(gcmData != null){
-            ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
+            ImpressionNotificationManager.getsInstance().showAnswerRepliedNotification(getApplicationContext(), gcmData);
         }
     }
 
@@ -66,7 +65,7 @@ public class ImpressionGcmListenerService extends GcmListenerService {
         NotificationData gcmData = parser.parseGcmMessage(message);
 
         if(gcmData != null){
-            ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
+            ImpressionNotificationManager.getsInstance().showNewQuestionCreatedNotification(getApplicationContext(), gcmData);
         }
     }
 

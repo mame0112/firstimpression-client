@@ -26,14 +26,24 @@ public class ImpressionNotificationManager {
     }
 
 
-    public void showNotification(final Context context, final NotificationData data){
-        LogUtil.d(TAG, "showNotification");
+    public void showAnswerRepliedNotification(final Context context, final NotificationData data){
+        LogUtil.d(TAG, "showAnswerRepliedNotification");
 
         if(data == null){
             return;
         }
         ImpressionNotification notification = new ImpressionNotification();
-        notification.showNotiofication(context, 1, data);
+        notification.showAnswerRepliedNotification(context, 1, data);
+    }
+
+    public void showNewQuestionCreatedNotification(final Context context, final NotificationData data){
+        LogUtil.d(TAG, "showNewQuestionCreatedNotification");
+
+        if(data == null){
+            return;
+        }
+        ImpressionNotification notification = new ImpressionNotification();
+        notification.showNewQuestionCreatedNotification(context, 2, data);
     }
 
 //    public void showNotification(final Context context, final NotificationData data){
