@@ -16,7 +16,8 @@ public class GcmMessageParser {
 
     public NotificationData parseGcmMessage(String message){
         if(message == null){
-            throw new IllegalArgumentException("message cannot be null");
+            return null;
+//            throw new IllegalArgumentException("message cannot be null");
         }
 
         try {

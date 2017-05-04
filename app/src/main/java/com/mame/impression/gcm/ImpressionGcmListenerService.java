@@ -22,19 +22,51 @@ public class ImpressionGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle data) {
+        String category = data.getString(GcmConstant.CATEGORY);
         String message = data.getString(GcmConstant.MESSAGE);
-//        LogUtil.d(TAG, "From: " + from);
+
+        LogUtil.d(TAG, "category: " + category);
         LogUtil.d(TAG, "Message: " + message);
+
+        if(category == null){
+            LogUtil.w(TAG, "category is null");
+            return;
+        }
 
         boolean isNotificationEnabled = PreferenceUtil.getNotificationSetting(getApplicationContext());
         if(isNotificationEnabled){
-            GcmMessageParser parser = new GcmMessageParser();
 
-            NotificationData gcmData = parser.parseGcmMessage(message);
-
-            if(gcmData != null){
-                ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
+            switch(GcmConstant.PUSH_CATEGORY.valueOf(category)){
+                case MESSAGE_REPLIED:
+                    parseMessageRepliedNotification(message);
+                    break;
+                case MESSAGE_CREATED:
+                    //TODO Need to implement
+//                    parseMessageCreatedNotification(message);
+                    break;
             }
+        }
+    }
+
+    private void parseMessageRepliedNotification(String message){
+        LogUtil.d(TAG, "parseMessageRepliedNotification");
+
+        GcmMessageParser parser = new GcmMessageParser();
+        NotificationData gcmData = parser.parseGcmMessage(message);
+
+        if(gcmData != null){
+            ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
+        }
+    }
+
+    private void parseMessageCreatedNotification(String message){
+        LogUtil.d(TAG, "parseMessageCreatedNotification");
+
+        GcmMessageParser parser = new GcmMessageParser();
+        NotificationData gcmData = parser.parseGcmMessage(message);
+
+        if(gcmData != null){
+            ImpressionNotificationManager.getsInstance().showNotification(getApplicationContext(), gcmData);
         }
     }
 
