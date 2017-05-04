@@ -18,7 +18,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-        android:layout_height="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center_horizontal"
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/main_choice_button_horizontal_margin"

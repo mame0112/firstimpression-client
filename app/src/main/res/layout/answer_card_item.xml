@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:paddingRight="@dimen/default_card_horizontal_margin"
     android:paddingLeft="@dimen/default_card_horizontal_margin"
     android:paddingTop="@dimen/default_card_vertical_margin"
     android:id="@+id/answer_card_frame"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <RelativeLayout
         android:id="@+id/answer_card_content_frame"
         android:layout_width="match_parent"
